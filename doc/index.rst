@@ -11,9 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   examples/index
    intro
    state-of-the-art/index
+   examples/index
 
 
 Indices and tables

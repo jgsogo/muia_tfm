@@ -8,3 +8,4 @@ Ejemplos de sintaxis RST
    math
    graphviz
    image
+   bibliography
