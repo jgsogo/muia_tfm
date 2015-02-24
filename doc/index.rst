@@ -12,8 +12,11 @@ Contents:
    :maxdepth: 2
 
    intro
-   state-of-the-art/index
-   examples/index
+   i.state-of-the-art/index
+   ii.problem/index
+   iii.hypothesis/index
+   iv.model/index
+..   examples/index
 
 
 Indices and tables
