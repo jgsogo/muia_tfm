@@ -7,7 +7,4 @@ Estado del Arte
 
    equiparacion-grafos
    medidas-similaridad
-   
 
-
-Y éste es el estado del arte
