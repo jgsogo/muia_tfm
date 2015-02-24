@@ -5,3 +5,6 @@ lib/
 local/
 include/
 doc/_build
+Scripts/
+Lib/
+Include/
