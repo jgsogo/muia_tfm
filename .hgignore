@@ -8,3 +8,5 @@ doc/_build
 Scripts/
 Lib/
 Include/
+.idea
+*.pdf

@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Medida de distancia en grafos UNL's documentation!
-=============================================================
+Medida de distancia en grafos UNL
+=================================
 
 Contents:
 
@@ -16,13 +16,17 @@ Contents:
    ii.problem/index
    iii.hypothesis/index
    iv.model/index
+   zreferences
 ..   examples/index
 
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. only:: html
+
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`
 
