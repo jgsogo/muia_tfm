@@ -35,3 +35,19 @@ A y otro grafo B
      #. Coste asociado a sustituir un UW por otro: dependerá de su distancia en la taxonomia.
      #. Coste asociado a los rasgos/atributos de un UW --> en primera aproximación lo vamos a ignorar.
      #. Coste asociado a eliminar/crear una relación.
+
+Propuesta II
+------------
+
+Un DAG de UNL es un grafo bipartito (todo nodo-concepto se conecta con un nodo-relación y éste con un nodo-concepto); para este tipo de grafos se ha desarrollado una métrica de próximidad llamada SimRank (¡buscar!); este algoritmo me sirve para poner en relación con un nodo todos los que estén más próximos a él.
+
+Puedo construir el minimum.common-supergraph, expresarlo como grafo bipartito y resolver el problema de minimum-flow-cost.
+
+
+Propuesta III
+-------------
+
+Calculo la matriz de distancias entre todos los conceptos que aparecen en el grafo origen y en el grafo destino de la comparación, y a partir de ella calcula la máxima verosimilitud del matching, es decir, cuál es la mejor combinación de pares, la que tiene el mínimo coste de distancias (¿es una matriz de adyacencia que puedo expresar de alguna otra forma?). Una vez tengo las mejores soluciones combinatorias paso a por las relaciones entre conceptos.
+
+ * La primera opción es simplemente ver qué relaciones se mantienen e incorporarlas a la métrica de similaridad \cite{ManuelMontes-y-GomezAlexanderGelbukh} 
+ * Otra opción es expresar también el problema como combinatorio: ver la combinación de relaciones entre los conceptos que minimiza la distancia <-- aunque entonces esta combinatoria debería incorporarla también en el problema inicial a minimizar.
