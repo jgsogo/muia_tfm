@@ -39,7 +39,7 @@ A y otro grafo B
 Propuesta II
 ------------
 
-Un DAG de UNL es un grafo bipartito (todo nodo-concepto se conecta con un nodo-relación y éste con un nodo-concepto); para este tipo de grafos se ha desarrollado una métrica de próximidad llamada SimRank (¡buscar!); este algoritmo me sirve para poner en relación con un nodo todos los que estén más próximos a él.
+Un DAG de UNL es un grafo bipartito (todo nodo-concepto se conecta con un nodo-relación y éste con un nodo-concepto); para este tipo de grafos se ha desarrollado una métrica de próximidad llamada SimRank (¡buscar!); este algoritmo me sirve para poner en relación con un nodo todos los que estén más próximos a él. <<< Salía en el vídeo "Proximity in Graphs de la Week#7 del [Coursera] Mining Massive Data Sets".
 
 Puedo construir el minimum.common-supergraph, expresarlo como grafo bipartito y resolver el problema de minimum-flow-cost.
 
