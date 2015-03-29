@@ -1,0 +1,12 @@
+syntax: glob
+
+bin/
+lib/
+local/
+include/
+doc/_build
+Scripts/
+Lib/
+Include/
+.idea
+*.pdf
