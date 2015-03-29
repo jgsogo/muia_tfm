@@ -1,4 +1,0 @@
-
-
-Semántica estructural
-=====================

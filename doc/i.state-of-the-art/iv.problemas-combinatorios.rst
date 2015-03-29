@@ -1,4 +1,0 @@
-
-
-Problemas combinatorios
-=======================

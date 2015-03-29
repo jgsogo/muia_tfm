@@ -1,4 +1,0 @@
-
-
-Grafos conceptuales
-===================

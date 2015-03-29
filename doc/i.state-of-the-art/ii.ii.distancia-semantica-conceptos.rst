@@ -1,4 +1,0 @@
-
-
-Distancia semántica entre conceptos
-===================================

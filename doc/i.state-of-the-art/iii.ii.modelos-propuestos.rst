@@ -1,4 +1,0 @@
-
-
-Modelos propuestos
-==================
