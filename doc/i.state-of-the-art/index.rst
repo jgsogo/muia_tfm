@@ -5,7 +5,8 @@ Estado del Arte
 .. toctree::
    :maxdepth: 2
 
-   parafrasis
-   equiparacion-grafos
-   medidas-similaridad
+   i.grafos-conceptuales
+   ii.medidas-de-distancia
+   iii.distancia-semantica-grafos-conceptuales
+   iv.problemas-combinatorios
 
