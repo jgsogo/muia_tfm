@@ -203,7 +203,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia en grafos UNL Documentation',
-   u'Javier García Sogo', 'manual'),
+   u'Javier García Sogo', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
