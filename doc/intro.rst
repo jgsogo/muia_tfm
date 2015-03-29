@@ -72,9 +72,70 @@ Con el surgimiento de la computación a mediados del siglo XX, la labor de tradu
 intenta automatizarse a través de los ordenadores organizándose un área de investigación
 con una proyección importante. La primera demostración de un sistema de traducción
 automática tuvo lugar en enero de 1954 en Nueva York de la mano de IBM y la Universidad
-de Georgetown :cite:`Hutchins1994`. Hutchins indica que la demostración tuvo un impacto
+de Georgetown [#]_. Se trataba de un sistema basado en la utilización de diccionarios
+y reglas.
+
+.. [#] IBM mantiene en Internet documentación sobre este evento y el ordenador
+   IBM 701 en el que se ejecutó el programa: http://www-03.ibm.com/ibm/history/exhibits/701/701_intro.html (accedida el 21 de enero de 2015).
+
+Como Hutchins :cite:`Hutchins1994` indica, la demostración tuvo un impacto
 mediático muy importante y provocó la reacción de la Unión Soviética que priorizó el
 desarrollo de este tipo de sistemas. En ambos países, sus respectivas agencias de
 inteligencia instaron pusieron fondos al servicio de los investigadores, estábamos
 en plena Guerra Fría.
+
+El aparente éxito de este experimento hizo pensar que la traducción automática estaba
+mucho más cerca de ser una realidad de lo que realmente estaba, esta euforia duraría
+durante una década. En 1966 el *Automatic Language Processing Advisory Committee* (ALPAC)
+liderado por John R. Pierce publica un informe :cite:`Pierce1966` donde refleja su
+escepticismo sobre los resultados de los experimentos realizados durante esos años.
+En el apartado de recomendaciones el comité indica dos líneas de trabajo, en primer lugar
+sostiene que la lingüística computacional debe ser tratada como una ciencia y sus
+resultados tienen que ser evaluados por personas competentes en la materia; y en
+segundo lugar sugiere el desarrollo de varias líneas de trabajo [#]_, entre las
+cuales nos interesa remarcar las siguientes:
+
+ * Métodos prácticos para evaluar las traducciones.
+ * Medios para acelerar el trabajo de los traductores.
+ * Evaluación de la calidad y coste de varias fuentes de traducción.
+
+.. [#] La lista original contiene los siguientes puntos: "1. practical methods
+   for evaluation of translations; 2. means for speeding up the human translation
+   process; 3. evaluation of quality and cost of various sources of translations;
+   4. investigation of the utilization of translations, to guard against production
+   of translations that are never read; 5. study of delays in the over-all
+   translation process, and means for eliminating them, both in journals and in
+   individual items; 6. evaluation of the relative speed and cost of various sorts
+   of machine-aided translation; 7. adaptation of existing mechanized editing and
+   production processes in translation; 8. the over-all translation process; and
+   9. production of adequate reference works for the translator, including the
+   adaptation of glossaries that now exist primarily for automatic dictionary look-up
+   in machine translation".
+
+Hutchins :cite:`Hutchins2003` realiza un breve resumen del informe y del impacto
+que tuvo en la evolución de este área de investigación. En sus conclusiones señala
+como un inconveniente que el informe se preocupaba únicamente de las necesidades
+de traducción del mundo científico y administrativo, dejando a un lado los objetivos
+del comercio y la industria en un mundo en globalización.
+
+La confianza en los sistemas de traducción automáticos se recuperaría en la década de
+los 1970s. Por un lado el éxito del sistema americano Logos MT (hoy OpenLogos) para
+la traducción de manuales militares de inglés a vietnamita durante la Guerra de
+Vietnam; y por otro la aparición de la compañía SYSTRAN que inicialmente también
+trabajó en defensa, pero que pronto se orientaría también hacia usos comerciales.
+Cabe destacar que hoy en día ambas compañías siguen en activo, ambas enfocadas en la
+traducción bidireccional entre pares de lenguas :cite:`Scott2009` :cite:`Senellart2001`.
+
+En los 1980s, con el incremento de la potencia de cálculo de los ordenadores, renace
+el interés por los modelos estadísticos para traducción automática frente a los
+sistemas basados en diccionarios y reglas que había sido posible crear hasta el
+momento. Esta metodología de traducción sigue siendo hoy en día la más extendida.
+Los modelos utilizados son aplicables a cualquier lengua, pero tiene algunos
+dificultades inherentes relacionadas con la calidad de las traducciones o algunas
+características propias de los idiomas que provoca que los resultados deban ser
+revisados y, en consecuencia, su aceptación sea limitada.
+
+
+
+
 
