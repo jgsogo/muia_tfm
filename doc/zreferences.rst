@@ -11,3 +11,4 @@
 
 
 .. bibliography:: refs.bib
+   :style: unsrt
