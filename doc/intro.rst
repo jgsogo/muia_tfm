@@ -72,8 +72,8 @@ Con el surgimiento de la computación a mediados del siglo XX, la labor de tradu
 intenta automatizarse a través de los ordenadores organizándose un área de investigación
 con una proyección importante. La primera demostración de un sistema de traducción
 automática tuvo lugar en enero de 1954 en Nueva York de la mano de IBM y la Universidad
-de Georgetown [#]_. Se trataba de un sistema basado en la utilización de diccionarios
-y reglas.
+de Georgetown [#]_. Se trataba de un sistema basado en la utilización de **diccionarios
+y reglas**.
 
 .. [#] IBM mantiene en Internet documentación sobre este evento y el ordenador
    IBM 701 en el que se ejecutó el programa: http://www-03.ibm.com/ibm/history/exhibits/701/701_intro.html (accedida el 21 de enero de 2015).
@@ -127,7 +127,7 @@ Cabe destacar que hoy en día ambas compañías siguen en activo, ambas enfocada
 traducción bidireccional entre pares de lenguas :cite:`Scott2009` :cite:`Senellart2001`.
 
 En los 1980s, con el incremento de la potencia de cálculo de los ordenadores, renace
-el interés por los modelos estadísticos para traducción automática frente a los
+el interés por los **modelos estadísticos** para traducción automática frente a los
 sistemas basados en diccionarios y reglas que había sido posible crear hasta el
 momento. Esta metodología de traducción sigue siendo hoy en día la más extendida.
 Los modelos utilizados son aplicables a cualquier lengua, pero tiene algunos
@@ -135,7 +135,41 @@ dificultades inherentes relacionadas con la calidad de las traducciones o alguna
 características propias de los idiomas que provoca que los resultados deban ser
 revisados y, en consecuencia, su aceptación sea limitada.
 
+.. Otros tipos de traducción automática: Transfer-based, interlingual, dictionary-based,
+   example-based, hybrid MT
+
+El problema de la traducción automática se ha abordado desde otras perspectivas:
+ * traducción automática basada en diccionarios: las palabras son traducidas
+   una a una según las entradas de un diccionario,
+ * traducción automática mediante lengua intermedia: se trata de un tipo de traducción
+   basada en reglas donde el texto original es convertido inicialmente a una
+   interlingua desde la que se generan las traducciones a los idiomas de destino,
+ * traducción automática mediante transferencia: es un caso de traducción basada en
+   lengua intermedia donde se tiene en cuenta además las lenguas de origen y destino,
+ * traducción automática basada en ejemplos (EBMT, *Example-based Machine Translation*):
+   la traducción se realiza por analogía utiliza un corpus alineado de textos, y
+ * sistemas híbridos de traducción automática: utilizan una combinación de reglas y
+   métodos estadísticos para generar el texto en el idioma deseado.
+
+
+UNL como interlingua
+--------------------
 
 
 
+Un lenguaje artificial electrónico
+----------------------------------
+Las dos aproximaciones para la traducción automática que hemos enumerado anteriormente
+afrontan el problema de la traducción desde un lenguaje natural a otro. Los sistemas
+basados en diccionarios y reglas fueron implementados en primer lugar puesto que
+requerían menor capacidad de computación (a pesar de que el número de palabras en los
+diccionarios y de reglas podía crecer muchísimo). Los sistemas estadísticos, ya
+propuestos por Weaver en 1949 :cite:`Weaver1949`, 
 
+
+La calidad de la traducción
+---------------------------
+
+.. Apéndice 10 del ALPAC
+.. Distancias
+.. ¿Ejemplos?
