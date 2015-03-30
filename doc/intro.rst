@@ -127,7 +127,8 @@ Cabe destacar que hoy en día ambas compañías siguen en activo, ambas enfocada
 traducción bidireccional entre pares de lenguas :cite:`Scott2009` :cite:`Senellart2001`.
 
 En los 1980s, con el incremento de la potencia de cálculo de los ordenadores, renace
-el interés por los **modelos estadísticos** para traducción automática frente a los
+el interés por los **modelos estadísticos** ya propuestos por Weaver
+:cite:`Weaver1949` para traducción automática frente a los
 sistemas basados en diccionarios y reglas que había sido posible crear hasta el
 momento. Esta metodología de traducción sigue siendo hoy en día la más extendida.
 Los modelos utilizados son aplicables a cualquier lengua, pero tiene algunos
@@ -194,24 +195,28 @@ controlado hacia francés, español y alemán :cite:`Lonsdale1994`.
    técnica. Más información puede ser consultada en su web:
    http://www.lti.cs.cmu.edu/Research/Kant/ (accedida 30 de marzo de 2015).
 
-Según Alansary :cite:`Alansary` las características que debe tener una interlingua
+Alansary :cite:`AlAnsary2011` identifica cinco características que debe cumplir una
+interlingua: no puede ser ambigua; debe ser capaz de representar todos los
+matices del texto; tiene que ser universal para poder representar cualquier significado
+de cualquier dominio; debe representar únicamente el contenido independientemente de
+la representación formal del lenguaje de origen; y finalmente tiene que ser
+independiente tanto del lenguaje de origen como del de destino. Teniendo en cuenta
+estas características ningún lenguaje natural puede ser utilizado como interlingua
+puesto que no estará exento de ambigüedad e, igualmente, ninguna interlingua puede
+diseñarse con la idea de ser utilizada por las personas ya que con el tiempo
+evolucionará apartándose de la ortodoxia.
 
-... por lo tanto no podemos pensar en ninguna interlingua naturalista.
+.. TODO: Algo de Wittgenstein aquí lo petaba todo
 
+En consecuencia, una lengua pivot para un sistema de traducción automática podrá
+ser un lenguaje artificial como el lenguaje universal que introducíamos anteriormente.
+Este constructo además de servir para realizar traducciones constituye una
+herramienta de representación del conocimiento que puede ser utilizada en muchas
+otras aplicaciones de recuperación de información.
 
-UNL - Un lenguaje artificial electrónico
-----------------------------------------
-
-
-
-Un lenguaje artificial electrónico
-----------------------------------
-Las dos aproximaciones para la traducción automática que hemos enumerado anteriormente
-afrontan el problema de la traducción desde un lenguaje natural a otro. Los sistemas
-basados en diccionarios y reglas fueron implementados en primer lugar puesto que
-requerían menor capacidad de computación (a pesar de que el número de palabras en los
-diccionarios y de reglas podía crecer muchísimo). Los sistemas estadísticos, ya
-propuestos por Weaver en 1949 :cite:`Weaver1949`, 
+.. note:: Por aquí (y en el inicio de la introducción se introduce el UNL, en algún
+   sitio habrá que hacer un repaso del mismo con algún ejemplo para contextualizar
+   el tema de la TFM)
 
 
 La calidad de la traducción

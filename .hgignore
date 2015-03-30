@@ -10,3 +10,4 @@ Lib/
 Include/
 .idea
 *.pdf
+*.pyc
