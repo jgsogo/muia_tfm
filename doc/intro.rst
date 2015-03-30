@@ -138,7 +138,9 @@ revisados y, en consecuencia, su aceptación sea limitada.
 .. Otros tipos de traducción automática: Transfer-based, interlingual, dictionary-based,
    example-based, hybrid MT
 
-El problema de la traducción automática se ha abordado desde otras perspectivas:
+
+El problema de la traducción automática se ha abordado también desde otras perspectivas:
+
  * traducción automática basada en diccionarios: las palabras son traducidas
    una a una según las entradas de un diccionario,
  * traducción automática mediante lengua intermedia: se trata de un tipo de traducción
@@ -147,13 +149,58 @@ El problema de la traducción automática se ha abordado desde otras perspectiva
  * traducción automática mediante transferencia: es un caso de traducción basada en
    lengua intermedia donde se tiene en cuenta además las lenguas de origen y destino,
  * traducción automática basada en ejemplos (EBMT, *Example-based Machine Translation*):
-   la traducción se realiza por analogía utiliza un corpus alineado de textos, y
+   la traducción se realiza por analogía, utiliza un corpus alineado de textos, y
  * sistemas híbridos de traducción automática: utilizan una combinación de reglas y
-   métodos estadísticos para generar el texto en el idioma deseado.
+   métodos estadísticos, tratando de explotar las mejores características de cada
+   tipo :cite:`Costa-jussa2014`.
 
 
-UNL como interlingua
---------------------
+Traducción automática mediante lengua intermedia
+------------------------------------------------
+
+Una de las principales ventajas de los sistemas que utilizan una lengua pivot frente a
+los que se enfocan en la traducción entre pares de lenguas es el número de *traductores*
+que se tienen que desarrollar para cubrir todas las necesidades (figura
+:ref:`fig-interlingua`). En general son necesarias :math:`n(n-1)` para el caso directo
+y :math:`2n` utilizando una interlingua; a partir de tres lenguas la aproximación con
+interlingua requierirá menores esfuerzos de desarrollo.
+
+.. figure:: img/interlingua.png
+   :name: fig-interlingua
+
+   a) Grafo de traducciones necesarias en el caso de traducción directa
+   (se necesitan 12 diccionarios de traducción); b) Grafo de traducciones necesarias
+   utilizando una lengua puente (son necesarios únicamente 8 módulos de traducción).
+   Fuente: Wikimedia Commons.
+
+.. TODO: ¿Alguna referencia de cuántas lenguas pueden exister en el mundo globalizado
+   actual para el entorno comercial
+
+El mundo actual globalizado es un claro ejemplo de entorno multilingüe donde una
+verdadera superación de la barrera del lenguaje sólo puede acometerse utilizando una
+interlingua. La capacidad para localizar un producto en la lengua nativa de los clientes
+permite el acceso a nuevos mercados.
+
+.. TODO: Estimaciones de comercio sin barreras lingüísticas.
+
+Sin embargo, a pesar de estos beneficios este tipo de traducción es una de las menos
+utilizadas en la práctica, la mayoría son prototipos de investigación y sólo el
+proyecto KANT [#]_ ha sido utilizado en un sistema comercial :cite:`Brown2006`, sin
+embargo su aplicación se limita a la traducción de textos técnicos en inglés
+controlado hacia francés, español y alemán :cite:`Lonsdale1994`.
+
+.. [#] El proyecto Kant fue iniciado en 1989 por el Centro de Traducción Automática de
+   la Universidad Carnegie Mellon (Pittsburg) para la traducción de documentación
+   técnica. Más información puede ser consultada en su web:
+   http://www.lti.cs.cmu.edu/Research/Kant/ (accedida 30 de marzo de 2015).
+
+Según Alansary :cite:`Alansary` las características que debe tener una interlingua
+
+... por lo tanto no podemos pensar en ninguna interlingua naturalista.
+
+
+UNL - Un lenguaje artificial electrónico
+----------------------------------------
 
 
 
