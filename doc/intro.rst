@@ -3,6 +3,10 @@
 Introducción
 ============
 
+.. warning:: Inicio demasiado directo, pero el momento en que tenga listo el
+   estado del arte se puede empezar con el objetivo de la TFM y traer al lector
+   hasta el campo de las traducciones.
+
 El lenguaje universal (UNL, *Universal Networking Language*) es un lenguaje
 eléctronico para las máquinas que permite representar oraciones como expresiones
 lógicas sin ambigüedad; estas expresiones se generan para ser entendidas por
@@ -136,10 +140,6 @@ dificultades inherentes relacionadas con la calidad de las traducciones o alguna
 características propias de los idiomas que provoca que los resultados deban ser
 revisados y, en consecuencia, su aceptación sea limitada.
 
-.. Otros tipos de traducción automática: Transfer-based, interlingual, dictionary-based,
-   example-based, hybrid MT
-
-
 El problema de la traducción automática se ha abordado también desde otras perspectivas:
 
  * traducción automática basada en diccionarios: las palabras son traducidas
@@ -214,13 +214,36 @@ Este constructo además de servir para realizar traducciones constituye una
 herramienta de representación del conocimiento que puede ser utilizada en muchas
 otras aplicaciones de recuperación de información.
 
-.. note:: Por aquí (y en el inicio de la introducción se introduce el UNL, en algún
+.. warning:: Por aquí (y en el inicio de la introducción se introduce el UNL, en algún
    sitio habrá que hacer un repaso del mismo con algún ejemplo para contextualizar
    el tema de la TFM)
 
 
 La calidad de la traducción
 ---------------------------
+Uno de los apéndices del informe del ALPAC :cite:`Pierce1966` tuvo tanta
+repercusión como el propio informe, se trata del apéndice 10 donde se describe
+el experimento llevado a cabo por John B. Carroll para evaluar la calidad de las
+traducciones, tanto humanas como automáticas. En su experimento se sometían
+varias traducciones realizadas tanto por humanos como por máquinas a la evaluación
+de un conjunto de personas que las valoraba según dos parámetros: inteligibilidad
+y fidelidad.
+
+El desarrollo de una medida que permmita evaluar la calidad de una traducción es
+un asunto de extremada importancia, generalmente el destinatario de la traducción o
+el que la solicita no es capaz de comprender uno de los dos idiomas, por lo que
+debe fiarse de que el contenido que está entregando o recibiendo se corresponde con
+el texto original.
+
+.. warning:: Aquí necesito meter un poco más de chicha (aunque esto ya va camino
+   del estado del arte)
+
+En este documento abordamos precisamente este problema: la definición de una medida
+de distancia entre el texto original y la traducción que permita valorar el
+rendimiento de un sistema de traducción automática. Como tendremos la ocasión de
+exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua,
+concretamente en el UNL para poder realizar la comparación.
+
 
 .. Apéndice 10 del ALPAC
 .. Distancias
