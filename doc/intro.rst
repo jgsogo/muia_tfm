@@ -160,8 +160,8 @@ Traducción automática mediante lengua intermedia
 
 Una de las principales ventajas de los sistemas que utilizan una lengua pivot frente a
 los que se enfocan en la traducción entre pares de lenguas es el número de *traductores*
-que se tienen que desarrollar para cubrir todas las necesidades (figura
-:ref:`fig-interlingua`). En general son necesarias :math:`n(n-1)` para el caso directo
+que se tienen que desarrollar para cubrir todas las necesidades (
+:num:`figura #fig-interlingua`). En general son necesarias :math:`n(n-1)` para el caso directo
 y :math:`2n` utilizando una interlingua; a partir de tres lenguas la aproximación con
 interlingua requierirá menores esfuerzos de desarrollo.
 
