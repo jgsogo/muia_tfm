@@ -158,6 +158,18 @@ El problema de la traducción automática se ha abordado también desde otras pe
 
 Traducción automática mediante lengua intermedia
 ------------------------------------------------
+El conocido lingüista Noam Chomsky sostiene que el cerebro humano contiene un
+conjunto limitado de reglas para organizaar el lenguaje y, por lo tanto, todos
+los lenguajes tienen una base estructural común (Chomsky se refiere a ella como
+la *gramática universal*). El hecho de que palabras e ideas puedan ser traducidos
+de un idioma a otro, o la existencia de lenguas criollas aporta evidencias a esta
+hipótesis :cite:`Kottak2002`. La utilización de una interlingua supone la
+adhesión a esta corriente [#]_.
+
+.. [#] La hipótesis contraria, conocida como Hipótesis de Sapir-Whorf, sostiene que
+   las características del lenguaje condicionan la manera de pensar del hablante. Esta
+   hipótesis toma el nombre de Edward Sapir, quien la formula originalmente, y de 
+   Benajmin Lee Whorf, discípulo de aquél, que la desarrolla en la década de 1940.
 
 Una de las principales ventajas de los sistemas que utilizan una lengua pivot frente a
 los que se enfocan en la traducción entre pares de lenguas es el número de *traductores*
@@ -235,6 +247,12 @@ el que la solicita no es capaz de comprender uno de los dos idiomas, por lo que
 debe fiarse de que el contenido que está entregando o recibiendo se corresponde con
 el texto original.
 
+En el experimento de Carroll la evaluación era realizada por personas que daban una
+puntuación a distintos fragmentos de los textos traducidos comparados con los
+originales. En las conclusiones se muestra claramente cómo los textos producidos por
+los sistemas automáticos obtienen valores muy por debajo de los realizados por
+traductores.
+
 .. warning:: Aquí necesito meter un poco más de chicha (aunque esto ya va camino
    del estado del arte)
 
@@ -244,7 +262,7 @@ rendimiento de un sistema de traducción automática. Como tendremos la ocasión
 exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua,
 concretamente en el UNL para poder realizar la comparación.
 
-
-.. Apéndice 10 del ALPAC
-.. Distancias
-.. ¿Ejemplos?
+.. warning:: La conclusión de la introducción queda postpuesta a la definición del
+   problema, modelo (y del estado del arte), una vez que veamos si tenemos
+   que hablar de métricas de calidad de traducciones por aquí o esto lo
+   hemos abordado en el estado del arte... pienso en artículos como :cite:`Rossi2013`.
