@@ -259,8 +259,10 @@ traductores.
 En este documento abordamos precisamente este problema: la definición de una medida
 de distancia entre el texto original y la traducción que permita valorar el
 rendimiento de un sistema de traducción automática. Como tendremos la ocasión de
-exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua,
-concretamente en el UNL para poder realizar la comparación.
+exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua para
+poder realizar la comparación, tomará el grafo del texto original y medirá la
+distancia al grafo resultante de convertir el texto traducído nuevamente a la
+interlingua.
 
 .. warning:: La conclusión de la introducción queda postpuesta a la definición del
    problema, modelo (y del estado del arte), una vez que veamos si tenemos
