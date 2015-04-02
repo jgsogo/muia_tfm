@@ -57,7 +57,7 @@ Sistemas de representación del conocimiento
 
 
 Grafos conceptuales
-````````````````````
+```````````````````
 La característica fundamental que debe tener una interlingua es su capacidad para 
 representar cualquier tipo de conocimiento de una forma no ambigua. Una de las
 herramientas más potentes para la representación del conocimiento que además
@@ -110,7 +110,7 @@ restricción en cuanto a las relaciones.
 
 
 Conceptos y ontologías
-`````````````````````
+``````````````````````
 En los nodos de tipo *concepto* de los CGs tiene que tener cabida cualquier entidad real
 o abstracta y ésta tiene que poder expresarse de una manera no ambigua. En su artículo de
 1976 :cite:`Sowa1976` Sowa ya indica que estos conceptos son meros identificadores y que
