@@ -54,6 +54,10 @@ principales aportaciones y las dificultades que aún están presentes.
 
 Sistemas de representación del conocimiento
 -------------------------------------------
+
+
+Grafos conceptuales
+````````````````````
 La característica fundamental que debe tener una interlingua es su capacidad para 
 representar cualquier tipo de conocimiento de una forma no ambigua. Una de las
 herramientas más potentes para la representación del conocimiento que además
@@ -94,10 +98,75 @@ interpretada por un programa:
    Publishing Co., London, UK, 1984 y *Knowledge Representation: Logical, Philosophical and
    Computational Foundations*, Brooks Cole Publishing Co., Pacific Grove, CA, 2000.
 
+Sowa habla de ontologías en relación a los conceptos, indica que la selección de las categorías
+ontológicas debe ser el primer paso para diseñar una base de datos, de conocimiento o un
+sistema orientado a objetos :cite:`Shapiro2012`. Sin embargo no introduce ningún tipo de
+restricción en cuanto a las relaciones.
 
+.. En :cite:`Sowa2003` Sowa introduce los *nested graph models* (NGM) que permiten expresar el contexto de una relación, de tal forma que era posible incorporar lógica modal y temporal.
+
+.. warning:: ¿Incluir algo de cómo escribir estos grafos? CGIF,...  ¿Algo de los contextos?
+   No añade nada en la dirección que queremos llevar.
+
+
+Conceptos y ontologías
+`````````````````````
+En los nodos de tipo *concepto* de los CGs tiene que tener cabida cualquier entidad real
+o abstracta y ésta tiene que poder expresarse de una manera no ambigua. En su artículo de
+1976 :cite:`Sowa1976` Sowa ya indica que estos conceptos son meros identificadores y que
+por conveniencia son representados con una breve etiqueta en inglés, pero podría tratarse
+de un número o una dirección de memoria en un ordenador.
+
+Más importante es la jerarquización entre conceptos que introduce, en futuros artículos ya
+hablará de ontología y categorías. El término *ontología* hace referencia a la ciencia del
+ser, del todo; y es un concepto metafísico que se ha estudiado desde época clásica, tratando
+de realizar una clasificación de todo lo que *es*.
+
+Nosotros abordaremos las ontologías desde el punto de vista de la Ingeniería del Conocimiento,
+una de las definiciones más extendidas y aceptadas es la que se ofrece en :cite:`Studer1998`:
+*"An ontology is a formal, explicit specification of a shared conceptualization"* [#]_. Por
+*conceptualización* se entiende una modelización abstracta de un fenómeno identificando sus
+conceptos relavantes. Por *explícito* se hace referencia a que tanto los conceptos como sus
+relaciones y restricciones tienen que estar definidas explícitamente. Al ser *formal* la
+ontología puede procesarse mediante un programa informático (no estará expresada en lenguaje
+natural). Y también tiene que ser *compartida*, tiene que recoger un conocimiento consensuado,
+ha de ser aceptada por un grupo.
+
+.. [#] Traducción: una ontología es una especificación explícita y formal de un
+   conceptualización compartida.
+
+En los sistemas de traducción automática una ontología de los conceptos deberá recoger toda
+la realidad expresable en cualquier lenguaje natural, todos los significados posibles a los
+que haga referencia cualquier significante, ya sean realidades o pensamientos, abstracciones
+o acciones.
+
+.. Nos adentramos en terrenos de semiótica, y cosas superinteresantes de estructuralismo y demás, hablamos de Saussure, Hjelmslev, Wittgenstein... si tuviéramos tiempo nos adentraríamos más por este camino para bordar este capítulo y ponerle un título meritorio.
+
+El estudio de los conceptos, los referentes, los símbolos,... es una rama de la lingüística que 
+se desarrolla como ciencia durante el siglo XX y de forma sistemática a partir de los 1960s.
+La semiótica comienza su andadura con lingüísticas y filólogos como Ferdinand de Saussure,
+Louis Hjelmslev, Roman Jakobson y Ludwig Wittgenstein en Europa y paralelamente en
+Estados Unidos con Charles Sanders Peirce. Peirce y Saussure son contemporaneos y abordan el
+mismo problema, la creación de una *ciencia de los signos*, pero desde perspectivas diferentes.
+Saussure, lingüísta, la aborda desde una perspectiva psicosocial e indica que se trata de una
+nueva ciencia a la que llama *semiología*, Peirce considera que esta
+ciencia de los signos ya existe desde la antigüedad, aunque no plenamente desarrollada
+:cite:`Castanares2000`, así su trabajo consistió en la exploración, sistematización y ampliación
+de la lógica heredada de Aristóteles :cite:`Peirce1902`. Peirce desarrolló los grafos
+existenciales, que son el punto de partida para los grafos conceptuales de John F. Sowa.
+
+Fruto de estos estudios en el campo de la lingüística se realizan avances muy importantes
+relacionados con el significado de las palabras, nos interesa aquí hacer referencia a la
+semántica estructural y los principales que se dan entre significados y que han de ser
+considerados en una ontología de conceptos.
+
+--> homonimia, hiperonimia, sinonimia,...
+--> ontologías y taxonomías
 
 
 El lenguaje universal UNL
--------------------------
+`````````````````````````
+
+
 
 .. attention:: Métricas automáticas de evaluación de traducciones: http://en.wikipedia.org/wiki/Machine_translation#Evaluation
