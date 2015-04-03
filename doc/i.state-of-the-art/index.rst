@@ -109,8 +109,8 @@ restricción en cuanto a las relaciones.
    No añade nada en la dirección que queremos llevar.
 
 
-Conceptos y ontologías
-``````````````````````
+Semántica estructural
+`````````````````````
 En los nodos de tipo *concepto* de los CGs tiene que tener cabida cualquier entidad real
 o abstracta y ésta tiene que poder expresarse de una manera no ambigua. En su artículo de
 1976 :cite:`Sowa1976` Sowa ya indica que estos conceptos son meros identificadores y que
@@ -157,11 +157,123 @@ existenciales, que son el punto de partida para los grafos conceptuales de John 
 
 Fruto de estos estudios en el campo de la lingüística se realizan avances muy importantes
 relacionados con el significado de las palabras, nos interesa aquí hacer referencia a la
-semántica estructural y los principales que se dan entre significados y que han de ser
-considerados en una ontología de conceptos.
+semántica estructural y las principales relaciones que se dan entre significados y que
+han de ser considerados en una ontología de conceptos :cite:`WPSemantica`:
 
---> homonimia, hiperonimia, sinonimia,...
---> ontologías y taxonomías
+ * **Hiperonimia**: es la relación que se da entre una palabra (hiperónimo) cuyo significado
+   está totalmente incluido en los significados de otras más específicas (hipónimos).
+ * **Hiponimia**: es la relación en la que el significado de una palabra más específica
+   (hipónimo) contiene todos los rasgos de significado del término más general (hiperónimo).
+   Dos hipónimos de un mismo hiperónimo, son cohipónimos.
+ * **Holonimia**: es la relación que se establece entre una palabra (holónimo) y otra u
+   otras (merónimos) que designan partes de lo denotado por la primera. No se trata de una
+   relación entre significados, sino de rasgos extralingüísticos.
+ * **Meronimia**: un merónimo designa una parte de la realidad nombrada por un holónimo.
+
+Atendiendo a las propias palabras en relación con sus significados encontramos los siguientes
+fenómenos :cite:`WPSemantica`:
+
+ * **Monosemia**: palabras que tienen un único significado o acepción.
+ * **Polisemia**: una sóla palabra tiene varios significados, estando todos ellos emparentados
+   semánticamente.
+ * **Homonimia**: varios significados asociados a una misma forma, pero con orígenes diferentes.
+ * **Sinonimia**: es la relación entre dos términos de significados similares e intercambiables
+   en el discurso por pertenecer a la misma categoría sintáctica.
+ * **Antonimia**: es la relación que mantienen dos palabras cuyos significados se oponen.
+
+En la :num:`figura #fig-wordnet-lightning` se muestran algunos casos de hiperonimia y holonimia
+en torno a la palabra *candle*. En la misma imágen se puede ver también el fenómeno polisémico de
+esta palabra en inglés que puede denotar los conceptos de *vela*, *candela* o hacer referencia
+al verbo, inexistente en español, para referirse a la realización de una ovoscopia.
+
+
+.. _fig-wordnet-lightning:
+.. graphviz::
+   :caption: Esquema de relaciones semánticas en torno a la palabra *candle*, que en inglés hace referencia a los conceptos *vela* y *candela*, y también al verbo que hace referencia a la *ovoscopia*. Cada nodo representa un concepto (por lo tanto podría representarse por varios sinónimos). Las relaciones han sido extraídas de Wordnet v3.1.
+
+   digraph foo {
+        
+        wick2[label="(n) wick#2\n<es:mecha>"]
+        candle1[label="(n) candle#1\n<es:vela>"]
+        candlewick1[label="(n) candlewick#1\n<es:pabilo>"]
+        snuff1[label="(n) snuff#1"]
+        lamp1[label="(n) lamp#1\n<es:lámpara>"]
+        lantern1[label="(n) lantern#1\n<es:linterna>"]
+        sourceofillumination1[label="(n) source of illumination#1\n<es:fuente de iluminación>"]
+        dots1[label="..."]
+        dip7[label="(n) dip#7"]
+        vigillight1[label="(n) vigil light#1"]
+
+        candle2[label="(n) candle#2\n<es:candela>"]
+        luminousintensityunit1[label="(n) luminous intensity unit#1\n<es:unidad de intensidad lumínica>"]
+        lightunit1[label="(n) light unit#1"]
+        dots2[label="..."]
+
+        entity[label="(n) entity#1\n<es:entidad>"]
+
+        candle1v[label="(v) candle#1"]
+        examine2v[label="(v) examine#2\n<es:examinar>"]
+
+        # Hiperónimos
+        wick2 -> candlewick1 [label="hyponym"]
+        lamp1 -> candle1 [label="hyponym"]
+        lamp1 -> lantern1 [label="hyponym"]
+        sourceofillumination1 -> lamp1 [label="hyponym"]
+        dots1 -> sourceofillumination1 [label="hyponym"]
+        candle1 -> dip7 [label="hyponym"]
+        candle1 -> vigillight1 [label="hyponym"]
+
+        # Holónimos
+        {rank=same; snuff1 candlewick1 candle1}
+        snuff1 -> candlewick1 -> candle1 [style=dotted, label="meronym"]
+        wick2 -> candle1 [style=dotted, label="meronym"]
+
+        # Otra rama para candle
+        dots2 -> lightunit1 -> luminousintensityunit1 -> candle2 [label="hyponym"]
+
+        entity -> dots1 [label="hyponym"]
+        entity -> dots2 [label="hyponym"]
+
+        # Y otra más
+        examine2v -> candle1v [label="hyponym"]
+   }
+
+
+WordNet
+```````
+Una de los esfuerzos más importantes para realizar una ontología de conceptos es WordNet
+:cite:`Fellbaum1998`, contiene información codificada manualmente sobre sustantivos, verbos,
+adjetivos y adverbios en inglés, y los organiza en torno al concepto de *synset*. Un *synset*
+es un conjunto de palabras de la misma categoría gramatical que hacen referencia al mismo
+concepto, por lo tanto pueden ser intercambiadas en un texto sin afectar al significado.
+WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en 
+``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
+
+.. warning:: Incluir un poco más de WordNet, quizá fusionarlo con el apartada anterior. Podría
+   hablar de taxonomías/tesauros vs ontologías/wordnet. Usos o ejemplos más concretos.
+
+Las principales relaciones codificadas en WordNet son las de hiperonimia/hiponimia, seguidas
+por las de holonimia/meronimia, ambas estructuran los conceptos en jerarquías como la que
+se muestra en la :num:`figura #fig-wordnet-lightning`. Los verbos también están organizados
+en jerarquías arbóreas donde los hijos expresan maneras cada vez más específicas de realizar
+la acción (troponimia). Los adjetivos incluyen relaciones de antonimia, similaridad
+semántica y también relaciones con los sustantivos de los cuales derivan. En cuanto a los
+adverbios, son la categoría gramatical menos representada, en general están relacionados
+con los adjetivos de los que derivan.
+
+Apoyándose en WordNet se han desarrollado multitud de aplicaciones de procesamiento de
+lenguaje natural, *wordnets* en otros idiomas :cite:`Atserias2004`, ontologías como SUMO
+:cite:`Niles2001` o la *EuroWordNet Top Concept Ontology* :cite:`Alvez2008`.
+
+WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
+como lo es una interlingua para representación del conocimiento, WordNet se puede utilizar
+como un diccionario para definir los conceptos que se están utilizando en cada uno de los
+nodos de un grafo conceptual.
+
+
+.. warning:: A este trozo se le puede dar el enfoque inverso. Titularlo como "Semántica
+   estructural" e ir escribiendo poco a poco el embudo hasta llegar a hablar de las
+   taxonomias y wordnet
 
 
 El lenguaje universal UNL
