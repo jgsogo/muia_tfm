@@ -319,9 +319,72 @@ attributos forman parte del estándar. La última específicación del lenguaje,
 un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen un concepto
 no contemplado hasta el momento.
 
-.. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa?
+.. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa? De
+   momento sólo vamos a pasar por encima de los conceptos más relevantes para lo que nos
+   traemos entre manos.
 
-Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`)
+Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`),
+UNL tiene las mismas cuatro categorías de conceptos: sustantivos, verbos, adjetivos y adverbios.
+Las UWs se forman utilizando una palabra inglesa como etiqueta seguida de un conjunto de 
+restricciones: ``<UW> ::= <headword> [<constraint list>]``:
+
+ * La *headword* es una expresión en inglés (usualmente es una plabra, pero puede ser una
+   palabra compuesta o una oración si es necesario) que representa un conjunto de conceptos
+   a los que hace referencia esa expresión en inglés, se conoce como ***Basic UW***. Si no
+   existe una etiqueta en inglés para hacer referencia al concepto, entonces la UW se 
+   conoce como ***Extra UW***.
+ * La lista de restricciones sirve para desambiguar los distintos significados a los que puede
+   hacer referencia una misma *headword*. Cada restricción está formada por una relación UNL
+   y otra UW previamente definida que se combina con esta UW en dicha relación. Estas UWs
+   desambiguadas se conocen como ***Restricted UW***. 
+
+La :num:`tabla #table-uws-example` muestra algunos ejemplos de UWs con los significados
+correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restringidas
+
+.. list-table:: Ejemplos de UWs.
+   :name: table-uws-example
+   :header-rows: 1
+
+   * - UW
+     - Headword
+     - Restricciones
+     - Significado
+   * - go
+     - go
+     -
+     - Ir
+   * - house
+     - house
+     -
+     - Casa
+   * - state(icl>country)
+     - state
+     - icl>country
+     - País
+   * - state(icl>region)
+     - state
+     - icl>region
+     - Región de un país
+   * - state(icl>express(agt>thing,gol>person,obj>thing))
+     - state
+     - icl>express(agt>thing,gol>person,obj>thing)
+     - Acción por la que una persona expresa algo
+   * - samba(icl>dance)
+     - samba
+     - icl>dance
+     - Danza popular brasileña.
+   * - soufflé(icl>food)
+     - soufflé
+     - icl>food
+     - Tipo de comida
+
+La relación más habitual es ``icl`` que indica un concepto más general, se puede interpretar
+como "incluido en", "un tipo de" como ocurre en ``bird(icl>animal)`` o
+``animal(icl>living thing)``. ``icl`` codifica la relación de hiponimia que ya hemos visto
+descrita más arriba. Otras relaciones muy importantes por el contenido semántico que
+encapsulan son ``equ`` que indica equivalencia y ``iof`` que se utiliza para indicar una
+instancia concreta de una UW, como en ``Peter(iof>person)``.
+
 
 
 Medidas de distancia
