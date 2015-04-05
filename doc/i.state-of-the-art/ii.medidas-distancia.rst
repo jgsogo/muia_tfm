@@ -85,17 +85,19 @@ problema, así en :cite:`Conte2004` identificamos:
  * *Elastic Graph Matching* (EGM): se trata de abordar el problema comparando las imágenes de
    las estructuras de los dos grafos.
 
-Graph edit distance
-...................
-Aquí hay unos cuantos papers, preparar un compendio.
+.. warning:: A continuación puedo exponer algunos métodos con bibliografía donde vayan depurando
+   el algoritmo, pero prefiero esperar un poco para profundizar en el algoritmo elegido para el
+   modelo e implementación.
 
-Continouos optimization - relaxation labelling
-..............................................
-In 1995, Christmas et al.27 proposed a method, based on the theoretical framework of Kittler and Hancock, that is able to take into account during the iteration process (and not only during initialization) both node and edge attributes.
 
-Bipartite graph matching
-........................
-For this approach we can cite the papers by Wang et al.163 in 1994, by El-Sonbaty and Ismail42 in 1998, by Baeza and Valiente5 in 2000 and by Liu et al.92 in the same year
+   Graph edit distance
+      Aquí hay unos cuantos papers, preparar un compendio.
+
+   Continouos optimization - relaxation labelling
+      In 1995, Christmas et al.27 proposed a method, based on the theoretical framework of Kittler and Hancock, that is able to take into account during the iteration process (and not only during initialization) both node and edge attributes.
+
+   Bipartite graph matching
+      For this approach we can cite the papers by Wang et al.163 in 1994, by El-Sonbaty and Ismail42 in 1998, by Baeza and Valiente5 in 2000 and by Liu et al.92 in the same year
 
 
 Distancia en redes de conceptos
