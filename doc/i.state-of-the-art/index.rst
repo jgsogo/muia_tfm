@@ -56,6 +56,7 @@ Sistemas de representación del conocimiento
 -------------------------------------------
 
 
+.. grafos-conceptuales_
 Grafos conceptuales
 ```````````````````
 La característica fundamental que debe tener una interlingua es su capacidad para 
@@ -239,6 +240,7 @@ al verbo, inexistente en español, para referirse a la realización de una ovosc
    }
 
 
+.. wordnet_
 WordNet
 ```````
 Una de los esfuerzos más importantes para realizar una ontología de conceptos es WordNet
@@ -268,17 +270,61 @@ lenguaje natural, *wordnets* en otros idiomas :cite:`Atserias2004`, ontologías 
 WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
 como lo es una interlingua para representación del conocimiento, WordNet se puede utilizar
 como un diccionario para definir los conceptos que se están utilizando en cada uno de los
-nodos de un grafo conceptual.
-
-
-.. warning:: A este trozo se le puede dar el enfoque inverso. Titularlo como "Semántica
-   estructural" e ir escribiendo poco a poco el embudo hasta llegar a hablar de las
-   taxonomias y wordnet
+nodos de un grafo conceptual y medir la distancia semántica entre conceptos utilizados
+en diferentes traducciones de un mismo texto.
 
 
 El lenguaje universal UNL
 `````````````````````````
+Un paso adelante en las interlinguas para representación del conocimiento es el lenguaje
+universal (UNL, *Universal Networking Language*); este *lenguaje* surgió como una
+iniciativa del Instituto de Estudios Avanzados de la Universidad de la Naciones Unidas
+en 1996 con el objetivo de eliminar las barreras lingüísticas para el comercio y la
+educación.
+
+La representación de un texto en UNL se realiza oración por oración, cada oración se
+codifica en un hipergrafo donde los conceptos son los nodos y las relaciones entre ellos
+constituyen los arcos. ESte hipergrafo también puede ser representado como un conjunto
+de relaciones binarias que enlazan los conceptos presentes en la oración. Los conceptos
+se representan con etiquetas literales que reciben el nombre de *Palabras Universales*
+(UW, Universal Words) que además pueden ir acompañadas de diferentes attributos que
+permiten mostrar más informacón sobre el uso específico del concepto en la oración
+original :cite:`Uchida1999`.
+
+Como ejemplo, mostramos el utilizado en por Teixeira *et al.* en :cite:`TeixeiraMartins2005`
+donde la representación de la oración en inglés *"Peter kissed Mary?!"* se realiza como se
+muestra en el :num:`listado #code-unl1`.
+
+.. code-block:: unl
+   :caption: Representación UNL de *"Peter kissed Mary?!"*.
+   :name: code-unl1
+   
+   [S]
+   {unl}
+   agt(kiss(agt>person,obj>person).@entry.@past.@interrogative.@exclamative, Peter(iof>person))
+   obj(kiss(agt>person,obj>person).@entry.@past.@interrogative.@exclamative, Mary(iof>person))
+   {/unl}
+   [/S]
+
+En el :num:`listado #code-unl1` aparecen dos relaciones, ``agt`` (agente) y ``obj`` (objeto),
+que enlazan los conceptos (UWs) ``kiss(agt>person,obj>person)`` con ``Peter(iof>person)`` y
+``kiss(agt>person,obj>person)`` con ``Mary(iof>person)`` respectivamente; además se hace uso
+de los attributos ``@entry``, ``@past``, ``@interrogative`` y ``@exclamative``.
+
+La principal diferentes entre el UNL y otros sistemas de representación del conocimiento como
+los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
+Framework* (RDF :cite:`Brickley2014`) es que el número y el significado de las relaciones y
+attributos forman parte del estándar. La última específicación del lenguaje, UNL Version II
+(16 de febrero de 2014) :cite:`Zhu2014`, incluye 57 relaciones y 94 atributos. Las UWs no son
+un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen un concepto
+no contemplado hasta el momento.
+
+.. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa?
+
+Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`)
 
 
+Medidas de distancia
+--------------------
 
 .. attention:: Métricas automáticas de evaluación de traducciones: http://en.wikipedia.org/wiki/Machine_translation#Evaluation
