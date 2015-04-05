@@ -534,13 +534,46 @@ grafo, asignar un coste a cada una de ellas y buscar la secuencia de ediciones c
 menor (*graph edit cost*).
 
 Cualquiera de estas estrategias de coste mínimo puede ser utilizada para calcular una medida de
-disimilaridad entre grafos
+disimilaridad entre grafos; una adecuada elección de los costes de cada una de las operaciones
+puede provocar que la métrica de coste de edición cumpla las propiedades matemáticas de una
+distancia, definiéndose una *distancia entre grafos* que permite aplicar a este dominio algunos
+algoritmos de otros espacios métricos :cite:`Conte2004`; se conoce entonces como
+*graph edit distance*. Algunos autores como Bunke han demostrado que el problema del *subgrafo
+máximo común*, y el isomorfismo entre grafos y subgrafos, pueden ser reducidos al cálculo de
+la *graph edit distance*.
 
-Entre las estrategias utilizadas para comparar los grafos, una aproximación común es medir el
-coste de convertir un grafo en otro y medir la similaridad en función del coste mínimo.
-En cuanto a las técnicas de comparación inexacta de grafos
+.. warning:: Revisar las referencias de Bunke en :cite:`Conte2004` para incluirlas si procede
+   en el párrafo anterior cuando se habla de las "demostraciones de Bunke".
 
+Muchos de los algoritmos utilizados para la comparación inexacta de grafos utilizan heurísticas
+para explorar el espacio de búsqueda, ya que en muchos casos se considera un probleam NP-completo;
+sin embargo el tipo de grafos que utilizaremos nosotros son suficientemente pequeños como para
+que el tiempo de cálculo no sea una variable a tener en cuenta. Nos interesa, por tanto,
+mostrar las familias de algoritmos utilizados desde el punto de vista de la formulación del
+problema, así en :cite:`Conte2004` identificamos:
 
+ * Optimización continua: convierte el problema de comparación de grafos, que en principio es
+   un problema de optimización discreta, en un problema continuo no lineal y se aplican
+   diferentes algoritmos o heurísticas para obtener un solución suficientemente buena.
+ * Métodos espectrales: basadas en los autovalores y autovectores calculados a partir de la
+   matriz de adyacencia. El inconveniente de estos métodos es que sólo tienen en cuenta la
+   estructura del grafo y no los atributos de los nodos y arcos.
+ * Conversión a un grafo bipartito: convertir el problema a este tipo de grafos permite
+   aplicar algoritmos con tiempo de solución de orden polinómico.
+ * *Elastic Graph Matching* (EGM): se trata de abordar el problema comparando las imágenes de
+   las estructuras de los dos grafos.
+
+Graph edit distance
+...................
+Aquí hay unos cuantos papers, preparar un compendio.
+
+Continouos optimization - relaxation labelling
+..............................................
+In 1995, Christmas et al.27 proposed a method, based on the theoretical framework of Kittler and Hancock, that is able to take into account during the iteration process (and not only during initialization) both node and edge attributes.
+
+Bipartite graph matching
+........................
+For this approach we can cite the papers by Wang et al.163 in 1994, by El-Sonbaty and Ismail42 in 1998, by Baeza and Valiente5 in 2000 and by Liu et al.92 in the same year
 
 
 Distancia en redes de conceptos
