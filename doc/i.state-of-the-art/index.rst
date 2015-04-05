@@ -490,6 +490,12 @@ diferentes (lo veremos en el próximo capítulo).
    debe cumplir las tres propiedades mientras que una de similaridad para que no es tan
    estricta. Documentar e introducir brevemente.
 
+.. warning:: Por aquí comienza a emerger el caracter combinatorio del problema, queremos
+   medir la distancia entre dos grafos que tienen ruido, donde la distancia se va a deber
+   tanto a la diferencia de estructura como de los conceptos presentes en los nodos. Nos
+   interesa la mínima distancia considerando todas las combinaciones de estructuras y
+   conceptos.
+
 Comparación de grafos
 `````````````````````
 La comparación de grafos es un problema muy prolífico en la literatura; desde hace tiempo,
@@ -506,16 +512,34 @@ La comparación entre los grafos puede realizarse de manera exacta (isomorfismo,
 o bien permitir cierta tolerancia a errores puesto que los datos pueden contener ruido. 
 En el caso de la traducción automática lo que pretendemos medir es precisamente las variaciones
 introducidas por cada traductor respecto al contenido del texto original, en definitiva, el ruido;
-por lo tanto nos interesarán las técnicas de comparación exacta.
+por lo tanto nos interesarán las técnicas de comparación inexacta, nuestro objetivo no es
+*encontrar* un grafo igual, sino medir comparar dos grafos que *a priori* van a ser distintos.
+También debemos tener presente que nuestros grafos tienen atributos tanto en los nodos
+como en los arcos.
 
-.. warning:: Nos interesan las técnicas de comparación exacta si pensamos en la estructura del
-   grafo (no queremos tolerar ninguna varíación en la estructura, exceptuando el caso de
-   paráfrasis: distinta estructura => mismo contenido semántico).
-   El ruido introducido por los traductores en los nodos, en los conceptos, lo tendremos en
-   cuenta al hablar de la distancia semántica entre conceptos.
+.. warning:: Si en el modelo convertimos nuestro grafo UNL a un **grafo bipartito** entonces no
+   tendríamos atributos en los arcos...
 
-   Aquí es donde empieza a emerger el caracter combinatorio del problema: mismas estructuras con
-   conceptos relacionados, estructuras ligeramente más diferentes con conceptos más próximos. 
+.. warning:: Introducir en lo anterior citas a los papers con surveys de algoritmos de
+   comparación de grafos de los que se toma lo que sigue: :cite:`Conte2004`
+
+Comparación inexacta de grafos
+++++++++++++++++++++++++++++++
+Una de las estrategias habituales para abordar este problema es asignar un coste a las
+discrepancias/errores existentes entre los grafos, surge así un problema combinatorio cuya solución
+consistirá en encontrar la correspondencia cuyo coste sea mínimo (*error correcting* o 
+*error-tolerant*).
+Otra aproximación al problema consiste en definir un conjunto de operaciones de edición de un
+grafo, asignar un coste a cada una de ellas y buscar la secuencia de ediciones cuyo coste sea
+menor (*graph edit cost*).
+
+Cualquiera de estas estrategias de coste mínimo puede ser utilizada para calcular una medida de
+disimilaridad entre grafos
+
+Entre las estrategias utilizadas para comparar los grafos, una aproximación común es medir el
+coste de convertir un grafo en otro y medir la similaridad en función del coste mínimo.
+En cuanto a las técnicas de comparación inexacta de grafos
+
 
 
 
