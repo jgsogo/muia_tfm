@@ -384,8 +384,8 @@ con todas las UWs aceptadas y sus relaciones :cite:`Zhu2002`.
    traemos entre manos.
 
 
-Universal Words (UWs)
-+++++++++++++++++++++
+Palabras universales (UWs)
+++++++++++++++++++++++++++
 
 Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`),
 UNL tiene las mismas cuatro categorías de conceptos: sustantivos, verbos, adjetivos y adverbios.
@@ -464,7 +464,7 @@ Todas las UWs aparecen relacionadas con otras utilizando alguna de estas tres re
    utiliza con entidades y nombres propios.
  * ``pof`` (parte de): codifica la relación de meronimia.
 
-La Ontología Ontology contiene también el resto de relaciones posibles entre cualquier par de
+La Ontología UNL contiene también el resto de relaciones posibles entre cualquier par de
 UWs, no obstante, estas relaciones aparecen entre los conceptos más generales posibles,
 de tal forma que se explota la propiedad de herencia de las UWs: cualquier UWs hereda las
 relaciones más restrictivas de sus hiperónimos.
