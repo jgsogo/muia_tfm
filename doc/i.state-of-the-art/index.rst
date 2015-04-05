@@ -46,7 +46,8 @@ aquéllos cuya representación formal es un grafo; posteriormente expondremos la
 medidas que se han propuesto en la bibliografía para estudiar la similaridad entre dos
 grafos, veremos cómo evaluar la distancia semántica entre conceptos y textos, y
 finalmente repasaremos los modelos propuestos que integran lo anterior para evaluar
-la distancia entre grafos conceptuales, analizando en profundidad cuáles son sus
+la distancia entre grafos conceptuales (manifiestan una distancia debida a la estructura
+del grafo y también al contenido de los nodos), analizando en profundidad cuáles son sus
 principales aportaciones y las dificultades que aún están presentes.
 
 .. warning:: Quizá estos párrafos anteriores son más introducción que estado del arte
@@ -471,13 +472,64 @@ relaciones más restrictivas de sus hiperónimos.
 
 Esta ontología constituye una red semántica con características similares a WordNet, por lo
 que las técnicas y metodologías utilizadas sobre WordNet podrán ser aplicadas al sistema UNL
-sin requerir una adaptación especial.
+sin requerir una adaptación especial. En concreto en el problema de distancia entre grafos
+conceptuales, la distancia entre los conceptos podrá ser medida utilizando las relaciones
+presentes en esta ontología.
+
+
+Medidas de distancia y similaridad
+----------------------------------
+La diferencia semántica entre dos grafos que codifican información puede interpretarse en
+términos de distancia o similaridad entre la estructura de los grafos y también entre los
+conceptos que están presentes en cada grafo. Dos grafos (coceptuales o UNL) pueden
+codificar una información totalmente distinta a pesar de compartir la estructura, pero
+también pueden tener la misma información a pesar de mostrar estructuras ligeramente
+diferentes (lo veremos en el próximo capítulo).
+
+.. warning:: Comentar diferencias entre distancia y similaridad. Una medida de distancia
+   debe cumplir las tres propiedades mientras que una de similaridad para que no es tan
+   estricta. Documentar e introducir brevemente.
+
+Comparación de grafos
+`````````````````````
+La comparación de grafos es un problema muy prolífico en la literatura; desde hace tiempo,
+multitud de problemas en el ámbito del reconocimiento de patrones se han codificado en forma
+de grafos, una herramienta muy potente para representar la información de forma clara y
+concisa. Pero los grafos no sólo se utilizan para almacenar la información, en muchos casos
+es precisa la búsqueda de patrones dentro de un conjunto de grafos, o la clasificación de
+un nuevo grafo. Y aquí es donde se plantea el problema, ¿qué significa exactamente comparar
+dos grafos? :cite:`Jolion2001`. Una definición puede ser "encontrar en un grafo :math:`G_1`
+cuál es el subgrafo :math:`G'_1` que es similar (exacto o parcial) a un subgrafo :math:`G'_2`
+de otro grafo :math:`G_2`.
+
+La comparación entre los grafos puede realizarse de manera exacta (isomorfismo, *exact matching*)
+o bien permitir cierta tolerancia a errores puesto que los datos pueden contener ruido. 
+En el caso de la traducción automática lo que pretendemos medir es precisamente las variaciones
+introducidas por cada traductor respecto al contenido del texto original, en definitiva, el ruido;
+por lo tanto nos interesarán las técnicas de comparación exacta.
+
+.. warning:: Nos interesan las técnicas de comparación exacta si pensamos en la estructura del
+   grafo (no queremos tolerar ninguna varíación en la estructura, exceptuando el caso de
+   paráfrasis: distinta estructura => mismo contenido semántico).
+   El ruido introducido por los traductores en los nodos, en los conceptos, lo tendremos en
+   cuenta al hablar de la distancia semántica entre conceptos.
+
+   Aquí es donde empieza a emerger el caracter combinatorio del problema: mismas estructuras con
+   conceptos relacionados, estructuras ligeramente más diferentes con conceptos más próximos. 
 
 
 
+Distancia en redes de conceptos
+```````````````````````````````
 
+Distancia semántica entre textos
+--------------------------------
+Fenómenos lingüísticos
+``````````````````````
+Modelos propuestos en la bibliografía
+`````````````````````````````````````
 
-Medidas de distancia
---------------------
+Medidas de evaluación de traducciones
+-------------------------------------
 
 .. attention:: Métricas automáticas de evaluación de traducciones: http://en.wikipedia.org/wiki/Machine_translation#Evaluation
