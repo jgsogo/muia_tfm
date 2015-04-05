@@ -291,37 +291,101 @@ se representan con etiquetas literales que reciben el nombre de *Palabras Univer
 permiten mostrar más informacón sobre el uso específico del concepto en la oración
 original :cite:`Uchida1999`.
 
-Como ejemplo, mostramos el utilizado en por Teixeira *et al.* en :cite:`TeixeiraMartins2005`
-donde la representación de la oración en inglés *"Peter kissed Mary?!"* se realiza como se
-muestra en el :num:`listado #code-unl1`.
+Como ejemplo, mostramos el utilizado por Uchida y Zhu en :cite:`Uchida2001` donde muestran
+la codificación de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a
+construir una torre enorme, que parecía alcanzar los cielos." tanto en su forma
+gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-example-unl`).
+
+
+.. _fig-example-unl:
+.. graphviz::
+   :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.".
+
+   digraph foo {
+
+        begun[label="begin(icl>do).@entry.@past"]
+        long_ago[label="long ago(icl>ago)"]
+        city[label="city(icl>region).@def"]
+        Babylon[label="Babylon(iof>city)"]
+        people[label="people(icl>person).@def"]
+        build[label="build(icl>do)"]
+        tower[label="tower(icl>building).@indef"]
+        huge[label="huge(icl>big)"]
+        seemed[label="seem(icl>be).@past"]
+        reach[label="reach(icl>come).@begin.@soon"]
+        heaven[label="heaven(icl>region).@def.@pl"]
+
+        begun -> build [label="obj"]
+        build -> tower [label="obj"]
+        begun -> people [label="agt"]
+        begun -> long_ago [label="tim"]
+        begun -> city [label="plc"]
+        city -> Babylon [label="mod"]
+        build -> people [label="agt"]
+        tower -> huge [label="aoj"]
+        reach -> tower [label="obj"]
+        seemed -> tower [label="aoj"]
+        reach -> seemed [label="obj", dir=back]
+        reach -> heaven [label="gol"]
+
+        {rank=same; begun build tower}
+        }
+
 
 .. code-block:: unl
-   :caption: Representación UNL de *"Peter kissed Mary?!"*.
-   :name: code-unl1
+   :caption: Codificación en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.".
+   :name: code-example-unl
    
-   [S]
-   {unl}
-   agt(kiss(agt>person,obj>person).@entry.@past.@interrogative.@exclamative, Peter(iof>person))
-   obj(kiss(agt>person,obj>person).@entry.@past.@interrogative.@exclamative, Mary(iof>person))
-   {/unl}
-   [/S]
+    [S:2]
+    {org:es}
+    Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.
+    {/org}
+    {unl}
+    tim(begin(icl>do).@entry.@past, long ago(icl>ago))
+    mod(city(icl>region).@def, Babylon(iof>city))
+    plc(begin(icl>do).@entry.@past, city (icl>region).@def)
+    agt(begin(icl>do).@entry.@past, people(icl>person).@def)
+    obj(begin(icl>do).@entry.@past, build(icl>do))
+    agt(build(icl>do), people.@def)
+    obj(build(icl>do), tower(icl>building).@indef)
+    aoj(huge(icl>big), tower(icl>building).@indef)
+    aoj(seem(icl>be).@past, tower(icl>building).@indef)
+    obj(seem(icl>be).@past, reach(icl>come).@begin.@soon)
+    obj(reach(icl>come).@begin-soon, tower(icl>building).@indef)
+    gol(reach(icl>come).@begin-soon, heaven(icl>region).@def.@pl)
+    {/unl}
+    [/S]
 
-En el :num:`listado #code-unl1` aparecen dos relaciones, ``agt`` (agente) y ``obj`` (objeto),
-que enlazan los conceptos (UWs) ``kiss(agt>person,obj>person)`` con ``Peter(iof>person)`` y
-``kiss(agt>person,obj>person)`` con ``Mary(iof>person)`` respectivamente; además se hace uso
-de los attributos ``@entry``, ``@past``, ``@interrogative`` y ``@exclamative``.
 
-La principal diferentes entre el UNL y otros sistemas de representación del conocimiento como
+En el ejemplo indicado aparecen numerosas relaciones como ``mod``, ``agt``, ``aoj``, etc
+indicando la relación entre los conceptos (UWs) que enlazan, aparecen varias UWs como
+``city(icl>region)``, ``tower(icl>building)`` que indican objetos o ``seem(icl>be)``, 
+``begin(icl>do)`` que son verbos, e incluso adjetivos como ``huge(icl>big)`` o el adverbio
+``long ago(icl>ago)``; también aparece una UW que es un nombre propio de ciudad
+``Babylon(iof>city)``. Muchas UWs están acompañada por varios attributos como ``@past``,
+``@def`` o ``@entry``.
+Las palabras universales UWs y las relaciones están diseñadas para representar el contenido
+objetivo del texto (el mensaje, la información, el contenido semántico), mientras que los
+atributos codifican rasgos gramaticales del lenguaje, intencionalidad, etc. que pueden
+no ser representables en todas las lenguas.
+
+La principal diferencia entre el UNL y otros sistemas de representación del conocimiento como
 los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
 Framework* (RDF :cite:`Brickley2014`) es que el número y el significado de las relaciones y
-attributos forman parte del estándar. La última específicación del lenguaje, UNL Version II
-(16 de febrero de 2014) :cite:`Zhu2014`, incluye 57 relaciones y 94 atributos. Las UWs no son
-un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen un concepto
-no contemplado hasta el momento.
+attributos forman parte del estándar :cite:`TeixeiraMartins2005`. La última específicación del
+lenguaje, UNL Version II (16 de febrero de 2014) :cite:`Zhu2014`, incluye 57 relaciones y
+94 atributos.
+Las UWs no son un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen
+un concepto no contemplado hasta el momento, si bien existe una base de datos, UNL Knowledge Base,
+con todas las UWs aceptadas y sus relaciones :cite:`Zhu2002`.
 
 .. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa? De
    momento sólo vamos a pasar por encima de los conceptos más relevantes para lo que nos
    traemos entre manos.
+
+
+Universal Words (UWs)
++++++++++++++++++++++
 
 Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`),
 UNL tiene las mismas cuatro categorías de conceptos: sustantivos, verbos, adjetivos y adverbios.
@@ -378,12 +442,38 @@ correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restrin
      - icl>food
      - Tipo de comida
 
-La relación más habitual es ``icl`` que indica un concepto más general, se puede interpretar
-como "incluido en", "un tipo de" como ocurre en ``bird(icl>animal)`` o
-``animal(icl>living thing)``. ``icl`` codifica la relación de hiponimia que ya hemos visto
-descrita más arriba. Otras relaciones muy importantes por el contenido semántico que
-encapsulan son ``equ`` que indica equivalencia y ``iof`` que se utiliza para indicar una
-instancia concreta de una UW, como en ``Peter(iof>person)``.
+
+UNL Ontology - UNL Knowledge Base [#]_
+++++++++++++++++++++++++++++++++++++++
+
+.. [#] En la bibliografía anterior a la especificación UNL Version II la *UNL Ontology*
+   aparece como *UNL Knowledge Base*
+
+Esta base de datos constituye una red semántica con todas las relaciones binarias dirigidas que
+existen entre las palabras universales (UWs); asigna a estas relaciones un grado de certeza
+absoluto (imposible o verdadero). De esta forma cualquier UW aceptada aparecerá en la
+ontología relacionada con otras palabras.
+
+Todas las UWs aparecen relacionadas con otras utilizando alguna de estas tres relaciones:
+
+ * ``icl`` (incluido en, tipo de): indica un concepto superior o más general, codifica la
+   relación de hiponimia descrita en apartados anteriores.
+ * ``equ`` (equivalencia): indica equivalencia entre dos conceptos, se puede asimilar a
+   una relación de sinonimia.
+ * ``iof`` (instancia de): indica el tipo de concepto al que pertenece la instancia, se
+   utiliza con entidades y nombres propios.
+ * ``pof`` (parte de): codifica la relación de meronimia.
+
+La Ontología Ontology contiene también el resto de relaciones posibles entre cualquier par de
+UWs, no obstante, estas relaciones aparecen entre los conceptos más generales posibles,
+de tal forma que se explota la propiedad de herencia de las UWs: cualquier UWs hereda las
+relaciones más restrictivas de sus hiperónimos.
+
+Esta ontología constituye una red semántica con características similares a WordNet, por lo
+que las técnicas y metodologías utilizadas sobre WordNet podrán ser aplicadas al sistema UNL
+sin requerir una adaptación especial.
+
+
 
 
 
