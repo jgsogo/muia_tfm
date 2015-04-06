@@ -34,11 +34,17 @@ la :num:`figura #fig-interlingua-esquema`.
 
 Si convirtiéramos cualquiera de los textos traducidos de nuevo en la representación
 en interlingua, deberíamos obtener una representación idéntica a la que hemos
-utilizado para generarlos. La calidad de la traducción en cuanto a su fiabilidad, 
+utilizado para generarlos [#]_. La calidad de la traducción en cuanto a su fiabilidad, 
 entendida como contenido semántico transmitido, estará por lo tanto directamente
 relacionada con la proximidad entre las dos representaciones en interlingua; así
 un medida adecuada de distancia o de similaridad entre ambas representaciones resulta
-en una herramienta de extremada utilidad para evaluar un sistema de traducción automática.
+ser una herramienta de extremada utilidad para evaluar un sistema de traducción automática.
+
+.. [#] Podrán existir diferencias debidas a fenómenos lingüísticos como la paráfrasis y
+   también pérdidas de significado debidas a limitaciones de la lengua de destino si ésta
+   no es capaz de representar toda la riqueza semántica del texto original.
+
+.. TODO: En el comentario anterior hay que enlazar al apartado donde se hable de paráfrasis y de limitaciones del lenguaje.
 
 En este capítulo estudiamos el estado del arte de los sistemas de representación del
 conocimiento que son utilizados como interlinguas, y en concreto nos centraremos en

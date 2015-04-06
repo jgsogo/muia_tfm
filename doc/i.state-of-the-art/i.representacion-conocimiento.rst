@@ -47,10 +47,10 @@ interpretada por un programa:
    Publishing Co., London, UK, 1984 y *Knowledge Representation: Logical, Philosophical and
    Computational Foundations*, Brooks Cole Publishing Co., Pacific Grove, CA, 2000.
 
-Sowa habla de ontologías en relación a los conceptos, indica que la selección de las categorías
-ontológicas debe ser el primer paso para diseñar una base de datos, de conocimiento o un
+Sowa habla de ontologías en relación a los nodos-concepto, indica que la selección de las
+categorías ontológicas debe ser el primer paso para diseñar una base de datos, de conocimiento o un
 sistema orientado a objetos :cite:`Shapiro2012`. Sin embargo no introduce ningún tipo de
-restricción en cuanto a las relaciones.
+restricción en cuanto a los nodos-relación que pueden aparecer en el grafo.
 
 .. En :cite:`Sowa2003` Sowa introduce los *nested graph models* (NGM) que permiten expresar el contexto de una relación, de tal forma que era posible incorporar lógica modal y temporal.
 
@@ -75,7 +75,7 @@ Nosotros abordaremos las ontologías desde el punto de vista de la Ingeniería d
 una de las definiciones más extendidas y aceptadas es la que se ofrece en :cite:`Studer1998`:
 *"An ontology is a formal, explicit specification of a shared conceptualization"* [#]_. Por
 *conceptualización* se entiende una modelización abstracta de un fenómeno identificando sus
-conceptos relavantes. Por *explícito* se hace referencia a que tanto los conceptos como sus
+conceptos relevantes. Por *explícito* se hace referencia a que tanto los conceptos como sus
 relaciones y restricciones tienen que estar definidas explícitamente. Al ser *formal* la
 ontología puede procesarse mediante un programa informático (no estará expresada en lenguaje
 natural). Y también tiene que ser *compartida*, tiene que recoger un conocimiento consensuado,
@@ -91,11 +91,11 @@ o acciones.
 
 .. Nos adentramos en terrenos de semiótica, y cosas superinteresantes de estructuralismo y demás, hablamos de Saussure, Hjelmslev, Wittgenstein... si tuviéramos tiempo nos adentraríamos más por este camino para bordar este capítulo y ponerle un título meritorio.
 
-El estudio de los conceptos, los referentes, los símbolos,... es una rama de la lingüística que 
+El estudio de los conceptos, los referentes, los símbolos, etc. es una rama de la lingüística que 
 se desarrolla como ciencia durante el siglo XX y de forma sistemática a partir de los 1960s.
 La semiótica comienza su andadura con lingüísticas y filólogos como Ferdinand de Saussure,
 Louis Hjelmslev, Roman Jakobson y Ludwig Wittgenstein en Europa y paralelamente en
-Estados Unidos con Charles Sanders Peirce. Peirce y Saussure son contemporaneos y abordan el
+Estados Unidos con Charles Sanders Peirce. Peirce y Saussure son contemporáneos y abordan el
 mismo problema, la creación de una *ciencia de los signos*, pero desde perspectivas diferentes.
 Saussure, lingüísta, la aborda desde una perspectiva psicosocial e indica que se trata de una
 nueva ciencia a la que llama *semiología*, Peirce considera que esta
@@ -130,10 +130,11 @@ fenómenos :cite:`WPSemantica`:
    en el discurso por pertenecer a la misma categoría sintáctica.
  * **Antonimia**: es la relación que mantienen dos palabras cuyos significados se oponen.
 
-En la :num:`figura #fig-wordnet-lightning` se muestran algunos casos de hiperonimia y holonimia
-en torno a la palabra *candle*. En la misma imágen se puede ver también el fenómeno polisémico de
-esta palabra en inglés que puede denotar los conceptos de *vela*, *candela* o hacer referencia
-al verbo, inexistente en español, para referirse a la realización de una ovoscopia.
+En la :num:`figura #fig-wordnet-lightning` se muestran algunos casos de hiperonimia/hiponimia y
+holonimia/meronimia en torno a la palabra *candle*. En la misma imágen se puede ver también el
+fenómeno polisémico de esta palabra en inglés que puede denotar los conceptos de *vela*, *candela*
+o hacer referencia al verbo, inexistente en español, para referirse a la realización de una
+ovoscopia.
 
 
 .. _fig-wordnet-lightning:

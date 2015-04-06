@@ -7,6 +7,14 @@ Introducción
    estado del arte se puede empezar con el objetivo/problema de la TFM y traer al lector
    hasta el campo de las traducciones con UNL.
 
+Actualmente el inglés se ha erigido como la lengua vehicular en internet, para el
+conocimiento científico, los negocios y la educación; quienes no son nativos
+angloparlantes deben dedicar dinero y tiempo para acceder a estos conocimientos,
+pero muchas otras personas no tendrán los recursos necesarios. Pero la barrera del
+idioma también existe en el sentido contrario, el conocimiento expresado en otros
+lenguajes como el español, chino, árabe, etc. resulta inaccesible para aquéllos
+que no conocen estos idiomas.
+
 El lenguaje universal (UNL, *Universal Networking Language*) es un lenguaje
 eléctronico para las máquinas que permite representar oraciones como expresiones
 lógicas sin ambigüedad; estas expresiones se generan para ser entendidas por
@@ -15,18 +23,11 @@ los ordenadores, no por las personas :cite:`Uchida1999`.
 El UNL, como herramienta de representación del conocimiento, puede ser entendido
 desde dos perspectivas diferentes: como una lengua que sirva de pivote en sistemas
 de traducción automática o como un esquema de representación en sistemas de
-recuperación de información :cite:`TeixeiraMartins2005`. De este modo este
+recuperación de información :cite:`TeixeiraMartins2005`. Este
 lenguaje universal puede ser utilizado como la herramienta necesaria para romper
 la barrera del idioma que separa a muchas personas del acceso al conocimiento que
 no está expresado en un lenguaje que puedan entender.
 
-Actualmente el inglés se ha erigido como la lengua vehicular en internet, para el
-conocimiento científico, los negocios y la educación; quienes no son nativos
-angloparlantes deben dedicar dinero y tiempo para acceder a estos conocimientos,
-pero muchas otras personas no tendrán los recursos necesarios. Pero la barrera del
-idioma también existe en el sentido contrario, el conocimiento expresado en otros
-lenguajes como el español, chino, árabe, etc. resulta inaccesible para aquéllos
-que no conocen estos idiomas.
 
 
 La barrera del lenguaje
@@ -41,9 +42,10 @@ La barrera del lenguaje
 A lo largo de los años se han tratado de adoptar diferentes soluciones para hacer
 frente a este problema; en la época del colonialismo la metropolis imponía su idioma
 en el gobierno de las colonias de tal forma que el acceso a los negocios, la
-justicia, el poder o a las clases altas quedaba supeditado al conocimiento del lenguaje;
+justicia, el poder o a las clases altas quedaba supeditado a su conocimiento;
 así se extendieron algunos idiomas europeos como el inglés, francés o español,
-sustituyendo de forma permanente en algunos casos al idioma local. No obstante, el
+desplazando de forma permanente en algunos casos al idioma local. Sin embargo, este
+proceso se realizó de una manera forzada y hoy no se consideraría una opción viable; el
 lenguaje puede ser considerado la expresión de una cultura y constituye uno de los
 símbolos de identidad más importantes para una población; no se puede pretender que
 el conjunto de la humanidad converja hacia una única lengua común.
@@ -85,8 +87,8 @@ y reglas**.
 Como Hutchins :cite:`Hutchins1994` indica, la demostración tuvo un impacto
 mediático muy importante y provocó la reacción de la Unión Soviética que priorizó el
 desarrollo de este tipo de sistemas. En ambos países, sus respectivas agencias de
-inteligencia instaron pusieron fondos al servicio de los investigadores, estábamos
-en plena Guerra Fría.
+inteligencia instaron a sus gobiernos a disponer de fondos al servicio de los
+investigadores, estábamos en plena Guerra Fría.
 
 El aparente éxito de este experimento hizo pensar que la traducción automática estaba
 mucho más cerca de ser una realidad de lo que realmente estaba, esta euforia duraría
@@ -126,17 +128,17 @@ La confianza en los sistemas de traducción automáticos se recuperaría en la d
 los 1970s. Por un lado el éxito del sistema americano Logos MT (hoy OpenLogos) para
 la traducción de manuales militares de inglés a vietnamita durante la Guerra de
 Vietnam; y por otro la aparición de la compañía SYSTRAN que inicialmente también
-trabajó en defensa, pero que pronto se orientaría también hacia usos comerciales.
+trabajó vinculada a defensa, pero que pronto se orientaría además hacia usos comerciales.
 Cabe destacar que hoy en día ambas compañías siguen en activo, ambas enfocadas en la
 traducción bidireccional entre pares de lenguas :cite:`Scott2009` :cite:`Senellart2001`.
 
 En los 1980s, con el incremento de la potencia de cálculo de los ordenadores, renace
 el interés por los **modelos estadísticos** ya propuestos por Weaver
-:cite:`Weaver1949` para traducción automática frente a los
+:cite:`Weaver1949` en 1949 para traducción automática frente a los
 sistemas basados en diccionarios y reglas que había sido posible crear hasta el
 momento. Esta metodología de traducción sigue siendo hoy en día la más extendida.
-Los modelos utilizados son aplicables a cualquier lengua, pero tiene algunos
-dificultades inherentes relacionadas con la calidad de las traducciones o algunas
+Los modelos utilizados son aplicables a cualquier lengua, pero tienen algunas
+dificultades relacionadas con la calidad de las traducciones o algunas
 características propias de los idiomas que provoca que los resultados deban ser
 revisados y, en consecuencia, su aceptación sea limitada.
 
@@ -191,12 +193,13 @@ interlingua requierirá menores esfuerzos de desarrollo.
 
 El mundo actual globalizado es un claro ejemplo de entorno multilingüe donde una
 verdadera superación de la barrera del lenguaje sólo puede acometerse utilizando una
-interlingua. La capacidad para localizar un producto en la lengua nativa de los clientes
-permite el acceso a nuevos mercados.
+interlingua. Un escenario de este tipo permitiría un acceso universal a la cultura y
+una expansión comercial hacia nuevos mercados sin precedentes, los productos podrían
+localizarse en la lengua nativa de cada cliente potencial sin incurrir en costes elevados.
 
 .. TODO: Estimaciones de comercio sin barreras lingüísticas.
 
-Sin embargo, a pesar de estos beneficios este tipo de traducción es una de las menos
+Sin embargo, a pesar de estos beneficios, este tipo de traducción es una de las menos
 utilizadas en la práctica, la mayoría son prototipos de investigación y sólo el
 proyecto KANT [#]_ ha sido utilizado en un sistema comercial :cite:`Brown2006`, sin
 embargo su aplicación se limita a la traducción de textos técnicos en inglés
@@ -220,15 +223,14 @@ evolucionará apartándose de la ortodoxia.
 
 .. TODO: Algo de Wittgenstein aquí lo petaba todo
 
-En consecuencia, una lengua pivot para un sistema de traducción automática podrá
-ser un lenguaje artificial como el lenguaje universal que introducíamos anteriormente.
-Este constructo además de servir para realizar traducciones constituye una
-herramienta de representación del conocimiento que puede ser utilizada en muchas
-otras aplicaciones de recuperación de información.
+En consecuencia, una lengua pivot para un sistema de traducción automática sólo podrá ser
+un lenguaje artificial; este constructo, además de servir para realizar traducciones,
+constituiría una herramienta de representación del conocimiento que podría ser utilizada
+en muchas otras aplicaciones de recuperación de información.
 
-.. warning:: Por aquí (y en el inicio de la introducción se introduce el UNL, en algún
-   sitio habrá que hacer un repaso del mismo con algún ejemplo para contextualizar
-   el tema de la TFM)
+.. warning:: Por aquí me gustaría mencionar el UNL, igual que lo he hecho antes en la
+   introducción... una vez que tenga el inicio de la introducción hay que volver aquí
+   para ver si encaja.
 
 
 La calidad de la traducción
@@ -237,11 +239,11 @@ Uno de los apéndices del informe del ALPAC :cite:`Pierce1966` tuvo tanta
 repercusión como el propio informe, se trata del apéndice 10 donde se describe
 el experimento llevado a cabo por John B. Carroll para evaluar la calidad de las
 traducciones, tanto humanas como automáticas. En su experimento se sometían
-varias traducciones realizadas tanto por humanos como por máquinas a la evaluación
-de un conjunto de personas que las valoraba según dos parámetros: inteligibilidad
+varias traducciones realizadas por humanos y por máquinas a la evaluación
+de un conjunto de personas que las puntuaba según dos parámetros: inteligibilidad
 y fidelidad.
 
-El desarrollo de una medida que permmita evaluar la calidad de una traducción es
+El desarrollo de una medida que permita evaluar la calidad de una traducción es
 un asunto de extremada importancia, generalmente el destinatario de la traducción o
 el que la solicita no es capaz de comprender uno de los dos idiomas, por lo que
 debe fiarse de que el contenido que está entregando o recibiendo se corresponde con
@@ -253,8 +255,8 @@ originales. En las conclusiones se muestra claramente cómo los textos producido
 los sistemas automáticos obtienen valores muy por debajo de los realizados por
 traductores.
 
-.. warning:: Aquí necesito meter un poco más de chicha (aunque esto ya va camino
-   del estado del arte)
+.. warning:: Aquí necesito meter un poco más de chicha... a lo mejor una gráfica
+   con los resultados del experimento.
 
 En este documento abordamos precisamente este problema: la definición de una medida
 de distancia entre el texto original y la traducción que permita valorar el
@@ -262,12 +264,7 @@ rendimiento de un sistema de traducción automática. Como tendremos la ocasión
 exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua para
 poder realizar la comparación, tomará el grafo del texto original y medirá la
 distancia al grafo resultante de convertir el texto traducido nuevamente a la
-interlingua.
-
-.. warning:: La conclusión de la introducción queda postpuesta a la definición del
-   problema, modelo (y del estado del arte), una vez que veamos si tenemos
-   que hablar de métricas de calidad de traducciones por aquí o esto lo
-   hemos abordado en el estado del arte... pienso en artículos como :cite:`Rossi2013`.
+interlingua (ver :num:`figura #fig-problema-interlingua`).
 
 .. _fig-problema-interlingua:
 .. graphviz::
@@ -296,3 +293,8 @@ interlingua.
         n7a -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #1"]
         n7b -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #2"]
    }
+
+.. warning:: La conclusión de la introducción queda postpuesta a la definición del
+   problema, modelo (y del estado del arte), una vez que veamos si tenemos
+   que hablar de métricas de calidad de traducciones por aquí o esto lo
+   hemos abordado en el estado del arte... pienso en artículos como :cite:`Rossi2013`.
