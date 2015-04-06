@@ -89,9 +89,8 @@ problema, así en :cite:`Conte2004` identificamos:
    el algoritmo, pero prefiero esperar un poco para profundizar en el algoritmo elegido para el
    modelo e implementación.
 
-
    Graph edit distance
-      Aquí hay unos cuantos papers, preparar un compendio.
+      Aquí hay unos cuantos papers, si seguimos este camino hay que preparar un compendio.
 
    Continouos optimization - relaxation labelling
       In 1995, Christmas et al.27 proposed a method, based on the theoretical framework of Kittler and Hancock, that is able to take into account during the iteration process (and not only during initialization) both node and edge attributes.
@@ -102,3 +101,33 @@ problema, así en :cite:`Conte2004` identificamos:
 
 Distancia en redes de conceptos
 ```````````````````````````````
+Igual de importante que comparar los grafos que codifican la información es ser capaces de
+estimar cuál es la distancia o la similaridad entre dos conceptos. De esta forma podemos asignar
+costes a la sustitución de un nodo por otro o a los errores en la correspondencia de los
+nodos de los grafos en los algoritmos mostrados en el apartado anterior. Debemos tener presente
+que en nuestro caso no existe el problema de desambiguar puesto que los nodos presentes en 
+un grafo conceptual o en UNL están perfectamente identificados [#]_.
+
+.. [#] La identificación en UNL está realizada en base a las *Universal Words* cuya correspondencia
+   con los *synsets* de WordNet no es inmediata. Aunque la mayoría de las medidas de distancia
+   hacen referencia a WordNet, la Ontología UNL tiene una estructura basada en las mismas
+   relaciones de hiponimia y meronimia por lo que los algoritmos pueden aplicarse en una u otra
+   red de conceptos de la misma manera.
+
+La distancia semántica entre conceptos ha sido un tema que ha captado la atención investigadora
+desde hace mucho tiempo; y con el surgimiento de las redes de conceptos como MeSH
+(http://www.nlm.nih.gov/mesh/) o WordNet ha tenido un impulso notable.
+
+Se han propuesto medidas de distancia/similaridad basadas únicamente en redes de conceptos como
+las que hemos citado. Las medidas más básicas se limitan a contar los arcos de separación entre
+los conceptos para calcular el camino más corto :cite:`Rada1989`, otras tienen
+en cuenta también la dirección de los arcos :cite:`Hirst1998` y en otras se considera la
+profundidad de los conceptos dentro de la red y el número de enlaces que tienen como una medida de
+dilución del contenido léxico :cite:`Sussna1993` :cite:`Leacock1998`.
+
+Otras medidas combinan la información de estas redes de conceptos con medidas estadísticas, la
+primera de estas aproximaciones pudo ser llevada a cabo en 1995 por Resnik :cite:`Resnik1995` donde
+complementaba la información obtenida a través de WordNet con el contenido de información
+(*information content*) aportado por su hiperónimo común más próximo. 
+
+
