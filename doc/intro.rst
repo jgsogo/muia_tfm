@@ -261,10 +261,38 @@ de distancia entre el texto original y la traducción que permita valorar el
 rendimiento de un sistema de traducción automática. Como tendremos la ocasión de
 exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua para
 poder realizar la comparación, tomará el grafo del texto original y medirá la
-distancia al grafo resultante de convertir el texto traducído nuevamente a la
+distancia al grafo resultante de convertir el texto traducido nuevamente a la
 interlingua.
 
 .. warning:: La conclusión de la introducción queda postpuesta a la definición del
    problema, modelo (y del estado del arte), una vez que veamos si tenemos
    que hablar de métricas de calidad de traducciones por aquí o esto lo
    hemos abordado en el estado del arte... pienso en artículos como :cite:`Rossi2013`.
+
+.. _fig-problema-interlingua:
+.. graphviz::
+   :caption: Evaluación de una traducción apoyándose en la interlingua.
+
+   digraph foo {
+        rankdir=LR
+        n1[label="Texto original"]
+        n2[label="Analizador", shape=box]
+        n3[label="Interlingua"]
+        
+        n4a[label="Generador #1", shape=box]
+        n5a[label="Texto traducido #1"]
+        n6a[label="Analizador"]
+        n7a[label="Interlingua #1"]
+
+        n4b[label="Generador #2", shape=box]
+        n5b[label="Texto traducido #2"]
+        n6b[label="Analizador"]
+        n7b[label="Interlingua #2"]
+
+        n1 -> n2 -> n3
+        n3 -> n4a -> n5a -> n6a -> n7a
+        n3 -> n4b -> n5b -> n6b -> n7b
+        
+        n7a -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #1"]
+        n7b -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #2"]
+   }

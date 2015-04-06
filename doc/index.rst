@@ -13,10 +13,10 @@ Contents:
 
    intro
    i.state-of-the-art/index
-   ii.problem/index
-   iii.hypothesis/index
-   iv.model/index
    zreferences
+..   ii.problem/index
+..   iii.hypothesis/index
+..   iv.model/index
 ..   examples/index
 
 
