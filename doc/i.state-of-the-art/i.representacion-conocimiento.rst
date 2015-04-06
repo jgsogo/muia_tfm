@@ -24,6 +24,10 @@ permite realizar inferencias son los grafos conceptuales (CG, *Conceptual Graph*
    conocen como *relaciones conceptuales*. Un grafo conceptual puede constar de un único
    concepto, pero no puede contener relaciones conceptuales que tengan enlaces sin conectar.
 
+.. warning:: Aclarar el tema de que los CGs son *bipartitos*, en los algoritmos que hemos visto
+   para compararlos se habla de relaciones como arcos que unen los nodos. Puede que ésta sea
+   también una representación aceptada.
+
 La primera aproximación de Sowa a los grafos conceptuales la realiza en el contexto
 de las bases de datos y los sistemas de recuperación de información [#]_, como una herramienta
 intermedia de comunicación entre los usuarios y las máquinas: el grafo describe el 
@@ -200,8 +204,12 @@ concepto, por lo tanto pueden ser intercambiadas en un texto sin afectar al sign
 WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en 
 ``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
 
+.. TODO: Nota al pie: qué es un synset
+
 .. warning:: Incluir un poco más de WordNet, quizá fusionarlo con el apartada anterior. Podría
    hablar de taxonomías/tesauros vs ontologías/wordnet. Usos o ejemplos más concretos.
+   También se puede hablar de otras redes de conceptos y pensar seriamente si en este
+   apartado hay que incorporar ya al debate la ontología UNL
 
 Las principales relaciones codificadas en WordNet son las de hiperonimia/hiponimia, seguidas
 por las de holonimia/meronimia, ambas estructuran los conceptos en jerarquías como la que
@@ -218,9 +226,9 @@ lenguaje natural, *wordnets* en otros idiomas :cite:`Atserias2004`, ontologías 
 
 WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
 como lo es una interlingua para representación del conocimiento, WordNet se puede utilizar
-como un diccionario para definir los conceptos que se están utilizando en cada uno de los
-nodos de un grafo conceptual y medir la distancia semántica entre conceptos utilizados
-en diferentes traducciones de un mismo texto.
+como un diccionario para identificar sin ambigüedades los conceptos que se utilizan en los
+nodos de un grafo conceptual, además, como veremos posteriormente, es una herramienta ideal
+para medir distancias semánticas entre conceptos.
 
 
 El lenguaje universal UNL
@@ -233,7 +241,7 @@ educación.
 
 La representación de un texto en UNL se realiza oración por oración, cada oración se
 codifica en un hipergrafo donde los conceptos son los nodos y las relaciones entre ellos
-constituyen los arcos. ESte hipergrafo también puede ser representado como un conjunto
+constituyen los arcos. Este hipergrafo también puede ser representado como un conjunto
 de relaciones binarias que enlazan los conceptos presentes en la oración. Los conceptos
 se representan con etiquetas literales que reciben el nombre de *Palabras Universales*
 (UW, Universal Words) que además pueden ir acompañadas de diferentes attributos que
@@ -330,7 +338,10 @@ con todas las UWs aceptadas y sus relaciones :cite:`Zhu2002`.
 
 .. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa? De
    momento sólo vamos a pasar por encima de los conceptos más relevantes para lo que nos
-   traemos entre manos.
+   traemos entre manos, después profundizaremos en lo que sea necesario para hacer un buen
+   estado del arte y eliminaremos los apartados que sean accesorios.
+
+   Deberíamos hacer referencia a que en la versión actual se llama *Ontología UNL* a esta UNL KB
 
 
 Palabras universales (UWs)
@@ -343,16 +354,17 @@ restricciones: ``<UW> ::= <headword> [<constraint list>]``:
 
  * La *headword* es una expresión en inglés (usualmente es una plabra, pero puede ser una
    palabra compuesta o una oración si es necesario) que representa un conjunto de conceptos
-   a los que hace referencia esa expresión en inglés, se conoce como ***Basic UW***. Si no
-   existe una etiqueta en inglés para hacer referencia al concepto, entonces la UW se 
-   conoce como *Extra UW*.
+   a los que hace referencia esa expresión en inglés, se conoce como *Basic UW*. Si no
+   existe una etiqueta en inglés para hacer referencia al concepto, entonces se utiliza la
+   palabra correspondiente en otro idioma y la UW se conoce como *Extra UW*.
  * La lista de restricciones sirve para desambiguar los distintos significados a los que puede
    hacer referencia una misma *headword*. Cada restricción está formada por una relación UNL
    y otra UW previamente definida que se combina con esta UW en dicha relación. Estas UWs
    desambiguadas se conocen como *Restricted UW*. 
 
 La :num:`tabla #table-uws-example` muestra algunos ejemplos de UWs con los significados
-correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restringidas
+correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restringidas y 
+también ejemplos de UWs extra.
 
 .. list-table:: Ejemplos de UWs.
    :name: table-uws-example
@@ -400,10 +412,15 @@ UNL Ontology - UNL Knowledge Base [#]_
 
 Esta base de datos constituye una red semántica con todas las relaciones binarias dirigidas que
 existen entre las palabras universales (UWs); asigna a estas relaciones un grado de certeza
-absoluto (imposible o verdadero). De esta forma cualquier UW aceptada aparecerá en la
+absoluto (imposible o verdadero) [#]_. De esta forma cualquier UW aceptada aparecerá en la
 ontología relacionada con otras palabras.
 
-Todas las UWs aparecen relacionadas con otras utilizando alguna de estas tres relaciones:
+.. [#] La posibilidad de asignar a una relación un grado de certeza *imposible* sirve para
+   eliminar relaciones heredadas. Por ejemplo, si una palabra permite una relación determinada,
+   por herencia, todos sus hipónimos también la permitirán; la única manera de eliminarlas
+   es utilizar estas declaraciones de imposibles.
+
+Todas las UWs aparecen relacionadas con otras utilizando alguna de estas cuatro relaciones:
 
  * ``icl`` (incluido en, tipo de): indica un concepto superior o más general, codifica la
    relación de hiponimia descrita en apartados anteriores.
