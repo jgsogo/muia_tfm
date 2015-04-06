@@ -6,10 +6,10 @@ términos de distancia o similaridad entre la estructura de los grafos y tambié
 conceptos que están presentes en cada grafo. Dos grafos (coceptuales o UNL) pueden
 codificar una información totalmente distinta a pesar de compartir la estructura, pero
 también pueden tener la misma información a pesar de mostrar estructuras ligeramente
-diferentes (lo veremos en el próximo capítulo).
+diferentes (paráfrasis).
 
 .. warning:: Comentar diferencias entre distancia y similaridad. Una medida de distancia
-   debe cumplir las tres propiedades mientras que una de similaridad para que no es tan
+   debe cumplir las tres/cuatro propiedades mientras que una de similaridad para que no es tan
    estricta. Documentar e introducir brevemente.
 
 .. warning:: Por aquí comienza a emerger el caracter combinatorio del problema, queremos
@@ -28,22 +28,22 @@ es precisa la búsqueda de patrones dentro de un conjunto de grafos, o la clasif
 un nuevo grafo. Y aquí es donde se plantea el problema, ¿qué significa exactamente comparar
 dos grafos? :cite:`Jolion2001`. Una definición puede ser "encontrar en un grafo :math:`G_1`
 cuál es el subgrafo :math:`G'_1` que es similar (exacto o parcial) a un subgrafo :math:`G'_2`
-de otro grafo :math:`G_2`.
+de otro grafo :math:`G_2`".
 
 La comparación entre los grafos puede realizarse de manera exacta (isomorfismo, *exact matching*)
 o bien permitir cierta tolerancia a errores puesto que los datos pueden contener ruido. 
 En el caso de la traducción automática lo que pretendemos medir es precisamente las variaciones
 introducidas por cada traductor respecto al contenido del texto original, en definitiva, el ruido;
-por lo tanto nos interesarán las técnicas de comparación inexacta, nuestro objetivo no es
-*encontrar* un grafo igual, sino medir comparar dos grafos que *a priori* van a ser distintos.
-También debemos tener presente que nuestros grafos tienen atributos tanto en los nodos
+por lo tanto nos interesarán las técnicas de comparación inexacta. Nuestro objetivo no es
+*encontrar* un grafo igual, sino comparar dos grafos que *a priori* van a ser distintos.
+Además debemos tener presente que nuestros grafos tienen atributos tanto en los nodos
 como en los arcos.
 
 .. warning:: Si en el modelo convertimos nuestro grafo UNL a un **grafo bipartito** entonces no
-   tendríamos atributos en los arcos...
+   tendríamos atributos en los arcos... Es una opción.
 
 .. warning:: Introducir en lo anterior citas a los papers con surveys de algoritmos de
-   comparación de grafos de los que se toma lo que sigue: :cite:`Conte2004`
+   comparación de grafos de los que se toma el apartado de comparación de grafos: :cite:`Conte2004`
 
 Comparación inexacta de grafos
 ++++++++++++++++++++++++++++++
@@ -53,11 +53,11 @@ consistirá en encontrar la correspondencia cuyo coste sea mínimo (*error corre
 *error-tolerant*).
 Otra aproximación al problema consiste en definir un conjunto de operaciones de edición de un
 grafo, asignar un coste a cada una de ellas y buscar la secuencia de ediciones cuyo coste sea
-menor (*graph edit cost*).
+menor que nos permiten convertir un grafo en otro (*graph edit cost*).
 
 Cualquiera de estas estrategias de coste mínimo puede ser utilizada para calcular una medida de
 disimilaridad entre grafos; una adecuada elección de los costes de cada una de las operaciones
-puede provocar que la métrica de coste de edición cumpla las propiedades matemáticas de una
+permite que la métrica de coste de edición cumpla las propiedades matemáticas de una
 distancia, definiéndose una *distancia entre grafos* que permite aplicar a este dominio algunos
 algoritmos de otros espacios métricos :cite:`Conte2004`; se conoce entonces como
 *graph edit distance*. Algunos autores como Bunke han demostrado que el problema del *subgrafo
@@ -67,12 +67,17 @@ la *graph edit distance*.
 .. warning:: Revisar las referencias de Bunke en :cite:`Conte2004` para incluirlas si procede
    en el párrafo anterior cuando se habla de las "demostraciones de Bunke".
 
+.. warning:: En el párrafo anterior se habla del concepto *subgrafo máximo común*, pero no se
+   ha introducido en ningún momento. Antes de este punto habría que introducir también la
+   comparación de grafos utilizando el subgrafo-máximo-común y el supergrafo-mínimo, son dos
+   alternativas que también ofrecen referencias.
+
 Muchos de los algoritmos utilizados para la comparación inexacta de grafos utilizan heurísticas
 para explorar el espacio de búsqueda, ya que en muchos casos se considera un probleam NP-completo;
 sin embargo el tipo de grafos que utilizaremos nosotros son suficientemente pequeños como para
 que el tiempo de cálculo no sea una variable a tener en cuenta. Nos interesa, por tanto,
 mostrar las familias de algoritmos utilizados desde el punto de vista de la formulación del
-problema, así en :cite:`Conte2004` identificamos:
+problema, así en podemos identificar las siguientes :cite:`Conte2004`:
 
  * Optimización continua: convierte el problema de comparación de grafos, que en principio es
    un problema de optimización discreta, en un problema continuo no lineal y se aplican
@@ -87,7 +92,10 @@ problema, así en :cite:`Conte2004` identificamos:
 
 .. warning:: A continuación puedo exponer algunos métodos con bibliografía donde vayan depurando
    el algoritmo, pero prefiero esperar un poco para profundizar en el algoritmo elegido para el
-   modelo e implementación.
+   modelo e implementación. Si no, esto va a parecer un *survey* de algoritmos de comparación
+   de grafos. De todos modos puede ser interesante explorar las diferentes formulaciones del
+   problema, ya que en algún momento habrá que justificar por qué se ha elegido una de ellas.
+   Por tener ejemplos:
 
    Graph edit distance
       Aquí hay unos cuantos papers, si seguimos este camino hay que preparar un compendio.
@@ -104,7 +112,7 @@ Distancia en redes de conceptos
 Igual de importante que comparar los grafos que codifican la información es ser capaces de
 estimar cuál es la distancia o la similaridad entre dos conceptos. De esta forma podemos asignar
 costes a la sustitución de un nodo por otro o a los errores en la correspondencia de los
-nodos de los grafos en los algoritmos mostrados en el apartado anterior. Debemos tener presente
+elementos de los grafos en los algoritmos mostrados en el apartado anterior. Debemos tener presente
 que en nuestro caso no existe el problema de desambiguar puesto que los conceptos presentes en 
 un grafo conceptual o en UNL están perfectamente identificados [#]_.
 
@@ -122,9 +130,9 @@ desde hace mucho tiempo; y con el surgimiento de las redes de conceptos como MeS
    :cite:`Jiang1997`. Tengo que decidir el nivel de la exposición que voy a hacer aquí,
    no puedo convertir cada apartado en una recopilación de todos los métodos...
 
-La aproximaciones para medir la similaridad entre conceptos se han abordado desde tres
-perspectivas principales :cite:`Slimani2013`: basadas en la estructura de la red de conceptos,
-centradas en el contenido de información y aproximaciones basadas en características de
+La medida de la similaridad entre conceptos se ha abordado desde tres perspectivas principales
+:cite:`Slimani2013`: basadas en la estructura de la red de conceptos, centradas en el contenido
+de información de cada nodo y aproximaciones basadas en características de
 los términos. Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
 varias de estas perspectivas.
 
@@ -141,12 +149,12 @@ relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
 
  * **Densidad**: la densidad de la red no es la misma en todas sus partes, se puede sugerir
    que cuanto mayor es la densidad en una zona, menor es la distancia entre los nodos que 
-   forman parte de ella :cite:`Richardson1995`.
+   están en esa zona :cite:`Richardson1995`.
  * **Profundidad**: cuanto más se desciende en la jerarquía más sutiles son las diferencias
    entre los conceptos, por lo tanto la distancia entre los nodos es cada vez menor.
  * **Tipo de conexión**: el peso de cada conexión será diferente según el tipo de relación
    que indique: hiponimia, meronimia, antonimia, etc.
- * **Fuerza de cada conexión**: en la relación de un nodo con sus hijos, no todas las
+ * **Fuerza de cada conexión**: en la relación de un nodo con sus hijos no todas las
    conexiones tienen que tener el mismo peso. En este punto es donde los métodos estadísticos
    basados en el contenido de información (ver más abajo) pueden ser útiles.
 
@@ -157,15 +165,21 @@ relaciones de hiponimia.
 Contenido de información
 ++++++++++++++++++++++++
 Los métodos basados en el contenido de información de los nodos se apoyan en una colección
-de documentos de la que extraen las frecuencias de aparición de cada concepto. La similaridad
-entre dos conceptos vendrá dada por el contenido de información del hiperónimo común más
-próximo. La primera aproximación pudo ser llevada a cabo en 1995 por Resnik :cite:`Resnik1995`
-que sólo tenía en cuenta la frecuencia de aparición de un término; propuestas más recientes
-consideran también los posibles sentidos del término y el contenido de información de cada
-uno de ellos.
+de documentos de la que extraen las frecuencias de aparición de cada término. La primera
+vez en la que se utiliza el contenido de información pudo ser en 1995 por Resnik 
+:cite:`Resnik1995` quien sólo tenía en cuenta la frecuencia de aparición de un término para
+evaluar su contenido de información. Propuestas más recientes consideran también los posibles
+conceptos a los que puede hacer referencia el término. El cálculo de la distancia entre dos
+conceptos puede realizarse combinando en una ecuación el contenido de información de ambos
+términos y el de todos los elementos que se encuentran en el camino que los une.
+
+.. warning:: Explicar más esto, mostrando cómo funciona algún modelo de los que aparecen en
+   :cite:`Slimani2013` o :cite:`Jiang1997`
 
 Basadas en características de los términos
 ++++++++++++++++++++++++++++++++++++++++++
 Una aproximación diferente permite calcular la similaridad entre dos conceptos basándose en
 características descriptivas de cada uno de ellos, el valor de similaridad se calcula
-utilizando formulaciones como el coeficiente de Jaccard.
+utilizando formulaciones análogas al coeficiente de Jaccard.
+Uno de los principales incovenientes para poder aplicar este tipo de modelos es que normalmente
+no se dispone de un conjunto de características homogeneo para todos los conceptos.
