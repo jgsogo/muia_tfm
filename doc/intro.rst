@@ -3,9 +3,9 @@
 Introducción
 ============
 
-.. warning:: Inicio demasiado directo, pero el momento en que tenga listo el
-   estado del arte se puede empezar con el objetivo de la TFM y traer al lector
-   hasta el campo de las traducciones.
+.. warning:: Inicio demasiado directo, pero en el momento en que tenga listo el
+   estado del arte se puede empezar con el objetivo/problema de la TFM y traer al lector
+   hasta el campo de las traducciones con UNL.
 
 El lenguaje universal (UNL, *Universal Networking Language*) es un lenguaje
 eléctronico para las máquinas que permite representar oraciones como expresiones

@@ -100,3 +100,20 @@ por el peso de las relaciones que los unen con el nodo de entrada. El algoritmo 
 por el grafo hasta que se agotan todas las combinaciones posibles.
 En el artículo limitan la aplicación a grafos con estructura de árbol (no presentan ciclos).
 
+
+.. warning:: Artículos pendientes de revisión:
+
+   :cite:`Ganapathy2013` (sin acceso al contenido)
+
+   :cite:`Myaeng1992` (sin acceso al contenido) Uno de los autores es Aurelio López-López,
+   que aparece en las referencias de Montes-y-Gómez y este articulo es 10 años anterior, así
+   que probablemente no añada nada.
+
+   :cite:`Cho2010` (sin acceso al contenido) Utiliza un RandomWalk para calcular la
+   similaridad entre los grafos. Es una idea que lleva un tiempo rondándote por la cabeza,
+   al menos ver cómo la implementa.
+
+Ambas aproximaciones utilizan modelos combinatorios cuya aplicación en grafos grandes es
+cuestionable, no obstante, al igual que en nuestro caso, se centrar en pequeñas oraciones donde
+el número de nodos y conexiones es relativamente pequeño por lo que los tiempos de cálculo
+son aceptables para la experimentación.

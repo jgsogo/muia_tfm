@@ -53,7 +53,7 @@ principales aportaciones y las dificultades que aún están presentes.
 .. warning:: Quizá estos párrafos anteriores son más introducción que estado del arte
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    i.representacion-conocimiento
    ii.medidas-distancia
