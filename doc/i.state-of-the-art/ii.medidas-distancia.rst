@@ -105,7 +105,7 @@ Igual de importante que comparar los grafos que codifican la información es ser
 estimar cuál es la distancia o la similaridad entre dos conceptos. De esta forma podemos asignar
 costes a la sustitución de un nodo por otro o a los errores en la correspondencia de los
 nodos de los grafos en los algoritmos mostrados en el apartado anterior. Debemos tener presente
-que en nuestro caso no existe el problema de desambiguar puesto que los nodos presentes en 
+que en nuestro caso no existe el problema de desambiguar puesto que los conceptos presentes en 
 un grafo conceptual o en UNL están perfectamente identificados [#]_.
 
 .. [#] La identificación en UNL está realizada en base a las *Universal Words* cuya correspondencia
@@ -118,16 +118,54 @@ La distancia semántica entre conceptos ha sido un tema que ha captado la atenci
 desde hace mucho tiempo; y con el surgimiento de las redes de conceptos como MeSH
 (http://www.nlm.nih.gov/mesh/) o WordNet ha tenido un impulso notable.
 
-Se han propuesto medidas de distancia/similaridad basadas únicamente en redes de conceptos como
-las que hemos citado. Las medidas más básicas se limitan a contar los arcos de separación entre
-los conceptos para calcular el camino más corto :cite:`Rada1989`, otras tienen
-en cuenta también la dirección de los arcos :cite:`Hirst1998` y en otras se considera la
-profundidad de los conceptos dentro de la red y el número de enlaces que tienen como una medida de
-dilución del contenido léxico :cite:`Sussna1993` :cite:`Leacock1998`.
+.. warning:: Para un review de medidas más amplio se puede empezar por :cite:`Slimani2013` y
+   :cite:`Jiang1997`. Tengo que decidir el nivel de la exposición que voy a hacer aquí,
+   no puedo convertir cada apartado en una recopilación de todos los métodos...
 
-Otras medidas combinan la información de estas redes de conceptos con medidas estadísticas, la
-primera de estas aproximaciones pudo ser llevada a cabo en 1995 por Resnik :cite:`Resnik1995` donde
-complementaba la información obtenida a través de WordNet con el contenido de información
-(*information content*) aportado por su hiperónimo común más próximo. 
+La aproximaciones para medir la similaridad entre conceptos se han abordado desde tres
+perspectivas principales :cite:`Slimani2013`: basadas en la estructura de la red de conceptos,
+centradas en el contenido de información y aproximaciones basadas en características de
+los términos. Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
+varias de estas perspectivas.
 
+Basadas en la estructura
+++++++++++++++++++++++++
+Considerar la jerarquía de conceptos y el número de conexiones existentes entre ellos es una
+de las maneras más sencillas y naturales de calcular su similaridad. No obstante, parece
+lógico pensar que la distancia entre dos nodos adyacentes cualesquiera no tiene por qué ser
+idéntica, así cada conexión debe tener un peso asignado en el cálculo de esta distancia. En
+redes muy grandes, como es el caso que nos ocupa, esta peso no puede ser asignado manualmente
+para cada conexión, deben implementarse algoritmos que permitan calcularlo basándose en
+características de la red. Algunas de estas características estructurales típicamente
+relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
 
+ * **Densidad**: la densidad de la red no es la misma en todas sus partes, se puede sugerir
+   que cuanto mayor es la densidad en una zona, menor es la distancia entre los nodos que 
+   forman parte de ella :cite:`Richardson1995`.
+ * **Profundidad**: cuanto más se desciende en la jerarquía más sutiles son las diferencias
+   entre los conceptos, por lo tanto la distancia entre los nodos es cada vez menor.
+ * **Tipo de conexión**: el peso de cada conexión será diferente según el tipo de relación
+   que indique: hiponimia, meronimia, antonimia, etc.
+ * **Fuerza de cada conexión**: en la relación de un nodo con sus hijos, no todas las
+   conexiones tienen que tener el mismo peso. En este punto es donde los métodos estadísticos
+   basados en el contenido de información (ver más abajo) pueden ser útiles.
+
+En general, todos los algoritmos que utilizan la estructura de la red calculan la distancia
+entre dos conceptos a través del camino más corto entre ellos utilizando únicamente las
+relaciones de hiponimia. 
+
+Contenido de información
+++++++++++++++++++++++++
+Los métodos basados en el contenido de información de los nodos se apoyan en una colección
+de documentos de la que extraen las frecuencias de aparición de cada concepto. La similaridad
+entre dos conceptos vendrá dada por el contenido de información del hiperónimo común más
+próximo. La primera aproximación pudo ser llevada a cabo en 1995 por Resnik :cite:`Resnik1995`
+que sólo tenía en cuenta la frecuencia de aparición de un término; propuestas más recientes
+consideran también los posibles sentidos del término y el contenido de información de cada
+uno de ellos.
+
+Basadas en características de los términos
+++++++++++++++++++++++++++++++++++++++++++
+Una aproximación diferente permite calcular la similaridad entre dos conceptos basándose en
+características descriptivas de cada uno de ellos, el valor de similaridad se calcula
+utilizando formulaciones como el coeficiente de Jaccard.
