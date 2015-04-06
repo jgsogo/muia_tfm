@@ -46,8 +46,8 @@ Los dos fenómenos lingüísticos principales que pueden provocar este engaño s
 
    ¿Existen otros fenómenos que modifiquen la estructura pero no alteren el contenido semántico?
 
-Limitaciones del lenguajes
-``````````````````````````
+Limitaciones del lenguaje
+`````````````````````````
 En el proceso de traducción automática que hemos mostrado en la
 :num:`figura #fig-problema-interlingua` donde comparamos los grafos de interlingua producidos
 a partir de los generadores con el grafo en interlingua de partida, la información que
@@ -74,3 +74,29 @@ interpretarlos e incorporarlos al texto traducido.
 
 Modelos propuestos en la bibliografía
 `````````````````````````````````````
+La mayoría de los modelos de comparación de grafos aparecen relacionados con la investigación
+en el campo de la recuperación de información; muchos de ellos se limitan al problema de
+determinar si un grafo está contenido dentro de otro, se limitan a problemas de búsqueda donde
+no se obtiene ninguna medida de similaridad. Otros métodos más generales miden la similaridad
+en base al conjunto de elementos que tienen en común los grafos a comparar :cite:`Montes2000`.
+
+En el problema que nos ocupa necesitamos poder comparar grafos de una forma flexible, donde se
+permita que los atributos de los nodos o los arcos sean diferentes.
+
+En :cite:`Montes2001` Montes-y-Gómez *et al.* proponen un modelo flexible para comparar grafos
+conceptuales, en él primero se construye el conjunto de todos los solapamientos posibles entre
+ambos grafos y posteriomente se calcula la similaridad a partir de dos valores de similaridad
+conceptual y relacional igual que en :cite:`Montes2000`, cada uno de estos valores se obtiene
+utilizando una expresión análoga al coeficiente Sørensen-Dice. En los cálculos el modelo
+propuesto utiliza un tesauro de conceptos (con relaciones de hiponimia) y varios parámetros
+que el usuario puede modificar de acuerdo a sus intereses.
+
+Otra aproximación interesante es la mostrada por Zhong *et al.* en :cite:`Zhong2002`, en ella
+se utiliza el nodo de entrada del grafo conceptual como nodo de comienzo del algoritmo y se
+propone un método recursivo. La similaridad entre dos grafos conceptuales consistirá en la
+similaridad entre estos dos nodos de entrada y el máximo valor de similaridad que se obtenga
+de todas las combinaciones de subgrafos que sean hijos de este nodo de entrada ponderadas 
+por el peso de las relaciones que los unen con el nodo de entrada. El algoritmo va progresando
+por el grafo hasta que se agotan todas las combinaciones posibles.
+En el artículo limitan la aplicación a grafos con estructura de árbol (no presentan ciclos).
+
