@@ -59,3 +59,4 @@ principales aportaciones y las dificultades que aún están presentes.
    ii.medidas-distancia
    iii.distancia-semantica
    iv.evaluacion-traducciones
+   v.problemas-combinatorios
