@@ -9,7 +9,7 @@ Medida de distancia en grafos UNL
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    intro
    i.state-of-the-art/index
