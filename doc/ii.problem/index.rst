@@ -2,14 +2,17 @@
 Descripción del problema
 ========================
 
-.. 2-4 páginas
+Algunas carencias en la bibliografía:
 
+ * Nadie habla de la Ontología UNL (o no me he cruzado con ellos). Todas las métricas de distancia
+   semántica entre conceptos se evalúan en WordNet
+ * Nadie trabaja con grafos UNL - todo el trabajo llega, como mucho, a grafos conceptuales, y tampoco hay tanto.
 
-UNL - Hipergrafo
-----------------
+Posibles líneas de actuación:
 
-UNL se define como un hipergrafo (la diferencia con un grafo es que las aristas son hiperaristas
-que pueden relacionar cualquier cantidad de vértices, en lugar de sólo un máximo de dos como en el
-caso particular) compuesto por un conjunto de enlaces dirigidos etiquetados entre los nodos o hipernodos
-(las UWs, que además pueden estar anotadas).
+ * Adaptar algoritmos a la Ontología UNL y a los grafos UNL:
+    * Documentar las diferencias (WordNet-Ontología UNL) y (CGs-Grafo UNL), adaptar algún algoritmo para
+      que funcione en este nuevo escenario.
+ * Valorar si realmente se puede aportar algún modelo nuevo.
+
 

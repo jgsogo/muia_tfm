@@ -6,15 +6,16 @@
 Medida de distancia en grafos UNL
 =================================
 
-Contents:
+.. only:: html
+   Contents:
 
 .. toctree::
    :maxdepth: 4
 
    intro
    i.state-of-the-art/index
+   ii.problem/index
    zreferences
-..   ii.problem/index
 ..   iii.hypothesis/index
 ..   iv.model/index
 ..   examples/index

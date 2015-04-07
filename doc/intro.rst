@@ -82,7 +82,7 @@ de Georgetown [#]_. Se trataba de un sistema basado en la utilización de **dicc
 y reglas**.
 
 .. [#] IBM mantiene en Internet documentación sobre este evento y el ordenador
-   IBM 701 en el que se ejecutó el programa: http://www-03.ibm.com/ibm/history/exhibits/701/701_intro.html (accedida el 21 de enero de 2015).
+   IBM 701 en el que se ejecutó el programa: http://www-03.ibm.com/ibm/history/exhibits/701/701_intro.html (accedida el 21 de marzo de 2015).
 
 Como Hutchins :cite:`Hutchins1994` indica, la demostración tuvo un impacto
 mediático muy importante y provocó la reacción de la Unión Soviética que priorizó el
