@@ -10,3 +10,5 @@ Lib/
 Include/
 .idea
 *.pdf
+build
+
