@@ -24,9 +24,9 @@ void info(wordnet& wn, const std::string& word) {
             auto data = wn.wordnet_graph[it->first];
             cout << "\t" << it->second << ": ";
             for (auto& w: data.words) {
-	        cout << w << ", ";
-	    }
-	    cout << endl;
+				cout << w << ", ";
+			}
+			cout << endl;
         }
     }
 }
@@ -70,5 +70,4 @@ int main(int argc, char** argv) {
             }
         }
     }
-    
 }
