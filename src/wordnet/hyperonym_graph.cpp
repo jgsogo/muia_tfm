@@ -1,9 +1,8 @@
 
-#pragma once
 
 #include "hyperonym_graph.h"
 #include <queue>
-# include <boost/graph/filtered_graph.hpp>
+#include <boost/graph/filtered_graph.hpp>
 
 using namespace wn;
 using namespace wnb;
