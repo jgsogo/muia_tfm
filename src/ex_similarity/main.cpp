@@ -3,11 +3,12 @@
 #include <vector>
 
 #include "wnb/core/wordnet.hh"
-#include "wnb/nltk_similarity.hh"
+#include "distance/shortest_path.h"
 
 using namespace std;
 using namespace wnb;
 
+/*
 void info(wordnet& wn, const std::string& word) {
     nltk_similarity similarity(wn);
     auto synsets = wn.get_synsets(word);
@@ -30,6 +31,7 @@ void info(wordnet& wn, const std::string& word) {
         }
     }
 }
+*/
 
 int main(int argc, char** argv) {
 	if (argc != 2) {
@@ -48,7 +50,7 @@ int main(int argc, char** argv) {
     vector<synset> synsets1 = wn.get_synsets("cat");
     vector<synset> synsets2 = wn.get_synsets("dog");
 
-    nltk_similarity similarity(wn);
+	wn::shortest_path dist(wn);
 
     for (auto& s1: synsets1) {
         cout << "_____________________" << endl << endl;
@@ -60,7 +62,7 @@ int main(int argc, char** argv) {
 
         for (auto& s2: synsets2) {
             if (s1.pos == s2.pos) {
-                auto distance = similarity.shortest_path_distance(s1, s2);
+				auto distance = dist(s1, s2);
                 cout << "\t" << distance << "\t|";
                 for(auto& w: s2.words) {
                     cout << w << ", ";
