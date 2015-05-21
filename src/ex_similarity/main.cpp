@@ -31,8 +31,12 @@ void info(wordnet& wn, const std::string& word) {
     }
 }
 
-int main() {
-    wordnet wn("/usr/share/wordnet/", true);
+int main(int argc, char** argv) {
+	if (argc != 2) {
+		cout << "usage: " << argv[0] << " <path/to/wordnet-3.0/>" << endl;
+		exit(1);
+	}
+	wordnet wn(argv[1], true);
 
     //cout << endl << "==== WORD -- Cat" << endl;
     //info(wn, "cat");
@@ -40,6 +44,7 @@ int main() {
     //cout << endl << "==== WORD -- Dog" << endl;
     //info(wn, "dog");
 
+	cout << "Similarity between 'cat' and 'dog'" << endl;
     vector<synset> synsets1 = wn.get_synsets("cat");
     vector<synset> synsets2 = wn.get_synsets("dog");
 
