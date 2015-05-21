@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
     vector<synset> synsets2 = wn.get_synsets("dog");
 
 	wn::shortest_path dist(wn);
+	cout << " - min_distance = " << dist.min() << endl;
+	cout << " - max_distance = " << dist.max() << endl;
 
     for (auto& s1: synsets1) {
         cout << "_____________________" << endl << endl;
