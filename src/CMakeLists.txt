@@ -24,4 +24,6 @@ include_directories(${CMAKE_SOURCE_DIR})
 # Libraries and executables
 #--------------------------
 add_subdirectory(distance)
+add_subdirectory(wordnet)
+
 add_subdirectory(ex_similarity)
