@@ -27,6 +27,17 @@ int main(int argc, char** argv) {
 	cout << " - min_distance = " << dist.min() << endl;
 	cout << " - max_distance = " << dist.max() << endl;
 
+    auto n = std::min(synsets1.size(), synsets2.size());
+    auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin()+n), vector<synset>(synsets2.begin(), synsets2.begin()+n));
+    cout << "Min distance is " << data.second << endl;
+    cout << "Pairs are: " << endl;
+    for (auto& p:data.first) {
+        cout << "--> " << p.first << endl;
+        cout << "--> " << p.second << endl;
+        cout << "-----------------" << endl;
+    }
+    exit(1);
+
     for (auto& s1: synsets1) {
         cout << "_____________________" << endl << endl;
         cout << s1 << " -> " << s1.gloss << "." << endl;
