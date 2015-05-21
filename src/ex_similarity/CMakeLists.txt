@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( wnb_similarity )
+project( ex_similarity )
 
 
 file(GLOB _headers "*.h")
@@ -10,20 +10,14 @@ set(SRC_FILES
             CMakeLists.txt
             )
 
-# Find BOOST
-FIND_PACKAGE(Boost COMPONENTS graph REQUIRED)
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-
-# Find WNB library - http://www.cmake.org/Wiki/CMake:How_To_Find_Libraries
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../../dependencies/wordnet-blast/")
-find_package(Wnb REQUIRED)
+# Dependencies
+include_directories(${wn_distance_INCLUDE_DIR})
 
 # Project example
-include_directories(${WNB_INCLUDE_DIRS})
-
-add_executable( wnb_similarity ${SRC_FILES})
-set_property(TARGET wnb_similarity PROPERTY CXX_STANDARD 11)
+add_executable( ex_similarity ${SRC_FILES})
+set_property(TARGET ex_similarity PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries( wnb_similarity ${WNB_LIBRARIES} )
-
+target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance )
+set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
+                                               LINKER_LANGUAGE CXX
+                                               FOLDER "examples")

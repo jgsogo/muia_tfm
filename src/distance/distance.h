@@ -10,7 +10,7 @@ namespace wn {
 	class WN_DISTANCE_EXPORT distance {
 		public:
 			distance(const wnb::wordnet& wordnet);
-			virtual float operator()(const synset& s1, const synset& s2) = 0;
+			virtual float operator()(const synset& s1, const synset& s2) const = 0;
 		protected:
 			const wnb::wordnet& wordnet;
 	};
