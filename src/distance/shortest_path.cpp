@@ -5,6 +5,8 @@
 using namespace wn;
 
 shortest_path::shortest_path(const wnb::wordnet& wordnet) : distance(wordnet) {
+	hyperonym_graph graph(wordnet);
+	max_depth = graph.max_depth();
 }
 
 float shortest_path::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
@@ -26,5 +28,5 @@ float shortest_path::operator()(const wnb::synset& s1, const wnb::synset& s2) co
 }
 
 float shortest_path::max() const {
-
+	return 2 * max_depth;
 }

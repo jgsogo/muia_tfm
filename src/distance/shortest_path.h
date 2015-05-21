@@ -9,5 +9,7 @@ namespace wn {
 			shortest_path(const wnb::wordnet& wordnet);
 			virtual float operator()(const wnb::synset& s1, const wnb::synset& s2) const;
 			virtual float max() const;
+		protected:
+			std::size_t max_depth;
 	};
 }

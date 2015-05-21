@@ -84,3 +84,42 @@ map<synset, std::size_t> hyperonym_graph::hypernym_map(wnb::synset s) const {
 	return ret;
 }
 
+std::size_t hyperonym_graph::max_depth() const {
+	using namespace _detail;
+	map<vertex, std::size_t> vert_depth;
+	boost::graph_traits<G>::vertex_iterator v, v_end;
+	std::tie(v, v_end) = boost::vertices(d->fg);
+	for (; v != v_end; ++v) {
+		//std::size_t depth; bool inserted;
+		auto it_vertex = vert_depth.insert(std::make_pair(*v, 0));
+		if (it_vertex.second) {
+			std::queue<vertex> q;
+			q.push(*v);
+			while (!q.empty()) {
+				vertex u = q.front(); q.pop();
+				//auto new_d = vertices[u] + 1;
+				boost::graph_traits<G>::out_edge_iterator e, e_end;
+				std::tie(e, e_end) = boost::out_edges(*v, d->fg);
+				for (; e != e_end; ++e) {
+					vertex w = target(*e, d->fg);
+					q.push(w);
+					if (vert_depth.find(w) != vert_depth.end()) {
+						if (vert_depth[w] >= it_vertex.first->second + 1) {
+							q.pop();
+						}
+						else {
+							vert_depth[w] = it_vertex.first->second + 1;
+						}
+					}
+					else {
+						vert_depth[w] = it_vertex.first->second + 1;
+					}
+				}				
+			}
+		}
+	}
+	auto it_max_depth = std::max_element(vert_depth.begin(), vert_depth.end(), [](const std::pair<vertex, std::size_t>& lhs, const std::pair<vertex, std::size_t>& rhs){
+		return lhs.second < rhs.second;
+	});
+	return it_max_depth->second;
+}

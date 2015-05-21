@@ -10,7 +10,7 @@ namespace wn {
 			hyperonym_graph(const wnb::wordnet& wordnet);
 			~hyperonym_graph();
 			std::map<wnb::synset, std::size_t> hypernym_map(wnb::synset s) const;
-			//virtual float operator()(const wnb::synset& s1, const wnb::synset& s2) const = 0;
+			std::size_t max_depth() const;
 		protected:
 			struct data;
 			data* d;
