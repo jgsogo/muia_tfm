@@ -20,6 +20,9 @@ int main(int argc, char** argv) {
     vector<synset> synsets1 = wn.get_synsets("cat");
     vector<synset> synsets2 = wn.get_synsets("dog");
 
+	cout << "94185: " << wn.wordnet_graph[94185] << endl;
+	cout << "94190: " << wn.wordnet_graph[94190] << endl;
+
 	wn::shortest_path dist(wn);
 	cout << " - min_distance = " << dist.min() << endl;
 	cout << " - max_distance = " << dist.max() << endl;
