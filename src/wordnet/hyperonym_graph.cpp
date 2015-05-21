@@ -90,30 +90,22 @@ std::size_t hyperonym_graph::max_depth() const {
 	boost::graph_traits<G>::vertex_iterator v, v_end;
 	std::tie(v, v_end) = boost::vertices(d->fg);
 	for (; v != v_end; ++v) {
-		//std::size_t depth; bool inserted;
 		auto it_vertex = vert_depth.insert(std::make_pair(*v, 0));
 		if (it_vertex.second) {
 			std::queue<vertex> q;
 			q.push(*v);
 			while (!q.empty()) {
 				vertex u = q.front(); q.pop();
-				//auto new_d = vertices[u] + 1;
+				auto hyperonym_depth = vert_depth.at(u) + 1;
 				boost::graph_traits<G>::out_edge_iterator e, e_end;
-				std::tie(e, e_end) = boost::out_edges(*v, d->fg);
+				std::tie(e, e_end) = boost::out_edges(u, d->fg);
 				for (; e != e_end; ++e) {
 					vertex w = target(*e, d->fg);
-					q.push(w);
-					if (vert_depth.find(w) != vert_depth.end()) {
-						if (vert_depth[w] >= it_vertex.first->second + 1) {
-							q.pop();
-						}
-						else {
-							vert_depth[w] = it_vertex.first->second + 1;
-						}
-					}
-					else {
-						vert_depth[w] = it_vertex.first->second + 1;
-					}
+					auto it_w = vert_depth.insert(std::make_pair(w, hyperonym_depth));
+					if (it_w.second || it_w.first->second < hyperonym_depth) {
+						it_w.first->second = hyperonym_depth;
+						q.push(w);
+					}					
 				}				
 			}
 		}

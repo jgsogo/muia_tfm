@@ -21,3 +21,9 @@ target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance wn_wordnet )
 set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
                                                FOLDER "examples")
+
+install(TARGETS ex_similarity
+  RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" COMPONENT bin
+  LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT shlib
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib  
+  )
