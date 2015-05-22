@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    auto n = std::min(synsets1.size(), synsets2.size());
+    auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
     vector<wn::distance::_t_distance> distances;
     auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances);
     cout << " - Min distance is " << data << endl;
