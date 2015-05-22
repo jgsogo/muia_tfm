@@ -28,3 +28,38 @@ add_subdirectory(distance)
 add_subdirectory(wordnet)
 
 add_subdirectory(ex_similarity)
+
+
+# Data
+#------------------------
+option(DOWNLOAD_WORDNET "Download WordNet 3.1" OFF)
+if(DOWNLOAD_WORDNET)
+    if(IS_DIRECTORY "${CMAKE_INSTALL_PREFIX}/data/wordnet3.1")
+              message(STATUS "WordNet 3.1 is already on disk")
+    else()
+              message(STATUS "Downloading WordNet 3.1 database to ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1")
+              file(DOWNLOAD http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1/wn3.1.dict.tar.gz                            SHOW_PROGRESS)
+              
+              message(STATUS "Uncompressing database...")
+              execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1/wn3.1.dict.tar.gz
+                            WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1)
+
+    endif()
+endif()
+
+option(DOWNLOAD_SEMCOR "Download SemCor 3.0" OFF)
+if(DOWNLOAD_SEMCOR)
+    set(SEMCOR_DIR "${CMAKE_INSTALL_PREFIX}/data")
+    if(IS_DIRECTORY ${SEMCOR_DIR}/semcor3.0)
+              message(STATUS "SemCor 3.0 is already on disk (${${SEMCOR_DIR}})")
+    else()
+              message(STATUS "Downloading SemCor 3.0 database to ${SEMCOR_DIR}")
+              file(DOWNLOAD http://web.eecs.umich.edu/~mihalcea/downloads/semcor/semcor3.0.tar.gz ${SEMCOR_DIR}/semcor3.0.tar.gz                            SHOW_PROGRESS)
+              
+              message(STATUS "Uncompressing database...")
+              execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${SEMCOR_DIR}/semcor3.0.tar.gz
+                            WORKING_DIRECTORY ${SEMCOR_DIR})
+
+    endif()
+endif()
+
