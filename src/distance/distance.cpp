@@ -1,6 +1,7 @@
 
 //#include "stdafx.h"
 #include "distance.h"
+#include <numeric>
 
 using namespace wn;
 using namespace std;
@@ -19,27 +20,38 @@ float distance::max() const {
 pair<vector<pair<wnb::synset, wnb::synset>>, float> distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2) const {
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() == v2.size());
-    auto accumulator = [](const float& lhs, const float& rhs) { return lhs + rhs;};
-    auto distance = [this](const wnb::synset& s1, const wnb::synset& s2) { return this->operator()(s1, s2); };
 
-    vector<wnb::synset> permutation(v1.size());
-    float min_value = numeric_limits<float>::max();
-    sort(v1.begin(), v1.end());
-    do {
-        float sum = inner_product(v1.begin(), v1.end(), v2.begin(), 0.f, accumulator, distance);
-        if (sum < min_value) {
-            min_value = sum;
-            permutation = vector<wnb::synset>(v1.begin(), v1.end());
-        }
-    } while (next_permutation(v1.begin(), v1.end()));
+	vector<float> distances; distances.reserve(v1.size()*v1.size()); // distance 'matrix'
+	size_t index = 0;
+	for (auto it1 = v1.begin(); it1 != v1.end(); ++it1) {
+		for (auto it2 = v2.begin(); it2 != v2.end(); ++it2) {
+			distances[index] = this->operator()(*it1, *it2);
+		}
+	}
 
-    // Build return value
-    pair<vector<pair<wnb::synset, wnb::synset>>, float> ret;
-    for (auto& s1: permutation) {
-        for (auto& s2: v2) {
-        ret.first.push_back(make_pair(s1,s2));
-        }
-    }
-    ret.second = min_value;
-    return ret;
+	vector<size_t> indexes;  indexes.reserve(v1.size()); // indexes
+	size_t n(0);
+	std::generate_n(std::back_inserter(indexes), v1.size(), [n]()mutable{return n++; });
+
+	vector<size_t> permutation; permutation.reserve(v1.size());
+	float min_value = numeric_limits<float>::max();
+	do {
+		float sum = 0.f;
+		for (auto i = 0; i < v1.size(); ++i) {
+			sum += distances[8 * i + indexes[0]];
+		}
+		if (sum < min_value){
+			std::copy(indexes.begin(), indexes.end(), permutation.begin());
+		}
+	} while (next_permutation(indexes.begin(), indexes.end()));
+
+	// Build return value
+	pair<vector<pair<wnb::synset, wnb::synset>>, float> ret;
+	for (auto& s1 : v1) {
+		for (auto& index : permutation) {
+			ret.first.push_back(make_pair(s1, v2[index]));
+		}
+	}
+	ret.second = min_value;
+	return ret;
 }
