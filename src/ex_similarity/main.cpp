@@ -24,7 +24,8 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
             cout << ": " << wn.wordnet_graph[v];
             cout << endl;
         }
-        // out_edges
+        /*
+        // in_edges
         cout << " - in_edges: " << endl;
         boost::graph_traits<wordnet::graph>::in_edge_iterator in, in_end;
         std::tie(in, in_end) = boost::in_edges(orph1.id, wn.wordnet_graph);
@@ -35,6 +36,7 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
             cout << ": " << wn.wordnet_graph[v];
             cout << endl;
         }
+        */
     }
 }
 
