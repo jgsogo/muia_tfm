@@ -6,6 +6,8 @@
 using namespace wn;
 using namespace std;
 
+const float distance::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
+
 distance::distance(const wnb::wordnet& wordnet) : wordnet(wordnet) {
 }
 
@@ -14,9 +16,12 @@ float distance::min() const {
 }
 
 float distance::max() const {
-	return std::numeric_limits<float>::max();
+    return max_distance;
 }
 
+bool distance::connected(const wnb::synset& s1, const wnb::synset& s2) const {
+    return (this->operator()(s1, s2) < distance::max_distance);
+}
 
 float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vector<distance::_t_distance>& dist_combs) const {
     // Look for the combination that minimizes distance between the two sets.
@@ -33,10 +38,14 @@ float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vec
     std::iota(indexes.begin(), indexes.end(), 0);
 
     vector<pair<vector<size_t>, float>> permutations;
-    float min_value = numeric_limits<float>::max();
+    float min_value = distance::max_distance;
     do {
         float sum = 0.f;
         for (auto i = 0; i < v1.size(); ++i) {
+            if (distances[v1.size() * i + indexes[i]] == max_distance) {
+                sum = std::numeric_limits<float>::max();
+                break;
+            }
             sum += distances[v1.size() * i + indexes[i]];
         }
         if (sum <= min_value){
