@@ -38,7 +38,7 @@ pair<vector<pair<wnb::synset, wnb::synset>>, float> distance::min_distance(vecto
 	do {
 		float sum = 0.f;
 		for (auto i = 0; i < v1.size(); ++i) {
-			sum += distances[8 * i + indexes[0]];
+			sum += distances[v1.size() * i + indexes[0]];
 		}
 		if (sum < min_value){
 			std::copy(indexes.begin(), indexes.end(), permutation.begin());
