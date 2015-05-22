@@ -26,6 +26,7 @@ bool distance::connected(const wnb::synset& s1, const wnb::synset& s2) const {
 float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vector<distance::_t_distance>& dist_combs) const {
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() == v2.size());
+    assert(v1.size()*max_distance <= std::numeric_limits<float>::max());
 
     vector<float> distances; distances.reserve(v1.size()*v1.size()); // distance 'matrix'
     for (auto it1 = v1.begin(); it1 != v1.end(); ++it1) {
@@ -42,10 +43,6 @@ float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vec
     do {
         float sum = 0.f;
         for (auto i = 0; i < v1.size(); ++i) {
-            if (distances[v1.size() * i + indexes[i]] == max_distance) {
-                sum = std::numeric_limits<float>::max();
-                break;
-            }
             sum += distances[v1.size() * i + indexes[i]];
         }
         if (sum <= min_value){
