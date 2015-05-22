@@ -13,15 +13,18 @@ namespace _detail {
 	struct hyperonym_edge {
 		hyperonym_edge() {}
 
-		hyperonym_edge(PointerSymbolMap pointer_symbol)
-			: m_pointer_symbol(pointer_symbol) {}
+        hyperonym_edge(PointerSymbolMap pointer_symbol, bool instance_hyperonym)
+			: m_pointer_symbol(pointer_symbol),
+              instance_hyperonym(instance_hyperonym) {}
 
 		template <typename Edge>
 		bool operator()(const Edge& e) const {
 			//! \todo TODO: Create enum to identify edge types
-			return 1 == get(m_pointer_symbol, e); // hypernyme (instance_hypernyme not used here)
+            auto pointer_symbol = get(m_pointer_symbol, e);
+            return (1 == pointer_symbol || (instance_hyperonym && 2 == pointer_symbol));
 		}
 		PointerSymbolMap m_pointer_symbol;
+        bool instance_hyperonym;
 	};
 
 	typedef boost::property_map<wordnet::graph, int ptr::*>::const_type PointerSymbolMap;
@@ -32,8 +35,8 @@ namespace _detail {
 
 
 struct hyperonym_graph::data {
-	data(const wnb::wordnet& wnet)
-		: filter(boost::get(&ptr::pointer_symbol, wnet.wordnet_graph)),
+    data(const wnb::wordnet& wnet, bool instance_hyperonym)
+		: filter(boost::get(&ptr::pointer_symbol, wnet.wordnet_graph), instance_hyperonym),
 		  fg(wnet.wordnet_graph, filter) {
 	};
 	_detail::hyperonym_edge<_detail::PointerSymbolMap> filter;
@@ -41,7 +44,7 @@ struct hyperonym_graph::data {
 };
 
 
-hyperonym_graph::hyperonym_graph(const wnb::wordnet& wnet) : d(new data(wnet)) {
+hyperonym_graph::hyperonym_graph(const wnb::wordnet& wnet, bool instance_hyperonym) : d(new data(wnet, instance_hyperonym)) {
 }
 
 hyperonym_graph::~hyperonym_graph() {
@@ -113,4 +116,20 @@ std::size_t hyperonym_graph::max_depth() const {
 		return lhs.second < rhs.second;
 	});
 	return it_max_depth->second;
+}
+
+vector<wnb::synset> hyperonym_graph::orphans() const {
+    using namespace _detail;
+
+    vector<wnb::synset> ret;
+    boost::graph_traits<G>::vertex_iterator v, v_end;
+    std::tie(v, v_end) = boost::vertices(d->fg);
+    for (; v != v_end; ++v) {
+        boost::graph_traits<G>::out_edge_iterator e, e_end;
+        std::tie(e, e_end) = boost::out_edges(*v, d->fg);
+        if (e == e_end) {
+            ret.push_back(d->fg[*v]);
+        }
+    }
+    return ret;
 }
