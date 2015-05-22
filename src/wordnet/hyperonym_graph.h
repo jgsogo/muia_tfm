@@ -7,10 +7,11 @@
 namespace wn {
 	class WN_WORDNET_EXPORT hyperonym_graph {
 		public:
-			hyperonym_graph(const wnb::wordnet& wordnet);
+			hyperonym_graph(const wnb::wordnet& wordnet, bool instance_hyperonym = false);
 			~hyperonym_graph();
 			std::map<wnb::synset, std::size_t> hypernym_map(wnb::synset s) const;
 			std::size_t max_depth() const;
+            std::vector<wnb::synset> orphans() const;
 		protected:
 			struct data;
 			data* d;
