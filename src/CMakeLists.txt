@@ -51,7 +51,7 @@ option(DOWNLOAD_SEMCOR "Download SemCor 3.0" OFF)
 if(DOWNLOAD_SEMCOR)
     set(SEMCOR_DIR "${CMAKE_INSTALL_PREFIX}/data")
     if(IS_DIRECTORY ${SEMCOR_DIR}/semcor3.0)
-              message(STATUS "SemCor 3.0 is already on disk (${${SEMCOR_DIR}})")
+              message(STATUS "SemCor 3.0 is already on disk (${SEMCOR_DIR}/semcor3.0)")
     else()
               message(STATUS "Downloading SemCor 3.0 database to ${SEMCOR_DIR}")
               file(DOWNLOAD http://web.eecs.umich.edu/~mihalcea/downloads/semcor/semcor3.0.tar.gz ${SEMCOR_DIR}/semcor3.0.tar.gz                            SHOW_PROGRESS)
@@ -59,6 +59,22 @@ if(DOWNLOAD_SEMCOR)
               message(STATUS "Uncompressing database...")
               execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${SEMCOR_DIR}/semcor3.0.tar.gz
                             WORKING_DIRECTORY ${SEMCOR_DIR})
+
+    endif()
+endif()
+
+option(DOWNLOAD_BROWN "Download Brown Corpus" OFF)
+if(DOWNLOAD_BROWN)
+    set(BROWN_DIR "${CMAKE_INSTALL_PREFIX}/data")
+    if(IS_DIRECTORY ${BROWN_DIR}/brown)
+              message(STATUS "Brown Corpus is already on disk (${BROWN_DIR}/brown)")
+    else()
+              message(STATUS "Downloading Brown Corpus database to ${BROWN_DIR}")
+              file(DOWNLOAD http://www.nltk.org/nltk_data/packages/corpora/brown.zip ${BROWN_DIR}/brown.zip                            SHOW_PROGRESS)
+              
+              message(STATUS "Uncompressing database...")
+              execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${BROWN_DIR}/brown.zip
+                            WORKING_DIRECTORY ${BROWN_DIR})
 
     endif()
 endif()
