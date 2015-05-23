@@ -58,9 +58,8 @@ namespace _detail {
 *    Hyperonym graph DATA definition and implementation
 *******************/
 struct hyperonym_graph::data {
-	_detail::hyperonym_edge<_detail::PointerSymbolMap> filter;
 	_detail::hyperonymG hyperonym_graph;
-	_detail::hyperonymG hyponym_graph;
+	_detail::hyponymG hyponym_graph;
 	const wnb::wordnet& wnet;
 	bool instances;
 	map<_detail::vertex, std::size_t> vert_depth;
@@ -74,7 +73,7 @@ struct hyperonym_graph::data {
 
 	static void compute_max_depth(hyperonym_graph::data& data) {
         using namespace _detail;
-        auto orphans = hyperonym_graph::orphans(data.wnet, data.instance_hyperonym);
+        auto orphans = hyperonym_graph::orphans(data.wnet, data.instances);
         for(auto& s: orphans) {
             // Use hyponym graph
             auto it = data.vert_depth.insert(std::make_pair(s.id, 0));
@@ -104,7 +103,7 @@ struct hyperonym_graph::data {
 /******************
 *    hyperonym_graph implementation
 *******************/
-hyperonym_graph::hyperonym_graph(const wnb::wordnet& wnet, bool instance_hyperonym) : d(new data(wnet, instance_hyperonym)) {
+hyperonym_graph::hyperonym_graph(const wnb::wordnet& wnet, bool instances) : d(new data(wnet, instances)) {
     hyperonym_graph::data::compute_max_depth(*d);
 }
 
@@ -112,9 +111,9 @@ hyperonym_graph::~hyperonym_graph() {
 	delete d;
 }
 
-map<synset, size_t> hyperonym_graph::hypernym_map(const wordnet& wnet, const synset& s, bool instance_hyperonym) {
+map<synset, size_t> hyperonym_graph::hypernym_map(const wordnet& wnet, const synset& s, bool instances) {
     using namespace _detail;
-    hyperonym_graph::data d(wnet, instance_hyperonym);
+    hyperonym_graph::data d(wnet, instances);
     map<vertex, std::size_t> vertices;
 	boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
 	std::queue<vertex> q;
@@ -148,7 +147,7 @@ map<synset, size_t> hyperonym_graph::hypernym_map(const wordnet& wnet, const syn
 }
 
 map<synset, std::size_t> hyperonym_graph::hypernym_map(const wnb::synset& s) const {
-    return hyperonym_graph::hypernym_map(d->wnet, s, d->instance_hyperonym);
+    return hyperonym_graph::hypernym_map(d->wnet, s, d->instances);
 }
 
 std::size_t hyperonym_graph::max_depth() const {
@@ -159,9 +158,9 @@ std::size_t hyperonym_graph::max_depth() const {
 	return it_max_depth->second;
 }
 
-vector<wnb::synset> hyperonym_graph::orphans(const wnb::wordnet& wnet, bool instance_hyperonym) {
+vector<wnb::synset> hyperonym_graph::orphans(const wnb::wordnet& wnet, bool instances) {
     using namespace _detail;
-    hyperonym_graph::data d(wnet, instance_hyperonym);
+    hyperonym_graph::data d(wnet, instances);
     vector<wnb::synset> ret;
     boost::graph_traits<hyperonymG>::vertex_iterator v, v_end;
     std::tie(v, v_end) = boost::vertices(d.hyperonym_graph);
@@ -176,7 +175,7 @@ vector<wnb::synset> hyperonym_graph::orphans(const wnb::wordnet& wnet, bool inst
 }
 
 vector<wnb::synset> hyperonym_graph::orphans() const {
-    return hyperonym_graph::orphans(d->wnet, d->instance_hyperonym);
+    return hyperonym_graph::orphans(d->wnet, d->instances);
 }
 
 size_t hyperonym_graph::get_max_depth(const wnb::synset& s) const {
