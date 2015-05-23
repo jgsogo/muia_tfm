@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 #include "corpus/wn_corpus_export.h"
-#include "wnb/core/wordnet.hh"
+#include "distance/synset.h" //! TODO: Restructure project to include "wordnet/wordnet.h"
 
 namespace wn {
     class WN_CORPUS_EXPORT corpus {
