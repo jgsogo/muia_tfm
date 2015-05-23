@@ -181,3 +181,74 @@ vector<wnb::synset> hyperonym_graph::orphans() const {
 size_t hyperonym_graph::get_max_depth(const wnb::synset& s) const {
     return d->vert_depth[s.id];
 }
+
+vector<vector<wnb::synset>> hyperonym_graph::hypernym_path(const wnb::synset& from, const wnb::synset& to) const {
+    return hyperonym_graph::hypernym_path(d->wnet, from, to, d->instances);
+}
+
+vector<vector<wnb::synset>> hyperonym_graph::hypernym_path(const wnb::wordnet& wnet, const wnb::synset& from, const wnb::synset& to, bool instances) {
+    using namespace _detail;
+    hyperonym_graph::data d(wnet, instances);
+    // We take for granted that there is a hyperonym-path from 'from' to 'to'
+    // Recursion function
+    function<vector<vector<vertex>> (const vertex& s, const vertex& target)> find_target;
+    find_target = [&d, &find_target](const vertex& s, const vertex& target) {
+        vector<vector<vertex>> ret;
+        boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
+        std::tie(e, e_end) = boost::out_edges(s, d.hyperonym_graph);
+        for (; e!=e_end; ++e) {
+            vertex v = boost::target(*e, d.hyperonym_graph);
+            if (v == target) {
+                auto it = ret.insert(ret.end(), vector<vertex>());
+                it->push_back(v);
+            }
+            else {
+                auto paths = find_target(v, target);
+                for (auto& path: paths) {
+                    path.push_back(v);
+                    ret.push_back(vector<vertex>(path.begin(), path.end()));
+                }
+            }
+        }
+        return ret;
+    };
+    // Init recursion
+    auto paths = find_target(from.id, to.id);
+    // Prepare output
+    vector<vector<wnb::synset>> results;
+    for (auto& path: paths) {
+        auto it_result = results.insert(results.end(), vector<wnb::synset>());
+        for (auto it_path = path.rbegin(); it_path!=path.rend(); ++it_path) {
+            it_result->push_back(wnet.wordnet_graph[*it_path]);
+        }
+    }
+    return results;
+}
+
+std::vector<wnb::synset> hyperonym_graph::lowest_hypernym(const wnb::synset& s1, const wnb::synset& s2) const {
+    return hyperonym_graph::lowest_hypernym(d->wnet, s1, s2, d->instances);
+}
+
+vector<wnb::synset> hyperonym_graph::lowest_hypernym(const wnb::wordnet& wnet, const wnb::synset& s1, const wnb::synset& s2, bool instances) {
+    using namespace _detail;
+    auto map1 = hyperonym_graph::hypernym_map(wnet, s1, instances);
+    auto map2 = hyperonym_graph::hypernym_map(wnet, s2, instances);
+
+    vector<wnb::synset> ret;
+    float min_distance = numeric_limits<size_t>::max();
+	for (auto it1 = map1.begin(); it1 != map1.end(); ++it1) {
+		for (auto it2 = map2.begin(); it2 != map2.end(); ++it2) {
+			if (it1->first == it2->first) {
+                auto distance = it1->second + it2->second;
+                if(distance < min_distance) {
+                    min_distance = distance;
+                    ret.clear();
+                }
+                if (distance == min_distance) {
+                    ret.push_back(it1->first);
+                }
+			}
+		}
+	}
+	return ret;
+}
