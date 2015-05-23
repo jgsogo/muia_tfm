@@ -39,6 +39,9 @@ corpus::_t_doc_index corpus::add_document(const std::string& filename) {
     auto doc_index = this->parse_document(filename);
     documents.push_back(filename);
     auto doc_i = documents.size();
+    doc_count[doc_i] = accumulate(doc_index.begin(), doc_index.end(), 0, [](const size_t& lhs, const _t_doc_index::value_type& rhs){
+        return lhs + rhs.second;
+    });
     for (auto& entry: doc_index) {
         index[entry.first].insert(make_pair(doc_i, entry.second));
     }
@@ -50,7 +53,6 @@ corpus::_t_doc_index corpus::add_documents(const vector<string>& docs) {
 
     _t_doc_index partial_index;
     for (auto& filename : docs) {
-        // parse doc
         auto doc_index = this->add_document(filename);
         partial_index += doc_index;
     }
@@ -59,4 +61,8 @@ corpus::_t_doc_index corpus::add_documents(const vector<string>& docs) {
 
 const vector<string>& corpus::get_documents() const {
     return documents;
+}
+
+const corpus::_t_doc_count& corpus::get_doc_count() const {
+    return doc_count;
 }
