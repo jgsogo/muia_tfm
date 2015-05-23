@@ -16,6 +16,7 @@ namespace wn {
             std::map<wnb::synset, std::size_t> hypernym_map(const wnb::synset& s) const;
             std::vector<wnb::synset> orphans() const;
 			std::size_t max_depth() const;
+			std::size_t get_max_depth(const wnb::synset& s) const;
 		protected:
 			struct data;
 			data* d;
