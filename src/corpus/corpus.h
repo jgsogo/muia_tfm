@@ -17,7 +17,9 @@ namespace wn {
             ~corpus();
 
             _t_doc_index add_documents(const std::vector<std::string>& docs);
+            _t_doc_index add_document(const std::string& filename);
             const _t_corpus_index& get_index() const;
+            const std::vector<std::string>& get_documents() const;
         protected:
             virtual _t_doc_index parse_document(const std::string&) const = 0;
 

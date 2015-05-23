@@ -33,7 +33,7 @@ corpus::_t_doc_index semcor::parse_document(const std::string& filename) const {
         string lemma = wf.get_attribute("lemma", has_lemma);
         string lexsn = wf.get_attribute("lexsn", has_lexsn);
         if (has_lemma && has_lexsn) {
-            cout << lemma << " | " << lexsn;
+            //cout << lemma << " | " << lexsn;
             auto data = parse_lexsn(lexsn);
             vector<wnb::index>::const_iterator i, i_end;
             tie(i, i_end) = wordnet.get_indexes(lemma);
@@ -43,39 +43,16 @@ corpus::_t_doc_index semcor::parse_document(const std::string& filename) const {
                     if (synset.pos == get<0>(data) && synset.lex_filenum == get<1>(data)) {
                         for(auto& id: synset.lex_ids) {
                             if(id == get<2>(data)) {
-                                cout << " -> " << synset;
                                 ret.insert(make_pair(synset, 0)).first->second += 1;
+                                //cout << " -> " << synset << " [" << ret[synset] << "]"<< endl;
                                 return;
                             }
                         }
                     }
                 }
             }
-            cout << endl;
+            //cout << endl;
         }
-
-        /*
-        string lemma = wf.get_attribute("lemma", has_attribute);
-        string pos = wf.get_attribute("pos", has_attribute);
-
-        if (has_attribute) {
-            cout << lemma << " | " << lexsn << endl;
-            auto indexes = wordnet.get_indexes(lemma);
-            for (; indexes.first != indexes.second; ++indexes.first) {
-                //if (pos == pos_t::UNKNOWN || it->pos == pos)
-                auto it_synset_offset = indexes.first->synset_offsets.begin();
-                for (auto it_synset_ids = indexes.first->synset_ids.begin(); it_synset_ids != indexes.first->synset_ids.end(); ++it_synset_ids, ++it_synset_offset) {
-                    wnb::synset s = wordnet.wordnet_graph[*it_synset_ids];
-                    cout << "\t" << s.pos << ":" << s.lex_filenum << ":" << *it_synset_offset << ":" << s.words[0];
-                    cout << " -- ";
-                    for (auto& id: s.lex_ids) {
-                        cout << ", " << id;
-                    }
-                    cout << endl;
-                }
-            }
-        }
-        */
     };
     // Parser
     core::service::parser* parser;
