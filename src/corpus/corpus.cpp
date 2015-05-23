@@ -34,20 +34,29 @@ const corpus::_t_corpus_index& corpus::get_index() const {
     return index;
 }
 
+corpus::_t_doc_index corpus::add_document(const std::string& filename) {
+    using namespace _detail;
+    auto doc_index = this->parse_document(filename);
+    documents.push_back(filename);
+    auto doc_i = documents.size();
+    for (auto& entry: doc_index) {
+        index[entry.first].insert(make_pair(doc_i, entry.second));
+    }
+    return doc_index;
+}
+
 corpus::_t_doc_index corpus::add_documents(const vector<string>& docs) {
     using namespace _detail;
 
     _t_doc_index partial_index;
     for (auto& filename : docs) {
         // parse doc
-        auto doc_index = this->parse_document(filename);
-        documents.push_back(filename);
+        auto doc_index = this->add_document(filename);
         partial_index += doc_index;
-        auto doc_i = documents.size();
-        // add to corpus index
-        for (auto& entry: doc_index) {
-            index[entry.first].insert(make_pair(doc_i, entry.second));
-        }
     }
     return partial_index;
+}
+
+const vector<string>& corpus::get_documents() const {
+    return documents;
 }

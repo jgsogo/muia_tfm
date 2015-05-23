@@ -7,7 +7,7 @@ project( muia_tfm )
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Find BOOST
-find_package(Boost COMPONENTS graph REQUIRED)
+find_package(Boost COMPONENTS graph filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -61,7 +61,7 @@ endif()
 option(DOWNLOAD_SEMCOR "Download SemCor from NLTK" OFF)
 if(DOWNLOAD_SEMCOR)
     set(SEMCOR_DIR "${CMAKE_INSTALL_PREFIX}/data")
-    if(IS_DIRECTORY ${SEMCOR_DIR}/semcor3.0)
+    if(IS_DIRECTORY ${SEMCOR_DIR}/semcor)
               message(STATUS "SemCor is already on disk (${SEMCOR_DIR}/semcor)")
     else()
               message(STATUS "Downloading SemCor NLTK database to ${SEMCOR_DIR}")
