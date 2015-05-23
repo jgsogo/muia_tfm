@@ -17,6 +17,11 @@ find_package(Wnb REQUIRED)
 include_directories(${WNB_INCLUDE_DIRS})
 link_directories(${WNB_LIBRARY_DIRS})
 
+# Find xml_parser
+find_package(xml_parser REQUIRED)
+
+
+# Needed include directories
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR})
 
@@ -26,8 +31,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 #--------------------------
 add_subdirectory(distance)
 add_subdirectory(wordnet)
+add_subdirectory(corpus)
 
-add_subdirectory(ex_similarity)
+option(BUILD_EXAMPLES "Build examples" ON)
+if (BUILD_EXAMPLES)
+    add_subdirectory(ex_similarity)
+    add_subdirectory(ex_semcor)
+endif(BUILD_EXAMPLES)
 
 
 # Data
@@ -47,17 +57,18 @@ if(DOWNLOAD_WORDNET)
     endif()
 endif()
 
-option(DOWNLOAD_SEMCOR "Download SemCor 3.0" OFF)
+# We use SemCor from NLTK because it is in XML format (http://www.nltk.org/nltk_data/) not like the Mihaela one (http://web.eecs.umich.edu/~mihalcea/)
+option(DOWNLOAD_SEMCOR "Download SemCor from NLTK" OFF)
 if(DOWNLOAD_SEMCOR)
     set(SEMCOR_DIR "${CMAKE_INSTALL_PREFIX}/data")
     if(IS_DIRECTORY ${SEMCOR_DIR}/semcor3.0)
-              message(STATUS "SemCor 3.0 is already on disk (${SEMCOR_DIR}/semcor3.0)")
+              message(STATUS "SemCor is already on disk (${SEMCOR_DIR}/semcor)")
     else()
-              message(STATUS "Downloading SemCor 3.0 database to ${SEMCOR_DIR}")
-              file(DOWNLOAD http://web.eecs.umich.edu/~mihalcea/downloads/semcor/semcor3.0.tar.gz ${SEMCOR_DIR}/semcor3.0.tar.gz                            SHOW_PROGRESS)
+              message(STATUS "Downloading SemCor NLTK database to ${SEMCOR_DIR}")
+              file(DOWNLOAD http://www.nltk.org/nltk_data/packages/corpora/semcor.zip ${SEMCOR_DIR}/semcor.zip                            SHOW_PROGRESS)
               
               message(STATUS "Uncompressing database...")
-              execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${SEMCOR_DIR}/semcor3.0.tar.gz
+              execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${SEMCOR_DIR}/semcor.zip
                             WORKING_DIRECTORY ${SEMCOR_DIR})
 
     endif()
