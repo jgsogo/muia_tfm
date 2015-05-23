@@ -27,9 +27,30 @@ namespace _detail {
         bool instance_hyperonym;
 	};
 
+	template <typename PointerSymbolMap>
+	struct hyponym_edge {
+		hyponym_edge() {}
+
+        hyponym_edge(PointerSymbolMap pointer_symbol, bool instance_hyponym)
+			: m_pointer_symbol(pointer_symbol),
+              instance_hyponym(instance_hyponym) {}
+
+		template <typename Edge>
+		bool operator()(const Edge& e) const {
+			//! \todo TODO: Create enum to identify edge types
+            auto pointer_symbol = get(m_pointer_symbol, e);
+            return (3 == pointer_symbol || (instance_hyponym && 4 == pointer_symbol));
+		}
+		PointerSymbolMap m_pointer_symbol;
+        bool instance_hyponym;
+	};
+
 	typedef boost::property_map<wordnet::graph, int ptr::*>::const_type PointerSymbolMap;
-	typedef boost::filtered_graph<wordnet::graph, hyperonym_edge<PointerSymbolMap> > G;
-	typedef boost::graph_traits<G>::vertex_descriptor vertex;
+
+	typedef boost::filtered_graph<wordnet::graph, hyperonym_edge<PointerSymbolMap> > hyperonymG;
+	typedef boost::filtered_graph<wordnet::graph, hyponym_edge<PointerSymbolMap> > hyponymG;
+
+	typedef boost::graph_traits<wordnet::graph>::vertex_descriptor vertex;
 
 }
 
@@ -38,7 +59,7 @@ namespace _detail {
 *******************/
 struct hyperonym_graph::data {
 	_detail::hyperonym_edge<_detail::PointerSymbolMap> filter;
-	_detail::G fg;
+	_detail::hyperonymG fg;
 	const wnb::wordnet& wnet;
 	bool instance_hyperonym;
 	map<_detail::vertex, std::size_t> vert_depth;
@@ -52,28 +73,31 @@ struct hyperonym_graph::data {
 
 	static void compute_max_depth(hyperonym_graph::data& data) {
         using namespace _detail;
-        boost::graph_traits<G>::vertex_iterator v, v_end;
-        std::tie(v, v_end) = boost::vertices(data.fg);
-        for (; v != v_end; ++v) {
-            auto it_vertex = data.vert_depth.insert(std::make_pair(*v, 0));
-            if (it_vertex.second) {
-                std::queue<vertex> q;
-                q.push(*v);
-                while (!q.empty()) {
-                    vertex u = q.front(); q.pop();
-                    auto hyperonym_depth = data.vert_depth.at(u) + 1;
-                    boost::graph_traits<G>::out_edge_iterator e, e_end;
-                    std::tie(e, e_end) = boost::out_edges(u, data.fg);
-                    for (; e != e_end; ++e) {
-                        vertex w = target(*e, data.fg);
-                        auto it_w = data.vert_depth.insert(std::make_pair(w, hyperonym_depth));
-                        if (it_w.second || it_w.first->second < hyperonym_depth) {
-                            it_w.first->second = hyperonym_depth;
-                            q.push(w);
-                        }
+        auto orphans = hyperonym_graph::orphans(data.wnet, data.instance_hyperonym);
+        for(auto& s: orphans) {
+            // Use hyponym graph
+            hyponym_edge<_detail::PointerSymbolMap> hypo_filter(boost::get(&ptr::pointer_symbol, data.wnet.wordnet_graph), data.instance_hyperonym);
+            hyponymG graph(data.wnet.wordnet_graph, hypo_filter);
+            auto it = data.vert_depth.insert(std::make_pair(s.id, 0));
+            assert(it.second);
+            size_t depth = 0;
+
+            // Function for recursiveness
+            function<void (vertex, size_t)> recurse_vertex;
+            recurse_vertex = [&data, &graph, &recurse_vertex](vertex v, size_t depth) {
+                boost::graph_traits<hyponymG>::out_edge_iterator e, e_end;
+                std::tie(e, e_end) = boost::out_edges(v, graph);
+                for(; e!=e_end; ++e) {
+                    vertex w = target(*e, graph);
+                    auto it_vertex = data.vert_depth.insert(std::make_pair(w, depth));
+                    if (it_vertex.first->second > depth) {
+                        return;
                     }
+                    recurse_vertex(w, depth+1);
                 }
-            }
+            };
+            // Init recursion
+            recurse_vertex(s.id, depth+1);
         }
     }
 };
@@ -93,7 +117,7 @@ map<synset, size_t> hyperonym_graph::hypernym_map(const wordnet& wnet, const syn
     using namespace _detail;
     hyperonym_graph::data d(wnet, instance_hyperonym);
     map<vertex, std::size_t> vertices;
-	boost::graph_traits<G>::out_edge_iterator e, e_end;
+	boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
 	std::queue<vertex> q;
 	q.push(s.id);
 	vertices[s.id] = 0;
@@ -140,10 +164,10 @@ vector<wnb::synset> hyperonym_graph::orphans(const wnb::wordnet& wnet, bool inst
     using namespace _detail;
     hyperonym_graph::data d(wnet, instance_hyperonym);
     vector<wnb::synset> ret;
-    boost::graph_traits<G>::vertex_iterator v, v_end;
+    boost::graph_traits<hyperonymG>::vertex_iterator v, v_end;
     std::tie(v, v_end) = boost::vertices(d.fg);
     for (; v != v_end; ++v) {
-        boost::graph_traits<G>::out_edge_iterator e, e_end;
+        boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
         std::tie(e, e_end) = boost::out_edges(*v, d.fg);
         if (e == e_end) {
             ret.push_back(d.fg[*v]);

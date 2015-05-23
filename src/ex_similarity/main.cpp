@@ -14,7 +14,7 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
         auto orph1 = *begin;
         cout << endl << orph1 << endl;
         // out_edges
-        cout << " - out_edges: " << endl;
+        cout << " - out_edges targets: " << endl;
         boost::graph_traits<wordnet::graph>::out_edge_iterator e, e_end;
         std::tie(e, e_end) = boost::out_edges(orph1.id, wn.wordnet_graph);
         for (; e != e_end; ++e) {
@@ -24,9 +24,9 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
             cout << ": " << wn.wordnet_graph[v];
             cout << endl;
         }
-        /*
+
         // in_edges
-        cout << " - in_edges: " << endl;
+        cout << " - in_edges sources: " << endl;
         boost::graph_traits<wordnet::graph>::in_edge_iterator in, in_end;
         std::tie(in, in_end) = boost::in_edges(orph1.id, wn.wordnet_graph);
         for (; in != in_end; ++in) {
@@ -36,7 +36,7 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
             cout << ": " << wn.wordnet_graph[v];
             cout << endl;
         }
-        */
+
     }
 }
 
@@ -58,8 +58,7 @@ int main(int argc, char** argv) {
     cout << " - min_distance = " << dist.min() << endl;
     cout << " - max_distance = " << dist.max() << endl;
 
-    wn::hyperonym_graph graph(wn, true);
-    auto orphs = graph.orphans();
+    auto orphs = wn::hyperonym_graph::orphans(wn, true);
     decltype(orphs) orphs_nouns; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_nouns), [](const synset& s){return s.pos == pos_t::N; });
     decltype(orphs) orphs_verbs; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_verbs), [](const synset& s){return s.pos == pos_t::V; });
     decltype(orphs) orphs_adjs;  std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_adjs), [](const synset& s){return s.pos == pos_t::A || s.pos==pos_t::S; });
@@ -74,7 +73,7 @@ int main(int argc, char** argv) {
     cout << endl; print_orphans(orphs_verbs.begin(), (orphs_verbs.size() > n_orphs) ? orphs_verbs.begin() + n_orphs : orphs_verbs.end(), wn);
     cout << endl; print_orphans(orphs_adjs.begin(), (orphs_adjs.size() > n_orphs) ? orphs_adjs.begin() + n_orphs : orphs_adjs.end(), wn);
     cout << endl; print_orphans(orphs_advs.begin(), (orphs_advs.size() > n_orphs) ? orphs_advs.begin() + n_orphs : orphs_advs.end(), wn);
-    
+
     cout << endl;
     cout << "# Distance between synsets" << endl;
     cout << "#-------------------------------" << endl;
