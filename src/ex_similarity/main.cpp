@@ -1,16 +1,20 @@
 
 #include <iostream>
 #include <vector>
+#include <boost/filesystem.hpp>
 
 #include "wnb/core/wordnet.hh"
+#include "../wordnet/hyperonym_graph.h"
 #include "../distance/shortest_path.h"
 #include "../distance/distance_sussna.h"
 #include "../distance/distance_wu_palmer.h"
 #include "../distance/distance_leacock_chodorow.h"
-#include "../wordnet/hyperonym_graph.h"
+#include "../distance/distance_resnik.h"
+#include "../corpus/semcor.h"
 
 using namespace std;
 using namespace wnb;
+namespace fs = ::boost::filesystem;
 
 void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end, const wordnet& wn) {
     for (; begin != end; ++begin) {
@@ -44,8 +48,8 @@ void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end,
 }
 
 int main(int argc, char** argv) {
-	if (argc != 2) {
-		cout << "usage: " << argv[0] << " <path/to/wordnet-3.0/>" << endl;
+	if (argc != 3) {
+		cout << "usage: " << argv[0] << " <path/to/wordnet-3.1/dict/> <path/to/semcor/>" << endl;
 		exit(1);
 	}
     cout << endl;
@@ -53,6 +57,31 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
 	wordnet wn(argv[1]);
 	wn::hyperonym_graph graph(wn);
+
+    cout << endl;
+    cout << "# Reading SemCor" << endl;
+    cout << "#-------------------------------" << endl;
+	wn::semcor corpus(wn);
+    string basepath = argv[2];
+    // Parse files in SemCor corpus
+    auto read_corpus_dir = [&corpus](const string& directory) {
+        if(fs::is_directory(directory)) {
+            cout << "## Reading files in " << directory << endl;
+            fs::recursive_directory_iterator it(directory);
+            fs::recursive_directory_iterator endit;
+            while(it != endit) {
+                if(fs::is_regular_file(*it) && it->path().extension() == ".xml") {
+                    auto filename = fs::absolute(it->path());
+                    auto doc_index = corpus.add_document(filename.string());
+                    cout << "\t" << filename << " --> " << doc_index.size() << " synsets." << endl;
+                }
+                ++it;
+            }
+        }
+    };
+    read_corpus_dir(basepath + "brown1/");
+    read_corpus_dir(basepath + "brown2/");
+    read_corpus_dir(basepath + "brownv/");
 
     cout << endl;
     cout << "# Stats about loaded WordNet" << endl;
@@ -77,6 +106,12 @@ int main(int argc, char** argv) {
     cout << " - min_distance = " << distance_leacock_chodorow.min() << endl;
     cout << " - max_distance = " << distance_leacock_chodorow.max() << endl;
 
+    cout << "Distance 'Resnik 1995':" << endl;
+    wn::distance::resnik distance_resnik(graph, corpus);
+    cout << " - min_distance = " << distance_resnik.min() << endl;
+    cout << " - max_distance = " << distance_resnik.max() << endl;
+
+    /*
     auto orphs = wn::hyperonym_graph::orphans(wn, true);
     decltype(orphs) orphs_nouns; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_nouns), [](const synset& s){return s.pos == pos_t::N; });
     decltype(orphs) orphs_verbs; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_verbs), [](const synset& s){return s.pos == pos_t::V; });
@@ -92,6 +127,7 @@ int main(int argc, char** argv) {
     cout << endl; print_orphans(orphs_verbs.begin(), (orphs_verbs.size() > n_orphs) ? orphs_verbs.begin() + n_orphs : orphs_verbs.end(), wn);
     cout << endl; print_orphans(orphs_adjs.begin(), (orphs_adjs.size() > n_orphs) ? orphs_adjs.begin() + n_orphs : orphs_adjs.end(), wn);
     cout << endl; print_orphans(orphs_advs.begin(), (orphs_advs.size() > n_orphs) ? orphs_advs.begin() + n_orphs : orphs_advs.end(), wn);
+    */
 
     cout << endl;
     cout << "# Distance between synsets" << endl;
@@ -104,9 +140,10 @@ int main(int argc, char** argv) {
     cout << "sussna(cat[0], dog[0]) = " << distance_sussna(synsets1[0], synsets2[0]) << endl;
     cout << "wu_palmer(cat[0], dog[0]) = " << distance_wu_palmer(synsets1[0], synsets2[0]) << endl;
     cout << "leacock_chodorow(cat[0], dog[0]) = " << distance_leacock_chodorow(synsets1[0], synsets2[0]) << endl;
+    cout << "resnik(cat[0], dog[0]) = " << distance_resnik(synsets1[0], synsets2[0]) << endl;
+
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-
     auto distance_synsets = [n, &synsets1, &synsets2](wn::distance::base& dist){
         vector<wn::distance::base::_t_distance> distances;
         auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances);
@@ -144,6 +181,11 @@ int main(int argc, char** argv) {
     cout << "# Distance 'Leacock & Chodorow' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
     distance_synsets(distance_leacock_chodorow);
+
+    cout << endl;
+    cout << "# Distance 'Resnik' between synset sets" << endl;
+    cout << "#-------------------------------" << endl;
+    distance_synsets(distance_resnik);
 
 
 }

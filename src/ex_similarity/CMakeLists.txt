@@ -17,7 +17,7 @@ include_directories(${wn_distance_INCLUDE_DIR})
 add_executable( ex_similarity ${SRC_FILES})
 set_property(TARGET ex_similarity PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance wn_wordnet )
+target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance wn_wordnet wn_corpus)
 set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
                                                FOLDER "examples")
@@ -25,5 +25,5 @@ set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
 install(TARGETS ex_similarity
   RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" COMPONENT bin
   LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT shlib
-  ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib  
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib
   )
