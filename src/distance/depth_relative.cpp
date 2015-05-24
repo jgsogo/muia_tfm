@@ -1,6 +1,5 @@
 
 #include "depth_relative.h"
-#include "../wordnet/hyperonym_graph.h"
 
 using namespace wn::distance;
 using namespace std;
