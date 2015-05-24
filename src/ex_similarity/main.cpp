@@ -4,6 +4,7 @@
 
 #include "wnb/core/wordnet.hh"
 #include "distance/shortest_path.h"
+#include "distance/depth_relative.h"
 #include "wordnet/hyperonym_graph.h"
 
 using namespace std;
@@ -54,9 +55,14 @@ int main(int argc, char** argv) {
     cout << "# Stats about loaded WordNet" << endl;
     cout << "#-------------------------------" << endl;
     cout << "Distance 'shortest_path':" << endl;
-    wn::shortest_path dist(wn);
-    cout << " - min_distance = " << dist.min() << endl;
-    cout << " - max_distance = " << dist.max() << endl;
+    wn::shortest_path shortest_path(wn);
+    cout << " - min_distance = " << shortest_path.min() << endl;
+    cout << " - max_distance = " << shortest_path.max() << endl;
+
+    cout << "Distance 'depth_relative':" << endl;
+    wn::depth_relative depth_relative(wn);
+    cout << " - min_distance = " << depth_relative.min() << endl;
+    cout << " - max_distance = " << depth_relative.max() << endl;
 
     auto orphs = wn::hyperonym_graph::orphans(wn, true);
     decltype(orphs) orphs_nouns; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_nouns), [](const synset& s){return s.pos == pos_t::N; });
@@ -81,19 +87,39 @@ int main(int argc, char** argv) {
     vector<synset> synsets2 = wn.get_synsets("dog");
     cout << "cat[0] = " << synsets1[0] << endl;
     cout << "dog[0] = " << synsets2[0] << endl;
-    cout << "distance(cat[0], dog[0]) = " << dist(synsets1[0], synsets2[0]) << endl;
+    cout << "shortest_path(cat[0], dog[0]) = " << shortest_path(synsets1[0], synsets2[0]) << endl;
+    cout << "depth_relative(cat[0], dog[0]) = " << depth_relative(synsets1[0], synsets2[0]) << endl;
+
+    auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
+    cout << endl;
+    cout << "# Distance 'shortest_path' between synset sets" << endl;
+    cout << "#-------------------------------" << endl;
+    vector<wn::distance::_t_distance> distances_shortest_path;
+    auto data_shortest_path = shortest_path.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances_shortest_path);
+    cout << " - Min distance is " << data_shortest_path << endl;
+    cout << " - Combinations: " << distances_shortest_path.size() << endl;
+    for (auto it_dist = distances_shortest_path.begin(); it_dist != distances_shortest_path.end() && it_dist != distances_shortest_path.begin() + 3; ++it_dist) {
+        cout << " - Candidate pairs: " << endl;
+        auto dist_sum = 0.f;
+        for (auto& p : *it_dist) {
+            dist_sum += get<2>(p);
+            cout << "\t" << get<2>(p) << "\t|" << get<0>(p) << endl;
+            cout << "\t\t|" << get<1>(p) << endl;
+            cout << endl;
+        }
+        cout << "\t=" << dist_sum << endl;
+    }
 
     cout << endl;
-    cout << "# Distance between synset sets" << endl;
+    cout << "# Distance 'depth_relative' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    vector<wn::distance::_t_distance> distances;
-    auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances);
-    cout << " - Min distance is " << data << endl;
-    cout << " - Combinations: " << distances.size() << endl;
-    for (auto it_dist = distances.begin(); it_dist != distances.end() && it_dist != distances.begin() + 3; ++it_dist) {
+    vector<wn::distance::_t_distance> distances_depth_relative;
+    auto data_depth_relative = depth_relative.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances_depth_relative);
+    cout << " - Min distance is " << data_depth_relative << endl;
+    cout << " - Combinations: " << distances_depth_relative.size() << endl;
+    for (auto it_dist = distances_depth_relative.begin(); it_dist != distances_depth_relative.end() && it_dist != distances_depth_relative.begin() + 3; ++it_dist) {
         cout << " - Candidate pairs: " << endl;
-        auto dist_sum = 0;
+        auto dist_sum = 0.f;
         for (auto& p : *it_dist) {
             dist_sum += get<2>(p);
             cout << "\t" << get<2>(p) << "\t|" << get<0>(p) << endl;
