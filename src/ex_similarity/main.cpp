@@ -3,9 +3,9 @@
 #include <vector>
 
 #include "wnb/core/wordnet.hh"
-#include "distance/shortest_path.h"
-#include "distance/depth_relative.h"
-#include "wordnet/hyperonym_graph.h"
+#include "../distance/shortest_path.h"
+#include "../distance/distance_sussna.h"
+#include "../wordnet/hyperonym_graph.h"
 
 using namespace std;
 using namespace wnb;
@@ -50,19 +50,20 @@ int main(int argc, char** argv) {
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
 	wordnet wn(argv[1]);
+	wn::hyperonym_graph graph(wn);
 
     cout << endl;
     cout << "# Stats about loaded WordNet" << endl;
     cout << "#-------------------------------" << endl;
     cout << "Distance 'shortest_path':" << endl;
-    wn::shortest_path shortest_path(wn);
+    wn::distance::shortest_path shortest_path(wn);
     cout << " - min_distance = " << shortest_path.min() << endl;
     cout << " - max_distance = " << shortest_path.max() << endl;
 
     cout << "Distance 'depth_relative':" << endl;
-    wn::depth_relative depth_relative(wn);
-    cout << " - min_distance = " << depth_relative.min() << endl;
-    cout << " - max_distance = " << depth_relative.max() << endl;
+    wn::distance::sussna distance_sussna(graph);
+    cout << " - min_distance = " << distance_sussna.min() << endl;
+    cout << " - max_distance = " << distance_sussna.max() << endl;
 
     auto orphs = wn::hyperonym_graph::orphans(wn, true);
     decltype(orphs) orphs_nouns; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_nouns), [](const synset& s){return s.pos == pos_t::N; });
@@ -88,13 +89,13 @@ int main(int argc, char** argv) {
     cout << "cat[0] = " << synsets1[0] << endl;
     cout << "dog[0] = " << synsets2[0] << endl;
     cout << "shortest_path(cat[0], dog[0]) = " << shortest_path(synsets1[0], synsets2[0]) << endl;
-    cout << "depth_relative(cat[0], dog[0]) = " << depth_relative(synsets1[0], synsets2[0]) << endl;
+    cout << "sussna(cat[0], dog[0]) = " << distance_sussna(synsets1[0], synsets2[0]) << endl;
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
     cout << endl;
     cout << "# Distance 'shortest_path' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    vector<wn::distance::_t_distance> distances_shortest_path;
+    vector<wn::distance::base::_t_distance> distances_shortest_path;
     auto data_shortest_path = shortest_path.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances_shortest_path);
     cout << " - Min distance is " << data_shortest_path << endl;
     cout << " - Combinations: " << distances_shortest_path.size() << endl;
@@ -113,8 +114,8 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance 'depth_relative' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    vector<wn::distance::_t_distance> distances_depth_relative;
-    auto data_depth_relative = depth_relative.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances_depth_relative);
+    vector<wn::distance::base::_t_distance> distances_depth_relative;
+    auto data_depth_relative = distance_sussna.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances_depth_relative);
     cout << " - Min distance is " << data_depth_relative << endl;
     cout << " - Combinations: " << distances_depth_relative.size() << endl;
     for (auto it_dist = distances_depth_relative.begin(); it_dist != distances_depth_relative.end() && it_dist != distances_depth_relative.begin() + 3; ++it_dist) {

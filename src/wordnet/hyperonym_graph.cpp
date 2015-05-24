@@ -294,11 +294,11 @@ vector<wnb::synset> hyperonym_graph::lowest_hypernym(const wnb::wordnet& wnet, c
 	return ret;
 }
 
-vector<wnb::synset> hyperonym_graph::hyperonyms(const wnb::synset& s) {
+vector<wnb::synset> hyperonym_graph::hyperonyms(const wnb::synset& s) const {
     return hyperonym_graph::hyperonyms(d->wnet, s, d->instances);
 }
 
-vector<wnb::synset> hyperonym_graph::hyponyms(const wnb::synset& s) {
+vector<wnb::synset> hyperonym_graph::hyponyms(const wnb::synset& s) const {
     return hyperonym_graph::hyponyms(d->wnet, s, d->instances);
 }
 
@@ -328,3 +328,6 @@ vector<wnb::synset> hyperonym_graph::hyponyms(const wnb::wordnet& wnet, const wn
     return ret;
 }
 
+const wnb::wordnet& hyperonym_graph::get_wordnet() const {
+    return d->wnet;
+}

@@ -3,27 +3,27 @@
 #include "distance.h"
 #include <numeric>
 
-using namespace wn;
+using namespace wn::distance;
 using namespace std;
 
-const float distance::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
+const float base::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
 
-distance::distance(const wnb::wordnet& wordnet) : wordnet(wordnet) {
+base::base() {
 }
 
-float distance::min() const {
+float base::min() const {
 	return 0;
 }
 
-float distance::max() const {
+float base::max() const {
     return max_distance;
 }
 
-bool distance::connected(const wnb::synset& s1, const wnb::synset& s2) const {
-    return (this->operator()(s1, s2) < distance::max_distance);
+bool base::connected(const wnb::synset& s1, const wnb::synset& s2) const {
+    return (this->operator()(s1, s2) < base::max_distance);
 }
 
-float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vector<distance::_t_distance>& dist_combs) const {
+float base::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vector<base::_t_distance>& dist_combs) const {
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() == v2.size());
     assert(v1.size()*max_distance <= std::numeric_limits<float>::max());
@@ -39,7 +39,7 @@ float distance::min_distance(vector<wnb::synset> v1, vector<wnb::synset> v2, vec
     std::iota(indexes.begin(), indexes.end(), 0);
 
     vector<pair<vector<size_t>, float>> permutations;
-    float min_value = distance::max_distance;
+    float min_value = base::max_distance;
     do {
         float sum = 0.f;
         for (auto i = 0; i < v1.size(); ++i) {
