@@ -73,29 +73,69 @@ struct hyperonym_graph::data {
 
 	static void compute_max_depth(hyperonym_graph::data& data) {
         using namespace _detail;
+
+        // Function for recursive assignment of depth value
+        function<void (vertex, size_t)> recurse_vertex;
+        recurse_vertex = [&data, &recurse_vertex](vertex v, size_t depth) {
+            boost::graph_traits<hyponymG>::out_edge_iterator e, e_end;
+            std::tie(e, e_end) = boost::out_edges(v, data.hyponym_graph);
+            for(; e!=e_end; ++e) {
+                vertex w = target(*e, data.hyponym_graph);
+                auto it_vertex = data.vert_depth.insert(std::make_pair(w, depth));
+                if (it_vertex.first->second > depth) {
+                    return;
+                }
+                it_vertex.first->second = depth;
+                recurse_vertex(w, depth+1);
+            }
+        };
+
         auto orphans = hyperonym_graph::orphans(data.wnet, data.instances);
         for(auto& s: orphans) {
             // Use hyponym graph
             auto it = data.vert_depth.insert(std::make_pair(s.id, 0));
             assert(it.second);
             size_t depth = 0;
-
-            // Function for recursiveness
-            function<void (vertex, size_t)> recurse_vertex;
-            recurse_vertex = [&data, &recurse_vertex](vertex v, size_t depth) {
-                boost::graph_traits<hyponymG>::out_edge_iterator e, e_end;
-                std::tie(e, e_end) = boost::out_edges(v, data.hyponym_graph);
-                for(; e!=e_end; ++e) {
-                    vertex w = target(*e, data.hyponym_graph);
-                    auto it_vertex = data.vert_depth.insert(std::make_pair(w, depth));
-                    if (it_vertex.first->second > depth) {
-                        return;
-                    }
-                    recurse_vertex(w, depth+1);
-                }
-            };
             // Init recursion
             recurse_vertex(s.id, depth+1);
+        }
+
+        /* TODO: Not every hyperonym relation has its corresponding hyponym relation
+                I think that this is an error in WordNet, I whether if there is some
+                kind of reason to have hyperonyms relations and not its reverse
+                hyponym relation.
+        */
+        std::vector<vertex> bastards; // They have a parent (hyperonym) but that parent doesn't recognize them as children (hyponyms)
+        boost::graph_traits<wordnet::graph>::vertex_iterator v, v_end;
+        std::tie(v, v_end) = boost::vertices(data.wnet.wordnet_graph);
+        for (; v != v_end; ++v) {
+            if (data.vert_depth.find(*v) == data.vert_depth.end()) {
+                bastards.push_back(*v);
+            }
+        }
+        for(auto& s: bastards) {
+            // Look for his parent
+            function<size_t (vertex, size_t)> look_for_parent;
+            look_for_parent = [&data, &look_for_parent](vertex v, size_t up) {
+                boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
+                std::tie(e, e_end) = boost::out_edges(v, data.hyperonym_graph);
+                size_t max_level = up;
+                for (; e!=e_end; ++e) {
+                    vertex w = target(*e, data.hyperonym_graph);
+                    auto it_vert_depth = data.vert_depth.find(w);
+                    if (it_vert_depth != data.vert_depth.end()) {
+                        max_level = std::max(max_level, it_vert_depth->second + up + 1);
+                    }
+                    else {
+                        max_level = std::max(max_level, look_for_parent(w, up+1));
+                    }
+                }
+                return max_level;
+            };
+
+            auto depth = look_for_parent(s, 0);
+            data.vert_depth[s] = depth;
+            recurse_vertex(s, depth+1);
         }
     }
 };
@@ -218,6 +258,7 @@ vector<vector<wnb::synset>> hyperonym_graph::hypernym_path(const wnb::wordnet& w
     vector<vector<wnb::synset>> results;
     for (auto& path: paths) {
         auto it_result = results.insert(results.end(), vector<wnb::synset>());
+        it_result->push_back(from);
         for (auto it_path = path.rbegin(); it_path!=path.rend(); ++it_path) {
             it_result->push_back(wnet.wordnet_graph[*it_path]);
         }
@@ -252,3 +293,38 @@ vector<wnb::synset> hyperonym_graph::lowest_hypernym(const wnb::wordnet& wnet, c
 	}
 	return ret;
 }
+
+vector<wnb::synset> hyperonym_graph::hyperonyms(const wnb::synset& s) {
+    return hyperonym_graph::hyperonyms(d->wnet, s, d->instances);
+}
+
+vector<wnb::synset> hyperonym_graph::hyponyms(const wnb::synset& s) {
+    return hyperonym_graph::hyponyms(d->wnet, s, d->instances);
+}
+
+vector<wnb::synset> hyperonym_graph::hyperonyms(const wnb::wordnet& wnet, const wnb::synset& s, bool instances) {
+    using namespace _detail;
+    hyperonym_graph::data d(wnet, instances);
+    boost::graph_traits<hyperonymG>::out_edge_iterator e, e_end;
+    std::tie(e, e_end) = boost::out_edges(s.id, d.hyperonym_graph);
+    vector<wnb::synset> ret;
+    for (; e!=e_end;++e) {
+        vertex v = target(*e, d.hyperonym_graph);
+        ret.push_back(d.hyperonym_graph[v]);
+    }
+    return ret;
+}
+
+vector<wnb::synset> hyperonym_graph::hyponyms(const wnb::wordnet& wnet, const wnb::synset& s, bool instances) {
+    using namespace _detail;
+    hyperonym_graph::data d(wnet, instances);
+    boost::graph_traits<hyponymG>::out_edge_iterator e, e_end;
+    std::tie(e, e_end) = boost::out_edges(s.id, d.hyponym_graph);
+    vector<wnb::synset> ret;
+    for (; e!=e_end;++e) {
+        vertex v = target(*e, d.hyponym_graph);
+        ret.push_back(d.hyperonym_graph[v]);
+    }
+    return ret;
+}
+

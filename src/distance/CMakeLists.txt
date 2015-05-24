@@ -14,8 +14,10 @@ set(SRC_FILES
 
 # Library - wn_distance
 set(HEADERS   distance.h
+              shortest_path.h
+              depth_relative.h
               synset.h
-              ) 
+              )
 
 add_library(wn_distance ${SRC_FILES})
 target_link_libraries(wn_distance ${Boost_LIBRARIES} ${WNB_LIBRARIES})
@@ -29,6 +31,6 @@ generate_export_header(wn_distance)
 install(TARGETS wn_distance
   RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" COMPONENT bin
   LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT shlib
-  ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib  
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib
   PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/distance"
   )

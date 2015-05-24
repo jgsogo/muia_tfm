@@ -24,12 +24,12 @@ depth_relative::~depth_relative() {
 
 float depth_relative::edge_weight(const wnb::synset& child, const wnb::synset& parent) const {
     assert(d->graph.get_max_depth(child) > d->graph.get_max_depth(parent));
+    //assert(d->graph.get_max_depth(child) + 1 == d->graph.get_max_depth(parent));
 
-    // Compute hypernyms of child
-    auto n_child_hypernyms = 1; // TODO: implement using distance::wordnet (do not touch hyperonym_graph)
-    // and hyponyms of parent
-    auto n_parent_hyponyms = 1; // TODO: implement using distance::wordnet (do not touch hyperonym_graph)
-    // apply formula in [Sussna, 1993]
+    auto n_child_hypernyms = d->graph.hyperonyms(child).size();
+    auto n_parent_hyponyms = d->graph.hyponyms(parent).size();
+    // Formula in [Sussna, 1993]
+    // TODO: This formula may have an ERROR, it should be: `min + (max-min)/n`
     auto w_child_hypernyms = minmax_hyperonym_r.second - (minmax_hyperonym_r.second - minmax_hyperonym_r.first)/float(n_child_hypernyms);
     auto w_parent_hyponyms = minmax_hyponym_r.second - (minmax_hyponym_r.second - minmax_hyponym_r.first)/float(n_parent_hyponyms);
     return (w_child_hypernyms + w_parent_hyponyms)/(2*(d->graph.get_max_depth(child)));
@@ -47,6 +47,7 @@ float depth_relative::operator()(const wnb::synset& s1, const wnb::synset& s2) c
             auto it_2 = it_1 + 1;
             do {
                 weight += edge_weight(*it_1, *it_2);
+                ++it_1; ++it_2;
             } while (it_2 != path.end());
             return weight;
         };
@@ -71,5 +72,5 @@ float depth_relative::operator()(const wnb::synset& s1, const wnb::synset& s2) c
 }
 
 float depth_relative::max() const {
-	return 2 * d->graph.max_depth(); //! TODO: Sure?
+	return 2 * d->graph.max_depth(); //! TODO: Make this computation!
 }
