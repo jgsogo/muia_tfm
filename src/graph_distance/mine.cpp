@@ -48,9 +48,39 @@ float mine::operator()(const conceptual_graph& s1,
         // Distance between nodes
         distance += dist(s1_nodes[*it_s1], s2_nodes[*it_s2]);
         auto s1_edges = s1.get_outgoing_edges(*it_s1);
-        auto s2_edges = s1.get_outgoing_edges(*it_s1);
-
+        auto s2_edges = s2.get_outgoing_edges(*it_s2);
+        distance += this->operator()(s1, s1_edges, s2, s2_edges);
 
     }
     return distance;
+}
+
+float mine::operator()(const conceptual_graph& s1,
+                       const vector<pair<relation, synset_id>>& s1_relations,
+                       const conceptual_graph& s2,
+                       const vector<pair<relation, synset_id>>& s2_relations) const {
+
+    if (s1_relations.size() > s2_relations.size()) {
+        return this->operator()(s2, s2_relations, s1, s1_relations);
+    }
+    else {
+        float distance = numeric_limits<float>::max();
+        assert(s2_relations.size() >= s1_relations.size());
+        sort(s1_relations.begin(), s1_relations.end());
+        sort(s2_relations.begin(), s2_relations.end());
+        do {
+            float aux_distance = inner_product(s1_relations.begin(), s1_relations.end(), s2_relations.begin(), s2_relations.end(),
+                                                0.f, [this](const pair<relation, synset_id>& lhs, const pair<relation, synset_id>& rhs){
+                                                    if (lhs.first == rhs.first) {
+                                                        return dist(s1.get_node(lhs.second), s2.get_node(rhs.second));
+                                                        }
+                                                    else {
+                                                        return dist.max();
+                                                        }
+                                                });
+
+
+            distance = std::min(distance, aux_distance);
+        } while(next_permutation(s2_relations.begin(), s2_relations.end()));
+    }
 }

@@ -35,6 +35,10 @@ conceptual_graph::synset_id conceptual_graph::add_node(const wnb::synset& s) {
     return u;
 }
 
+wnb::synset conceptual_graph::get_node(const synset_id& s1) const {
+    return d->graph[s1];
+}
+
 void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, int rel_type) {
     relation rel;
     rel.type = rel_type;
