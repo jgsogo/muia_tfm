@@ -10,6 +10,8 @@
 #include "../distance/distance_wu_palmer.h"
 #include "../distance/distance_leacock_chodorow.h"
 #include "../distance/distance_resnik.h"
+#include "../distance/distance_jiang_conrath.h"
+#include "../distance/distance_lin.h"
 #include "../corpus/semcor.h"
 
 using namespace std;
@@ -55,7 +57,7 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
-	wordnet wn(argv[1]);
+	wordnet wn(argv[1], true);
 	wn::hyperonym_graph graph(wn);
 
     cout << endl;
@@ -111,6 +113,16 @@ int main(int argc, char** argv) {
     cout << " - min_distance = " << distance_resnik.min() << endl;
     cout << " - max_distance = " << distance_resnik.max() << endl;
 
+    cout << "Distance 'Jiang && Conrath':" << endl;
+    wn::distance::jiang_conrath distance_jiang_conrath(graph, corpus);
+    cout << " - min_distance = " << distance_jiang_conrath.min() << endl;
+    cout << " - max_distance = " << distance_jiang_conrath.max() << endl;
+
+    cout << "Distance 'Lin':" << endl;
+    wn::distance::lin distance_lin(graph, corpus);
+    cout << " - min_distance = " << distance_lin.min() << endl;
+    cout << " - max_distance = " << distance_lin.max() << endl;
+
     /*
     auto orphs = wn::hyperonym_graph::orphans(wn, true);
     decltype(orphs) orphs_nouns; std::copy_if(orphs.begin(), orphs.end(), std::back_inserter(orphs_nouns), [](const synset& s){return s.pos == pos_t::N; });
@@ -141,7 +153,9 @@ int main(int argc, char** argv) {
     cout << "wu_palmer(cat[0], dog[0]) = " << distance_wu_palmer(synsets1[0], synsets2[0]) << endl;
     cout << "leacock_chodorow(cat[0], dog[0]) = " << distance_leacock_chodorow(synsets1[0], synsets2[0]) << endl;
     cout << "resnik(cat[0], dog[0]) = " << distance_resnik(synsets1[0], synsets2[0]) << endl;
-
+    cout << "jiang_conrath(cat[0], dog[0]) = " << distance_jiang_conrath(synsets1[0], synsets2[0]) << endl;
+    cout << "lin(cat[0], dog[0]) = " << distance_lin(synsets1[0], synsets2[0]) << endl;
+    
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
     auto distance_synsets = [n, &synsets1, &synsets2](wn::distance::base& dist){
@@ -187,5 +201,15 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     distance_synsets(distance_resnik);
 
+    cout << endl;
+    cout << "# Distance 'Jiang && Conrath' between synset sets" << endl;
+    cout << "#-------------------------------" << endl;
+    distance_synsets(distance_jiang_conrath);
+
+    cout << endl;
+    cout << "# Distance 'Lin' between synset sets" << endl;
+    cout << "#-------------------------------" << endl;
+    distance_synsets(distance_lin);
+    
 
 }
