@@ -7,7 +7,7 @@ using namespace std;
 const pair<float, float> sussna::minmax_hyperonym_r = make_pair(1, 2);
 const pair<float, float> sussna::minmax_hyponym_r = make_pair(1, 2);
 
-sussna::sussna(const hyperonym_graph& graph) : depth_relative(graph) {
+sussna::sussna(const wn::hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 sussna::~sussna() {

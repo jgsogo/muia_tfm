@@ -1,10 +1,11 @@
 
 #include "distance_resnik.h"
+#include <numeric>
 
 using namespace wn::distance;
 using namespace std;
 
-resnik::resnik(const hyperonym_graph& graph, const wn::corpus& corpus) : information_based(graph, corpus) {
+resnik::resnik(const wn::hyperonym_graph& graph, const wn::corpus& corpus) : information_based(graph, corpus) {
     auto corpus_index = corpus.get_index();
     for (auto& s: corpus_index) {
         auto hypernyms = graph.hypernym_map(s.first);
