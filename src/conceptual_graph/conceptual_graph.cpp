@@ -41,6 +41,7 @@ void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, in
 }
 
 void conceptual_graph::print(std::ostream& os) const {
-    d->print(os, d->graph, conceptual_graph_printer(d->graph));
+    conceptual_graph_printer writer(d->graph);
+    d->print(os, d->graph, writer);
 }
 

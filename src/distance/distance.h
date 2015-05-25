@@ -20,6 +20,7 @@ namespace wn {
 
                 typedef std::vector<std::tuple<wnb::synset, wnb::synset, float>> _t_distance;
                 virtual float min_distance(std::vector<wnb::synset> v1, std::vector<wnb::synset> v2, std::vector<_t_distance>& dist_combs) const;
+                virtual float min_distance(std::vector<wnb::synset> v1, std::vector<wnb::synset> v2, std::vector<_t_distance>& dist_combs, float penalization) const;
             protected:
         };
 

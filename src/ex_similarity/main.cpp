@@ -155,15 +155,16 @@ int main(int argc, char** argv) {
     cout << "resnik(cat[0], dog[0]) = " << distance_resnik(synsets1[0], synsets2[0]) << endl;
     cout << "jiang_conrath(cat[0], dog[0]) = " << distance_jiang_conrath(synsets1[0], synsets2[0]) << endl;
     cout << "lin(cat[0], dog[0]) = " << distance_lin(synsets1[0], synsets2[0]) << endl;
-    
+
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    auto distance_synsets = [n, &synsets1, &synsets2](wn::distance::base& dist){
+    auto penalize_each = 1.f;
+    auto distance_synsets = [n, penalize_each, &synsets1, &synsets2](wn::distance::base& dist){
         vector<wn::distance::base::_t_distance> distances;
-        auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), vector<synset>(synsets2.begin(), synsets2.begin() + n), distances);
+        auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), synsets2, distances, penalize_each);
         cout << " - Min distance is " << data << endl;
         cout << " - Combinations: " << distances.size() << endl;
-        for (auto it_dist = distances.begin(); it_dist != distances.end() && it_dist != distances.begin() + 3; ++it_dist) {
+        for (auto it_dist = distances.begin(); it_dist != distances.end(); ++it_dist) {
             cout << " - Candidate pairs: " << endl;
             auto dist_sum = 0.f;
             for (auto& p : *it_dist) {
@@ -172,7 +173,8 @@ int main(int argc, char** argv) {
                 cout << "\t\t|" << get<1>(p) << endl;
                 cout << endl;
             }
-            cout << "\t=" << dist_sum << endl;
+            cout << "\t" << penalize_each << "*" << synsets2.size()-n << "=" << penalize_each*(synsets2.size()-n) << endl;
+            cout << "\t=" << data << endl;
         }
     };
 
@@ -210,6 +212,6 @@ int main(int argc, char** argv) {
     cout << "# Distance 'Lin' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
     distance_synsets(distance_lin);
-    
+
 
 }
