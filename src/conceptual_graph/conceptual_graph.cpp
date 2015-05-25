@@ -5,6 +5,7 @@
 #include "relation.h"
 
 using namespace wn;
+using namespace std;
 
 class conceptual_graph_printer : public boost::default_writer {
     public:
@@ -40,8 +41,30 @@ void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, in
     boost::add_edge(s1, s2, rel, d->graph);
 }
 
+map<conceptual_graph::synset_id, wnb::synset> conceptual_graph::get_nodes() const {
+    map<synset_id, wnb::synset> ret;
+    boost::graph_traits<_t_graph>::vertex_iterator v, v_end;
+    tie(v, v_end) = boost::vertices(d->graph);
+    for (; v!=v_end; ++v) {
+        ret[*v] = d->graph[*v];
+    }
+    return ret;
+}
+
+vector<pair<relation, conceptual_graph::synset_id>> conceptual_graph::get_outgoing_edges(const synset_id& id) const {
+    vector<pair<relation, synset_id>> ret;
+    boost::graph_traits<_t_graph>::out_edge_iterator e, e_end;
+    tie(e, e_end) = boost::out_edges(id, d->graph);
+    for (; e!=e_end; ++e) {
+        auto v = target(*e, d->graph);
+        ret.push_back(make_pair(d->graph[*e], v));
+    }
+    return ret;
+}
+
 void conceptual_graph::print(std::ostream& os) const {
     conceptual_graph_printer writer(d->graph);
     d->print(os, d->graph, writer);
 }
+
 
