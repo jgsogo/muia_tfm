@@ -34,6 +34,7 @@ add_subdirectory(distance)
 add_subdirectory(wordnet)
 add_subdirectory(corpus)
 add_subdirectory(conceptual_graph)
+add_subdirectory(graph_distance)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 if (BUILD_EXAMPLES)
