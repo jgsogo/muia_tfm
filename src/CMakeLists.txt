@@ -7,6 +7,7 @@ project( muia_tfm )
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Find BOOST
+set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost COMPONENTS graph filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})

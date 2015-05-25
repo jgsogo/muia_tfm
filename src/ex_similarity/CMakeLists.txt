@@ -17,7 +17,7 @@ include_directories(${wn_distance_INCLUDE_DIR})
 add_executable( ex_similarity ${SRC_FILES})
 set_property(TARGET ex_similarity PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance wn_wordnet wn_corpus)
+target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_distance wn_wordnet wn_corpus ${XML_PARSER_LIBRARIES})
 set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
                                                FOLDER "examples")
