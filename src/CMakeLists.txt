@@ -33,11 +33,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_subdirectory(distance)
 add_subdirectory(wordnet)
 add_subdirectory(corpus)
+add_subdirectory(conceptual_graph)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 if (BUILD_EXAMPLES)
     add_subdirectory(ex_similarity)
     add_subdirectory(ex_semcor)
+    add_subdirectory(ex_conceptual_graph)
 endif(BUILD_EXAMPLES)
 
 
