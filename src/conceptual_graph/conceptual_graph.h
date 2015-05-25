@@ -14,6 +14,7 @@ namespace wn {
             ~conceptual_graph();
 
             synset_id add_node(const wnb::synset& s); //! returns 'id' for the given node (the same synset can appear more than once).
+            wnb::synset get_node(const synset_id& s1) const;
             void add_relation(const synset_id& s1, const synset_id& s2, int rel_type);
             std::map<synset_id, wnb::synset> get_nodes() const;
             std::vector<std::pair<relation, synset_id>> get_outgoing_edges(const synset_id& id) const;
