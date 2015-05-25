@@ -4,7 +4,7 @@
 using namespace wn::distance;
 using namespace std;
 
-leacock_chodorow::leacock_chodorow(const hyperonym_graph& graph) : depth_relative(graph) {
+leacock_chodorow::leacock_chodorow(const wn::hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 leacock_chodorow::~leacock_chodorow() {

@@ -2,7 +2,7 @@
 #pragma once
 
 #include "wordnet/wn_wordnet_export.h"
-#include "distance/synset.h" // TODO: This should be 'wordnet/wordnet.h'
+#include "../distance/synset.h" // TODO: This should be 'wordnet/wordnet.h'
 
 namespace wn {
 

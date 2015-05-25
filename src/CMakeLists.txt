@@ -19,7 +19,7 @@ link_directories(${WNB_LIBRARY_DIRS})
 
 # Find xml_parser
 find_package(xml_parser REQUIRED)
-
+include_directories(${XML_PARSER_INCLUDE_DIRS})
 
 # Needed include directories
 include_directories(${CMAKE_BINARY_DIR})

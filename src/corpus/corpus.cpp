@@ -1,5 +1,6 @@
 
 #include "corpus.h"
+#include <numeric>
 
 using namespace wn;
 using namespace std;

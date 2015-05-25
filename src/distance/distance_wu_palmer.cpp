@@ -4,7 +4,7 @@
 using namespace wn::distance;
 using namespace std;
 
-wu_palmer::wu_palmer(const hyperonym_graph& graph) : depth_relative(graph) {
+wu_palmer::wu_palmer(const wn::hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 wu_palmer::~wu_palmer() {
