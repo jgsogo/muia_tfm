@@ -23,7 +23,7 @@ jiang_conrath::~jiang_conrath() {
 }
 
 float jiang_conrath::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
-    auto distance = base::max_distance;
+    auto distance = this->max();
     auto it_s1 = concept_count.find(s1);
     auto it_s2 = concept_count.find(s2);
     if (it_s1 != concept_count.end() && it_s2 != concept_count.end()) {
@@ -33,15 +33,12 @@ float jiang_conrath::operator()(const wnb::synset& s1, const wnb::synset& s2) co
             if (it_lch != concept_count.end()) {
                 auto aux_distance = 2 * log(it_lch->second) - (log(it_s1->second) + log(it_s2->second));
                 distance = std::min(distance, float(aux_distance));
-            }
-            else {
-                // TODO: I don't know what to do if a concept is not present in the corpus.
-            }
+            }            
         }
     }
     return distance;
 }
 
 float jiang_conrath::max() const {
-    return base::max_distance;
+    return 2 * log(all_count) - (log(1) + log(1));
 }

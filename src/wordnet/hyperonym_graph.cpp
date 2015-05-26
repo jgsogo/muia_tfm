@@ -19,7 +19,7 @@ namespace _detail {
 
 		template <typename Edge>
 		bool operator()(const Edge& e) const {
-			//! \todo TODO: Create enum to identify edge types
+			// TODO: Create enum to identify edge types
             auto pointer_symbol = get(m_pointer_symbol, e);
             return (1 == pointer_symbol || (instance_hyperonym && 2 == pointer_symbol));
 		}
@@ -37,7 +37,7 @@ namespace _detail {
 
 		template <typename Edge>
 		bool operator()(const Edge& e) const {
-			//! \todo TODO: Create enum to identify edge types
+			// TODO: Create enum to identify edge types
             auto pointer_symbol = get(m_pointer_symbol, e);
             return (3 == pointer_symbol || (instance_hyponym && 4 == pointer_symbol));
 		}

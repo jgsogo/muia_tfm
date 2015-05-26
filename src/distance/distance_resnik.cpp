@@ -17,6 +17,7 @@ resnik::resnik(const wn::hyperonym_graph& graph, const wn::corpus& corpus) : inf
         }
         all_count += synset_count*(hypernyms.size()+1);
     }
+    max_count = std::max_element(concept_count.begin(), concept_count.end(), [](const pair<wnb::synset, std::size_t>& lhs, const pair<wnb::synset, std::size_t>& rhs){return lhs.second < rhs.second; })->second;
 }
 
 resnik::~resnik() {
@@ -30,19 +31,18 @@ float resnik::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
         if (it_lch != concept_count.end()) {
             auto aux_similarity = -log(it_lch->second/float(all_count));
             similarity = std::max(similarity, aux_similarity);
-        }
-        else {
-            // TODO: I don't know what to do if a concept is not present in the corpus.
-        }
+        }        
 	}
 
     if (similarity == 0) {
-        return base::max_distance;
+        return this->max();
     }
 
     return 1.f/similarity;
 }
 
 float resnik::max() const {
-    return base::max_distance;
+    // TODO: Think about a better approach for this 'max_distance' computation.
+    auto min_similarity = -log(max_count / float(all_count));
+    return 1.f / min_similarity;
 }
