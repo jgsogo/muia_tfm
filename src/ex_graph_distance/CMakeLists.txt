@@ -16,7 +16,7 @@ set(SRC_FILES
 add_executable( ex_graph_distance ${SRC_FILES})
 set_property(TARGET ex_graph_distance PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries(ex_graph_distance ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_wordnet wn_distance wn_conceptual_graph wn_graph_distance)
+target_link_libraries(ex_graph_distance ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_corpus wn_wordnet wn_distance wn_conceptual_graph wn_graph_distance)
 set_target_properties(ex_graph_distance PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
                                                FOLDER "examples")
