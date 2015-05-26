@@ -28,36 +28,40 @@ float sussna::edge_weight(const wnb::synset& child, const wnb::synset& parent) c
 
 float sussna::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
 	//hyperonym_graph graph(wordnet);
-	auto distance = base::max_distance;
+	auto distance = this->max();
 	auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
 	for(auto& lch: lowest_common_hypernym) {
-        // Compute minimum distance path
-        auto path_weight = [this](const vector<wnb::synset>& path){
-            float weight = 0.f;
-            auto it_1 = path.begin();
-            auto it_2 = it_1 + 1;
-            do {
-                weight += edge_weight(*it_1, *it_2);
-                ++it_1; ++it_2;
-            } while (it_2 != path.end());
-            return weight;
-        };
-
-        // Work on paths s1->lch
-        auto min_weight_s1 = base::max_distance;
         auto paths_s1 = graph.hypernym_path(s1, lch);
-        for (auto& path: paths_s1) {
-            min_weight_s1 = std::min(min_weight_s1, path_weight(path));
-        }
-        // Work on paths s2->lch
         auto paths_s2 = graph.hypernym_path(s2, lch);
-        auto min_weight_s2 = base::max_distance;
-        for (auto& path: paths_s2) {
-            min_weight_s2 = std::min(min_weight_s2, path_weight(path));
-        }
 
-        // Keep minimum
-        distance = std::min(distance, min_weight_s1+min_weight_s2);
+        if (!paths_s1.empty() && !paths_s2.empty()) {
+            // Compute minimum distance path
+            auto path_weight = [this](const vector<wnb::synset>& path){
+                float weight = 0.f;
+                auto it_1 = path.begin();
+                auto it_2 = it_1 + 1;
+                do {
+                    weight += edge_weight(*it_1, *it_2);
+                    ++it_1; ++it_2;
+                } while (it_2 != path.end());
+                return weight;
+            };
+
+            // Work on paths s1->lch
+            auto min_weight_s1 = this->max();
+            for (auto& path : paths_s1) {
+                min_weight_s1 = std::min(min_weight_s1, path_weight(path));
+            }
+            // Work on paths s2->lch
+
+            auto min_weight_s2 = this->max();
+            for (auto& path : paths_s2) {
+                min_weight_s2 = std::min(min_weight_s2, path_weight(path));
+            }
+
+            // Keep minimum
+            distance = std::min(distance, min_weight_s1 + min_weight_s2);
+        }
 	}
 	return distance;
 }
