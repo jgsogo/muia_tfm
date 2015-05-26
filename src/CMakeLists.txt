@@ -41,6 +41,7 @@ if (BUILD_EXAMPLES)
     add_subdirectory(ex_similarity)
     add_subdirectory(ex_semcor)
     add_subdirectory(ex_conceptual_graph)
+    add_subdirectory(ex_graph_distance)
 endif(BUILD_EXAMPLES)
 
 

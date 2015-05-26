@@ -18,6 +18,7 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2)
     }
     else {
         assert(s2_nodes.size() >= s1_nodes.size());
+        cout << "min::min_distance(s1, s2)" << endl;
         float distance = numeric_limits<float>::max();
         vector<conceptual_graph::synset_id> s2_synsets(s2_nodes.size());
         for_each(s2_nodes.begin(), s2_nodes.end(), [&s2_synsets](const pair<conceptual_graph::synset_id, wnb::synset>& item){ s2_synsets.push_back(item.first); });
@@ -47,18 +48,21 @@ float mine::min_distance(vector<relation>& rel1, vector<relation>& rel2) const {
     }
     else {
         assert(rel2.size() >= rel1.size());
+        cout << "\t mine::min_distance(rel1[" << rel1.size() << "], rel2[" << rel2.size() << "])" << endl;
         float distance = numeric_limits<float>::max();
         auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
         sort(rel2.begin(), rel2.end(), relation_less);
+        cout << "\t\t go with permutations!" << endl;
         do {
             float aux_distance = inner_product(rel1.begin(), rel1.end(), rel2.begin(), 0.f,
                 [](const float& lhs, const float& rhs){ return lhs + rhs; },
                 [this](const relation& lhs, const relation& rhs){ return this->operator()(lhs, rhs); });
             distance = std::min(distance, aux_distance);
-        } while (next_permutation(rel2.begin(), rel1.end(), relation_less));
+        } while (next_permutation(rel2.begin(), rel2.end(), relation_less));
     }
 }
 
-float mine::operator()(const relation&, const relation&) const {
+float mine::operator()(const relation& r1, const relation& r2) const {
+    cout << "\t mine::operator()(r1, r2)" << endl;
     return 0.f;
 }
