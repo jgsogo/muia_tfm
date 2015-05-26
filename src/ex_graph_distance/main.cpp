@@ -98,8 +98,11 @@ int main(int argc, char** argv) {
         auto penalize_node = dist.max();
         auto penalize_edge = mine_distance.max_edge_distance();
         auto data = mine_distance.min_distance(cgraph1, cgraph2, penalize_node, penalize_edge);
-        cout << " - Distance in [" << mine_distance.min(cgraph1, cgraph2, penalize_node, penalize_edge) << ", " << mine_distance.max(cgraph1, cgraph2, penalize_node, penalize_edge) << "]" << endl;
+        auto min_d = mine_distance.min(cgraph1, cgraph2, penalize_node, penalize_edge);
+        auto max_d = mine_distance.max(cgraph1, cgraph2, penalize_node, penalize_edge);
+        cout << " - Distance in [" << min_d << ", " << max_d << "]" << endl;
         cout << " - Min distance is " << data << endl;
+        cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
     };
 
     wn::distance::shortest_path shortest_path(wn);
