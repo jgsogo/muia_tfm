@@ -13,7 +13,7 @@ namespace wn {
             public:
                 depth_relative(const hyperonym_graph& graph);
                 ~depth_relative();
-                virtual float operator()(const wnb::synset& s1, const wnb::synset& s2) const = 0;
+                virtual float operator()(const synset& s1, const synset& s2) const = 0;
                 virtual float max() const = 0;
 
             protected:

@@ -14,6 +14,8 @@ set(SRC_FILES
 
 # Library - wn_wordnet
 set(HEADERS   hyperonym_graph.h
+              synset.h
+              wordnet.h
               ) 
 
 add_library(wn_wordnet ${SRC_FILES})

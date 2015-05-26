@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "synset.h"
+#include "../wordnet/synset.h"
 #include "distance/wn_distance_export.h"
 
 namespace wn {
@@ -15,16 +15,16 @@ namespace wn {
                 base();
                 virtual float min() const; //! min distance by default is 0
                 virtual float max() const; //! max distance between two synsets (by default is '''distance::max_distance''');
-                virtual float operator()(const wnb::synset& s1, const wnb::synset& s2) const = 0;
-                virtual bool connected(const wnb::synset& s1, const wnb::synset& s2) const;
+                virtual float operator()(const synset& s1, const synset& s2) const = 0;
+                virtual bool connected(const synset& s1, const synset& s2) const;
 
-                typedef std::vector<std::tuple<wnb::synset, wnb::synset, float>> _t_distance;
-                virtual float min_distance(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, std::vector<_t_distance>& dist_combs) const;
-                virtual float min_distance(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, std::vector<_t_distance>& dist_combs, float penalization) const;
+                typedef std::vector<std::tuple<synset, synset, float>> _t_distance;
+                virtual float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs) const;
+                virtual float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs, float penalization) const;
                 
                 //! Max and min values for the distance between two synset sets.
-                virtual float min(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, float penalization) const;
-                virtual float max(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, float penalization) const;
+                virtual float min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
+                virtual float max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
             protected:
         };
 

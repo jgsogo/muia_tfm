@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "../distance/synset.h" // TODO: Look for better place as "../wordnet/wordnet.h"
+#include "../wordnet/synset.h"
 #include "conceptual_graph/wn_conceptual_graph_export.h"
 #include "relation.h"
 
@@ -13,9 +13,9 @@ namespace wn {
             conceptual_graph();
             ~conceptual_graph();
 
-            synset_id add_node(const wnb::synset& s); //! returns 'id' for the given node (the same synset can appear more than once).
-            wnb::synset get_node(const synset_id& s1) const;
-            std::map<synset_id, wnb::synset> get_nodes() const;
+            synset_id add_node(const synset& s); //! returns 'id' for the given node (the same synset can appear more than once).
+            synset get_node(const synset_id& s1) const;
+            std::map<synset_id, synset> get_nodes() const;
 
             void add_relation(const synset_id& s1, const synset_id& s2, int rel_type);
             std::vector<relation> get_edges() const;

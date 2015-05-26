@@ -3,12 +3,12 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include "wnb/core/wordnet.hh"
+#include "../wordnet/wordnet.h"
 #include "../conceptual_graph/conceptual_graph.h"
 #include "../conceptual_graph/unl_graph.h"
 
+using namespace wn;
 using namespace std;
-using namespace wnb;
 namespace fs = ::boost::filesystem;
 
 
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
-	wordnet wn(argv[1], true);
+	wordnet wnet(argv[1], true);
 
     /*
     cout << endl;
@@ -64,12 +64,12 @@ int main(int argc, char** argv) {
     cout << "# Build conceptual graph" << endl;
     cout << "#-------------------------------" << endl;
     // Build a sample cgraph
-    wn::conceptual_graph cgraph;
-    auto dog = wn.get_synsets("dog", pos_t::N)[0];
+    conceptual_graph cgraph;
+    auto dog = wnet.get_synsets("dog", pos_t::N)[0];
     std::cout << " - dog >> " << dog << endl;
-    auto drink = wn.get_synsets("drink", pos_t::V)[0];
+    auto drink = wnet.get_synsets("drink", pos_t::V)[0];
     std::cout << " - drink >> " << drink << endl;
-    auto water = wn.get_synsets("water", pos_t::N)[0];
+    auto water = wnet.get_synsets("water", pos_t::N)[0];
     std::cout << " - water >> " << water << endl;
     
     auto id_drink = cgraph.add_node(drink);
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
     cout << "# Build UNL graph" << endl;
     cout << "#-------------------------------" << endl;
     // Build a sample unl_graph
-    wn::unl_graph unlgraph;
+    unl_graph unlgraph;
     auto id_drink_unl = unlgraph.add_node(drink);
     unlgraph.add_attribute(id_drink_unl, "attr1");
     auto id_dog_unl = unlgraph.add_node(dog);

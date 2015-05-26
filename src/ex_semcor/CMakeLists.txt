@@ -17,7 +17,7 @@ include_directories(${wn_corpus_INCLUDE_DIR})
 add_executable( ex_corpus ${SRC_FILES})
 set_property(TARGET ex_corpus PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries(ex_corpus ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_wordnet wn_corpus)
+target_link_libraries(ex_corpus ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_corpus)
 set_target_properties(ex_corpus PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
                                                FOLDER "examples")

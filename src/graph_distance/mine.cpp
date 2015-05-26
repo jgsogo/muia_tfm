@@ -20,7 +20,7 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
         assert(s2_nodes.size() >= s1_nodes.size());
         float distance = numeric_limits<float>::max();
         vector<conceptual_graph::synset_id> s2_synsets(s2_nodes.size());
-        for_each(s2_nodes.begin(), s2_nodes.end(), [&s2_synsets](const pair<conceptual_graph::synset_id, wnb::synset>& item){ s2_synsets.push_back(item.first); });
+        for_each(s2_nodes.begin(), s2_nodes.end(), [&s2_synsets](const pair<conceptual_graph::synset_id, synset>& item){ s2_synsets.push_back(item.first); });
         do {
             float aux_distance = 0.f;
             auto it_s1 = s1_nodes.begin();

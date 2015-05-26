@@ -15,10 +15,10 @@ namespace wn {
             public:
                 sussna(const hyperonym_graph& graph);
                 ~sussna();
-                virtual float operator()(const wnb::synset& s1, const wnb::synset& s2) const;
+                virtual float operator()(const synset& s1, const synset& s2) const;
                 virtual float max() const;
 
-                float edge_weight(const wnb::synset& child, const wnb::synset& parent) const;
+                float edge_weight(const synset& child, const synset& parent) const;
 
             protected:
                 static const std::pair<float, float> minmax_hyperonym_r;

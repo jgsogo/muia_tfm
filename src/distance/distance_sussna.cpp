@@ -1,19 +1,20 @@
 
 #include "distance_sussna.h"
 
+using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
 const pair<float, float> sussna::minmax_hyperonym_r = make_pair(1, 2);
 const pair<float, float> sussna::minmax_hyponym_r = make_pair(1, 2);
 
-sussna::sussna(const wn::hyperonym_graph& graph) : depth_relative(graph) {
+sussna::sussna(const hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 sussna::~sussna() {
 }
 
-float sussna::edge_weight(const wnb::synset& child, const wnb::synset& parent) const {
+float sussna::edge_weight(const synset& child, const synset& parent) const {
     assert(graph.get_max_depth(child) > graph.get_max_depth(parent));
     //assert(graph.get_max_depth(child) + 1 == graph.get_max_depth(parent));
 
@@ -26,7 +27,7 @@ float sussna::edge_weight(const wnb::synset& child, const wnb::synset& parent) c
     return (w_child_hypernyms + w_parent_hyponyms)/(2*(graph.get_max_depth(child)));
 }
 
-float sussna::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
+float sussna::operator()(const synset& s1, const synset& s2) const {
 	//hyperonym_graph graph(wordnet);
 	auto distance = this->max();
 	auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
@@ -36,7 +37,7 @@ float sussna::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
 
         if (!paths_s1.empty() && !paths_s2.empty()) {
             // Compute minimum distance path
-            auto path_weight = [this](const vector<wnb::synset>& path){
+            auto path_weight = [this](const vector<synset>& path){
                 float weight = 0.f;
                 auto it_1 = path.begin();
                 auto it_2 = it_1 + 1;

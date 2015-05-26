@@ -3,7 +3,7 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 
-#include "wnb/core/wordnet.hh"
+#include "../wordnet/wordnet.h"
 #include "../wordnet/hyperonym_graph.h"
 #include "../distance/shortest_path.h"
 #include "../distance/distance_sussna.h"
@@ -14,35 +14,35 @@
 #include "../distance/distance_lin.h"
 #include "../corpus/semcor.h"
 
+using namespace wn;
 using namespace std;
-using namespace wnb;
 namespace fs = ::boost::filesystem;
 
-void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end, const wordnet& wn) {
+void print_orphans(vector<synset>::iterator begin, vector<synset>::iterator end, const wordnet& wnet) {
     for (; begin != end; ++begin) {
         auto orph1 = *begin;
         cout << endl << orph1 << endl;
         // out_edges
         cout << " - out_edges targets: " << endl;
         boost::graph_traits<wordnet::graph>::out_edge_iterator e, e_end;
-        std::tie(e, e_end) = boost::out_edges(orph1.id, wn.wordnet_graph);
+        std::tie(e, e_end) = boost::out_edges(orph1.id, wnet.wordnet_graph);
         for (; e != e_end; ++e) {
-            auto edge = wn.wordnet_graph[*e];
+            auto edge = wnet.wordnet_graph[*e];
             cout << "\t" << info_helper::symbols[edge.pointer_symbol];
-            auto v = boost::target(*e, wn.wordnet_graph);
-            cout << ": " << wn.wordnet_graph[v];
+            auto v = boost::target(*e, wnet.wordnet_graph);
+            cout << ": " << wnet.wordnet_graph[v];
             cout << endl;
         }
 
         // in_edges
         cout << " - in_edges sources: " << endl;
         boost::graph_traits<wordnet::graph>::in_edge_iterator in, in_end;
-        std::tie(in, in_end) = boost::in_edges(orph1.id, wn.wordnet_graph);
+        std::tie(in, in_end) = boost::in_edges(orph1.id, wnet.wordnet_graph);
         for (; in != in_end; ++in) {
-            auto edge = wn.wordnet_graph[*in];
+            auto edge = wnet.wordnet_graph[*in];
             cout << "\t" << info_helper::symbols[edge.pointer_symbol];
-            auto v = boost::source(*in, wn.wordnet_graph);
-            cout << ": " << wn.wordnet_graph[v];
+            auto v = boost::source(*in, wnet.wordnet_graph);
+            cout << ": " << wnet.wordnet_graph[v];
             cout << endl;
         }
 
@@ -57,13 +57,13 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
-	wordnet wn(argv[1], true);
-	wn::hyperonym_graph graph(wn);
+	wordnet wnet(argv[1], true);
+	hyperonym_graph graph(wnet);
 
     cout << endl;
     cout << "# Reading SemCor" << endl;
     cout << "#-------------------------------" << endl;
-	wn::semcor corpus(wn);
+	semcor corpus(wnet);
     string basepath = argv[2];
     // Parse files in SemCor corpus
     auto read_corpus_dir = [&corpus](const string& directory) {
@@ -89,37 +89,37 @@ int main(int argc, char** argv) {
     cout << "# Stats about loaded WordNet" << endl;
     cout << "#-------------------------------" << endl;
     cout << "Distance 'shortest_path':" << endl;
-    wn::distance::shortest_path shortest_path(wn);
+    distance::shortest_path shortest_path(wnet);
     cout << " - min_distance = " << shortest_path.min() << endl;
     cout << " - max_distance = " << shortest_path.max() << endl;
 
     cout << "Distance 'sussna':" << endl;
-    wn::distance::sussna distance_sussna(graph);
+    distance::sussna distance_sussna(graph);
     cout << " - min_distance = " << distance_sussna.min() << endl;
     cout << " - max_distance = " << distance_sussna.max() << endl;
 
     cout << "Distance 'Wu and Palmer':" << endl;
-    wn::distance::wu_palmer distance_wu_palmer(graph);
+    distance::wu_palmer distance_wu_palmer(graph);
     cout << " - min_distance = " << distance_wu_palmer.min() << endl;
     cout << " - max_distance = " << distance_wu_palmer.max() << endl;
 
     cout << "Distance 'Leacock and Chodorow':" << endl;
-    wn::distance::leacock_chodorow distance_leacock_chodorow(graph);
+    distance::leacock_chodorow distance_leacock_chodorow(graph);
     cout << " - min_distance = " << distance_leacock_chodorow.min() << endl;
     cout << " - max_distance = " << distance_leacock_chodorow.max() << endl;
 
     cout << "Distance 'Resnik 1995':" << endl;
-    wn::distance::resnik distance_resnik(graph, corpus);
+    distance::resnik distance_resnik(graph, corpus);
     cout << " - min_distance = " << distance_resnik.min() << endl;
     cout << " - max_distance = " << distance_resnik.max() << endl;
 
     cout << "Distance 'Jiang && Conrath':" << endl;
-    wn::distance::jiang_conrath distance_jiang_conrath(graph, corpus);
+    distance::jiang_conrath distance_jiang_conrath(graph, corpus);
     cout << " - min_distance = " << distance_jiang_conrath.min() << endl;
     cout << " - max_distance = " << distance_jiang_conrath.max() << endl;
 
     cout << "Distance 'Lin':" << endl;
-    wn::distance::lin distance_lin(graph, corpus);
+    distance::lin distance_lin(graph, corpus);
     cout << " - min_distance = " << distance_lin.min() << endl;
     cout << " - max_distance = " << distance_lin.max() << endl;
 
@@ -144,8 +144,8 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance between synsets" << endl;
     cout << "#-------------------------------" << endl;
-    vector<synset> synsets1 = wn.get_synsets("cat");
-    vector<synset> synsets2 = wn.get_synsets("dog");
+    vector<synset> synsets1 = wnet.get_synsets("cat");
+    vector<synset> synsets2 = wnet.get_synsets("dog");
     cout << "cat[0] = " << synsets1[0] << endl;
     cout << "dog[0] = " << synsets2[0] << endl;
     cout << "shortest_path(cat[0], dog[0]) = " << shortest_path(synsets1[0], synsets2[0]) << endl;
@@ -158,7 +158,7 @@ int main(int argc, char** argv) {
 
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    auto distance_synsets = [n, &synsets1, &synsets2](wn::distance::base& dist){
+    auto distance_synsets = [n, &synsets1, &synsets2](distance::base& dist){
         auto penalize_each = dist.max();
         vector<wn::distance::base::_t_distance> distances;
         auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);

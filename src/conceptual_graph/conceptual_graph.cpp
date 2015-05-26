@@ -29,13 +29,13 @@ conceptual_graph::~conceptual_graph() {
     delete d;
 }
 
-conceptual_graph::synset_id conceptual_graph::add_node(const wnb::synset& s) {
+conceptual_graph::synset_id conceptual_graph::add_node(const synset& s) {
     auto u = boost::add_vertex(d->graph);
     d->graph[u] = s;
     return u;
 }
 
-wnb::synset conceptual_graph::get_node(const synset_id& s1) const {
+synset conceptual_graph::get_node(const synset_id& s1) const {
     return d->graph[s1];
 }
 
@@ -47,8 +47,8 @@ void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, in
     boost::add_edge(s1, s2, rel, d->graph);
 }
 
-map<conceptual_graph::synset_id, wnb::synset> conceptual_graph::get_nodes() const {
-    map<synset_id, wnb::synset> ret;
+map<conceptual_graph::synset_id, synset> conceptual_graph::get_nodes() const {
+    map<synset_id, synset> ret;
     boost::graph_traits<_t_graph>::vertex_iterator v, v_end;
     tie(v, v_end) = boost::vertices(d->graph);
     for (; v!=v_end; ++v) {

@@ -3,11 +3,11 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include "wnb/core/wordnet.hh"
+#include "../wordnet/wordnet.h"
 #include "corpus/semcor.h"
 
+using namespace wn;
 using namespace std;
-using namespace wnb;
 namespace fs = ::boost::filesystem;
 
 
@@ -19,12 +19,12 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
-	wordnet wn(argv[1]);
+	wordnet wnet(argv[1]);
 
     cout << endl;
     cout << "# Reading SemCor" << endl;
     cout << "#-------------------------------" << endl;
-	wn::semcor corpus(wn);
+	semcor corpus(wnet);
     string basepath = argv[2];
 
     // Parse files in SemCor corpus
