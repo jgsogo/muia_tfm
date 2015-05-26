@@ -1,16 +1,17 @@
 
 #include "distance_leacock_chodorow.h"
 
+using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-leacock_chodorow::leacock_chodorow(const wn::hyperonym_graph& graph) : depth_relative(graph) {
+leacock_chodorow::leacock_chodorow(const hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 leacock_chodorow::~leacock_chodorow() {
 }
 
-float leacock_chodorow::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
+float leacock_chodorow::operator()(const synset& s1, const synset& s2) const {
 	auto map1 = graph.hypernym_map(s1);
 	auto map2 = graph.hypernym_map(s2);
 

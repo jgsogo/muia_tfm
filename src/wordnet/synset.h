@@ -4,9 +4,9 @@
 #include <iostream>
 #include "wnb/core/wordnet.hh"
 
-namespace wnb {
+namespace wn {
 	// We will use synsets as concepts
-	//typedef wnb::synset synset;
+	typedef wnb::synset synset;
 
 	//! Print synset
 	inline std::ostream& operator <<(std::ostream& os, const synset& s) {

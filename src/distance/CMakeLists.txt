@@ -16,7 +16,6 @@ set(SRC_FILES
 set(HEADERS   distance.h
               shortest_path.h
               depth_relative.h
-              synset.h
               )
 
 add_library(wn_distance ${SRC_FILES})

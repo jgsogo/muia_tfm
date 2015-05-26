@@ -3,6 +3,7 @@
 #include "distance.h"
 #include <numeric>
 
+using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
@@ -19,26 +20,26 @@ float base::max() const {
     return max_distance;
 }
 
-float base::min(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, float penalization) const {
+float base::min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
     return abs(int(v2.size()) - int(v1.size()))*penalization;
 }
 
-float base::max(const std::vector<wnb::synset>& v1, const std::vector<wnb::synset>& v2, float penalization) const {
+float base::max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
     auto min_elements = std::min(v2.size(), v1.size());
     return min_elements*this->max() + abs(int(v2.size()) - int(v1.size()))*penalization;
 }
 
 
-bool base::connected(const wnb::synset& s1, const wnb::synset& s2) const {
+bool base::connected(const synset& s1, const synset& s2) const {
     return (this->operator()(s1, s2) < base::max_distance);
 }
 
-float base::min_distance(const vector<wnb::synset>& v1, const vector<wnb::synset>& v2, vector<base::_t_distance>& dist_combs) const {
+float base::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<base::_t_distance>& dist_combs) const {
     assert(v1.size() == v2.size());
     return this->min_distance(v1, v2, dist_combs, 0.f);
     }
 
-float base::min_distance(const vector<wnb::synset>& v1, const vector<wnb::synset>& v2, vector<_t_distance>& dist_combs, float penalize_each) const {
+float base::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<_t_distance>& dist_combs, float penalize_each) const {
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() <= v2.size());
     auto penalization = (v2.size() - v1.size())*penalize_each;
@@ -85,7 +86,7 @@ float base::min_distance(const vector<wnb::synset>& v1, const vector<wnb::synset
         if (it_perm->second == min_value && !repeated_indexes(it_perm->first.begin(), it_perm->first.begin() + v1.size())) {
             unique_indexes.push_back(vector<size_t>(it_perm->first.begin(), it_perm->first.begin() + v1.size()));
             auto s1 = v1.begin();
-            auto new_comb = dist_combs.insert(dist_combs.end(), vector<tuple<wnb::synset, wnb::synset, float>>());
+            auto new_comb = dist_combs.insert(dist_combs.end(), vector<tuple<synset, synset, float>>());
             for (auto index = 0; index < v1.size(); ++index, ++s1) {
                 new_comb->push_back(make_tuple(*s1, v2[it_perm->first[index]], distances[v2.size() * index + it_perm->first[index]]));
             }

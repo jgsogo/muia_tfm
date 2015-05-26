@@ -2,12 +2,13 @@
 #include "distance_lin.h"
 #include <numeric>
 
+using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-lin::lin(const wn::hyperonym_graph& graph, const wn::corpus& corpus) : information_based(graph, corpus) {
+lin::lin(const hyperonym_graph& graph_, const corpus& corpus_) : information_based(graph_, corpus_) {
     max_count = 0.f;
-    auto corpus_index = corpus.get_index();
+    auto corpus_index = corpus_.get_index();
     for (auto& s : corpus_index) {
         auto hypernyms = graph.hypernym_map(s.first);
         auto synset_count = std::accumulate(s.second.begin(), s.second.end(), 0, [](const size_t& lhs, const pair<corpus::doc_id, std::size_t>& doc_count){ return lhs + doc_count.second; });
@@ -18,20 +19,12 @@ lin::lin(const wn::hyperonym_graph& graph, const wn::corpus& corpus) : informati
         }
         all_count += synset_count*(hypernyms.size() + 1);
     }
-    /*
-    for (auto& s: corpus_index) {
-        auto synset_count = std::accumulate(s.second.begin(), s.second.end(), size_t(0), [](const size_t& lhs, const pair<corpus::doc_id, std::size_t>& doc_count){ return lhs + doc_count.second; });
-        concept_count[s.first] = synset_count;
-        all_count += synset_count;
-        max_count = std::max(max_count, synset_count);
-    }
-    */
 }
 
 lin::~lin() {
 }
 
-float lin::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
+float lin::operator()(const synset& s1, const synset& s2) const {
     auto similarity = 0.f;
     auto it_s1 = concept_count.find(s1);
     auto it_s2 = concept_count.find(s2);

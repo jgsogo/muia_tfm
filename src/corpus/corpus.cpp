@@ -25,7 +25,7 @@ namespace _detail {
 }
 
 
-corpus::corpus(const wnb::wordnet& wordnet) : wordnet(wordnet) {
+corpus::corpus(const wordnet& wnet) : wnet(wnet) {
 }
 
 corpus::~corpus() {

@@ -3,7 +3,7 @@
 #include <vector>
 
 #include <boost/filesystem.hpp>
-#include "wnb/core/wordnet.hh"
+#include "../wordnet/wordnet.h"
 #include "../wordnet/hyperonym_graph.h"
 #include "../conceptual_graph/conceptual_graph.h"
 #include "../distance/shortest_path.h"
@@ -16,8 +16,8 @@
 #include "../graph_distance/mine.h"
 #include "../corpus/semcor.h"
 
+using namespace wn;
 using namespace std;
-using namespace wnb;
 namespace fs = ::boost::filesystem;
 
 
@@ -29,13 +29,13 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Loading WordNet" << endl;
     cout << "#-------------------------------" << endl;
-	wordnet wn(argv[1], true);
-    wn::hyperonym_graph graph(wn);
+	wordnet wnet(argv[1], true);
+    hyperonym_graph graph(wnet);
 
     cout << endl;
     cout << "# Reading SemCor" << endl;
     cout << "#-------------------------------" << endl;
-    wn::semcor corpus(wn);
+    semcor corpus(wnet);
     string basepath = argv[2];
     // Parse files in SemCor corpus
     auto read_corpus_dir = [&corpus](const string& directory) {
@@ -61,25 +61,25 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Build conceptual graph" << endl;
     cout << "#-------------------------------" << endl;
-    auto dog = wn.get_synsets("dog", pos_t::N)[0];
+    auto dog = wnet.get_synsets("dog", pos_t::N)[0];
     std::cout << " - dog >> " << dog << endl;
-    auto drink = wn.get_synsets("drink", pos_t::V)[0];
+    auto drink = wnet.get_synsets("drink", pos_t::V)[0];
     std::cout << " - drink >> " << drink << endl;
-    auto water = wn.get_synsets("water", pos_t::N)[0];
+    auto water = wnet.get_synsets("water", pos_t::N)[0];
     std::cout << " - water >> " << water << endl;
-    auto wine = wn.get_synsets("wine", pos_t::N)[0];
+    auto wine = wnet.get_synsets("wine", pos_t::N)[0];
     std::cout << " - wine >> " << wine << endl;
 
 
     // Build a sample cgraph
-    wn::conceptual_graph cgraph1;
+    conceptual_graph cgraph1;
     auto id_drink = cgraph1.add_node(drink);
     auto id_dog = cgraph1.add_node(dog);
     auto id_water = cgraph1.add_node(water);
     cgraph1.add_relation(id_drink, id_dog, 10);
     cgraph1.add_relation(id_drink, id_water, 12);
 
-    wn::conceptual_graph cgraph2;
+    conceptual_graph cgraph2;
     id_drink = cgraph2.add_node(drink);
     id_dog = cgraph2.add_node(dog);
     auto id_wine = cgraph2.add_node(wine);
@@ -93,8 +93,8 @@ int main(int argc, char** argv) {
     cgraph2.print(std::cout);
 
 
-    auto distance_graphs = [&cgraph1, &cgraph2](wn::distance::base& dist) {
-        wn::distance::mine mine_distance(dist);
+    auto distance_graphs = [&cgraph1, &cgraph2](distance::base& dist) {
+        distance::mine mine_distance(dist);
         auto penalize_node = dist.max();
         auto penalize_edge = mine_distance.max_edge_distance();
         auto data = mine_distance.min_distance(cgraph1, cgraph2, penalize_node, penalize_edge);
@@ -105,13 +105,13 @@ int main(int argc, char** argv) {
         cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
     };
 
-    wn::distance::shortest_path shortest_path(wn);
-    wn::distance::sussna distance_sussna(graph);
-    wn::distance::wu_palmer distance_wu_palmer(graph);
-    wn::distance::leacock_chodorow distance_leacock_chodorow(graph);
-    wn::distance::resnik distance_resnik(graph, corpus);
-    wn::distance::jiang_conrath distance_jiang_conrath(graph, corpus);
-    wn::distance::lin distance_lin(graph, corpus);
+    distance::shortest_path shortest_path(wnet);
+    distance::sussna distance_sussna(graph);
+    distance::wu_palmer distance_wu_palmer(graph);
+    distance::leacock_chodorow distance_leacock_chodorow(graph);
+    distance::resnik distance_resnik(graph, corpus);
+    distance::jiang_conrath distance_jiang_conrath(graph, corpus);
+    distance::lin distance_lin(graph, corpus);
 
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;

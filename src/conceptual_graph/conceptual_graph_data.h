@@ -12,7 +12,7 @@ namespace wn {
     
     typedef boost::adjacency_list<boost::vecS, boost::vecS,
                                   boost::bidirectionalS,
-                                  wnb::synset, relation> _t_graph;
+                                  synset, relation> _t_graph;
 
     struct conceptual_graph::data {
         _t_graph graph;

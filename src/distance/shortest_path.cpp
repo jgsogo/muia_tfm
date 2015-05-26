@@ -2,16 +2,17 @@
 #include "shortest_path.h"
 #include "../wordnet/hyperonym_graph.h"
 
+using namespace wn;
 using namespace wn::distance;
 
-shortest_path::shortest_path(const wnb::wordnet& wordnet) :wordnet(wordnet) {
-	hyperonym_graph graph(wordnet);
+shortest_path::shortest_path(const wordnet& wnet) :wnet(wnet) {
+    hyperonym_graph graph(wnet);
 	max_depth = graph.max_depth();
 }
 
-float shortest_path::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
-	auto map1 = hyperonym_graph::hypernym_map(wordnet, s1);
-	auto map2 = hyperonym_graph::hypernym_map(wordnet, s2);
+float shortest_path::operator()(const synset& s1, const synset& s2) const {
+    auto map1 = hyperonym_graph::hypernym_map(wnet, s1);
+    auto map2 = hyperonym_graph::hypernym_map(wnet, s2);
 
 	// For each ancestor synset common to both subject synsets, find the
 	// connecting path length. Return the shortest of these.

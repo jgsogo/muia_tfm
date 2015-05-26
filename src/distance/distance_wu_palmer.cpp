@@ -1,16 +1,17 @@
 
 #include "distance_wu_palmer.h"
 
+using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-wu_palmer::wu_palmer(const wn::hyperonym_graph& graph) : depth_relative(graph) {
+wu_palmer::wu_palmer(const hyperonym_graph& graph) : depth_relative(graph) {
 }
 
 wu_palmer::~wu_palmer() {
 }
 
-float wu_palmer::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
+float wu_palmer::operator()(const synset& s1, const synset& s2) const {
     auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
     //auto lch_depth = graph.max_depth();
     float similarity = 0.f;
