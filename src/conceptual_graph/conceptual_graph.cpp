@@ -57,6 +57,16 @@ map<conceptual_graph::synset_id, wnb::synset> conceptual_graph::get_nodes() cons
     return ret;
 }
 
+vector<relation> conceptual_graph::get_edges() const {
+    vector<relation> ret;
+    boost::graph_traits<_t_graph>::edge_iterator e, e_end;
+    tie(e, e_end) = boost::edges(d->graph);
+    for (; e != e_end; ++e) {
+        ret.push_back(d->graph[*e]);
+    }
+    return ret;
+}
+
 vector<relation> conceptual_graph::get_outgoing_edges(const synset_id& id) const {
     vector<relation> ret;
     boost::graph_traits<_t_graph>::out_edge_iterator e, e_end;
