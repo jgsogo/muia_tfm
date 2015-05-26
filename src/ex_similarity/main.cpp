@@ -163,8 +163,11 @@ int main(int argc, char** argv) {
         vector<wn::distance::base::_t_distance> distances;
         auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);
         auto data = dist.min_distance(s1, synsets2, distances, penalize_each);
-        cout << " - Distance € [" << dist.min(s1, synsets2, penalize_each) << ", " << dist.max(s1, synsets2, penalize_each) << "]" << endl;
+        auto min_d = dist.min(s1, synsets2, penalize_each);
+        auto max_d = dist.max(s1, synsets2, penalize_each);
+        cout << " - Distance € [" << min_d << ", " << max_d  << "]" << endl;
         cout << " - Min distance is " << data << endl;
+        cout << " - Ratio " << (data-min_d) / (max_d-min_d) << endl;
         cout << " - Combinations: " << distances.size() << endl;
         for (auto it_dist = distances.begin(); it_dist != distances.end(); ++it_dist) {
             cout << " - Candidate pairs: " << endl;
