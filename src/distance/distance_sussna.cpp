@@ -63,5 +63,10 @@ float sussna::operator()(const wnb::synset& s1, const wnb::synset& s2) const {
 }
 
 float sussna::max() const {
-	return 2 * graph.max_depth(); // TODO: Make this computation!
+    // Max distance will happen on the longest path and with the highest edge-weights
+    float max_v = 0.f;
+    for (auto i = 1; i <= graph.max_depth(); ++i) {
+        max_v +=  0.5f/i;
+    }
+    return 2 * (minmax_hyperonym_r.second + minmax_hyponym_r.second) * max_v;
 }

@@ -158,10 +158,12 @@ int main(int argc, char** argv) {
 
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    auto penalize_each = 1.f;
-    auto distance_synsets = [n, penalize_each, &synsets1, &synsets2](wn::distance::base& dist){
+    auto distance_synsets = [n, &synsets1, &synsets2](wn::distance::base& dist){
+        auto penalize_each = dist.max();
         vector<wn::distance::base::_t_distance> distances;
-        auto data = dist.min_distance(vector<synset>(synsets1.begin(), synsets1.begin() + n), synsets2, distances, penalize_each);
+        auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);
+        auto data = dist.min_distance(s1, synsets2, distances, penalize_each);
+        cout << " - Distance € [" << dist.min(s1, synsets2, penalize_each) << ", " << dist.max(s1, synsets2, penalize_each) << "]" << endl;
         cout << " - Min distance is " << data << endl;
         cout << " - Combinations: " << distances.size() << endl;
         for (auto it_dist = distances.begin(); it_dist != distances.end(); ++it_dist) {
