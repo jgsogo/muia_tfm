@@ -1,6 +1,7 @@
 
 #include "unl_graph.h"
 #include "conceptual_graph_data.h"
+#include "unl_relation.h"
 
 using namespace wn;
 
@@ -17,7 +18,7 @@ class unl_graph_printer : public boost::default_writer {
         }
         void operator()(std::ostream& os, const boost::graph_traits<_t_graph>::edge_descriptor& e) const {
             const relation& rel = graph[e];
-            os << "[label=\"" << rel << "\"]";
+            os << "[label=\"" << unl::relation::str_types[rel.type] << "\"]";
         }
     private:
         const _t_graph& graph;
