@@ -87,3 +87,9 @@ void conceptual_graph::print(std::ostream& os) const {
 void conceptual_graph::mcgregor_common_subgraphs(const conceptual_graph& rhs) const {
     mcgregor_common_subgraphs_compute(d->graph, rhs.d->graph);
 }
+
+namespace wn {
+    void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs) {
+        mcgregor_common_subgraphs_compute(lhs.d->graph, rhs.d->graph);
+    }
+}

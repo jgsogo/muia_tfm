@@ -25,9 +25,11 @@ namespace wn {
 
             void mcgregor_common_subgraphs(const conceptual_graph& rhs) const;
 
+            friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs);
         protected:
             struct data;
             data* d;
     };
 
+    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs);
 }
