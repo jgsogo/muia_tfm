@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <boost/graph/mcgregor_common_subgraphs.hpp>
-#include "conceptual_graph/conceptual_graph.h"
+#include "conceptual_graph.h"
 
 namespace wn {
     namespace mcs {
@@ -18,7 +18,13 @@ namespace wn {
 
         template <typename GraphFirst, typename GraphSecond>
         struct store_callback {
-            store_callback(const GraphFirst& graph1, const GraphSecond& graph2) : m_graph1(graph1), m_graph2(graph2) {
+            // Types for filtered graph
+            typedef typename property_map<GraphFirst, vertex_index_t>::type VertexIndexMap;
+            typedef shared_array_property_map<bool, VertexIndexMap> MembershipMap;
+            typedef typename membership_filtered_graph_traits<_t_graph, MembershipMap>::graph_type
+                  MembershipFilteredGraph;
+
+            store_callback(const GraphFirst& graph1, const GraphSecond& graph2, std::vector<MembershipFilteredGraph>& out_vector) : m_graph1(graph1), m_graph2(graph2), graphs(out_vector) {
             }
 
             template <typename CorrespondenceMapFirstToSecond, typename CorrespondenceMapSecondToFirst>
@@ -26,23 +32,24 @@ namespace wn {
                             CorrespondenceMapSecondToFirst correspondence_map_2_to_1,
                             typename graph_traits<GraphFirst>::vertices_size_type subgraph_size) {
 
-                conceptual_graph graph;
-                BGL_FORALL_VERTICES_T(vertex1, m_graph1, GraphFirst) {
-                  // Skip unmapped vertices
-                  if (get(correspondence_map_1_to_2, vertex1) != graph_traits<GraphSecond>::null_vertex()) {
-                    graph.add_node(m_graph1[vertex1]);
-                    std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << std::endl;
-                  }
-                }
-                std::cout << "---" << std::endl;
-                graphs.push_back(graph);
+                // Fill membership map for first graph
+                MembershipMap membership_map1(num_vertices(m_graph1),
+                                              get(vertex_index, m_graph1));
+
+                fill_membership_map<GraphFirst>(m_graph1, correspondence_map_1_to_2, membership_map1);
+
+                // Generate filtered graphs using membership map
+                MembershipFilteredGraph subgraph1 =
+                  make_membership_filtered_graph(m_graph1, membership_map1);
+
+                graphs.push_back(subgraph1);
                 return (true);
             }
 
             private:
                 const GraphFirst& m_graph1;
                 const GraphSecond& m_graph2;
-                std::vector<conceptual_graph> graphs;
+                std::vector<MembershipFilteredGraph>& graphs;
         };
     }
 }

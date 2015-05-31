@@ -40,25 +40,3 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
         return distance + (s2_nodes.size() - s1_nodes.size())*node_penalization;
     }
 }
-
-/* TODO: Move to wn::distance::base_relation
-float mine::min_distance(const vector<relation>& rel1, const vector<relation>& rel2, float edge_penalization) const {
-    if (rel1.size() > rel2.size()) {
-        return this->min_distance(rel2, rel1, edge_penalization);
-    }
-    else {
-        assert(rel2.size() >= rel1.size());
-        float distance = rel1.size()*dist_relation.max();
-        auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
-        vector<relation> aux_rel2(rel2.begin(), rel2.end());
-        sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
-        do {
-            float aux_distance = inner_product(rel1.begin(), rel1.end(), aux_rel2.begin(), 0.f,
-                [](const float& lhs, const float& rhs){ return lhs + rhs; },
-                [this](const relation& lhs, const relation& rhs){ return this->operator()(lhs, rhs); });
-            distance = std::min(distance, aux_distance);
-        } while (next_permutation(aux_rel2.begin(), aux_rel2.end(), relation_less));
-        return distance + (rel2.size() - rel1.size())*edge_penalization;
-    }
-}
-*/
