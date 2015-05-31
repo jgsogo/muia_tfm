@@ -23,13 +23,21 @@ namespace wn {
 
             virtual void print(std::ostream& os) const;
 
-            void mcgregor_common_subgraphs(const conceptual_graph& rhs) const;
-
-            friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs);
+            friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
+                const conceptual_graph& lhs,
+                const conceptual_graph& rhs,
+                std::binary_function<const synset&, const synset&, bool>&,
+                std::binary_function<const relation&, const relation&, bool>&
+                );
         protected:
             struct data;
             data* d;
     };
 
-    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs);
+    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
+        const conceptual_graph& lhs,
+        const conceptual_graph& rhs,
+        std::binary_function<const synset&, const synset&, bool>&,
+        std::binary_function<const relation&, const relation&, bool>&
+        );
 }

@@ -12,6 +12,6 @@ mcs::~mcs() {
 }
 
 float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
-    s1.mcgregor_common_subgraphs(s2);
+    //mcgregor_common_subgraphs(s1, s2);
     return 0;
 }
