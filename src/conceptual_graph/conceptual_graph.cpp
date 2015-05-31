@@ -120,48 +120,39 @@ namespace wn {
     void mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
-        std::binary_function<const synset&, const synset&, bool>& cmp_synset,
-        std::binary_function<const relation&, const relation&, bool>& cmp_relation) {
+        std::function<bool (const synset&, const synset&)> cmp_synset,
+        std::function<bool (const relation&, const relation&)> cmp_relation) {
 
         print_callback<_t_graph, _t_graph> my_callback(lhs.d->graph, rhs.d->graph);
 
-        struct vertices_eq {
-            vertices_eq(const _t_graph& g1,
+        struct equivalence_func {
+            equivalence_func(const _t_graph& g1,
                         const _t_graph& g2,
-                        std::binary_function<const synset&, const synset&, bool>& dist)
-                        : graph1(g1), graph2(g2), distance_f(dist) {
+                        std::function<bool (const synset&, const synset&)> synset_dist,
+                        std::function<bool (const relation&, const relation&)> relation_dist)
+                        : graph1(g1), graph2(g2), dist_synset(synset_dist), dist_relation(relation_dist) {
             };
 
             bool operator()(graph_traits<_t_graph>::vertex_descriptor v1, graph_traits<_t_graph>::vertex_descriptor v2) {
-                return true;
+                return dist_synset(graph1[v1], graph2[v2]);
             };
-            std::binary_function<const synset&, const synset&, bool> distance_f;
-            const _t_graph& graph1;
-            const _t_graph& graph2;
-        };
-        vertices_eq vertex_equiv(lhs.d->graph, rhs.d->graph, cmp_synset);
-
-        struct edges_eq {
-            edges_eq(const _t_graph& g1,
-                     const _t_graph& g2,
-                     std::binary_function<const relation&, const relation&, bool>& dist)
-                     : graph1(g1), graph2(g2), distance_f(dist) {
-            };
-
             bool operator()(graph_traits<_t_graph>::edge_descriptor e1, graph_traits<_t_graph>::edge_descriptor e2) {
-                return true;
+                return dist_relation(graph1[e1], graph2[e2]);
             };
-            std::binary_function<const relation&, const relation&, bool> distance_f;
+
+            std::function<bool (const synset&, const synset&)> dist_synset;
+            std::function<bool (const relation&, const relation&)> dist_relation;
             const _t_graph& graph1;
             const _t_graph& graph2;
         };
-        edges_eq edges_equiv(lhs.d->graph, rhs.d->graph, cmp_relation);
+        equivalence_func funcs(lhs.d->graph, rhs.d->graph, cmp_synset, cmp_relation);
+
 
         // Print out all connected common subgraphs between graph1 and graph2.
         std::cout << "COMPUTE McGREGOR" << std::endl;
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, my_callback,
-            edges_equivalent(edges_equiv).
-            vertices_equivalent(vertex_equiv));
+            edges_equivalent(funcs).
+            vertices_equivalent(funcs));
 
         /*
         // Assume both graphs were defined with implicit vertex name,
