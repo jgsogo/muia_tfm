@@ -1,13 +1,13 @@
 
 #include "mcgregor_common_subgraphs.h"
-#include <boost/graph/mcgregor_common_subgraphs.hpp>
+//#include <boost/graph/mcgregor_common_subgraphs.hpp>
 
 /* Doc:
 http://www.boost.org/doc/libs/1_40_0/libs/graph/doc/mcgregor_common_subgraphs.html
 http://svn.kulitorum.com/RepSnapper/Libraries/Boost1.40/libs/graph/example/mcgregor_subgraphs_example.cpp
 https://www.ebi.ac.uk/msd-srv/ssm/papers/spe_csia.pdf
 */
-
+/*
 using namespace boost;
 
 template <typename GraphFirst, typename GraphSecond>
@@ -74,3 +74,4 @@ namespace wn {
     }
 
 }
+*/

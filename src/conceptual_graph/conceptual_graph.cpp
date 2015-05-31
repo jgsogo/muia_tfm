@@ -1,9 +1,7 @@
 
 #include "conceptual_graph.h"
 #include "conceptual_graph_data.h"
-
-#include "relation.h"
-#include "mcgregor_common_subgraphs.h"
+#include <boost/graph/mcgregor_common_subgraphs.hpp>
 
 using namespace wn;
 using namespace std;
@@ -84,12 +82,113 @@ void conceptual_graph::print(std::ostream& os) const {
     d->print(os, d->graph, writer);
 }
 
-void conceptual_graph::mcgregor_common_subgraphs(const conceptual_graph& rhs) const {
-    mcgregor_common_subgraphs_compute(d->graph, rhs.d->graph);
-}
 
 namespace wn {
-    void mcgregor_common_subgraphs_compute2(const conceptual_graph& lhs, const conceptual_graph& rhs) {
-        mcgregor_common_subgraphs_compute(lhs.d->graph, rhs.d->graph);
+    using namespace boost;
+
+    template <typename GraphFirst, typename GraphSecond>
+    struct print_callback {
+        print_callback(const GraphFirst& graph1, const GraphSecond& graph2) : m_graph1(graph1), m_graph2(graph2) {
+        }
+
+        template <typename CorrespondenceMapFirstToSecond, typename CorrespondenceMapSecondToFirst>
+        bool operator()(CorrespondenceMapFirstToSecond correspondence_map_1_to_2,
+                        CorrespondenceMapSecondToFirst correspondence_map_2_to_1,
+                        typename graph_traits<GraphFirst>::vertices_size_type subgraph_size) {
+            std::cout << "print_callback::operator() " << std::endl;
+            std::cout << "subgraph_size = " << subgraph_size << std::endl;
+            // Print out correspondences between vertices
+            BGL_FORALL_VERTICES_T(vertex1, m_graph1, GraphFirst) {
+                std::cout << "\t" << vertex1 << std::endl;
+                // Skip unmapped vertices
+                if (get(correspondence_map_1_to_2, vertex1) != graph_traits<GraphSecond>::null_vertex()) {
+                    std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << std::endl;
+                }
+            }
+
+            std::cout << "---" << std::endl;
+            return (true);
+        }
+
+        private:
+            const GraphFirst& m_graph1;
+            const GraphSecond& m_graph2;
+    };
+
+
+
+    void mcgregor_common_subgraphs(
+        const conceptual_graph& lhs,
+        const conceptual_graph& rhs,
+        std::binary_function<const synset&, const synset&, bool>& cmp_synset,
+        std::binary_function<const relation&, const relation&, bool>& cmp_relation) {
+
+        print_callback<_t_graph, _t_graph> my_callback(lhs.d->graph, rhs.d->graph);
+
+        struct vertices_eq {
+            vertices_eq(const _t_graph& g1,
+                        const _t_graph& g2,
+                        std::binary_function<const synset&, const synset&, bool>& dist)
+                        : graph1(g1), graph2(g2), distance_f(dist) {
+            };
+
+            bool operator()(graph_traits<_t_graph>::vertex_descriptor v1, graph_traits<_t_graph>::vertex_descriptor v2) {
+                return true;
+            };
+            std::binary_function<const synset&, const synset&, bool> distance_f;
+            const _t_graph& graph1;
+            const _t_graph& graph2;
+        };
+        vertices_eq vertex_equiv(lhs.d->graph, rhs.d->graph, cmp_synset);
+
+        struct edges_eq {
+            edges_eq(const _t_graph& g1,
+                     const _t_graph& g2,
+                     std::binary_function<const relation&, const relation&, bool>& dist)
+                     : graph1(g1), graph2(g2), distance_f(dist) {
+            };
+
+            bool operator()(graph_traits<_t_graph>::edge_descriptor e1, graph_traits<_t_graph>::edge_descriptor e2) {
+                return true;
+            };
+            std::binary_function<const relation&, const relation&, bool> distance_f;
+            const _t_graph& graph1;
+            const _t_graph& graph2;
+        };
+        edges_eq edges_equiv(lhs.d->graph, rhs.d->graph, cmp_relation);
+
+        // Print out all connected common subgraphs between graph1 and graph2.
+        std::cout << "COMPUTE McGREGOR" << std::endl;
+        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, my_callback,
+            edges_equivalent(edges_equiv).
+            vertices_equivalent(vertex_equiv));
+
+        /*
+        // Assume both graphs were defined with implicit vertex name,
+        // edge name, and vertex index properties
+        property_map<_t_graph, int synset::*> vname_map1 = get(&synset::id, lhs.d->graph);
+        property_map<_t_graph, int synset::*> vname_map2 = get(&synset::id, rhs.d->graph);
+        //property_map<_t_graph, vertex_name_t> vname_map1 = get(id, lhs);
+        //property_map<_t_graph, vertex_name_t> vname_map2 = get(id, rhs);
+
+        property_map<_t_graph, int relation::*>::const_type ename_map1 = get(&relation::type, lhs.d->graph);
+        property_map<_t_graph, int relation::*>::const_type ename_map2 = get(&relation::type, rhs.d->graph);
+
+        struct vertices_equivalents {
+            vertices_equivalents(const _t_graph& g1, const _t_graph& g2) : m_graph1(g1), m_graph2(g2) {};
+            bool operator()(graph_traits<_t_graph>::vertex_descriptor v1, graph_traits<_t_graph>::vertex_descriptor v2) {
+                return true;
+            };
+            const _t_graph& m_graph1;
+            const _t_graph& m_graph2;
+        };
+        vertices_equivalents eqv(lhs.d->graph, rhs.d->graph);
+
+        // Print out all connected common subgraphs between graph1 and graph2.
+        std::cout << "COMPUTE McGREGOR" << std::endl;
+        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, my_callback,
+            edges_equivalent(make_property_map_equivalent(ename_map1, ename_map2)).
+            vertices_equivalent(eqv));
+        */
     }
 }
