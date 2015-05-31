@@ -19,9 +19,11 @@ struct print_callback {
     bool operator()(CorrespondenceMapFirstToSecond correspondence_map_1_to_2,
                     CorrespondenceMapSecondToFirst correspondence_map_2_to_1,
                     typename graph_traits<GraphFirst>::vertices_size_type subgraph_size) {
-
+        std::cout << "print_callback::operator() " << std::endl;
+        std::cout << "subgraph_size = " << subgraph_size << std::endl;
         // Print out correspondences between vertices
         BGL_FORALL_VERTICES_T(vertex1, m_graph1, GraphFirst) {
+            std::cout << "\t" << vertex1 << std::endl;
             // Skip unmapped vertices
             if (get(correspondence_map_1_to_2, vertex1) != graph_traits<GraphSecond>::null_vertex()) {
                 std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << std::endl;
@@ -53,10 +55,21 @@ namespace wn {
         property_map<_t_graph, int relation::*>::const_type ename_map1 = get(&relation::type, lhs);
         property_map<_t_graph, int relation::*>::const_type ename_map2 = get(&relation::type, rhs);
 
+        struct vertices_equivalents {
+            vertices_equivalents(const _t_graph& g1, const _t_graph& g2) : m_graph1(g1), m_graph2(g2) {};
+            bool operator()(graph_traits<_t_graph>::vertex_descriptor v1, graph_traits<_t_graph>::vertex_descriptor v2) {
+                return true;
+            };
+            const _t_graph& m_graph1;
+            const _t_graph& m_graph2;
+        };
+        vertices_equivalents eqv(lhs, rhs);
+
         // Print out all connected common subgraphs between graph1 and graph2.
-        mcgregor_common_subgraphs(lhs, rhs, true, my_callback,
+        std::cout << "COMPUTE McGREGOR" << std::endl;
+        mcgregor_common_subgraphs_unique(lhs, rhs, true, my_callback,
             edges_equivalent(make_property_map_equivalent(ename_map1, ename_map2)).
-            vertices_equivalent(make_property_map_equivalent(vname_map1, vname_map2)));
+            vertices_equivalent(eqv));
 
     }
 
