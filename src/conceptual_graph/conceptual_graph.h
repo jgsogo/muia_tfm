@@ -23,7 +23,7 @@ namespace wn {
 
             virtual void print(std::ostream& os) const;
 
-            friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
+            friend WN_CONCEPTUAL_GRAPH_EXPORT conceptual_graph mcgregor_common_subgraphs(
                 const conceptual_graph& lhs,
                 const conceptual_graph& rhs,
                 std::function<bool (const synset&, const synset&)>,
@@ -34,7 +34,7 @@ namespace wn {
             data* d;
     };
 
-    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
+    WN_CONCEPTUAL_GRAPH_EXPORT conceptual_graph mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
         std::function<bool (const synset&, const synset&)>,

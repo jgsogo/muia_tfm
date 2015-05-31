@@ -93,7 +93,7 @@ namespace wn {
         http://svn.kulitorum.com/RepSnapper/Libraries/Boost1.40/libs/graph/example/mcgregor_subgraphs_example.cpp
         https://www.ebi.ac.uk/msd-srv/ssm/papers/spe_csia.pdf
     */
-    void mcgregor_common_subgraphs(
+    conceptual_graph mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
         std::function<bool (const synset&, const synset&)> cmp_synset,
@@ -131,10 +131,38 @@ namespace wn {
         */
 
         // Store all connected common subgraphs between graph1 and graph2.
-        mcs::store_callback<_t_graph, _t_graph> mcs_graphs(lhs.d->graph, rhs.d->graph);
+        typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
+        std::vector<store_callback::MembershipFilteredGraph> subgraphs;
+        store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs);
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
-            edges_equivalent(funcs).
-            vertices_equivalent(funcs));
+            edges_equivalent(funcs).vertices_equivalent(funcs));
 
+        // TODO: Build set of maximum_common_subgraphs without overlappings.
+        /*
+        for (auto& graph: subgraphs) {
+            auto v = boost::vertices(graph);
+            auto e = boost::edges(graph);
+        }
+        */
+        conceptual_graph ret;
+        if (subgraphs.size()) {
+            auto mcs_subgraph = subgraphs[0];
+            store_callback::MembershipFilteredGraph::vertex_iterator v, v_end;
+            std::tie(v, v_end) = vertices(mcs_subgraph);
+            for (; v!=v_end; ++v) {
+                ret.add_node(lhs.d->graph[*v]);
+            }
+
+            std::tie(v, v_end) = vertices(mcs_subgraph);
+            for (; v!=v_end; ++v) {
+                store_callback::MembershipFilteredGraph::out_edge_iterator e, e_end;
+                tie(e, e_end) = boost::out_edges(*v, mcs_subgraph);
+                for (; e!=e_end; ++e) {
+                    auto tgt = target(*e, mcs_subgraph);
+                    ret.add_relation(*v, tgt, lhs.d->graph[*e].type);
+                }
+            }
+        }
+        return ret;
     }
 }

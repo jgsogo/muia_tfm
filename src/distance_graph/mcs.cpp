@@ -38,6 +38,8 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.min() + 0.1f*(dist_relation.max()-dist_relation.min());
 
-    mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation);
+    auto max_subgraph = mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation);
+    std::cout << "wn::distance::mcs" << std::endl;
+    max_subgraph.print(std::cout);
     return 0;
 }
