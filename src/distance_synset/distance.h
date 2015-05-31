@@ -2,12 +2,12 @@
 #pragma once
 
 #include "../wordnet/synset.h"
-#include "distance/wn_distance_export.h"
+#include "distance_synset/wn_distance_synset_export.h"
 
 namespace wn {
     namespace distance {
 
-        class WN_DISTANCE_EXPORT base_synset {
+        class WN_DISTANCE_SYNSET_EXPORT base_synset {
             public:
                 static const float max_distance; //! max_distance to consider synsets connected
 

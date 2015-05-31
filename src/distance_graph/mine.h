@@ -6,7 +6,7 @@
 namespace wn {
     namespace distance {
 
-        class WN_GRAPH_DISTANCE_EXPORT mine : public base_graph {
+        class WN_DISTANCE_GRAPH_EXPORT mine : public base_graph {
             public:
                 mine(const base_synset& base_distance);
 

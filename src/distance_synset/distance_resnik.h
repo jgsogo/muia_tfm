@@ -12,7 +12,7 @@ namespace wn {
             Artificial Intelligence (pp. 448–453). Retrieved from
             http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.55.5277
         */
-        class WN_DISTANCE_EXPORT resnik : public information_based {
+        class WN_DISTANCE_SYNSET_EXPORT resnik : public information_based {
             public:
                 resnik(const hyperonym_graph& graph, const wn::corpus& corpus);
                 ~resnik();

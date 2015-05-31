@@ -12,7 +12,7 @@ namespace wn {
             Massachusetts: The MIT Press. Retrieved from
             http://www.researchgate.net/publication/200045856_Combining_Local_Context_and_WordNet_Similarity_for_Word_Sense_Identification
         */
-        class WN_DISTANCE_EXPORT leacock_chodorow : public depth_relative {
+        class WN_DISTANCE_SYNSET_EXPORT leacock_chodorow : public depth_relative {
             public:
                 leacock_chodorow(const hyperonym_graph& graph);
                 ~leacock_chodorow();

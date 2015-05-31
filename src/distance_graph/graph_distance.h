@@ -1,14 +1,14 @@
 
 #pragma once
 
-#include "graph_distance/wn_graph_distance_export.h"
+#include "distance_graph/wn_distance_graph_export.h"
 #include "../conceptual_graph/conceptual_graph.h"
-#include "../distance/distance.h"
+#include "../distance_synset/distance.h"
 
 namespace wn {
     namespace distance {
 
-        class WN_GRAPH_DISTANCE_EXPORT base_graph {
+        class WN_DISTANCE_GRAPH_EXPORT base_graph {
             public:
                 base_graph(const base_synset& base_distance);
 
