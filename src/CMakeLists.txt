@@ -30,10 +30,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Libraries and executables
 #--------------------------
-add_subdirectory(distance_synset)
 add_subdirectory(wordnet)
 add_subdirectory(corpus)
 add_subdirectory(conceptual_graph)
+add_subdirectory(distance_synset)
 add_subdirectory(distance_graph)
 add_subdirectory(distance_relation)
 
@@ -55,7 +55,7 @@ if(DOWNLOAD_WORDNET)
     else()
               message(STATUS "Downloading WordNet 3.1 database to ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1")
               file(DOWNLOAD http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1/wn3.1.dict.tar.gz                            SHOW_PROGRESS)
-              
+
               message(STATUS "Uncompressing database...")
               execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1/wn3.1.dict.tar.gz
                             WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/data/wordnet3.1)
@@ -72,7 +72,7 @@ if(DOWNLOAD_SEMCOR)
     else()
               message(STATUS "Downloading SemCor NLTK database to ${SEMCOR_DIR}")
               file(DOWNLOAD http://www.nltk.org/nltk_data/packages/corpora/semcor.zip ${SEMCOR_DIR}/semcor.zip                            SHOW_PROGRESS)
-              
+
               message(STATUS "Uncompressing database...")
               execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${SEMCOR_DIR}/semcor.zip
                             WORKING_DIRECTORY ${SEMCOR_DIR})
@@ -88,7 +88,7 @@ if(DOWNLOAD_BROWN)
     else()
               message(STATUS "Downloading Brown Corpus database to ${BROWN_DIR}")
               file(DOWNLOAD http://www.nltk.org/nltk_data/packages/corpora/brown.zip ${BROWN_DIR}/brown.zip                            SHOW_PROGRESS)
-              
+
               message(STATUS "Uncompressing database...")
               execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvzf ${BROWN_DIR}/brown.zip
                             WORKING_DIRECTORY ${BROWN_DIR})
