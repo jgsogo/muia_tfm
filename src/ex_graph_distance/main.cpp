@@ -89,6 +89,8 @@ int main(int argc, char** argv) {
     std::cout << " - water >> " << water << endl;
     auto wine = wnet.get_synsets("wine", pos_t::N)[0];
     std::cout << " - wine >> " << wine << endl;
+    auto red = wnet.get_synsets("red", pos_t::N)[0];
+    std::cout << " - red >> " << red << endl;
 
 
     // Build a sample cgraph
@@ -96,15 +98,19 @@ int main(int argc, char** argv) {
     auto id_drink = cgraph1.add_node(drink);
     auto id_dog = cgraph1.add_node(dog);
     auto id_water = cgraph1.add_node(water);
+    auto id_red = cgraph1.add_node(red);
     cgraph1.add_relation(id_drink, id_dog, 10);
     cgraph1.add_relation(id_drink, id_water, 12);
+    cgraph1.add_relation(id_dog, id_red, 8);
 
     conceptual_graph cgraph2;
     id_drink = cgraph2.add_node(drink);
     id_dog = cgraph2.add_node(dog);
+    id_red = cgraph2.add_node(red);
     auto id_wine = cgraph2.add_node(wine);
     cgraph2.add_relation(id_drink, id_dog, 10);
     cgraph2.add_relation(id_drink, id_wine, 12);
+    cgraph2.add_relation(id_wine, id_red, 8);
 
     cout << endl;
     cout << "Graph#1: The dog drinks water." << endl;
