@@ -26,8 +26,8 @@ namespace wn {
             friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
                 const conceptual_graph& lhs,
                 const conceptual_graph& rhs,
-                std::binary_function<const synset&, const synset&, bool>&,
-                std::binary_function<const relation&, const relation&, bool>&
+                std::function<bool (const synset&, const synset&)>,
+                std::function<bool (const relation&, const relation&)>
                 );
         protected:
             struct data;
@@ -37,7 +37,7 @@ namespace wn {
     WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
-        std::binary_function<const synset&, const synset&, bool>&,
-        std::binary_function<const relation&, const relation&, bool>&
+        std::function<bool (const synset&, const synset&)>,
+        std::function<bool (const relation&, const relation&)>
         );
 }
