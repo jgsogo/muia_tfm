@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( wn_distance )
+project( wn_distance_graph )
 
 include (GenerateExportHeader)
 
@@ -12,24 +12,22 @@ set(SRC_FILES
             )
 
 
-# Library - wn_distance
-set(HEADERS   distance.h
-              shortest_path.h
-              depth_relative.h
+# Library - wn_distance_graph
+set(HEADERS   graph_distance.h
               )
 
-add_library(wn_distance ${SRC_FILES})
-target_link_libraries(wn_distance ${Boost_LIBRARIES} ${WNB_LIBRARIES})
-set_target_properties(wn_distance PROPERTIES DEBUG_POSTFIX d
+add_library(wn_distance_graph ${SRC_FILES})
+target_link_libraries(wn_distance_graph ${Boost_LIBRARIES} ${WNB_LIBRARIES})
+set_target_properties(wn_distance_graph PROPERTIES DEBUG_POSTFIX d
                                              PUBLIC_HEADER "${HEADERS}"
                                              LINKER_LANGUAGE CXX
                                              FOLDER "libraries")
-generate_export_header(wn_distance)
+generate_export_header(wn_distance_graph)
 
 
-install(TARGETS wn_distance
+install(TARGETS wn_distance_graph
   RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" COMPONENT bin
   LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT shlib
   ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib
-  PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/distance"
+  PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/distance_graph"
   )

@@ -30,11 +30,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Libraries and executables
 #--------------------------
-add_subdirectory(distance)
+add_subdirectory(distance_synset)
 add_subdirectory(wordnet)
 add_subdirectory(corpus)
 add_subdirectory(conceptual_graph)
-add_subdirectory(graph_distance)
+add_subdirectory(distance_graph)
+add_subdirectory(distance_relation)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 if (BUILD_EXAMPLES)
