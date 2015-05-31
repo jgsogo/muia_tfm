@@ -158,9 +158,9 @@ int main(int argc, char** argv) {
 
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    auto distance_synsets = [n, &synsets1, &synsets2](distance::base& dist){
+    auto distance_synsets = [n, &synsets1, &synsets2](distance::base_synset& dist){
         auto penalize_each = dist.max();
-        vector<wn::distance::base::_t_distance> distances;
+        vector<wn::distance::base_synset::_t_distance> distances;
         auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);
         auto data = dist.min_distance(s1, synsets2, distances, penalize_each);
         auto min_d = dist.min(s1, synsets2, penalize_each);

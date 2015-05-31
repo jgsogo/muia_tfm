@@ -1,12 +1,12 @@
 
 #include "mine.h"
-#include <numeric> 
+#include <numeric>
 
 using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-mine::mine(const base& base_distance) : graph_base(base_distance) {
+mine::mine(const base_synset& base_distance) : graph_base(base_distance) {
 }
 
 float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
@@ -26,7 +26,7 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
             auto it_s1 = s1_nodes.begin();
             auto it_s2 = s2_synsets.begin();
             for (; it_s1 != s1_nodes.end(); ++it_s1, ++it_s2) {
-                aux_distance += this->dist.operator()(it_s1->second, s2_nodes[*it_s2]);
+                aux_distance += this->dist_synset.operator()(it_s1->second, s2_nodes[*it_s2]);
                 auto s1_edges = s1.get_outgoing_edges(it_s1->first);
                 auto s2_edges = s2.get_outgoing_edges(*it_s2);
                 aux_distance += this->min_distance(s1_edges, s2_edges, edge_penalization);
@@ -36,7 +36,7 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
                 distance = std::min(distance, aux_distance);
             }
         } while (next_permutation(s2_synsets.begin(), s2_synsets.end()));
-        
+
         return distance + (s2_nodes.size() - s1_nodes.size())*node_penalization;
     }
 }

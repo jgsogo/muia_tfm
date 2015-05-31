@@ -10,7 +10,7 @@ namespace wn {
         /*! Depth relative distance: sibling concepts deep in a taxonomy appear to be
             more closely related to one another than those higher up.
         */
-        class WN_DISTANCE_EXPORT information_based : public base {
+        class WN_DISTANCE_EXPORT information_based : public base_synset {
             public:
                 information_based(const hyperonym_graph& graph, const corpus& corpus_);
                 ~information_based();

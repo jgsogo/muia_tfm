@@ -25,7 +25,7 @@ struct graph_dist {
     graph_dist(conceptual_graph& g1, conceptual_graph& g2) : graph1(g1), graph2(g2) {};
 
     template <class GraphDistance>
-    void distance_graphs(distance::base& words_dist) {
+    void distance_graphs(distance::base_synset& words_dist) {
         GraphDistance graph_distance(words_dist);
         auto penalize_node = words_dist.max();
         auto penalize_edge = graph_distance.max_edge_distance();

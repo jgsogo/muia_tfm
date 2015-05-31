@@ -9,7 +9,7 @@ namespace wn {
         /*! Depth relative distance: sibling concepts deep in a taxonomy appear to be
             more closely related to one another than those higher up.
         */
-        class WN_DISTANCE_EXPORT depth_relative : public base {
+        class WN_DISTANCE_EXPORT depth_relative : public base_synset {
             public:
                 depth_relative(const hyperonym_graph& graph);
                 ~depth_relative();
