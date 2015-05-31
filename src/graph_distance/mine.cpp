@@ -6,7 +6,7 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-mine::mine(const base_synset& base_distance) : graph_base(base_distance) {
+mine::mine(const base_synset& base_distance) : base_graph(base_distance) {
 }
 
 float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
