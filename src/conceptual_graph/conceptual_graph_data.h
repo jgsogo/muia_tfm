@@ -9,7 +9,7 @@
 #include "relation.h"
 
 namespace wn {
-    
+
     typedef boost::adjacency_list<boost::vecS, boost::vecS,
                                   boost::bidirectionalS,
                                   synset, relation> _t_graph;
@@ -23,6 +23,6 @@ namespace wn {
             return os;
         }
 
-    };   
+    };
 
 }

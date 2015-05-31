@@ -23,6 +23,8 @@ namespace wn {
 
             virtual void print(std::ostream& os) const;
 
+            void mcgregor_common_subgraphs(const conceptual_graph& rhs) const;
+
         protected:
             struct data;
             data* d;

@@ -14,12 +14,32 @@
 #include "../distance/distance_jiang_conrath.h"
 #include "../distance/distance_lin.h"
 #include "../graph_distance/mine.h"
+#include "../graph_distance/mcs.h"
 #include "../corpus/semcor.h"
 
 using namespace wn;
 using namespace std;
 namespace fs = ::boost::filesystem;
 
+struct graph_dist {
+    graph_dist(conceptual_graph& g1, conceptual_graph& g2) : graph1(g1), graph2(g2) {};
+
+    template <class GraphDistance>
+    void distance_graphs(distance::base& words_dist) {
+        GraphDistance graph_distance(words_dist);
+        auto penalize_node = words_dist.max();
+        auto penalize_edge = graph_distance.max_edge_distance();
+        auto data = graph_distance.min_distance(graph1, graph2, penalize_node, penalize_edge);
+        auto min_d = graph_distance.min(graph1, graph2, penalize_node, penalize_edge);
+        auto max_d = graph_distance.max(graph1, graph2, penalize_node, penalize_edge);
+        cout << " - Distance in [" << min_d << ", " << max_d << "]" << endl;
+        cout << " - Min distance is " << data << endl;
+        cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
+    }
+
+    conceptual_graph& graph1;
+    conceptual_graph& graph2;
+};
 
 int main(int argc, char** argv) {
 	if (argc != 3) {
@@ -93,7 +113,8 @@ int main(int argc, char** argv) {
     cgraph2.print(std::cout);
 
 
-    auto distance_graphs = [&cgraph1, &cgraph2](distance::base& dist) {
+    /*
+    auto distance_graphs = [&cgraph1, &cgraph2](distance::base& words) {
         distance::mine mine_distance(dist);
         auto penalize_node = dist.max();
         auto penalize_edge = mine_distance.max_edge_distance();
@@ -104,7 +125,7 @@ int main(int argc, char** argv) {
         cout << " - Min distance is " << data << endl;
         cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
     };
-
+    */
     distance::shortest_path shortest_path(wnet);
     distance::sussna distance_sussna(graph);
     distance::wu_palmer distance_wu_palmer(graph);
@@ -113,40 +134,46 @@ int main(int argc, char** argv) {
     distance::jiang_conrath distance_jiang_conrath(graph, corpus);
     distance::lin distance_lin(graph, corpus);
 
+    graph_dist dist_graphs(cgraph1, cgraph2);
+
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(shortest_path);
+    cout << "###### Using 'distance::mine' for graphs" << endl;
+    dist_graphs.distance_graphs<distance::mine>(shortest_path);
+    cout << "###### Using 'distance::mcs' for graphs" << endl;
+    dist_graphs.distance_graphs<distance::mcs>(shortest_path);
+    exit(1);
 
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_sussna);
+    dist_graphs.distance_graphs<distance::mine>(distance_sussna);
 
     cout << endl;
     cout << "# Distance 'Wu Palmer' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_wu_palmer);
+    dist_graphs.distance_graphs<distance::mine>(distance_wu_palmer);
 
     cout << endl;
     cout << "# Distance 'Leacock & Chodorow' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_leacock_chodorow);
+    dist_graphs.distance_graphs<distance::mine>(distance_leacock_chodorow);
 
     cout << endl;
     cout << "# Distance 'Resnik' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_resnik);
+    dist_graphs.distance_graphs<distance::mine>(distance_resnik);
 
     cout << endl;
     cout << "# Distance 'Jiang && Conrath' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_jiang_conrath);
+    dist_graphs.distance_graphs<distance::mine>(distance_jiang_conrath);
 
     cout << endl;
     cout << "# Distance 'Lin' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_graphs(distance_lin);
+    dist_graphs.distance_graphs<distance::mine>(distance_lin);
 
 
 }
