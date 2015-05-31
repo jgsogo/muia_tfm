@@ -17,14 +17,14 @@ float wu_palmer::operator()(const synset& s1, const synset& s2) const {
     float similarity = 0.f;
     for(auto& lch: lowest_common_hypernym) {
         // Work on paths s1->lch
-        auto min_distance_s1 = base::max_distance;
+        auto min_distance_s1 = base_synset::max_distance;
         auto paths_s1 = graph.hypernym_path(s1, lch);
         for (auto& path: paths_s1) {
             min_distance_s1 = std::min(min_distance_s1, float(path.size()-1));
         }
         // Work on paths s2->lch
         auto paths_s2 = graph.hypernym_path(s2, lch);
-        auto min_distance_s2 = base::max_distance;
+        auto min_distance_s2 = base_synset::max_distance;
         for (auto& path: paths_s2) {
             min_distance_s2 = std::min(min_distance_s2, float(path.size()-1));
         }

@@ -8,7 +8,7 @@ namespace wn {
 
         class WN_GRAPH_DISTANCE_EXPORT mcs : public graph_base {
             public:
-                mcs(const base& base_distance);
+                mcs(const base_synset& base_distance);
                 ~mcs();
 
                 //! Compute minimum distance between two conceptual_graphs

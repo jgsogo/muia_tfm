@@ -10,7 +10,7 @@ namespace wn {
 
         class WN_GRAPH_DISTANCE_EXPORT graph_base {
             public:
-                graph_base(const base& base_distance);
+                graph_base(const base_synset& base_distance);
 
                 //! Compute minimum distance between two conceptual_graphs
                 virtual float min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const = 0;
@@ -20,7 +20,7 @@ namespace wn {
 
                 virtual float max_edge_distance() const = 0;
             protected:
-                const base& dist;
+                const base_synset& dist_synset;
         };
 
     }

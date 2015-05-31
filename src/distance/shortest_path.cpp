@@ -16,7 +16,7 @@ float shortest_path::operator()(const synset& s1, const synset& s2) const {
 
 	// For each ancestor synset common to both subject synsets, find the
 	// connecting path length. Return the shortest of these.
-    auto path_length = base::max_distance;
+    auto path_length = base_synset::max_distance;
 	for (auto it1 = map1.begin(); it1 != map1.end(); ++it1) {
 		for (auto it2 = map2.begin(); it2 != map2.end(); ++it2) {
 			if (it1->first == it2->first) {

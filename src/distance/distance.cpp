@@ -7,43 +7,43 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-const float base::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
+const float base_synset::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
 
-base::base() {
+base_synset::base_synset() {
 }
 
-float base::min() const {
+float base_synset::min() const {
 	return 0;
 }
 
-float base::max() const {
+float base_synset::max() const {
     return max_distance;
 }
 
-float base::min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
+float base_synset::min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
     return abs(int(v2.size()) - int(v1.size()))*penalization;
 }
 
-float base::max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
+float base_synset::max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
     auto min_elements = std::min(v2.size(), v1.size());
     return min_elements*this->max() + abs(int(v2.size()) - int(v1.size()))*penalization;
 }
 
 
-bool base::connected(const synset& s1, const synset& s2) const {
-    return (this->operator()(s1, s2) < base::max_distance);
+bool base_synset::connected(const synset& s1, const synset& s2) const {
+    return (this->operator()(s1, s2) < base_synset::max_distance);
 }
 
-float base::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<base::_t_distance>& dist_combs) const {
+float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<_t_distance>& dist_combs) const {
     assert(v1.size() == v2.size());
     return this->min_distance(v1, v2, dist_combs, 0.f);
     }
 
-float base::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<_t_distance>& dist_combs, float penalize_each) const {
+float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<_t_distance>& dist_combs, float penalize_each) const {
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() <= v2.size());
     auto penalization = (v2.size() - v1.size())*penalize_each;
-    assert(v1.size()*base::max_distance <= (std::numeric_limits<float>::max() - penalization));
+    assert(v1.size()*base_synset::max_distance <= (std::numeric_limits<float>::max() - penalization));
 
     // v1.size() is number of rows
     // v2.size() is number of columns
@@ -59,7 +59,7 @@ float base::min_distance(const vector<synset>& v1, const vector<synset>& v2, vec
     std::iota(indexes.begin(), indexes.end(), 0);
 
     vector<pair<vector<size_t>, float>> permutations;
-    float min_value = base::max_distance;
+    float min_value = base_synset::max_distance;
     do {
         float sum = 0.f;
         for (auto i = 0; i < v1.size(); ++i) {
