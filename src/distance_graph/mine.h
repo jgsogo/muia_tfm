@@ -8,18 +8,11 @@ namespace wn {
 
         class WN_DISTANCE_GRAPH_EXPORT mine : public base_graph {
             public:
-                mine(const base_synset& base_distance);
+                mine(const base_synset& base_distance, const base_relation& dist_relation);
 
                 //! Compute minimum distance between two conceptual_graphs
                 virtual float min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const;
 
-                // Compute minimum distance between two relation sets
-                virtual float min_distance(const std::vector<relation>& rel1, const std::vector<relation>& rel2, float edge_penalization) const;
-
-                // Distance between two relations
-                virtual float operator()(const relation&, const relation&) const;
-
-                float max_edge_distance() const;
         };
         typedef distance::mine distance_mine;
     }

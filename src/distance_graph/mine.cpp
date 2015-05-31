@@ -6,7 +6,7 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-mine::mine(const base_synset& base_distance) : base_graph(base_distance) {
+mine::mine(const base_synset& base_distance, const base_relation& dist_relation) : base_graph(base_distance, dist_relation) {
 }
 
 float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
@@ -29,7 +29,7 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
                 aux_distance += this->dist_synset.operator()(it_s1->second, s2_nodes[*it_s2]);
                 auto s1_edges = s1.get_outgoing_edges(it_s1->first);
                 auto s2_edges = s2.get_outgoing_edges(*it_s2);
-                aux_distance += this->min_distance(s1_edges, s2_edges, edge_penalization);
+                aux_distance += dist_relation.min_distance(s1_edges, s2_edges, edge_penalization);
             }
             if (aux_distance <= distance){
                 // TODO: Store current permutation as 'min' candidate.
@@ -41,13 +41,14 @@ float mine::min_distance(const conceptual_graph& s1, const conceptual_graph& s2,
     }
 }
 
+/* TODO: Move to wn::distance::base_relation
 float mine::min_distance(const vector<relation>& rel1, const vector<relation>& rel2, float edge_penalization) const {
     if (rel1.size() > rel2.size()) {
         return this->min_distance(rel2, rel1, edge_penalization);
     }
     else {
         assert(rel2.size() >= rel1.size());
-        float distance = rel1.size()*this->max_edge_distance();
+        float distance = rel1.size()*dist_relation.max();
         auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
         vector<relation> aux_rel2(rel2.begin(), rel2.end());
         sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
@@ -60,11 +61,4 @@ float mine::min_distance(const vector<relation>& rel1, const vector<relation>& r
         return distance + (rel2.size() - rel1.size())*edge_penalization;
     }
 }
-
-float mine::operator()(const relation& r1, const relation& r2) const {
-    return (r1.type == r2.type) ? 0.f : this->max_edge_distance(); // TODO: Naïve implementation of distance between relations.
-}
-
-float mine::max_edge_distance() const {
-    return 1.f;
-}
+*/

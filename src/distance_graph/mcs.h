@@ -8,7 +8,7 @@ namespace wn {
 
         class WN_DISTANCE_GRAPH_EXPORT mcs : public base_graph {
             public:
-                mcs(const base_synset& base_distance);
+                mcs(const base_synset& base_distance, const base_relation& dist_relation);
                 ~mcs();
 
                 //! Compute minimum distance between two conceptual_graphs
@@ -19,8 +19,6 @@ namespace wn {
 
                 // Distance between two relations
                 //virtual float operator()(const relation&, const relation&) const;
-
-                float max_edge_distance() const;
         };
 
     }

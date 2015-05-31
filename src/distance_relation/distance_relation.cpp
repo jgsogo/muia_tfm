@@ -93,6 +93,26 @@ float base_relation::min_distance(const std::vector<relation>& r1, const std::ve
     return min_value + penalization;
 }
 
+float base_relation::min_distance(const vector<relation>& r1, const vector<relation>& r2, float edge_penalization) const {
+    if (r1.size() > r2.size()) {
+        return this->min_distance(r2, r1, edge_penalization);
+    }
+    else {
+        assert(r2.size() >= r1.size());
+        float distance = r1.size()*this->max();
+        auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
+        vector<relation> aux_rel2(r2.begin(), r2.end());
+        sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
+        do {
+            float aux_distance = inner_product(r1.begin(), r1.end(), aux_rel2.begin(), 0.f,
+                [](const float& lhs, const float& rhs){ return lhs + rhs; },
+                [this](const relation& lhs, const relation& rhs){ return this->operator()(lhs, rhs); });
+            distance = std::min(distance, aux_distance);
+        } while (next_permutation(aux_rel2.begin(), aux_rel2.end(), relation_less));
+        return distance + (r2.size() - r1.size())*edge_penalization;
+    }
+}
+
 float base_relation::min(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const {
     return abs(int(r2.size()) - int(r1.size()))*penalization;
 }

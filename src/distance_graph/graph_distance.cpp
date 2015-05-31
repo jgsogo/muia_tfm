@@ -5,7 +5,7 @@
 using namespace wn;
 using namespace wn::distance;
 
-base_graph::base_graph(const base_synset& dist) : dist_synset(dist) {
+base_graph::base_graph(const base_synset& dist, const base_relation& dist_relation) : dist_synset(dist), dist_relation(dist_relation) {
 }
 
 float base_graph::min(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
@@ -24,7 +24,7 @@ float base_graph::max(const conceptual_graph& s1, const conceptual_graph& s2, fl
 
     auto s1_edges = s1.get_edges();
     auto s2_edges = s2.get_edges();
-    auto due_edges = std::min(s1_edges.size(), s2_edges.size())*this->max_edge_distance();
+    auto due_edges = std::min(s1_edges.size(), s2_edges.size())*dist_relation.max();
     due_edges += abs(int(s1_edges.size()) - int(s2_edges.size()))*edge_penalization;
     return due_nodes + due_edges;
 }
