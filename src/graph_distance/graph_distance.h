@@ -8,9 +8,9 @@
 namespace wn {
     namespace distance {
 
-        class WN_GRAPH_DISTANCE_EXPORT graph_base {
+        class WN_GRAPH_DISTANCE_EXPORT base_graph {
             public:
-                graph_base(const base_synset& base_distance);
+                base_graph(const base_synset& base_distance);
 
                 //! Compute minimum distance between two conceptual_graphs
                 virtual float min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const = 0;

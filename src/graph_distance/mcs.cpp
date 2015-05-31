@@ -5,7 +5,7 @@ using namespace wn;
 using namespace wn::distance;
 
 
-mcs::mcs(const base_synset& base_distance) : graph_base(base_distance) {
+mcs::mcs(const base_synset& base_distance) : base_graph(base_distance) {
 }
 
 mcs::~mcs() {

@@ -6,7 +6,7 @@
 namespace wn {
     namespace distance {
 
-        class WN_GRAPH_DISTANCE_EXPORT mcs : public graph_base {
+        class WN_GRAPH_DISTANCE_EXPORT mcs : public base_graph {
             public:
                 mcs(const base_synset& base_distance);
                 ~mcs();
