@@ -3,6 +3,7 @@
 #include "conceptual_graph_data.h"
 
 #include "relation.h"
+#include "mcgregor_common_subgraphs.h"
 
 using namespace wn;
 using namespace std;
@@ -83,4 +84,6 @@ void conceptual_graph::print(std::ostream& os) const {
     d->print(os, d->graph, writer);
 }
 
-
+void conceptual_graph::mcgregor_common_subgraphs(const conceptual_graph& rhs) const {
+    mcgregor_common_subgraphs_compute(d->graph, rhs.d->graph);
+}
