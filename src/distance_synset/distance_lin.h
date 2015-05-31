@@ -7,9 +7,9 @@ namespace wn {
     namespace distance {
         /*!
 
-            
+
         */
-        class WN_DISTANCE_EXPORT lin : public information_based {
+        class WN_DISTANCE_SYNSET_EXPORT lin : public information_based {
             public:
                 lin(const hyperonym_graph& graph, const wn::corpus& corpus);
                 ~lin();

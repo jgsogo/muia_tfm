@@ -8,7 +8,7 @@ namespace wn {
 
             Wu and Palmer distance (cited in [Budanitsky2006])
         */
-        class WN_DISTANCE_EXPORT wu_palmer : public depth_relative {
+        class WN_DISTANCE_SYNSET_EXPORT wu_palmer : public depth_relative {
             public:
                 wu_palmer(const hyperonym_graph& graph);
                 ~wu_palmer();

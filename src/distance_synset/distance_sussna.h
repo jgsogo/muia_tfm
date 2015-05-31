@@ -11,7 +11,7 @@ namespace wn {
             conference on Information and knowledge management - CIKM ’93 (pp. 67–74).
             New York, New York, USA: ACM Press. http://doi.org/10.1145/170088.170106
         */
-        class WN_DISTANCE_EXPORT sussna : public depth_relative {
+        class WN_DISTANCE_SYNSET_EXPORT sussna : public depth_relative {
             public:
                 sussna(const hyperonym_graph& graph);
                 ~sussna();
