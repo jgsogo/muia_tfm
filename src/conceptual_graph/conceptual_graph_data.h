@@ -15,6 +15,11 @@ namespace wn {
                                   synset, relation> _t_graph;
 
     struct conceptual_graph::data {
+        data() {};
+        data(const data& other) {
+            graph = other.graph;
+        };
+
         _t_graph graph;
 
         template <class TPrinter = boost::default_writer>

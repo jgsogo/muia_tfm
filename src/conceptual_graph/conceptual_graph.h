@@ -11,6 +11,7 @@ namespace wn {
             typedef std::size_t synset_id;
 
             conceptual_graph();
+            conceptual_graph(const conceptual_graph& other);
             ~conceptual_graph();
 
             synset_id add_node(const synset& s); //! returns 'id' for the given node (the same synset can appear more than once).
@@ -23,21 +24,23 @@ namespace wn {
 
             virtual void print(std::ostream& os) const;
 
-            friend WN_CONCEPTUAL_GRAPH_EXPORT std::vector<conceptual_graph> mcgregor_common_subgraphs(
+            friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
                 const conceptual_graph& lhs,
                 const conceptual_graph& rhs,
                 std::function<bool (const synset&, const synset&)>,
-                std::function<bool (const relation&, const relation&)>
+                std::function<bool (const relation&, const relation&)>,
+                std::vector<conceptual_graph>&
                 );
         protected:
             struct data;
             data* d;
     };
 
-    WN_CONCEPTUAL_GRAPH_EXPORT std::vector<conceptual_graph> mcgregor_common_subgraphs(
+    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
         std::function<bool (const synset&, const synset&)>,
-        std::function<bool (const relation&, const relation&)>
+        std::function<bool (const relation&, const relation&)>,
+        std::vector<conceptual_graph>&
         );
 }
