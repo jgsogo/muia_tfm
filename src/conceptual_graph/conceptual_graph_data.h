@@ -20,6 +20,30 @@ namespace wn {
             graph = other.graph;
         };
 
+        data& operator+=(const data& other) {
+            _t_graph::vertex_iterator v, v_end;
+            std::tie(v, v_end) = vertices(other.graph);
+            std::map<std::size_t, std::size_t> veq;
+            for (; v != v_end; ++v) {
+                auto u = add_vertex(graph);
+                graph[u] = other.graph[*v];
+                veq[*v] = u;
+            }
+
+            std::tie(v, v_end) = vertices(other.graph);
+            for (; v != v_end; ++v) {
+                _t_graph::out_edge_iterator e, e_end;
+                tie(e, e_end) = boost::out_edges(*v, other.graph);
+                for (; e != e_end; ++e) {
+                    auto tgt = target(*e, other.graph);
+
+                    relation rel = other.graph[*e];
+                    boost::add_edge(veq[*v], veq[tgt], rel, graph);
+                }
+            }
+            return *this;
+        }
+
         _t_graph graph;
 
         template <class TPrinter = boost::default_writer>
