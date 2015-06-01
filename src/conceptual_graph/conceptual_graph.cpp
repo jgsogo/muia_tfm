@@ -30,6 +30,11 @@ conceptual_graph::conceptual_graph() : d(new data()) {
 conceptual_graph::conceptual_graph(const conceptual_graph& other) : d(new data(*other.d)) {
 }
 
+conceptual_graph& conceptual_graph::operator+=(const conceptual_graph& other) {
+    (*d) += (*other.d);
+    return *this;
+}
+
 conceptual_graph::~conceptual_graph() {
     delete d;
 }
@@ -141,7 +146,6 @@ namespace wn {
             edges_equivalent(funcs).vertices_equivalent(funcs));
 
         for (auto& graph : subgraphs) {
-            print_graph(graph);
             auto it = ret.insert(ret.end(), conceptual_graph());
             store_callback::MembershipFilteredGraph::vertex_iterator v, v_end;
             std::tie(v, v_end) = vertices(graph);
