@@ -1,5 +1,6 @@
 
 #include "conceptual_graph.h"
+#include <algorithm>
 #include "conceptual_graph_data.h"
 #include <boost/graph/mcgregor_common_subgraphs.hpp>
 #include "mcs_callback_print.h"
@@ -93,7 +94,7 @@ namespace wn {
         http://svn.kulitorum.com/RepSnapper/Libraries/Boost1.40/libs/graph/example/mcgregor_subgraphs_example.cpp
         https://www.ebi.ac.uk/msd-srv/ssm/papers/spe_csia.pdf
     */
-    conceptual_graph mcgregor_common_subgraphs(
+    std::vector<conceptual_graph> mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
         std::function<bool (const synset&, const synset&)> cmp_synset,
@@ -121,15 +122,13 @@ namespace wn {
         };
         equivalence_func funcs(lhs.d->graph, rhs.d->graph, cmp_synset, cmp_relation);
 
-
         /*
         // Print out all connected common subgraphs between graph1 and graph2.
         mcs::print_callback<_t_graph, _t_graph> my_callback(lhs.d->graph, rhs.d->graph);
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, my_callback,
-            edges_equivalent(funcs).
-            vertices_equivalent(funcs));
+            edges_equivalent(funcs).vertices_equivalent(funcs));
         */
-
+        
         // Store all connected common subgraphs between graph1 and graph2.
         typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
         std::vector<store_callback::MembershipFilteredGraph> subgraphs;
@@ -137,31 +136,29 @@ namespace wn {
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
 
-        // TODO: Build set of maximum_common_subgraphs without overlappings.
-        /*
-        for (auto& graph: subgraphs) {
-            auto v = boost::vertices(graph);
-            auto e = boost::edges(graph);
-        }
-        */
-        conceptual_graph ret;
-        if (subgraphs.size()) {
-            auto mcs_subgraph = subgraphs[0];
+        std::cout << "!!!!!!!!!!!!!11" << std::endl;
+        std::vector<conceptual_graph> ret;
+        for (auto& graph : subgraphs) {
+            print_graph(graph);
+            auto it = ret.insert(ret.end(), conceptual_graph());
             store_callback::MembershipFilteredGraph::vertex_iterator v, v_end;
-            std::tie(v, v_end) = vertices(mcs_subgraph);
-            for (; v!=v_end; ++v) {
-                ret.add_node(lhs.d->graph[*v]);
+            std::tie(v, v_end) = vertices(graph);
+            for (; v != v_end; ++v) {
+                (*it).add_node(lhs.d->graph[*v]);
+                std::cout << "-";
             }
-
-            std::tie(v, v_end) = vertices(mcs_subgraph);
-            for (; v!=v_end; ++v) {
+            
+            std::tie(v, v_end) = vertices(graph);
+            for (; v != v_end; ++v) {
                 store_callback::MembershipFilteredGraph::out_edge_iterator e, e_end;
-                tie(e, e_end) = boost::out_edges(*v, mcs_subgraph);
-                for (; e!=e_end; ++e) {
-                    auto tgt = target(*e, mcs_subgraph);
-                    ret.add_relation(*v, tgt, lhs.d->graph[*e].type);
+                tie(e, e_end) = boost::out_edges(*v, graph);
+                for (; e != e_end; ++e) {
+                    auto tgt = target(*e, graph);
+                    (*it).add_relation(*v, tgt, lhs.d->graph[*e].type);
+                    std::cout << ".";
                 }
             }
+            std::cout << std::endl;
         }
         return ret;
     }
