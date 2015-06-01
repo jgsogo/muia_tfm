@@ -38,8 +38,16 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.min() + 0.1f*(dist_relation.max()-dist_relation.min());
 
-    auto max_subgraph = mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation);
-    std::cout << "wn::distance::mcs" << std::endl;
-    max_subgraph.print(std::cout);
+    auto max_subgraphs = mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation);
+    
+    // TODO: Build set of maximum_common_subgraphs without overlappings.
+    //  1) Compute punctuation of each subgraph.
+    //  2) Build matrix of incompatibilities.
+    //  3) Look for the best combination ¿o lo hago fuera?.
+
+    for (auto& graph : max_subgraphs) {
+        std::cout << std::endl << "wn::distance::mcs" << std::endl;
+        graph.print(std::cout);
+    }
     return 0;
 }

@@ -1,5 +1,6 @@
 
 #include "distance_relation.h"
+#include <numeric>
 
 using namespace wn;
 using namespace wn::distance;
@@ -104,7 +105,7 @@ float base_relation::min_distance(const vector<relation>& r1, const vector<relat
         vector<relation> aux_rel2(r2.begin(), r2.end());
         sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
         do {
-            float aux_distance = inner_product(r1.begin(), r1.end(), aux_rel2.begin(), 0.f,
+            float aux_distance = std::inner_product(r1.begin(), r1.end(), aux_rel2.begin(), 0.f,
                 [](const float& lhs, const float& rhs){ return lhs + rhs; },
                 [this](const relation& lhs, const relation& rhs){ return this->operator()(lhs, rhs); });
             distance = std::min(distance, aux_distance);

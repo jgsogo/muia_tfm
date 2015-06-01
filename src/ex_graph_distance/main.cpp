@@ -43,7 +43,7 @@ struct graph_dist {
 
 int main(int argc, char** argv) {
 	if (argc != 3) {
-		cout << "usage: " << argv[0] << " <path/to/wordnet-3.0/> <path/to/semcor/>" << endl;
+		cout << "usage: " << argv[0] << " <path/to/wordnet/dict/> <path/to/semcor/>" << endl;
 		exit(1);
 	}
     cout << endl;
