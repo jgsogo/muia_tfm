@@ -17,7 +17,7 @@ set(HEADERS   graph_distance.h
               )
 
 add_library(wn_distance_graph ${SRC_FILES})
-target_link_libraries(wn_distance_graph ${Boost_LIBRARIES} ${WNB_LIBRARIES})
+target_link_libraries(wn_distance_graph ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_conceptual_graph)
 set_target_properties(wn_distance_graph PROPERTIES DEBUG_POSTFIX d
                                              PUBLIC_HEADER "${HEADERS}"
                                              LINKER_LANGUAGE CXX
