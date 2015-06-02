@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <boost/graph/mcgregor_common_subgraphs.hpp>
+#include "conceptual_graph.h"
+#include "conceptual_graph_data.h"
+
 
 namespace wn {
     namespace mcs {
