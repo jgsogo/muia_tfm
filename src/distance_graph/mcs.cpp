@@ -1,5 +1,6 @@
 
 #include "mcs.h"
+#include "../conceptual_graph/mcgregor_common_subgraphs.h"
 
 using namespace wn;
 using namespace wn::distance;
@@ -38,9 +39,10 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.min() + 0.1f*(dist_relation.max()-dist_relation.min());
 
-    std::vector<conceptual_graph> max_subgraphs;
+    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>> max_subgraphs;
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, max_subgraphs);
 
+    /*
     // TODO: Build set of maximum_common_subgraphs without overlappings.
     //  1) Compute punctuation of each subgraph.
     auto punctuation_f = [this](const conceptual_graph& graph) {
@@ -100,13 +102,13 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
             mcs_graph += max_subgraphs[i];
         }
     }
-
+    */
     std::cout << "All candidates: " << std::endl;
     for (auto& graph : max_subgraphs) {
         std::cout << std::endl << "wn::distance::mcs" << std::endl;
-        graph.print(std::cout);
+        std::get<0>(graph).print(std::cout);
     }
     std::cout << "Max graphs" << std::endl << std::endl;
-    mcs_graph.print(std::cout);
-    return *it;
+    //mcs_graph.print(std::cout);
+    return 0;
 }

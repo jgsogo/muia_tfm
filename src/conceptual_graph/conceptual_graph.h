@@ -26,23 +26,17 @@ namespace wn {
 
             virtual void print(std::ostream& os) const;
 
+            // Functions for algorithms
             friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
                 const conceptual_graph& lhs,
                 const conceptual_graph& rhs,
                 std::function<bool (const synset&, const synset&)>,
                 std::function<bool (const relation&, const relation&)>,
-                std::vector<conceptual_graph>&
+                std::vector<std::tuple<conceptual_graph, std::map<synset_id, synset_id>, std::map<synset_id, synset_id>>>&
                 );
         protected:
             struct data;
             data* d;
     };
-
-    WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
-        const conceptual_graph& lhs,
-        const conceptual_graph& rhs,
-        std::function<bool (const synset&, const synset&)>,
-        std::function<bool (const relation&, const relation&)>,
-        std::vector<conceptual_graph>&
-        );
+    
 }
