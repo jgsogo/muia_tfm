@@ -7,7 +7,7 @@
 
 
 namespace wn {
-    
+
     using namespace boost;
 
     /* Doc for mcgregor_common_subgraphs
@@ -74,7 +74,7 @@ namespace wn {
             return true;
         };
         auto compatible_pairs = [&compatible_f](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, std::map<std::size_t, std::size_t>>& lhs,
-                                                const conceptual_graph_corresponde& correspondence_graph1, 
+                                                const conceptual_graph_corresponde& correspondence_graph1,
                                                 const conceptual_graph_corresponde& correspondence_graph2)->bool {
             // Tow pairs of graphs are compatible if each one-to-one comparison is also compatible.
             auto g1_map = std::get<0>(lhs);
@@ -110,30 +110,21 @@ namespace wn {
             }
         };
 
-        std::cout << "We have " << subgraphs.size() << " to work with." << std::endl;
-        for (auto i = 0; i < subgraphs.size(); ++i) {
-            std::cout << "-->> Work with graph " << i << std::endl;
+        // We need to check for all permutations
+        vector<size_t> indexes(subgraphs.size());
+        std::iota(indexes.begin(), indexes.end(), 0);
+        do {
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
-            
             // Append myself
-            append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
-
-            for (auto j = 0; j < subgraphs.size(); ++j) {
-                std::cout << "\t " << j << ": ";
-                if (i != j && compatible_pairs(subgraphs[j], correspondence_to_lhs, correspondence_to_rhs)) {
-                    append_correspondence_tuple(subgraphs[j], graph, correspondence_to_lhs, correspondence_to_rhs);
-                    std::cout << "yes!" << std::endl;
-                }
-                else {
-                    std::cout << "no :(" << std::endl;
-                }
-                graph.print(std::cout);
+            append_correspondence_tuple(subgraphs[indexes[0]], graph, correspondence_to_lhs, correspondence_to_rhs);
+            for (auto i = 1; i<indexes.size(); ++i) {
+                if (compatible_pairs(subgraphs[indexes[i]], correspondence_to_lhs, correspondence_to_rhs)) {
+                    append_correspondence_tuple(subgraphs[indexes[i]], graph, correspondence_to_lhs, correspondence_to_rhs);
+                    }
             }
-            std::cout << std::endl << std::endl;
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs));
-            // TODO: Some comparisons (check for compatibility) take place twice.
-        }
+        } while (next_permutation(indexes.begin(), indexes.end()));
     }
 }
