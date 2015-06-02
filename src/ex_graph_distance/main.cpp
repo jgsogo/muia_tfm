@@ -83,40 +83,64 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     auto dog = wnet.get_synsets("dog", pos_t::N)[0];
     std::cout << " - dog >> " << dog << endl;
+    auto cat = wnet.get_synsets("cat", pos_t::N)[0];
+    std::cout << " - cat >> " << cat << endl;
+
     auto drink = wnet.get_synsets("drink", pos_t::V)[0];
     std::cout << " - drink >> " << drink << endl;
+
     auto water = wnet.get_synsets("water", pos_t::N)[0];
     std::cout << " - water >> " << water << endl;
     auto wine = wnet.get_synsets("wine", pos_t::N)[0];
     std::cout << " - wine >> " << wine << endl;
-    auto red = wnet.get_synsets("red", pos_t::N)[0];
+    auto mountain = wnet.get_synsets("mountain", pos_t::N)[0];
+    std::cout << " - mountain >> " << mountain << endl;
+    auto top = wnet.get_synsets("top", pos_t::N)[0];
+    std::cout << " - top >> " << top << endl;
+
+    auto red = wnet.get_synsets("red", pos_t::A)[0];
     std::cout << " - red >> " << red << endl;
 
 
-    // Build a sample cgraph
+
     conceptual_graph cgraph1;
+    { // Graph#1: The red dog drinks water in the top of a mountain
+    cout << endl;
+    cout << "Graph#1: The red dog drinks water in the top of a mountain." << endl;
     auto id_drink = cgraph1.add_node(drink);
     auto id_dog = cgraph1.add_node(dog);
-    auto id_water = cgraph1.add_node(water);
     auto id_red = cgraph1.add_node(red);
-    cgraph1.add_relation(id_drink, id_dog, 10);
-    cgraph1.add_relation(id_drink, id_water, 12);
-    cgraph1.add_relation(id_dog, id_red, 8);
+    auto id_water = cgraph1.add_node(water);
+    auto id_top = cgraph1.add_node(top);
+    auto id_mountain = cgraph1.add_node(mountain);
+
+    cgraph1.add_relation(id_drink, id_dog, 1);
+    cgraph1.add_relation(id_dog, id_red, 1);
+    cgraph1.add_relation(id_drink, id_water, 1);
+    cgraph1.add_relation(id_drink, id_top, 1);
+    cgraph1.add_relation(id_top, id_mountain, 1);
+    cgraph1.print(std::cout);
+    }
 
     conceptual_graph cgraph2;
-    id_drink = cgraph2.add_node(drink);
-    id_dog = cgraph2.add_node(dog);
-    id_red = cgraph2.add_node(red);
-    auto id_wine = cgraph2.add_node(wine);
-    cgraph2.add_relation(id_drink, id_dog, 10);
-    cgraph2.add_relation(id_drink, id_wine, 12);
-    cgraph2.add_relation(id_wine, id_red, 8);
-
+    { // Graph#2: The dog drinks water under the top of a mountain
     cout << endl;
-    cout << "Graph#1: The dog drinks water." << endl;
-    cgraph1.print(std::cout);
-    cout << "Graph#2: The dog drinks wine." << endl;
+    cout << "Graph#2: The dog drinks water under the top of a mountain." << endl;
+    auto id_drink = cgraph2.add_node(drink);
+    auto id_dog = cgraph2.add_node(dog);
+    auto id_water = cgraph2.add_node(water);
+    auto id_top = cgraph2.add_node(top);
+    auto id_mountain = cgraph2.add_node(mountain);
+    cgraph2.add_relation(id_drink, id_dog, 1);
+    cgraph2.add_relation(id_drink, id_water, 1);
+    cgraph2.add_relation(id_drink, id_top, 100);
+    cgraph2.add_relation(id_top, id_mountain, 1);
     cgraph2.print(std::cout);
+    }
+
+
+
+
 
 
     /*
@@ -146,8 +170,8 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
-    cout << "###### Using 'distance::mine' for graphs" << endl;
-    dist_graphs.distance_graphs<distance::mine>(shortest_path, distance_relation);
+    //cout << "###### Using 'distance::mine' for graphs" << endl;
+    //dist_graphs.distance_graphs<distance::mine>(shortest_path, distance_relation);
     cout << "###### Using 'distance::mcs' for graphs" << endl;
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);
     exit(1);

@@ -53,9 +53,10 @@ namespace wn {
                     // Skip unmapped vertices
                     if (get(correspondence_map_1_to_2, vertex1) != graph_traits<GraphSecond>::null_vertex()) {
                         correspondence[vertex1] = get(correspondence_map_1_to_2, vertex1);
+                        //std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << std::endl;
                     }
                 }
-
+                //std::cout << "---" << std::endl;
                 graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence));
                 return (true);
             }
