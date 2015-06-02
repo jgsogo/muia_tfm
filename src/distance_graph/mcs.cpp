@@ -39,76 +39,52 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.min() + 0.1f*(dist_relation.max()-dist_relation.min());
 
-    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>> max_subgraphs;
-    mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, max_subgraphs);
+    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>> mcs_subgraphs;
+    mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);
+
+    // Rank candidates and keep the best one (minimizes distance)
+    auto min_value = std::numeric_limits<float>::max();
+    conceptual_graph best;
+    conceptual_graph_corresponde correspondence_s1;
+    conceptual_graph_corresponde correspondence_s2;
+    for (auto& candidate: mcs_subgraphs) {
+        auto value = 0.f;
+        auto candidate_graph = get<0>(candidate);
+        // Distance between nodes:
+        auto it_s1 = get<1>(candidate).begin();
+        auto it_s2 = get<2>(candidate).begin();
+        for (; it_s1 != get<1>(candidate).end(); ++it_s1, ++it_s2) {
+            value += dist_synset(s1.get_node(it_s1->second), s2.get_node(it_s2->second));
+        }
+        // Distance by relations
+        // TODO(jgsogo): Sum also distance by relations.
+        // Graph coverage
+        auto max_size = std::max(s1.get_nodes().size(), s2.get_nodes().size());
+        value = value + cmp_synset.synset_threshold*(max_size-candidate_graph.get_nodes().size());
+        // Update minimum
+        if (value < min_value) {
+            min_value = value;
+            best = get<0>(candidate);
+            correspondence_s1 = get<1>(candidate);
+            correspondence_s2 = get<2>(candidate);
+        }
+    }
 
     /*
-    // TODO: Build set of maximum_common_subgraphs without overlappings.
-    //  1) Compute punctuation of each subgraph.
-    auto punctuation_f = [this](const conceptual_graph& graph) {
-        return graph.get_nodes().size();
-    };
-    //  2) Build matrix of incompatibilities.
-    auto compatible_f = [this](const conceptual_graph& lhs, const conceptual_graph& rhs) {
-        auto lhs_nodes = lhs.get_nodes();
-        auto rhs_nodes = rhs.get_nodes();
-        // Credit: http://stackoverflow.com/questions/3772664/intersection-of-two-stl-maps
-        //      non-general version of intersection of two maps.
-        auto lhs_it = lhs_nodes.begin();
-        auto rhs_it = rhs_nodes.end();
-        while (lhs_it != lhs_nodes.end() && rhs_it != rhs_nodes.end()) {
-            if (lhs_it->first < rhs_it->first) {
-                ++lhs_it;
-            }
-            else if (rhs_it->first < lhs_it->first) {
-                ++rhs_it;
-            }
-            else {
-                return false;
-            }
-        }
-        return true;
-    };
-    //  3) Look for the best combination.
-    auto n = max_subgraphs.size();
-    std::vector<bool> compatibles(n^2);
-    std::vector<float> value(n);
-    for(auto i = 0; i<n; ++i) {
-        value[i] = punctuation_f(max_subgraphs[i]);
-        for (auto j=i; j<n; ++j) {
-            auto compatible = compatible_f(max_subgraphs[i], max_subgraphs[j]);
-            compatibles[i +j*n] = compatible;
-            compatibles[i*n +j] = compatible;
-        }
-    }
-    std::vector<float> sum_value(n);
-    for(auto i = 0; i<n; ++i) {
-        auto sum_values = value[i];
-        for (auto j=0; j<n; ++j) {
-            if (compatibles[i +j*n]) {
-                sum_values += value[j];
-            }
-        }
-        sum_value[i] = sum_values;
-    }
-
-    auto it = std::max_element(sum_value.begin(), sum_value.end());
-    auto max_n = std::distance(sum_value.begin(), it);
-
-    auto ret = 0.f;
-    conceptual_graph mcs_graph;
-    for (auto i = 0; i<n; ++i) {
-        if (compatibles[i+max_n*n] || i==max_n) {
-            mcs_graph += max_subgraphs[i];
-        }
-    }
-    */
     std::cout << "All candidates: " << std::endl;
-    for (auto& graph : max_subgraphs) {
+    for (auto& graph : mcs_subgraphs) {
         std::cout << std::endl << "wn::distance::mcs" << std::endl;
         std::get<0>(graph).print(std::cout);
     }
-    std::cout << "Max graphs" << std::endl << std::endl;
-    //mcs_graph.print(std::cout);
-    return 0;
+    */
+    std::cout << std::endl << "Best graph:" << std::endl << std::endl;
+    best.print(std::cout);
+    std::cout << std::endl << "Punctuation = " << min_value << std::endl;
+    std::cout << "Correspondences = " << std::endl;
+    auto it_cor_s1 = correspondence_s1.begin();
+    auto it_cor_s2 = correspondence_s2.begin();
+    for (; it_cor_s1 != correspondence_s1.end(); ++it_cor_s1, ++it_cor_s2) {
+        std::cout << it_cor_s1->first << ">>> " << it_cor_s1->second << " <--> " << it_cor_s2->second << std::endl;
+    }
+    return min_value;
 }

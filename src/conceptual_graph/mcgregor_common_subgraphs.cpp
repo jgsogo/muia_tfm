@@ -111,9 +111,11 @@ namespace wn {
         };
 
         // We need to check for all permutations
-        vector<size_t> indexes(subgraphs.size());
+        //std::cout << "We will do " << subgraphs.size() << "! permutations" << std::endl;
+        std::vector<size_t> indexes(subgraphs.size());
         std::iota(indexes.begin(), indexes.end(), 0);
         do {
+            //std::cout << ">>> graph[" << indexes[0] << "]" << std::endl;
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
@@ -121,8 +123,12 @@ namespace wn {
             append_correspondence_tuple(subgraphs[indexes[0]], graph, correspondence_to_lhs, correspondence_to_rhs);
             for (auto i = 1; i<indexes.size(); ++i) {
                 if (compatible_pairs(subgraphs[indexes[i]], correspondence_to_lhs, correspondence_to_rhs)) {
+                    //std::cout << "\t" << indexes[i] << " compatible." << std::endl;
                     append_correspondence_tuple(subgraphs[indexes[i]], graph, correspondence_to_lhs, correspondence_to_rhs);
                     }
+                else {
+                    //std::cout << "\t" << indexes[i] << " NON compatible." << std::endl;
+                }
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs));
         } while (next_permutation(indexes.begin(), indexes.end()));
