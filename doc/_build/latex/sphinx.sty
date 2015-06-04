@@ -89,7 +89,6 @@
 \sloppy
 \hbadness = 5000                % don't print trivial gripes
 
-\pagestyle{empty}               % start this way
 
 % Use this to set the font family for headers and other decor:
 \newcommand{\py@HeaderFamily}{\sffamily\bfseries}
@@ -120,6 +119,9 @@
     \renewcommand{\footrulewidth}{0.4pt}
   }
 }
+
+\pagestyle{plain}               % start this way
+
 
 % Some custom font markup commands.
 %
@@ -515,3 +517,4 @@
   \newfloat{literal-block}{htbp}{loc}[chapter]
 \fi
 \floatname{literal-block}{List}
+
