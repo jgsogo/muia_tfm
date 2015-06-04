@@ -4,6 +4,11 @@
     Las referencias se incluyen así :cite:`1987:nelson`
 
 
+.. raw:: latex
+
+    \newpage
+
+
 .. only:: html
 
     Referencias
