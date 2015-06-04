@@ -202,15 +202,15 @@ latex_elements = {
 'printindex': '',
 
 'babel': u'\\usepackage[spanish]{babel}',
-'pagenumbering': u'roman',
+'fncychap': u'',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia en grafos UNL Documentation',
-   u'Javier García Sogo', 'howto'),
+  ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia en grafos UNL',
+   u'Javier García Sogo', 'book'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
