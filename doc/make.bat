@@ -147,6 +147,8 @@ if "%1" == "latex" (
 
 if "%1" == "latexpdf" (
 	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
+	echo.Copy customized sphinx.sty to %BUILDDIR%/latex
+	cp sphinx.sty %BUILDDIR%/latex/sphinx.sty
 	cd %BUILDDIR%/latex
 	make all-pdf
 	cd %BUILDDIR%/..
