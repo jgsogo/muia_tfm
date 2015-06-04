@@ -1,4 +1,9 @@
 
+.. raw:: latex
+
+    \newpage
+
+
 Hipótesis de trabajo
 ====================
 
