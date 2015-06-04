@@ -112,6 +112,7 @@ latex:
 
 latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+	@echo "Copy customized sphinx.sty to $(BUILDDIR)/latex"
 	cp sphinx.sty $(BUILDDIR)/latex/sphinx.sty
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
