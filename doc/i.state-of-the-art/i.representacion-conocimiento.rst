@@ -2,6 +2,50 @@
 
 Sistemas de representación del conocimiento
 -------------------------------------------
+Pensamiento y Lenguaje están indisolublemente unidos, las estructuras conceptuales,
+si bien son diferentes de las estructuras lingüísticas, mantienen con estas una
+estrecha relación: para conocerlas, identificarlas y distinguirlas precisamos del
+lenguaje natural, pero también para describirlas y representarlas. Sin embargo, el
+aspecto lingüístico no es constitutivo de esas estructuras por más que sea su 
+mediador :cite:`IzquierdoArroyo1995`.
+
+La bibliografía contemporánea recoge la problemática de las estructuras conceptuales
+desde que en 1966 apareciera el libro de Shera sobre la "Documentación y la Organización
+del Conocimiento" :cite:`Shera1966`; se trata de un problema que compete a las llamadas
+Ciencias Cognitivas, que engloban disciplinas muy diferentes: la dimensión individual es
+objeto de la Psicología, pero también hay una dimensión social que será objeto de la Sociología
+y que se basa en el "principio de cooperación" :cite:`Grice1975` que establece que el discurso
+es una actividad colaborativa que se rige por unas máximas aceptadas tácitamente por todos
+cuantos participan en la conversación.
+
+.. teoria-dependencia-conceptual_
+Teoría de la Dependencia Conceptual
+```````````````````````````````````
+La principal dificultad para desarrollar los sistemas de comprensión del discurso por
+ordenador radica en proporcionarles esquemas conceptuales y conocimientos sobre el 
+mundo que les permita realizar inferencias. Uno de los primeros esfuerzos en este sentido
+lo encontramos en la obra de Roger C. Schank y Robert P. Abelson :cite:`Schank1977` donde
+se proponen dar con un "aparato general para un intento de representar todo o cualquier
+conocimiento", estudiando "cómo funciona la comprensión humana" puesto que "si entendemos
+cómo comprende el ser humano, podremos saber cómo conseguir que un ordenador entienda,
+y viceversa". Esta doctrina se apoya en la Teoría de la Dependencia Conceptual
+:cite:`Schank1969` que es "una teoría de la representación del significado de las frases",
+cuyo axioma básico consiste en que "para cualesquiera dos frases que son idénticas en
+significado, sin tener en cuenta las diferencias en el lenguaje, existe una única
+representación" [#]_.
+
+.. [#] Las citas textuales han sido tomadas de :cite:`IzquierdoArroyo1995`.
+
+Schank y Abelson estructuran el conocimiento en una secuencia de eventos,
+guiones o *scripts* que representan a través de lo que llaman primitivos léxicos, que
+pueden hacer referencia tanto a una acción (con la forma Actor-Acción-Objeto-Dirección-
+(Instrumento)) como a un estado (Objeto-(está en)-Estado-(con Valor)). Los autores
+identifican 11 actos primitivos que son los constituyentes esenciales de cualquier acción
+más compleja, con lo que las reglas de inferencia y razonamiento deben definirse sobre
+un conjunto finito y reducido de elementos. A partir de los *guiones* almacenados en la
+memoria, el ser humano y el ordenador pueden elaborar razonamientos y responder a las
+consultas o peticiones de información.
+
 
 
 .. grafos-conceptuales_
@@ -36,8 +80,8 @@ interpretada por un programa:
 
  * Los conceptos están representados por cajas que contienen un etiqueta identificativa del
    tipo de concepto que representan. Los conceptos pueden identificar cualquier entidad real
-   o abstracción. También es importante señalar que Sowa introduce una propiedad de ordenamiento
-   :math:`<` entre conceptos; así, si :math:`a` y :math:`b` son conceptos y se
+   o abstracción. También es importante señalar que Sowa introduce una propiedad de ordenamiento,
+   :math:`<`, entre conceptos; así, si :math:`a` y :math:`b` son conceptos y se
    cumple que :math:`a < b` entonces :math:`a` es un *subtipo* de `b`. Hay que señalar que un
    concepto :math:`a` puede ser un *subtipo común* a varios conceptos.
 

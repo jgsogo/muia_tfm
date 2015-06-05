@@ -42,7 +42,7 @@ en interlingua, deberíamos obtener una representación idéntica a la que hemos
 utilizado para generarlos [#]_. La calidad de la traducción en cuanto a su fiabilidad, 
 entendida como contenido semántico transmitido, estará por lo tanto directamente
 relacionada con la proximidad entre las dos representaciones en interlingua; así
-un medida adecuada de distancia o de similaridad entre ambas representaciones resulta
+una medida adecuada de distancia o de similaridad entre ambas representaciones resulta
 ser una herramienta de extremada utilidad para evaluar un sistema de traducción automática.
 
 .. [#] Podrán existir diferencias debidas a fenómenos lingüísticos como la paráfrasis y
