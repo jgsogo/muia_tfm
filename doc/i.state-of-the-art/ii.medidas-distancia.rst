@@ -63,11 +63,9 @@ por lo tanto nos interesarán las técnicas de comparación inexacta. Nuestro ob
 Además debemos tener presente que nuestros grafos tienen atributos tanto en los nodos
 como en los arcos.
 
-.. warning:: Si en el modelo convertimos nuestro grafo UNL a un **grafo bipartito** entonces no
-   tendríamos atributos en los arcos... Es una opción.
-
 .. warning:: Introducir en lo anterior citas a los papers con surveys de algoritmos de
    comparación de grafos de los que se toma el apartado de comparación de grafos: :cite:`Conte2004`
+
 
 Comparación inexacta de grafos
 ++++++++++++++++++++++++++++++
@@ -97,21 +95,21 @@ la *graph edit distance*.
    alternativas que también ofrecen referencias.
 
 Muchos de los algoritmos utilizados para la comparación inexacta de grafos utilizan heurísticas
-para explorar el espacio de búsqueda, ya que en muchos casos se considera un probleam NP-completo;
+para explorar el espacio de búsqueda, ya que en muchos casos se considera un problema NP-completo;
 sin embargo el tipo de grafos que utilizaremos nosotros son suficientemente pequeños como para
 que el tiempo de cálculo no sea una variable a tener en cuenta. Nos interesa, por tanto,
 mostrar las familias de algoritmos utilizados desde el punto de vista de la formulación del
-problema, así en podemos identificar las siguientes :cite:`Conte2004`:
+problema, así podemos identificar las siguientes :cite:`Conte2004`:
 
- * Optimización continua: convierte el problema de comparación de grafos, que en principio es
+ * **Optimización continua**: convierte el problema de comparación de grafos, que en principio es
    un problema de optimización discreta, en un problema continuo no lineal y se aplican
    diferentes algoritmos o heurísticas para obtener un solución suficientemente buena.
- * Métodos espectrales: basadas en los autovalores y autovectores calculados a partir de la
+ * **Métodos espectrales**: basadas en los autovalores y autovectores calculados a partir de la
    matriz de adyacencia. El inconveniente de estos métodos es que sólo tienen en cuenta la
    estructura del grafo y no los atributos de los nodos y arcos.
- * Conversión a un grafo bipartito: convertir el problema a este tipo de grafos permite
+ * **Conversión a un grafo bipartito**: convertir el problema a este tipo de grafos permite
    aplicar algoritmos con tiempo de solución de orden polinómico.
- * *Elastic Graph Matching* (EGM): se trata de abordar el problema comparando las imágenes de
+ * ***Elastic Graph Matching* (EGM)**: se trata de abordar el problema comparando las imágenes de
    las estructuras de los dos grafos.
 
 .. warning:: A continuación puedo exponer algunos métodos con bibliografía donde vayan depurando
@@ -163,10 +161,27 @@ varias de estas perspectivas.
 Basadas en la estructura
 ++++++++++++++++++++++++
 Considerar la jerarquía de conceptos y el número de conexiones existentes entre ellos es una
-de las maneras más sencillas y naturales de calcular su similaridad. No obstante, parece
-lógico pensar que la distancia entre dos nodos adyacentes cualesquiera no tiene por qué ser
-idéntica, así cada conexión debe tener un peso asignado en el cálculo de esta distancia. En
-redes muy grandes, como es el caso que nos ocupa, esta peso no puede ser asignado manualmente
+de las maneras más sencillas y naturales de calcular su similaridad. La formulación más
+simple consiste en calcular el camino más corto entre dos conceptos dentro de la red
+(utilizaremos :math:`len(c_1, c_2)` para designar la longitud del camino más corto entre
+un concepto :math:`c_1` y otro :math:`c_2`) y
+considerar su distancia semántica proporcional a la longitud de este camino.
+
+**Rada *et al.*** :cite:`Rada1989` aplican este principio para calcular la distancia entre
+conceptos en la red MeSH (*Medical Subject Headers*), Jarmasz y Szpakowicz
+:cite:`Jarmasz2003` utilizan la misma técnica con el *Roget's Thesaurus*.
+En ambos casos los resultados son bastante buenos debido a que sólo utilizan las relaciones
+``is-a`` :cite:`Lee1993`. Esta distancia se formularía como:
+
+.. math::
+
+    dist_r(c_1, c_2) = len(c_1, c_2)
+
+
+No obstante, parece lógico pensar que la distancia entre dos nodos adyacentes cualesquiera
+no tiene por qué ser idéntica, así cada conexión debe tener un peso asignado en el cálculo
+de esta distancia.
+En redes muy grandes, como es el caso que nos ocupa, esta peso no puede ser asignado manualmente
 para cada conexión, deben implementarse algoritmos que permitan calcularlo basándose en
 características de la red. Algunas de estas características estructurales típicamente
 relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
@@ -182,9 +197,46 @@ relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
    conexiones tienen que tener el mismo peso. En este punto es donde los métodos estadísticos
    basados en el contenido de información (ver más abajo) pueden ser útiles.
 
+**Sussna** :cite:`Sussna1993` propone una métrica de distancia que considera la profundidad
+dentro de la red de conceptos de tal forma que la distancia semántica entre ellos es
+tanto menor cuanto más se desciende en la jerarquía. Asigna a cada relación :math:`r` que 
+parte de un node :math:`c_1` un peso dentro de un intervalo :math:`[min_r, max_r]` en
+función del número de relaciones del mismo tipo que parten de él:
+
+.. math::
+	
+    wt(c_1 \rightarrow_r) = min_r + \frac{max_r - min_r}{edges_r (c_1)}
+
+La distancia entre dos conceptos adyacentes :math:`c_1` y :math:`c_2` es la media
+de los pesos de la relación en ambas direcciones ponderada por la profundidad de los nodos.
+
+.. math::
+
+    dist_s(c_1, c_2) = \frac{wt(c_1 \rightarrow_r) + wt(c_2 \rightarrow_{r'}) }{2 \cdot max\{depth(c_1), depth(c_2)\}}
+
+La distancia semántica entre dos nodos cualesquiera de la red se calcularía como la suma de
+distancias entre cada par de nodos adyacentes a lo largo del camino más corto que los une.
+
+**Wu and Palmer** :cite:`Wu1994` proponen una medida de similaridad entre conceptos que tiene
+en cuenta al hiperónimo común más profundo en la jerarquía (*lowest-super-ordinate*, ``lso``)
+de ambos conceptos:
+
+.. math::
+
+    sim_{WP}(c_1, c_2) = \frac{2 \cdot depth(lso(c_1, c_2))}{len(c_1, lso(c_1, c_2)) + len(c_2, lso(c_1, c_2)) + 2 \cdot depth(lso(c_1, c_2))}
+
+y la distancia se puede expresar como:
+
+.. math::
+
+    dist_{WP}(c_1, c_2) = 1 - sim_{WP}(c_1, c_2)
+
+
+
+
 En general, todos los algoritmos que utilizan la estructura de la red calculan la distancia
 entre dos conceptos a través del camino más corto entre ellos utilizando únicamente las
-relaciones de hiponimia. 
+relaciones de hiponimia.
 
 Contenido de información
 ++++++++++++++++++++++++
