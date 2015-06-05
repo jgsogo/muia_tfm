@@ -239,7 +239,8 @@ y la distancia se puede expresar como:
 
     dist_{WP}(c_1, c_2) = 1 - sim_{WP}(c_1, c_2)
 
-Así, la distance entre los conceptos es menor cuanto mayor es la profundidad del hiperónimo común.
+Así, la distancia entre los conceptos es menor cuanto mayor es la profundidad dentro
+de la jerarquía del hiperónimo común.
 
 
 En general, todos los algoritmos que utilizan la estructura de la red calculan la distancia
