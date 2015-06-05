@@ -564,4 +564,7 @@ que las técnicas y metodologías utilizadas sobre WordNet podrán ser aplicadas
 sin requerir una adaptación especial. En concreto en el problema de distancia entre grafos
 conceptuales, la distancia entre los conceptos podrá ser medida utilizando las relaciones
 presentes en esta ontología.
+De hecho existen algunos esfuerzos que muestran cómo se puede utilizar WordNet para enriquecer
+un diccionario UNL, mapeando los conceptos UNL con los *synsets* de la jerarquía de
+WordNet :cite:`Iraola2003`.
 
