@@ -5,12 +5,42 @@ La diferencia semántica entre dos grafos que codifican información puede inter
 términos de distancia o similaridad entre la estructura de los grafos y también entre los
 conceptos que están presentes en cada grafo. Dos grafos (coceptuales o UNL) pueden
 codificar una información totalmente distinta a pesar de compartir la estructura, pero
-también pueden tener la misma información a pesar de mostrar estructuras ligeramente
+también pueden tener la misma información a pesar de mostrar estructuras
 diferentes (paráfrasis).
 
-.. warning:: Comentar diferencias entre distancia y similaridad. Una medida de distancia
-   debe cumplir las tres/cuatro propiedades mientras que una de similaridad para que no es tan
-   estricta. Documentar e introducir brevemente.
+Una distancia o disimilaridad entre dos individuos :math:`i` y :math:`j` es una medida,
+indicada por :math:`d(i,j)` que mide la desemejanza entre ambos objetos en relación a un
+conjunto de características cuantitativas o cualitativas. El valor de :math:`d(i,j)` es
+siempre no negativo y cuanto mayor sea mayor será la diferencia entre los individuos.
+
+Toda medida de distancia debe verificar como mínimo las siguientes propiedades:
+
+ * :math:`d(i,j)>0` (no negatividad)
+ * :math:`d(i,i)=0`
+ * :math:`d(i,j)=d(j,i)` (simetría)
+
+Diremos que la distancia es euclidiana si además verifica que:
+
+ * :math:`d(i,j) \leq d(i,t)+d(t,j)` (desigualdad triangular)
+
+Existe una gran cantidad de medidas de distancia e indicadores de disimilaridad, y no hay
+ninguna regla general que nos permita definir una medida que sea válida para todo tipo de
+análisis en cualquier escenario. De las propiedades de los objetos, la naturaleza de las
+variables seleccionadas y la finalidad del estudio dependerá la elección adecuada de una u
+otra.
+
+También podemos utilizar indicadores de similitud entre los individuos para determinar su
+homogeneidad; estos indicadores actúan de forma contraria a las distancias, cuanto mayor
+es su valor, más parecidos son los objetos.
+
+La conversión entre valores de distancia y similaridad resulta intuitiva, pero dependerá
+del rango de valores que pueda alcanzar la medida que se tome como referencia. Para medidas
+de distancia en el rango :math:`d(i,j) \in [0, 1]` la similaridad asociada podrá calcularse como 
+:math:`s(i,j) = 1-d(i,j)`, en el caso de medidas no acotadas donde :math:`d(i,j) \in [0, \infty)`
+tendrá que utilizarse algo como :math:`s(i,j) \propto \frac{1}{d(i,j)}`. No obstante, la relación 
+adecuada entre distancia y similaridad podría no ser lineal según el problema con
+el que se trabaje.
+
 
 .. warning:: Por aquí comienza a emerger el caracter combinatorio del problema, queremos
    medir la distancia entre dos grafos que tienen ruido, donde la distancia se va a deber
