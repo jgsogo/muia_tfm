@@ -325,6 +325,8 @@ supone un desafío para el mundo occidental heredero de la lógica dicotómica a
 Hutchins :cite:`Hutchins1992` expone otros muchos problemas acompañados de una gran
 colección de ejemplos.
 
+.. TODO: Citas sobre ULTRA, KANT y PIVOT en http://www.unl.fi.upm.es/consorcio/archivos/publicaciones/lrec/lrec-martins.pdf
+
 Eurotra
 +++++++
 Ante la dificultad (en la práctica insalvable) que supone construir una interlingua universal,
@@ -438,22 +440,39 @@ no ser representables en todas las lenguas.
 La principal diferencia entre el UNL y otros sistemas de representación del conocimiento como
 los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
 Framework* (RDF :cite:`Brickley2014`) es que el número y el significado de las relaciones y
-attributos forman parte del estándar :cite:`TeixeiraMartins2005`.
+attributos deben formar parte del estándar :cite:`TeixeiraMartins2005`.
 
 
-La última especificación del
-lenguaje, UNL Version II (16 de febrero de 2014) :cite:`Zhu2014`, incluye 57 relaciones y
-94 atributos.
+
+Antes de continuar con la exposición del lenguaje UNL debe hacerse notar que actualmente todo
+el consorcio UNL no comparte las mismas especificaciones y los grupos originales de trabajo
+están divergiendo en sus líneas de investigación y estándares. La Comunidad Europea ha dejado
+de financiar el proyecto y no ha vuelto a mostrar interés por él :cite:`Tovar2000` y es la
+Fundación UNDL quien se encarga de coordinar los diferentes Centros de Lengua siendo éstos
+ahora los que tienen que buscar financiación para mantener la iniciativa.
+
+Asimismo la inactividad de la Fundación UNDL desembocó en la creación del
+Consorcio UNL [#]_ en 2005 en el marco de la conferencia CICLING (Méjico); en 2006 este
+consorcio adoptó el nombre Consorcio U++ [#]_.
+
+.. [#] El acuerdo de constitución del Consorcio UNL puede ser consultado en http://www.unl.fi.upm.es/consorcio/archivos/term_constitution.pdf (accedido en junio de 2015).
+
+.. [#] Datos históricos extraídos de la web del Consorcio U++. http://www.unl.fi.upm.es/consorcio/index.php (accedido en junio de 2015).
+
+.. TODO: En las notas aparece un U3+, pero no lo encuentro por ninguna parte.
+
+
+La última especificación del lenguaje realizada por la UNDL Fundation (aunque no es aceptada
+por parte del Consorcio U++) es la Version II (16 de febrero de 2014) :cite:`Zhu2014` que
+incluye 57 relaciones y 94 atributos. 
 Las UWs no son un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen
-un concepto no contemplado hasta el momento, si bien existe una base de datos, UNL Knowledge Base,
-con todas las UWs aceptadas y sus relaciones :cite:`Zhu2002`.
+un concepto no contemplado hasta el momento, aunque en teoría existe [#]_ una base de datos,
+*UNL Knowledge Base* u Ontología UNL, con todas las UWs aceptadas y sus
+relaciones :cite:`Zhu2002`.
 
-.. warning:: Aquí se puede hablar muchísimo más sobre UNL, describirlo incluso, ¿interesa? De
-   momento sólo vamos a pasar por encima de los conceptos más relevantes para lo que nos
-   traemos entre manos, después profundizaremos en lo que sea necesario para hacer un buen
-   estado del arte y eliminaremos los apartados que sean accesorios.
-
-   Deberíamos hacer referencia a que en la versión actual se llama *Ontología UNL* a esta UNL KB
+.. [#] A pesar de que se habla de la *UNL Knowledge Base* o más recientemente Ontología UNL en
+   varios entradas bibliográficas, el autor no ha sido capaz de encontrar esta base de datos ni
+   de obtener una referencia cierta a la misma.
 
 
 Palabras universales (UWs)
@@ -515,24 +534,17 @@ también ejemplos de UWs extra.
      - icl>food
      - Tipo de comida
 
-
-UNL Ontology - UNL Knowledge Base [#]_
-++++++++++++++++++++++++++++++++++++++
-
-.. [#] En la bibliografía anterior a la especificación UNL Version II la *UNL Ontology*
-   aparece como *UNL Knowledge Base*
-
-Esta base de datos constituye una red semántica con todas las relaciones binarias dirigidas que
-existen entre las palabras universales (UWs); asigna a estas relaciones un grado de certeza
-absoluto (imposible o verdadero) [#]_. De esta forma cualquier UW aceptada aparecerá en la
-ontología relacionada con otras palabras.
+Todas las UWs aceptadas deberían estar recogidas en un único repositorio centralizado conocido
+como *UNL Ontology* (anteriormente *UNL Knowledge Base*). Esta base de datos constituiría una red
+semántica con todas las relaciones binarias dirigidas que existen entre las palabras universales,  asignando a éstas relaciones un grado de certeza absoluto (imposible o verdadero) [#]_.
+De esta forma cualquier UW aceptada aparecerá en la ontología relacionada con otras palabras.
 
 .. [#] La posibilidad de asignar a una relación un grado de certeza *imposible* sirve para
-   eliminar relaciones heredadas. Por ejemplo, si una palabra permite una relación determinada,
-   por herencia, todos sus hipónimos también la permitirán; la única manera de eliminarlas
+   eliminar relaciones heredadas. Por ejemplo, si una palabra permite una relación determinada
+   todos sus hipónimos también la permitirán por haberla heredado; la única manera de eliminarlas
    es utilizar estas declaraciones de imposibles.
 
-Todas las UWs aparecen relacionadas con otras utilizando alguna de estas cuatro relaciones:
+Cualquier UW aparecería relacionada con otras mediante:
 
  * ``icl`` (incluido en, tipo de): indica un concepto superior o más general, codifica la
    relación de hiponimia descrita en apartados anteriores.
@@ -542,13 +554,14 @@ Todas las UWs aparecen relacionadas con otras utilizando alguna de estas cuatro 
    utiliza con entidades y nombres propios.
  * ``pof`` (parte de): codifica la relación de meronimia.
 
-La Ontología UNL contiene también el resto de relaciones posibles entre cualquier par de
-UWs, no obstante, estas relaciones aparecen entre los conceptos más generales posibles,
+La Ontología UNL también contendría el resto de relaciones posibles entre cualquier par de
+UWs, no obstante, estas relaciones sólo aparecerían entre los conceptos más generales posibles,
 de tal forma que se explota la propiedad de herencia de las UWs: cualquier UWs hereda las
 relaciones más restrictivas de sus hiperónimos.
 
-Esta ontología constituye una red semántica con características similares a WordNet, por lo
+Esta ontología constituiría una red semántica con características similares a WordNet, por lo
 que las técnicas y metodologías utilizadas sobre WordNet podrán ser aplicadas al sistema UNL
 sin requerir una adaptación especial. En concreto en el problema de distancia entre grafos
 conceptuales, la distancia entre los conceptos podrá ser medida utilizando las relaciones
 presentes en esta ontología.
+
