@@ -37,7 +37,7 @@ representación" [#]_.
 .. [#] Las citas textuales han sido tomadas de :cite:`IzquierdoArroyo1995`.
 
 Schank y Abelson estructuran el conocimiento en una secuencia de eventos,
-guiones o *scripts* que representan a través de lo que llaman primitivos léxicos, que
+guiones o *scripts* que representan a través de lo que llaman *primitivos léxicos*, que
 pueden hacer referencia tanto a una acción (con la forma Actor-Acción-Objeto-Dirección-
 (Instrumento)) como a un estado (Objeto-(está en)-Estado-(con Valor)). Los autores
 identifican 11 actos primitivos que son los constituyentes esenciales de cualquier acción
@@ -45,7 +45,6 @@ más compleja, con lo que las reglas de inferencia y razonamiento deben definirs
 un conjunto finito y reducido de elementos. A partir de los *guiones* almacenados en la
 memoria, el ser humano y el ordenador pueden elaborar razonamientos y responder a las
 consultas o peticiones de información.
-
 
 
 .. grafos-conceptuales_
@@ -187,7 +186,7 @@ ovoscopia.
 
 .. _fig-wordnet-lightning:
 .. graphviz::
-   :caption: Esquema de relaciones semánticas en torno a la palabra *candle*, que en inglés hace referencia a los conceptos *vela* y *candela*, y también al verbo que hace referencia a la *ovoscopia*. Cada nodo representa un concepto (por lo tanto podría representarse por varios sinónimos). Las relaciones han sido extraídas de Wordnet v3.1.
+   :caption: Esquema de relaciones semánticas en torno a la palabra *candle*, que en inglés hace referencia a los conceptos *vela* y *candela*, y también al verbo utilizado para la realización de una *ovoscopia*. Cada nodo representa un concepto (representado por varias palabras sinónimas). Las relaciones han sido extraídas de Wordnet v3.1.
 
    digraph foo {
         
@@ -313,6 +312,34 @@ Multilingual Central Repository* :cite:`Atserias2004`, ontologías como SUMO :ci
 o la *EuroWordNet Top Concept Ontology* que citábamos :cite:`Alvez2008`.
 
 
+Interlingua
+```````````
+En el capítulo introductorio hablamos de la traducción automática utilizando sistemas basados
+en interlinguas (ver :num:`sección #traduccion-interlingua`) como ULTRA, KANT o PIVOT. El
+argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
+de abstracción y universalidad que debe tener esta lengua, lo que la convertiría en inviable
+económicamente :cite:`Martins2002`: no sólo debería ser capaz de expresar cualquier significado
+de cualquier lengua sino que también tendría que poder trabajar con particularidades
+cognitivas de caulquier cultura como la lógica trivalente del Aymara :cite:`Rojas1985` que 
+supone un desafío para el mundo occidental heredero de la lógica dicotómica aristotélica.
+Hutchins :cite:`Hutchins1992` expone otros muchos problemas acompañados de una gran
+colección de ejemplos.
+
+Eurotra
++++++++
+Ante la dificultad (en la práctica insalvable) que supone construir una interlingua universal,
+se proponen interlinguas restringidas que permitan una representación exacta para un 
+conjunto cerrado de lenguas. Un ejemplo de este tipo ha sido el proyecto Eurotra que se concibe en 1978 y se dota de fondos en noviembre de 1982 con el objetivo de producir traducciones
+satisfactorias para los todos los idiomas de la Comunidad Europea :cite:`Hutchins1992a`.
+
+El proyecto se detiene en 1992 sin que lograra desembocar en un sistema comercial de traducción
+automática, sin embargo sí que llegó a crear un prototipo de investigación y sentó las
+bases para el nacimiento de grupos de investigación asociados con la traducción en los
+países del sur del continente europeo.
+
+
+
+
 El lenguaje universal UNL
 `````````````````````````
 Un paso adelante en las interlinguas para representación del conocimiento es el lenguaje
@@ -401,7 +428,7 @@ indicando la relación entre los conceptos (UWs) que enlazan, aparecen varias UW
 ``city(icl>region)``, ``tower(icl>building)`` que indican objetos o ``seem(icl>be)``, 
 ``begin(icl>do)`` que son verbos, e incluso adjetivos como ``huge(icl>big)`` o el adverbio
 ``long ago(icl>ago)``; también aparece una UW que es un nombre propio de ciudad
-``Babylon(iof>city)``. Muchas UWs están acompañada por varios attributos como ``@past``,
+``Babylon(iof>city)``. Muchas UWs están acompañadas por varios attributos como ``@past``,
 ``@def`` o ``@entry``.
 Las palabras universales UWs y las relaciones están diseñadas para representar el contenido
 objetivo del texto (el mensaje, la información, el contenido semántico), mientras que los
@@ -411,7 +438,10 @@ no ser representables en todas las lenguas.
 La principal diferencia entre el UNL y otros sistemas de representación del conocimiento como
 los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
 Framework* (RDF :cite:`Brickley2014`) es que el número y el significado de las relaciones y
-attributos forman parte del estándar :cite:`TeixeiraMartins2005`. La última específicación del
+attributos forman parte del estándar :cite:`TeixeiraMartins2005`.
+
+
+La última especificación del
 lenguaje, UNL Version II (16 de febrero de 2014) :cite:`Zhu2014`, incluye 57 relaciones y
 94 atributos.
 Las UWs no son un conjunto cerrado, cualquier persona puede proponer nuevas UWs que expresen

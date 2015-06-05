@@ -162,6 +162,7 @@ El problema de la traducción automática se ha abordado también desde otras pe
    tipo :cite:`Costa-jussa2014`.
 
 
+.. traduccion-interlingua_
 Traducción automática mediante lengua intermedia
 ------------------------------------------------
 El conocido lingüista Noam Chomsky sostiene que el cerebro humano contiene un
