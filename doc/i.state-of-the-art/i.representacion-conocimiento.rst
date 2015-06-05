@@ -204,12 +204,12 @@ concepto, por lo tanto pueden ser intercambiadas en un texto sin afectar al sign
 WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en 
 ``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
 
-.. TODO: Nota al pie: qué es un synset
+.. TODO: Hablar de que los sinónimos tienen matices, 
 
 .. warning:: Incluir un poco más de WordNet, quizá fusionarlo con el apartada anterior. Podría
    hablar de taxonomías/tesauros vs ontologías/wordnet. Usos o ejemplos más concretos.
    También se puede hablar de otras redes de conceptos y pensar seriamente si en este
-   apartado hay que incorporar ya al debate la ontología UNL
+   apartado hay que incorporar ya al debate la ontología UNL (que no existe)
 
 Las principales relaciones codificadas en WordNet son las de hiperonimia/hiponimia, seguidas
 por las de holonimia/meronimia, ambas estructuran los conceptos en jerarquías como la que
@@ -220,15 +220,20 @@ semántica y también relaciones con los sustantivos de los cuales derivan. En c
 adverbios, son la categoría gramatical menos representada, en general están relacionados
 con los adjetivos de los que derivan.
 
+WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
+como lo es una interlingua para representación del conocimiento; WordNet se puede utilizar
+como un diccionario para identificar sin ambigüedades los conceptos que se utilizan en los
+nodos de un grafo conceptual, además, como veremos posteriormente, es una herramienta ideal
+para medir distancias semánticas entre conceptos.
+
+
+EuroWordNet
++++++++++++
 Apoyándose en WordNet se han desarrollado multitud de aplicaciones de procesamiento de
 lenguaje natural, *wordnets* en otros idiomas :cite:`Atserias2004`, ontologías como SUMO
 :cite:`Niles2001` o la *EuroWordNet Top Concept Ontology* :cite:`Alvez2008`.
 
-WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
-como lo es una interlingua para representación del conocimiento, WordNet se puede utilizar
-como un diccionario para identificar sin ambigüedades los conceptos que se utilizan en los
-nodos de un grafo conceptual, además, como veremos posteriormente, es una herramienta ideal
-para medir distancias semánticas entre conceptos.
+
 
 
 El lenguaje universal UNL

@@ -42,12 +42,6 @@ adecuada entre distancia y similaridad podría no ser lineal según el problema 
 el que se trabaje.
 
 
-.. warning:: Por aquí comienza a emerger el caracter combinatorio del problema, queremos
-   medir la distancia entre dos grafos que tienen ruido, donde la distancia se va a deber
-   tanto a la diferencia de estructura como de los conceptos presentes en los nodos. Nos
-   interesa la mínima distancia considerando todas las combinaciones de estructuras y
-   conceptos.
-
 Comparación de grafos
 `````````````````````
 La comparación de grafos es un problema muy prolífico en la literatura; desde hace tiempo,
