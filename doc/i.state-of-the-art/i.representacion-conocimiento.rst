@@ -197,10 +197,15 @@ ovoscopia.
 WordNet
 ```````
 Una de los esfuerzos más importantes para realizar una ontología de conceptos es WordNet
-:cite:`Fellbaum1998`, contiene información codificada manualmente sobre sustantivos, verbos,
-adjetivos y adverbios en inglés, y los organiza en torno al concepto de *synset*. Un *synset*
-es un conjunto de palabras de la misma categoría gramatical que hacen referencia al mismo
-concepto, por lo tanto pueden ser intercambiadas en un texto sin afectar al significado.
+:cite:`Miller1990` :cite:`Fellbaum1998`, contiene información codificada manualmente sobre sustantivos, verbos, adjetivos y adverbios en inglés, y los organiza en torno al concepto
+de *synset*.
+WordNet se creó en el Laboratorio de Ciencia Cognitiva de la Universidad de Princeton en
+1985 bajo la dirección del profesor de psicología George Armitage Miller (1920-2012).
+
+Un *synset* es un conjunto de palabras de la misma categoría gramatical que hacen
+referencia al mismo concepto, por lo tanto pueden ser intercambiadas en un texto sin
+afectar al significado. Son elementos semánticamente equivalentes. Las palabras
+polisémicas aparecerán múltiples veces en *synset* diferentes.
 WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en 
 ``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
 
@@ -228,12 +233,40 @@ para medir distancias semánticas entre conceptos.
 
 
 EuroWordNet
-+++++++++++
-Apoyándose en WordNet se han desarrollado multitud de aplicaciones de procesamiento de
-lenguaje natural, *wordnets* en otros idiomas :cite:`Atserias2004`, ontologías como SUMO
-:cite:`Niles2001` o la *EuroWordNet Top Concept Ontology* :cite:`Alvez2008`.
+```````````
+La importancia probada de WordNet en la investigación asociada a lingüística computacional
+condujo a la creación de un proyecto europeo (LE-2 4003 y LE-4 8328) para generar *wordnets*
+en otros idiomas europeos y unir todos ellos en una base de datos multilingüe que permite,
+a partir de una palabra, consultar palabras similares en cualquier otro idioma [#]_.
 
+.. [#] EuroWordNet: Building a multilingual database with wordnets for several European languages. http://www.illc.uva.nl/EuroWordNet/ (accedida en mayo de 2015) 
 
+Los primeros cuatro idiomas que se adhirieron al proyecto fueron holandés (Universidad de
+Amsterdam), italiano (CNR, Pisa), español (Fundación Universidad Empresa) e inglés (Universidad
+de Sheffield, adaptando el WordNet original); posteriormente se incorporan el checo, estonio,
+alemán y francés :cite:`Vossen1998`.
+
+La principal contribución de este proyecto es la multilingualidad, el *wordnet* de cada idioma
+es específico, pero todos ellos se integran en una base de datos única a través de un índice
+interlingual (ILI, *inter-lingual index*) que conecta los *synsets* que son equivalentes
+en los diferentes idiomas.
+
+El proyecto se dió por finalizado en 1999 con la definición de la base de datos, las relaciones,
+la *Top Concept Ontology* (una ontología con 63 conceptos abstractos que se utilizaría para
+clasificar al resto de conceptos más concretos) y la definición del índice ILI. Con
+posterioridad se han seguido desarrollando los *wordnets* de cada idioma y se han sumado
+idiomas nuevos que han utilizado las especificaciones del EuroWordNet para generar sus bases
+de datos.
+
+Actualmente el testigo ha sido recogido por la *Global WordNet Association* [#]_ que intenta
+promover el desarrollo, difusión y estandarización de los *wordnets* que se vayan realizando.
+
+.. [#] The Global WordNet Association. http://globalwordnet.org/ (accedido en mayo de 2015).
+
+Apoyándose en estas redes de conceptos se han desarrollado multitud de aplicaciones
+de procesamiento de lenguaje natural, y recursos lingüísticos como el proyecto *MEANING
+Multilingual Central Repository* :cite:`Atserias2004`, ontologías como SUMO :cite:`Niles2001`
+o la *EuroWordNet Top Concept Ontology* que citábamos :cite:`Alvez2008`.
 
 
 El lenguaje universal UNL
