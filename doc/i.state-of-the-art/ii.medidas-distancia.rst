@@ -167,7 +167,7 @@ simple consiste en calcular el camino más corto entre dos conceptos dentro de l
 un concepto :math:`c_1` y otro :math:`c_2`) y
 considerar su distancia semántica proporcional a la longitud de este camino.
 
-**Rada *et al.*** :cite:`Rada1989` aplican este principio para calcular la distancia entre
+**Rada et al.** :cite:`Rada1989` aplican este principio para calcular la distancia entre
 conceptos en la red MeSH (*Medical Subject Headers*), Jarmasz y Szpakowicz
 :cite:`Jarmasz2003` utilizan la misma técnica con el *Roget's Thesaurus*.
 En ambos casos los resultados son bastante buenos debido a que sólo utilizan las relaciones
@@ -207,6 +207,14 @@ función del número de relaciones del mismo tipo que parten de él:
 	
     wt(c_1 \rightarrow_r) = min_r + \frac{max_r - min_r}{edges_r (c_1)}
 
+
+.. warning:: Aquí he modificado la relación original porque creo que verdaderamente hay un error tanto
+   en el artículo original como en las referencias que apuntan a él. En origen el peso de los arcos
+   está expresado como :math:`max_r - \frac{max_r - min_r}{edges_r (c_1)}`, así ocurre que el peso 
+   es mayor cuanto mayor sea el número de arcos lo que es contrario a la intuición de que a
+   mayor densidad de la red menor es la distancia entre conceptos.
+
+
 La distancia entre dos conceptos adyacentes :math:`c_1` y :math:`c_2` es la media
 de los pesos de la relación en ambas direcciones ponderada por la profundidad de los nodos.
 
@@ -231,7 +239,7 @@ y la distancia se puede expresar como:
 
     dist_{WP}(c_1, c_2) = 1 - sim_{WP}(c_1, c_2)
 
-
+Así, la distance entre los conceptos es menor cuanto mayor es la profundidad del hiperónimo común.
 
 
 En general, todos los algoritmos que utilizan la estructura de la red calculan la distancia
