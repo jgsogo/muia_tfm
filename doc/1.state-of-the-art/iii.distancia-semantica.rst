@@ -37,8 +37,6 @@ lenguaje natural, a saber:
 
    Los matices que portan los sinónimos se pierden cuando son asignados a la misma UW. 
 
-.. [#] Real Academia Española. Diccionario de la lengua española. 22ª edición (2012)
-
  * **Polisemia**: un mismo término puede hacer referencia a dos conceptos distintos; este
    fenómeno queda perfectamente cubierto en la codificación a través de UWs. Teniendo el
    grafo, la polisemia está perfectamente desambiguada.
@@ -48,6 +46,8 @@ lenguaje natural, a saber:
    con dos traducciones igual de buenas donde algunas expresiones sean distintas. Una medida
    de distancia será sensible a estas diferencias, debemos ser conscientes de ellas para poder
    interpretar los resultados.
+
+.. [#] Real Academia Española. Diccionario de la lengua española. 22ª edición (2012)
 
 Estos fenómenos pueden afectar muy sensiblemente a la medida de distancia semántica entre
 grafos indicando que son diferentes dos oraciones cuyo contenido semántico podría ser el
