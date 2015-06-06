@@ -260,8 +260,8 @@ análisis que realizan en el artículo concluyen que los parámetros óptimos en
 anterior son :math:`\alpha = 0.2` y :math:`\beta = 0.6`.
 
 
-Contenido de información
-++++++++++++++++++++++++
+Basadas en el contenido de información
+++++++++++++++++++++++++++++++++++++++
 Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de
 información de un concepto :cite:`Resnik1999`, para ello no basta con la red de conceptos
 sino que es necesario contar con un *corpus* suficientemente grande. Así, si la probabilidad
@@ -361,10 +361,26 @@ es decir,
 
     dist_{JC}(c_1, c_2) = 2log\, p(lso(c_1, c_2)) - (log \, p(c_1) + log \, p(c_2))
 
+**Lin** :cite:`Lin1998` propone una medida de similaridad universal, que no dependa de la
+representación de los conceptos ni de un recurso o aplicación específico. Así Lin prueba
+el siguiente teorema:
 
+    **Similarity Theorem**: The similarity between A and B is measured by the ratio between the
+    amount of information needed to state the commonality of A and B and the information
+    needed to fully describe what A and B are:
 
-.. warning:: Explicar más esto, mostrando cómo funciona algún modelo de los que aparecen en
-   :cite:`Slimani2013` o :cite:`Jiang1997`
+    .. math::
+
+        sim(A, B) = \frac{log P(common(A, B))}{log P(description(A,B))}
+
+es decir, la similaridad es el ratio entre la información que ambos conceptos tienen en común
+y la información necesaria para describirlos. La aplicación de este teorema a una jerarquía
+de conceptos es automática:
+
+.. math::
+
+    sim_{Lin}(c_1, c_2) = \frac{2 \cdot log \, p(lso(c_1, c_2))}{log(p(c_1)) + log(p(c_2))}
+
 
 Basadas en características de los términos
 ++++++++++++++++++++++++++++++++++++++++++
