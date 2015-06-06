@@ -67,10 +67,6 @@ permite realizar inferencias son los grafos conceptuales (CG, *Conceptual Graph*
    conocen como *relaciones conceptuales*. Un grafo conceptual puede constar de un único
    concepto, pero no puede contener relaciones conceptuales que tengan enlaces sin conectar.
 
-.. warning:: Aclarar el tema de que los CGs son *bipartitos*, en los algoritmos que hemos visto
-   para compararlos se habla de relaciones como arcos que unen los nodos. Puede que ésta sea
-   también una representación aceptada.
-
 La primera aproximación de Sowa a los grafos conceptuales la realiza en el contexto
 de las bases de datos y los sistemas de recuperación de información [#]_, como una herramienta
 intermedia de comunicación entre los usuarios y las máquinas: el grafo describe el 
@@ -253,11 +249,6 @@ WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en
 ``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
 
 .. TODO: Hablar de que los sinónimos tienen matices, 
-
-.. warning:: Incluir un poco más de WordNet, quizá fusionarlo con el apartada anterior. Podría
-   hablar de taxonomías/tesauros vs ontologías/wordnet. Usos o ejemplos más concretos.
-   También se puede hablar de otras redes de conceptos y pensar seriamente si en este
-   apartado hay que incorporar ya al debate la ontología UNL (que no existe)
 
 Las principales relaciones codificadas en WordNet son las de hiperonimia/hiponimia, seguidas
 por las de holonimia/meronimia, ambas estructuran los conceptos en jerarquías como la que
