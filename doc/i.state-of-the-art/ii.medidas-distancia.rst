@@ -37,9 +37,9 @@ La conversión entre valores de distancia y similaridad resulta intuitiva, pero 
 del rango de valores que pueda alcanzar la medida que se tome como referencia. Para medidas
 de distancia en el rango :math:`d(i,j) \in [0, 1]` la similaridad asociada podrá calcularse como 
 :math:`s(i,j) = 1-d(i,j)`, en el caso de medidas no acotadas donde :math:`d(i,j) \in [0, \infty)`
-tendrá que utilizarse algo como :math:`s(i,j) \propto \frac{1}{d(i,j)}`. No obstante, la relación 
-adecuada entre distancia y similaridad podría no ser lineal según el problema con
-el que se trabaje.
+tendrá que utilizarse algo como :math:`s(i,j) \propto \frac{1}{1 + d(i,j)}`. No obstante,
+la relación adecuada entre distancia y similaridad podría no ser lineal según el
+problema con el que se trabaje.
 
 
 Comparación de grafos
@@ -49,22 +49,68 @@ multitud de problemas en el ámbito del reconocimiento de patrones se han codifi
 de grafos, una herramienta muy potente para representar la información de forma clara y
 concisa. Pero los grafos no sólo se utilizan para almacenar la información, en muchos casos
 es precisa la búsqueda de patrones dentro de un conjunto de grafos, o la clasificación de
-un nuevo grafo. Y aquí es donde se plantea el problema, ¿qué significa exactamente comparar
-dos grafos? :cite:`Jolion2001`. Una definición puede ser "encontrar en un grafo :math:`G_1`
-cuál es el subgrafo :math:`G'_1` que es similar (exacto o parcial) a un subgrafo :math:`G'_2`
-de otro grafo :math:`G_2`".
+un nuevo grafo. 
 
-La comparación entre los grafos puede realizarse de manera exacta (isomorfismo, *exact matching*)
-o bien permitir cierta tolerancia a errores puesto que los datos pueden contener ruido. 
-En el caso de la traducción automática lo que pretendemos medir es precisamente las variaciones
-introducidas por cada traductor respecto al contenido del texto original, en definitiva, el ruido;
-por lo tanto nos interesarán las técnicas de comparación inexacta. Nuestro objetivo no es
-*encontrar* un grafo igual, sino comparar dos grafos que *a priori* van a ser distintos.
-Además debemos tener presente que nuestros grafos tienen atributos tanto en los nodos
-como en los arcos.
+El interés por los grafos aparece a finales los 1970s, momento en el que se plantean
+algoritmos y técnicas basadas en grafos para el reconocimiento de patrones, pero el coste
+computacional para su aplicación no es compatible con las tecnologías de la
+época :cite:`Conte2004`. A partir del año 2000 este interés despierta de nuevo, la
+potencia de los ordenadores empieza a ser suficiente para ejecutar los algoritmos de
+manera práctica y en las referencias bibliográficas empiezan a aparecer aplicaciones
+(:num:`tabla #table-graph-articles`).
 
-.. warning:: Introducir en lo anterior citas a los papers con surveys de algoritmos de
-   comparación de grafos de los que se toma el apartado de comparación de grafos: :cite:`Conte2004`
+
+.. tabularcolumns:: |p{3cm}|p{4cm}|p{4cm}|
+.. _table-graph-articles:
+.. list-table:: Número de artículos exponiendo técnicas de comparación de grafos
+   clasificados por períodos, y artículos centrados en aplicaciones. Datos obtenidos
+   de :cite:`Conte2004`.
+   :class: longtable
+   :header-rows: 1
+   :stub-columns: 1
+
+   *  -  Período
+      -  Artículos
+      -  Aplicaciones
+   *  -  hasta 1990
+      -  4
+      -  1
+   *  -  1991-1994
+      -  7
+      -  4
+   *  -  1995-1998
+      -  29
+      -  19
+   *  -  1999-2002
+      -  51
+      -  33
+   
+
+
+El problema que se plantea es ¿qué significa exactamente comparar dos grafos? ¿Comparar su
+estructura? ¿Su contenido? ¿Con qué flexibilidad debe hacerse? :cite:`Jolion2001`.
+Un planteamiento comunmente aceptado para comparar dos grafos trata de "encontrar en un
+grafo :math:`G_1` cuál es el subgrafo :math:`G'_1` que es similar (exacto o parcial)
+a un subgrafo :math:`G'_2` de otro grafo :math:`G_2`".
+
+La comparación entre los grafos puede realizarse de manera exacta (isomorfismo,
+*exact matching*) o bien permitir cierta tolerancia a errores puesto que los datos
+pueden contener ruido. La comparación exacta se utilizará cuando el objetivo sea
+la búsqueda o el reconocimiento de patrones.
+
+En el caso de la traducción automática asumimos que va a haber discrepancias en los grafos,
+fruto tanto de la elección de las palabras o los conceptos para expresar ciertas ideas,
+como de la estructura sintáctica utilizada para expresar la oración. Lo que nos interesa
+es precisamente medir las variaciones introducidas por cada traductor con respecto al 
+texto original, el ruido que separa dos grafos que *a priori* deberían ser iguales, tal y
+como se plantea la Teoría de la Dependencia Conceptual
+(ver :num:`sección #teoria-dependencia-conceptual`).
+
+Como hemos visto anteriormente, los grafos conceptuales y los grafos UNL que representan
+las oraciones tienen nodos y relaciones con atributos por lo que muchas de las técnicas
+de comparación (aún inexacta) de grafos no serán aplicables, pero resulta imprescindible
+conocerlas para exponer posteriormente los algoritmos donde sí se tienen en cuenta estos
+atributos.
 
 
 Comparación inexacta de grafos
