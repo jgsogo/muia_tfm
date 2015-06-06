@@ -239,16 +239,33 @@ y la distancia se puede expresar como:
 
     dist_{WP}(c_1, c_2) = 1 - sim_{WP}(c_1, c_2)
 
-Así, la distancia entre los conceptos es menor cuanto mayor es la profundidad dentro
-de la jerarquía del hiperónimo común.
+Así, la distancia entre los conceptos es menor cuanto mayor es la profundidad del hiperónimo común dentro de la jerarquía.
 
+**Leacock and Chodorow** :cite:`Leacock1998` proponen una función de similaridad semántica
+que tiene en cuenta la profundidad máxima de la jerarquía de conceptos:
 
-En general, todos los algoritmos que utilizan la estructura de la red calculan la distancia
-entre dos conceptos a través del camino más corto entre ellos utilizando únicamente las
-relaciones de hiponimia.
+.. math::
+
+    sim_{LC}(c_1, c_2) = -log \frac{len(c_1, c_2)}{2 \cdot \underset{c \in WordNet}{max} depth(c)}
+
+**Li et al.** :cite:`Li2003` plantean una función no lineal que pondera la longitud del camino
+más corto entre el par de conceptos y la profundidad del hiperónimo común:
+
+.. math::
+
+    sim_{Li}(c_1, c_2) = e^{-\alpha \cdot len(c_1, c_2)} \frac{e^{\beta \cdot N} - e^{-\beta \cdot N}}{e^{\beta \cdot N} + e^{-\beta \cdot N}}
+
+donde :math:`N = depth(lso(c_1, c_2))`, :math:`\alpha \geq 0` y :math:`\beta \geq 0`. Después del
+análisis que realizan en el artículo concluyen que los parámetros óptimos en la fórmula
+anterior son :math:`\alpha = 0.2` y :math:`\beta = 0.6`.
+
 
 Contenido de información
 ++++++++++++++++++++++++
+Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de
+información de un concepto, para ello no basta con la red de conceptos sino que es necesario
+contar con un *corpus* suficientemente grande.
+
 Los métodos basados en el contenido de información de los nodos se apoyan en una colección
 de documentos de la que extraen las frecuencias de aparición de cada término. La primera
 vez en la que se utiliza el contenido de información pudo ser en 1995 por Resnik 
