@@ -134,9 +134,9 @@ algoritmos de procesamiento en paralelo, como Shinano *et al.* :cite:`Shinano199
 Pardalo *et al.* :cite:`Pardalos1998` o San Segundo *et al.* :cite:`SanSegundo2011`.
 
 Otro algoritmo que aplica marcha atrás en la búsqueda del MCS se debe a McGregor en
-1979 :cite:`McGregor1982`, ésto no convierte el problema en la búsqueda del máximo *clique*
+1979 :cite:`McGregor1982`, éste no convierte el problema en la búsqueda del máximo *clique*
 y, según Bunke *et al.* :cite:`Bunke2002` ofrece resultados más rápido que los otros
-algoritmos que sí lo convierten cuando los grafos son dispersos. McGregor implementa
+algoritmos que sí lo hacen cuando los grafos son dispersos. McGregor implementa
 el algoritmo dentro de un programa para analizar las modificaciones en los enlaces de
 los compuestos químicos.
 
@@ -167,33 +167,23 @@ los grafos a comparar.
 
 Una elección adecuada de los costes asociados a los errores o a las operaciones de edición
 permite que los valores obtenidos cumplan las propiedades de una distancia métrica y, por
-lo tanto, podríamos hablar de **distancia entre grafos**.
+lo tanto, podríamos hablar de **distancia entre grafos** y así aplicar a este dominio
+algoritmos de otros espacios métricos :cite:`Conte2004`.
 
-.. TODO: Entramos en tierras pantanosas.
+Un caso particular de distancia entre grafos, cuando se utiliza un algoritmo *edit cost*,
+se conoce como *graph edit distance*. Bunke demostró en 1997 :cite:`Bunke1997` que el problema
+de máximo grafo común puede ser considerado un caso especial del cálculo de la *graph
+edit distance* cuando se asignan valores adecuados a los costes de edición, y también lo son
+el isomorfismo entre grafos y el isomorfismo entre subgrafos :cite:`Bunke1999`.
 
-Cualquiera de estas estrategias de coste mínimo puede ser utilizada para calcular una medida de
-disimilaridad entre grafos; una adecuada elección de los costes de cada una de las operaciones
-permite que la métrica de coste de edición cumpla las propiedades matemáticas de una
-distancia, definiéndose una *distancia entre grafos* que permite aplicar a este dominio algunos
-algoritmos de otros espacios métricos :cite:`Conte2004`; se conoce entonces como
-*graph edit distance*. Algunos autores como Bunke han demostrado que el problema del *subgrafo
-máximo común*, y el isomorfismo entre grafos y subgrafos, pueden ser reducidos al cálculo de
-la *graph edit distance*.
-
-.. warning:: Revisar las referencias de Bunke en :cite:`Conte2004` para incluirlas si procede
-   en el párrafo anterior cuando se habla de las "demostraciones de Bunke".
-
-.. warning:: En el párrafo anterior se habla del concepto *subgrafo máximo común*, pero no se
-   ha introducido en ningún momento. Antes de este punto habría que introducir también la
-   comparación de grafos utilizando el subgrafo-máximo-común y el supergrafo-mínimo, son dos
-   alternativas que también ofrecen referencias.
+.. Y aquí entramos en la comparación inexacta de grafos propiamente dicha
 
 Muchos de los algoritmos utilizados para la comparación inexacta de grafos utilizan heurísticas
 para explorar el espacio de búsqueda, ya que en muchos casos se considera un problema NP-completo;
 sin embargo el tipo de grafos que utilizaremos nosotros son suficientemente pequeños como para
 que el tiempo de cálculo no sea una variable a tener en cuenta. Nos interesa, por tanto,
 mostrar las familias de algoritmos utilizados desde el punto de vista de la formulación del
-problema, así podemos identificar las siguientes :cite:`Conte2004`:
+problema, en :cite:`Conte2004` encontramos las siguientes :
 
  * **Optimización continua**: convierte el problema de comparación de grafos, que en principio es
    un problema de optimización discreta, en un problema continuo no lineal y se aplican
