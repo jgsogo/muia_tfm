@@ -148,15 +148,15 @@ La distancia semántica entre conceptos ha sido un tema que ha captado la atenci
 desde hace mucho tiempo; y con el surgimiento de las redes de conceptos como MeSH
 (http://www.nlm.nih.gov/mesh/) o WordNet ha tenido un impulso notable.
 
-.. warning:: Para un review de medidas más amplio se puede empezar por :cite:`Slimani2013` y
-   :cite:`Jiang1997`. Tengo que decidir el nivel de la exposición que voy a hacer aquí,
-   no puedo convertir cada apartado en una recopilación de todos los métodos...
-
 La medida de la similaridad entre conceptos se ha abordado desde tres perspectivas principales
-:cite:`Slimani2013`: basadas en la estructura de la red de conceptos, centradas en el contenido
-de información de cada nodo y aproximaciones basadas en características de
-los términos. Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
-varias de estas perspectivas.
+:cite:`Slimani2013`:
+
+ * basadas en la estructura de la red de conceptos, 
+ * centradas en el contenido de información de cada nodo, y 
+ * aproximaciones basadas en características de los términos.
+
+Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
+varias de estas perspectivas. Desarrollamos cada uno de los puntos anteriores a continuación.
 
 Basadas en la estructura
 ++++++++++++++++++++++++
@@ -389,3 +389,9 @@ características descriptivas de cada uno de ellos, el valor de similaridad se c
 utilizando formulaciones análogas al coeficiente de Jaccard.
 Uno de los principales incovenientes para poder aplicar este tipo de modelos es que normalmente
 no se dispone de un conjunto de características homogeneo para todos los conceptos.
+
+Como referencia citamos los trabajos de Petrakis *et al.* :cite:`Petrakis2006` y
+Tversky :cite:`Tversky1977`, pero su enfoque se aparta del planteamiento de esta tesis donde contamos
+con los conceptos desambiguados y con una red de conceptos a nuestra disposición.
+
+
