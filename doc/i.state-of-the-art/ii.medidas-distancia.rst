@@ -263,14 +263,50 @@ anterior son :math:`\alpha = 0.2` y :math:`\beta = 0.6`.
 Contenido de información
 ++++++++++++++++++++++++
 Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de
-información de un concepto, para ello no basta con la red de conceptos sino que es necesario
-contar con un *corpus* suficientemente grande.
+información de un concepto :cite:`Resnik1999`, para ello no basta con la red de conceptos
+sino que es necesario contar con un *corpus* suficientemente grande. Así, si la probabilidad
+de encontrar un concepto :math:`c` en el corpus es :math:`p(c)`, es contenido de información
+dado por este concepto, según la teoría de la información es:
 
-Los métodos basados en el contenido de información de los nodos se apoyan en una colección
-de documentos de la que extraen las frecuencias de aparición de cada término. La primera
-vez en la que se utiliza el contenido de información pudo ser en 1995 por Resnik 
-:cite:`Resnik1995` quien sólo tenía en cuenta la frecuencia de aparición de un término para
-evaluar su contenido de información. Propuestas más recientes consideran también los posibles
+.. math::
+
+    IC(c) = -log(p(c))
+
+La primera vez en la que se utiliza el contenido de información para calcular la distancia
+semántica entre conceptos pudo ser en 1995 por Resnik quien sólo tenía
+en cuenta la frecuencia de aparición de un término para evaluarlo.
+
+**Resnik** :cite:`Resnik1995` propone la siguiente medida de similaridad semántica:
+
+.. math::
+
+    sim_R(c_1, c_2) = -log p(lso(c_1, c_2))
+
+Para el cálculo de las frecuencias de aparición de los conceptos en el corpus, Resnik realiza
+el cálculo contando como una aparición del concepto cada vez que aparece el propio concepto
+o uno de sus hipónimos en la jerarquía (hay que hacer notar que Resnik trabaja a nivel de palabras
+y no de conceptos desambiguados), formalmente:
+
+.. math::
+    
+    freq(c) = \sum_{w \in words(c)} count(w)
+
+donde :math:`words(c)` sería el conjunto de conceptos cuyo hiperónimo es :math:`c`. De este modo
+la probabilidad de un concepto puede calcularse como su frecuencia relativa de aparición:
+
+.. math::
+
+    p(c) = \frac{freq(c)}{N}
+
+siendo :math:`N` el número total de conceptos en la jerarquía.
+
+.. warning:: Verificar que N es el número total de conceptos, hay que pensar que estamos sumando
+   una aparición cada vez que aparece un hipónimo, por lo que N podría referirse al número de
+   conceptos o también al número de elementos sumados que va a ser mucho mayor.
+
+
+
+ Propuestas más recientes consideran también los posibles
 conceptos a los que puede hacer referencia el término. El cálculo de la distancia entre dos
 conceptos puede realizarse combinando en una ecuación el contenido de información de ambos
 términos y el de todos los elementos que se encuentran en el camino que los une.

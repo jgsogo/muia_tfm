@@ -16,7 +16,7 @@ resnik::resnik(const hyperonym_graph& graph, const corpus& corpus_) : informatio
         for (auto& hypernym: hypernyms) {
             concept_count.insert(make_pair(hypernym.first, 0)).first->second += synset_count;
         }
-        all_count += synset_count*(hypernyms.size()+1);
+        all_count += synset_count*(hypernyms.size()+1); // TODO: Verificar esta operación. Podría ser simplemente ``all_count += synset_count``.
     }
     max_count = std::max_element(concept_count.begin(), concept_count.end(), [](const pair<synset, size_t>& lhs, const pair<synset, size_t>& rhs){return lhs.second < rhs.second; })->second;
 }
