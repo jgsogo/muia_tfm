@@ -168,7 +168,7 @@ los grafos a comparar.
 Una elección adecuada de los costes asociados a los errores o a las operaciones de edición
 permite que los valores obtenidos cumplan las propiedades de una distancia métrica y, por
 lo tanto, podríamos hablar de **distancia entre grafos** y así aplicar a este dominio
-algoritmos de otros espacios métricos :cite:`Conte2004`.
+algoritmos de otros espacios métricos.
 
 Un caso particular de distancia entre grafos, cuando se utiliza un algoritmo *edit cost*,
 se conoce como *graph edit distance*. Bunke demostró en 1997 :cite:`Bunke1997` que el problema
@@ -178,39 +178,43 @@ el isomorfismo entre grafos y el isomorfismo entre subgrafos :cite:`Bunke1999`.
 
 .. Y aquí entramos en la comparación inexacta de grafos propiamente dicha
 
-Muchos de los algoritmos utilizados para la comparación inexacta de grafos utilizan heurísticas
-para explorar el espacio de búsqueda, ya que en muchos casos se considera un problema NP-completo;
-sin embargo el tipo de grafos que utilizaremos nosotros son suficientemente pequeños como para
-que el tiempo de cálculo no sea una variable a tener en cuenta. Nos interesa, por tanto,
-mostrar las familias de algoritmos utilizados desde el punto de vista de la formulación del
-problema, en :cite:`Conte2004` encontramos las siguientes :
+Los tipos de algoritmos utilizados para la comparación inexacta de grafos más relevantes
+son (el lector podrá encontrar una exposición más exhaustiva en el trabajo de Conte :cite:`Conte2004`):
+
+ * **Búsqueda en árbol con marcha atrás**: estos algoritmos requieren una heurística que
+   realice una buena estimación de cuál va a ser el coste de edición o error en caso de
+   seguir un camino determinado. De este modo podrá definirse el orden de búsqueda en el
+   árbol o podarse aquellas ramas que no vayan a visitarse.
+
+   Los primeros algoritmos sólo permitían la sustitución de nodos y arcos por lo que las
+   estructuras de ambos grafos debían ser isomorfas :cite:`Tsai1979`, posteriormente se
+   incorpora la adición y sustración de elementos (o su división y unión).
+
+   Resulta interesante el trabajo de Cordella *et al.* :cite:`Cordella1996`
+   :cite:`Cordella1998a` cuyo algoritmo incorpora un modelo de transformación que en
+   determinadas circunstancias permite sustituir un subgrafo por un único nodo.
+   También el trabajo de Serratosa *et al.* :cite:`Serratosa2000` que proponen un
+   algoritmo que utiliza información contextual.
 
  * **Optimización continua**: convierte el problema de comparación de grafos, que en principio es
    un problema de optimización discreta, en un problema continuo no lineal y se aplican
-   diferentes algoritmos o heurísticas para obtener un solución suficientemente buena.
+   diferentes algoritmos o heurísticas para obtener un solución suficientemente buena en
+   el dominio continuo que debe ser transformada posteriormente al discreto original.
+
+   La mayoría de este tipo de algoritmos que aparecen en :cite:`Conte2004` no consideran
+   los atributos en nodos y arcos, tan sólo el propuesto por Christmas *et al.*
+   :cite:`Christmas1995` que utilizan para el reconocimiento de carreteras en imágenes
+   aéreas.
+
  * **Métodos espectrales**: basadas en los autovalores y autovectores calculados a partir de la
    matriz de adyacencia. El inconveniente de estos métodos es que sólo tienen en cuenta la
-   estructura del grafo y no los atributos de los nodos y arcos.
- * **Conversión a un grafo bipartito**: convertir el problema a este tipo de grafos permite
-   aplicar algoritmos con tiempo de solución de orden polinómico.
- * ***Elastic Graph Matching* (EGM)**: se trata de abordar el problema comparando las imágenes de
-   las estructuras de los dos grafos.
+   estructura del grafo y no los atributos de los nodos y arcos. Una revisión actualizada de
+   algoritmos de este tipo que utilizan la matriz de distancias puede ser consultada en
+   el articulo de Aouchiche y Hansen de 2014 :cite:`Aouchiche2014`.
 
-.. warning:: A continuación puedo exponer algunos métodos con bibliografía donde vayan depurando
-   el algoritmo, pero prefiero esperar un poco para profundizar en el algoritmo elegido para el
-   modelo e implementación. Si no, esto va a parecer un *survey* de algoritmos de comparación
-   de grafos. De todos modos puede ser interesante explorar las diferentes formulaciones del
-   problema, ya que en algún momento habrá que justificar por qué se ha elegido una de ellas.
-   Por tener ejemplos:
-
-   Graph edit distance
-      Aquí hay unos cuantos papers, si seguimos este camino hay que preparar un compendio.
-
-   Continouos optimization - relaxation labelling
-      In 1995, Christmas et al.27 proposed a method, based on the theoretical framework of Kittler and Hancock, that is able to take into account during the iteration process (and not only during initialization) both node and edge attributes.
-
-   Bipartite graph matching
-      For this approach we can cite the papers by Wang et al.163 in 1994, by El-Sonbaty and Ismail42 in 1998, by Baeza and Valiente5 in 2000 and by Liu et al.92 in the same year
+ * Otras técnicas incluyen la descomposición y el preprocesamiento de los grafos, redes
+   neuronales, algoritmos genéticos, convirtiéndolo en un grafo bipartito o utilizando
+   propiedades locales de los nodos.
 
 
 Distancia en redes de conceptos
