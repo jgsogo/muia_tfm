@@ -13,9 +13,9 @@ Medida de distancia en grafos UNL
 .. toctree::
    :maxdepth: 4
 
-   intro
-   i.state-of-the-art/index
-   ii.problem/index
+   0.intro
+   1.state-of-the-art/index
+   2.problem/index
    zreferences
 ..   iii.hypothesis/index
 ..   iv.model/index
