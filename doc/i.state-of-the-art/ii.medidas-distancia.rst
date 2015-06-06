@@ -87,11 +87,11 @@ manera práctica y en las referencias bibliográficas empiezan a aparecer aplica
    
 
 
-El problema que se plantea es ¿qué significa exactamente comparar dos grafos? ¿Comparar su
-estructura? ¿Su contenido? ¿Con qué flexibilidad debe hacerse? :cite:`Jolion2001`.
-Un planteamiento comunmente aceptado para comparar dos grafos trata de "encontrar en un
-grafo :math:`G_1` cuál es el subgrafo :math:`G'_1` que es similar (exacto o parcial)
-a un subgrafo :math:`G'_2` de otro grafo :math:`G_2`".
+El problema que se plantea, de acuerdo con Jolion :cite:`Jolion2001` es, ¿qué significa
+exactamente comparar dos grafos? ¿Comparar su estructura? ¿Su contenido? ¿Con qué
+flexibilidad debe hacerse? Un planteamiento comunmente aceptado para comparar dos grafos
+consistiría en "encontrar en un grafo :math:`G_1` cuál es el subgrafo :math:`G'_1`
+que es similar (exacto o parcial) a un subgrafo :math:`G'_2` de otro grafo :math:`G_2`".
 
 La comparación entre los grafos puede realizarse de manera exacta (isomorfismo,
 *exact matching*) o bien permitir cierta tolerancia a errores puesto que los datos
@@ -112,16 +112,64 @@ de comparación (aún inexacta) de grafos no serán aplicables, pero resulta imp
 conocerlas para exponer posteriormente los algoritmos donde sí se tienen en cuenta estos
 atributos.
 
+Máximo grafo común
+++++++++++++++++++
+Uno de los problemas que mayor interés atrae en la literatura asociado a la comparación
+exacta de grafos es la búsqueda del **máximo grafo común** (MCS, *maximum common subgraph*),
+es decir, la búsqueda de un subgrafo del primer grafo que sea isomorfo con algún subgrafo
+que pueda extraerse del segundo, básicamente la idea de Jolion :cite:`Jolion2001` que
+exponíamos anteriormente.
+
+El problema de búsqueda del MCS puede reducirse a la búsqueda del máximo
+*clique* :cite:`Ambler1973`. La mayoría de algoritmos utilizan una búsqueda en árbol
+con marcha atrás (*backtracking*) utilizando su conversión al problema del máximo
+*clique*, como es el caso de Ullmann :cite:`Ullmann1976`, Ghahraman *et al.*
+:cite:`Ghahraman1980`, Cordella *et al* :cite:`Cordella2000` :cite:`Cordella1998` o
+Balas y Yu :cite:`Balas1986`. Larrosa y Valiente :cite:`Larrosa2002` lo plantean también
+cómo búsqueda de máximo *clique* en el ámbito de los problemas de satisfacción de
+restricciones (CSP, *Constraint Satisfaction Problem*).
+
+Se trata de un problema costoso computacionalmente por lo que también se investigan
+algoritmos de procesamiento en paralelo, como Shinano *et al.* :cite:`Shinano1998`,
+Pardalo *et al.* :cite:`Pardalos1998` o San Segundo *et al.* :cite:`SanSegundo2011`.
+
+Otro algoritmo que aplica marcha atrás en la búsqueda del MCS se debe a McGregor en
+1979 :cite:`McGregor1982`, ésto no convierte el problema en la búsqueda del máximo *clique*
+y, según Bunke *et al.* :cite:`Bunke2002` ofrece resultados más rápido que los otros
+algoritmos que sí lo convierten cuando los grafos son dispersos. McGregor implementa
+el algoritmo dentro de un programa para analizar las modificaciones en los enlaces de
+los compuestos químicos.
+
 
 Comparación inexacta de grafos
 ++++++++++++++++++++++++++++++
-Una de las estrategias habituales para abordar este problema es asignar un coste a las
-discrepancias/errores existentes entre los grafos, surge así un problema combinatorio cuya solución
-consistirá en encontrar la correspondencia cuyo coste sea mínimo (*error correcting* o 
-*error-tolerant*).
-Otra aproximación al problema consiste en definir un conjunto de operaciones de edición de un
-grafo, asignar un coste a cada una de ellas y buscar la secuencia de ediciones cuyo coste sea
-menor que nos permiten convertir un grafo en otro (*graph edit cost*).
+Cuando las restricciones impuestas por la correspondencia exacta entre grafos
+no se adaptan al problema, es necesario relajar estas restricciones para obtener un
+resultado adecuado en un tiempo suficientemente corto. En este tipo de algoritmos se
+introducen penalizaciones cuando la correspondencia entre los nodos o los arcos no es
+exacta. Por lo tanto, el algoritmo deberá encontrar la solución que minimice este coste.
+
+Hay algoritmos que garantizan la solución óptima (exacta en caso de que exista) y otros
+que sólo la aproximen ofreciendo un resultado que sea mínimo local, generalmente los
+segundos ofrecerán tiempos de respuesta mucho más breves.
+
+En función de la estrategia utilizada por los algoritmos podemos clasificarlos en:
+
+ * Algoritmos *error correcting* o *error-tolerant*: asignan un coste a las
+   discrepacias y errores existentes entre los grafos.
+ * Algoritmos *edit cost*: definen un conjunto de operaciones de edición de un grafo,
+   cada una con un coste asociado y buscan una secuencia de operaciones que permita
+   transformar un grafo en otro.
+
+En ambos casos estamos ante un problema de optimización donde el objetivo será conseguir
+la combinación de errores o de ediciones que minimice el coste de correspondencia entre
+los grafos a comparar.
+
+Una elección adecuada de los costes asociados a los errores o a las operaciones de edición
+permite que los valores obtenidos cumplan las propiedades de una distancia métrica y, por
+lo tanto, podríamos hablar de **distancia entre grafos**.
+
+.. TODO: Entramos en tierras pantanosas.
 
 Cualquiera de estas estrategias de coste mínimo puede ser utilizada para calcular una medida de
 disimilaridad entre grafos; una adecuada elección de los costes de cada una de las operaciones
