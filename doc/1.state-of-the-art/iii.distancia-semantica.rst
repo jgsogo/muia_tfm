@@ -13,31 +13,47 @@ presentando aquí; en algunos casos se orienta hacia la búsqueda exacta de un p
 conjunto de grafos, pero en otros se implementan medidas de similaridad que pueden tomar
 valores en un rango continuo.
 
-.. warning:: Hay que buscar un lugar adecuado para hablar de estas limitaciones del
-   lenguaje y fenómenos lingüísticos.
 
 Fenómenos lingüísticos
 ``````````````````````
-Introducimos aquí una problemática que surge en el problema de comparación de grafos que
-codifican información. En algunos casos una misma información puede codificarse de formas
-diferentes, una medida de distancia que no tuviera en cuenta esta posibilidad podría señalar
-dos grafos como diferentes cuando la información codificada es exactamente la misma.
+El lenguaje natural está repleto de ambigüedades que sólo se resuelven en la interacción
+entre los interlocutores (o entre el escritor y el lector de un texto), lo presentábamos
+anteriormente como "principio de cooperación" :cite:`Grice1975`. Además, una gran cantidad
+de matices (o incluso elementos relevantes de una lengua) no pueden ser representados
+ni en los grafos conceptuales ni en los grafos UNL, y, lo que puede ser más grave, la
+interpretación de una misma oración puede ser muy distinta incluso entre personas del
+mismo sustrato cultural como han mostrado Teixeira *et al.* :cite:`Martins2002` o
+Hutchins :cite:`Hutchins1992`.
 
-Los dos fenómenos lingüísticos principales que pueden provocar este engaño son:
+Estas ambigüedades pueden darse asociadas a dos fenómenos presentes en cualquier
+lenguaje natural, a saber:
 
- * Sinonimia: dos términos diferentes pueden representar exactamente el mismo concepto; en el
-   caso de los grafos UNL donde los nodos contienen UWs en vez de términos este fenómeno
-   no es un problema puesto que, por construcción, si dos términos representan el mismo
-   concepto entonces estarán representados por la misma palabra universal.
- * Paráfrasis: la paráfrasis consiste en transmitir el contenido del texto utilizando otras
+ * **Sinonimia**: la RAE define el término sinónimo como "Dicho de un vocablo o de una
+   expresión: Que tiene una misma o muy parecida significación que otro." [#]_, por lo
+   tanto a la hora de asignar términos a un concepto o UW en el lenguaje UNL, según
+   el grado de semejanza, dos términos sinónimos se identificarán con la misma UW o
+   diferentes. El problema es que no hay una unidad de medida objetiva para la semejanza
+   semántica entre palabras.
+
+   Los matices que portan los sinónimos se pierden cuando son asignados a la misma UW. 
+
+.. [#] Real Academia Española. Diccionario de la lengua española. 22ª edición (2012)
+
+ * **Polisemia**: un mismo término puede hacer referencia a dos conceptos distintos; este
+   fenómeno queda perfectamente cubierto en la codificación a través de UWs. Teniendo el
+   grafo, la polisemia está perfectamente desambiguada.
+
+ * **Paráfrasis**: la paráfrasis consiste en transmitir un mismo mensaje utilizando otras
    palabras. Una buena traducción debe ser fiel al texto original, pero podemos encontrarnos
    con dos traducciones igual de buenas donde algunas expresiones sean distintas. Una medida
-   de distancia captará estas diferencias, debemos ser conscientes de ellas para poder
+   de distancia será sensible a estas diferencias, debemos ser conscientes de ellas para poder
    interpretar los resultados.
 
-.. warning:: ¿Existen otros fenómenos que modifiquen la estructura pero no alteren el
-   contenido semántico? ¿Metáforas? En cualquier caso ambos van a quedar fuera del ámbito
-   de este trabajo.
+Estos fenómenos pueden afectar muy sensiblemente a la medida de distancia semántica entre
+grafos indicando que son diferentes dos oraciones cuyo contenido semántico podría ser el
+mismo. Hay que ser consciente de estos fenómenos para identificarlos cuando aparezcan y 
+valorar su influencia en las medidas propuestas.
+
 
 
 Limitaciones del lenguaje
@@ -46,24 +62,28 @@ En el proceso de traducción automática que hemos mostrado en la
 :num:`figura #fig-problema-interlingua` donde comparamos los grafos de interlingua producidos
 a partir de los generadores con el grafo en interlingua de partida, la información que
 tendrán los grafos generados a partir de los textos traducidos no podrá ser mayor que la
-información que es posible expresar en los lenguajes de destino.
+información que es posible expresar en los lenguajes de destino. Es decir, ningún grafo
+obtenido a partir de un texto puede contener más información que el propio texto.
 
 Así, si el texto original es en japonés y aparece el término *ikebana*, éste será codificado
 en UNL mediante la UW ``ikebana(icl>flower arrangement)``, al traducir este texto al español,
 idioma en el que no existe una tradución fiel para este concepto, el generador tendrá que optar
 por un término aproximado como *arreglo floral* donde ya se han perdido las connotaciones que
-este término tenía en japonés. Al generar a partir de la traducción en español la interlingua
-de nuevo, las connotaciones que se han perdido ya no volverán a recuperarse y en el nuevo
+este término tenía en japonés.
+
+Al generar a partir de la traducción en español la interlingua
+de nuevo, no podrán recuperarse los matices que ya se han perdido y en el nuevo
 grafo aparecerá la UW ``flower arrangement``. En este ejemplo existirá una distancia entre la
-interlingua original y la producida después de la traducción, pero esta distancia no podrá
-achacarse al generador sino a las limitaciones del idioma español.
+interlingua original (generada a partir del texto en japonés) y la producida después de la
+traducción (generada a partir del texto en español), pero esta distancia no podrá
+achacarse al generador sino a las limitaciones del lenguaje.
 
-Esta pérdida de información está provocada por carencia de vocabulario, pero las diferencias entre
-las lenguas son muy diversas y en cada traducción se pierden inevitablemente matices que no
-pueden volver a recuperarse sin la ayuda humana que pueda extraerlos del contexto o
-interpretarlos e incorporarlos al texto traducido.
+Esta pérdida de información que hemos mostrado como ejemplo está provocada por carencia de
+vocabulario, pero las diferencias entre las lenguas son muy diversas y mucho
+más profundas (el lector interesado podrá encontrar una buena muestra en la obra de
+Eco :cite:`Eco1999`)
 
-.. warning:: Documentar las carencias del lenguaje en el libro de Bernárdez.
+.. TODO: Documentar las carencias del lenguaje en el libro de Bernárdez.
 
 
 Modelos propuestos en la bibliografía
