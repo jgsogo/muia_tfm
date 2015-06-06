@@ -280,7 +280,7 @@ en cuenta la frecuencia de aparición de un término para evaluarlo.
 
 .. math::
 
-    sim_R(c_1, c_2) = -log p(lso(c_1, c_2))
+    sim_R(c_1, c_2) = -log \, p(lso(c_1, c_2))
 
 Para el cálculo de las frecuencias de aparición de los conceptos en el corpus, Resnik realiza
 el cálculo contando como una aparición del concepto cada vez que aparece el propio concepto
@@ -298,18 +298,70 @@ la probabilidad de un concepto puede calcularse como su frecuencia relativa de a
 
     p(c) = \frac{freq(c)}{N}
 
-siendo :math:`N` el número total de conceptos en la jerarquía.
+siendo :math:`N` el número total de conceptos en la jerarquía. 
 
 .. warning:: Verificar que N es el número total de conceptos, hay que pensar que estamos sumando
    una aparición cada vez que aparece un hipónimo, por lo que N podría referirse al número de
    conceptos o también al número de elementos sumados que va a ser mucho mayor.
 
+Como señala Budanitsky y Hirst :cite:`Budanitsky1998` uno de los mayores incovenientes de esta
+medida es que se obtiene el mismo valor de similaridad para cualesquiera dos conceptos que
+tengan el mismo ``lso``, algo que en las medidas que consideran la longitud del camino mínimo
+no ocurre.
+
+**Jiang y Conrath** :cite:`Jiang1997` ofrecen una aproximación en la que combinan las técnicas
+basadas en nodos y las basadas en arcos, la estructura de la red y la información estadística
+ofrecida por el corpus.
+
+En primer lugar consideran el peso de las conexiones en la red y postulan que este peso es
+proporcional a la probabilidad condicionada de encontrar una instancia de un concepto :math:`c`
+cuando ha aparecido el concepto padre :math:`f`:
+
+.. math::
+
+    p(c|f) = \frac{p(c \cap f)}{p(f)} = \frac{p(c)}{p(f)}
+
+la segunda igualdad se justifica según :cite:`Resnik1999` puesto que toda aparición de ``c``
+contará también como una aparición de ``par(c)``. De este modo el peso de cada conexión puede
+calcularse a través de la teoría de la información como:
+
+.. math::
+
+    wt(c, f) = -log [p(c|f)] = IC(c) - IC(f)
+
+es decir, el peso de cada conexión es simplemente la diferencia en el contenido de información
+entre el concepto hijo y su hiperónimo directo.
+
+Jiang y Conrath consideran también otros factores que deben incorporarse al peso de cada
+conexión, estos son: la densidad local, la profundidad del nodo y el tipo de enlace; obteniendo
+entonces una formulación como la que se sigue:
+
+.. math::
+
+    wt(c, f) = \bigg(\beta + (1-\beta)\frac{\overline{E}}{E(f)}\bigg) \bigg(\frac{d(f) + 1}{d(f)}\bigg)^{\alpha} [IC(c) - IC(f)] \, T(c, f)
+
+donde :math:`d(f)` es la profundidad del nodo ``f`` en la jerarquía, :math:`E(f)` el número
+de arcos (densidad local), :math:`\overline{E}` la densidad media en la jerarquía y :math:`T(c,f)`
+es el factor correspondiente al tipo de enlace. Los parámetros :math:`\alpha (\alpha \geq 0)`
+y :math:`\beta (0 \leq \beta \leq 1)` controlan el grado de influencia de los diferentes factores
+en el peso final del enlace.
+
+Utilizando esta formulación puede calcularse la distancia entre dos conceptos como la suma de los
+pesos de las conexiones del camino más corto que los une. En el caso especial en el que sólo se 
+considera el peso de los enlaces de tipo hiperónimo/hipónimo con un peso 1,
+:math:`\alpha = 0, \beta = 1, T(c,f)=1`, entonces la distancia puede calcularse como:
+
+.. math::
+
+    dist_{JC}(c_1, c_2) = IC(c_1) + IC(c_2) - 2 \cdot IC(lso(c_1, c_2))
+
+es decir,
+
+.. math::
+
+    dist_{JC}(c_1, c_2) = 2log\, p(lso(c_1, c_2)) - (log \, p(c_1) + log \, p(c_2))
 
 
- Propuestas más recientes consideran también los posibles
-conceptos a los que puede hacer referencia el término. El cálculo de la distancia entre dos
-conceptos puede realizarse combinando en una ecuación el contenido de información de ambos
-términos y el de todos los elementos que se encuentran en el camino que los une.
 
 .. warning:: Explicar más esto, mostrando cómo funciona algún modelo de los que aparecen en
    :cite:`Slimani2013` o :cite:`Jiang1997`
