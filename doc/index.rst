@@ -18,8 +18,9 @@ Medida de distancia en grafos UNL
    2.problem/index
    3.hypothesis/index
    4.model/index
+   5.pruebas/index
+   6.conclusion/index
    zreferences
-..   5.examples/index
 
 
 

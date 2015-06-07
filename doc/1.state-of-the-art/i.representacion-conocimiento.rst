@@ -472,7 +472,13 @@ Palabras universales (UWs)
 Las UWs constituyen una red de palabras similar a la vista en WordNet (:num:`sección #wordnet`),
 UNL tiene las mismas cuatro categorías de conceptos: sustantivos, verbos, adjetivos y adverbios.
 Las UWs se forman utilizando una palabra inglesa como etiqueta seguida de un conjunto de 
-restricciones: ``<UW> ::= <headword> [<constraint list>]``:
+restricciones:
+
+.. math::
+
+    <UW> ::= <headword> [<constraint \quad list>]
+
+donde cada una de las partes es:
 
  * La *headword* es una expresión en inglés (usualmente es una plabra, pero puede ser una
    palabra compuesta o una oración si es necesario) que representa un conjunto de conceptos
