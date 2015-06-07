@@ -112,6 +112,7 @@ de comparación (aún inexacta) de grafos no serán aplicables, pero resulta imp
 conocerlas para exponer posteriormente los algoritmos donde sí se tienen en cuenta estos
 atributos.
 
+.. maximo-grafo-comun_
 Máximo grafo común
 ++++++++++++++++++
 Uno de los problemas que mayor interés atrae en la literatura asociado a la comparación
@@ -246,6 +247,7 @@ La medida de la similaridad entre conceptos se ha abordado desde tres perspectiv
 Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
 varias de estas perspectivas. Desarrollamos cada uno de los puntos anteriores a continuación.
 
+.. redes-conceptos-estructura_
 Basadas en la estructura
 ++++++++++++++++++++++++
 Considerar la jerarquía de conceptos y el número de conexiones existentes entre ellos es una
