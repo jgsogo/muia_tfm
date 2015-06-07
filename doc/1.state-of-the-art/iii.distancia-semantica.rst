@@ -13,7 +13,7 @@ presentando aquí; en algunos casos se orienta hacia la búsqueda exacta de un p
 conjunto de grafos, pero en otros se implementan medidas de similaridad que pueden tomar
 valores en un rango continuo.
 
-
+.. fenomenos-linguisticos_
 Fenómenos lingüísticos
 ``````````````````````
 El lenguaje natural está repleto de ambigüedades que sólo se resuelven en la interacción
