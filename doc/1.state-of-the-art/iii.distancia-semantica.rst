@@ -91,7 +91,7 @@ Modelos propuestos en la bibliografía
 La mayoría de los modelos de comparación de grafos conceptuales aparecen relacionados con
 la investigación en el campo de la recuperación de información; muchos de ellos se limitan
 al problema de determinar si un grafo está contenido dentro de otro, son problemas de
-búsqueda donde no se obtiene ninguna medida de similaridad :cite:`Ellis1994`.
+búsqueda donde no se obtiene ninguna medida de similaridad :cite:`Ellis1994` :cite:`Huibers1996`.
 En el problema que nos ocupa necesitamos poder comparar grafos de una forma flexible, donde se
 permita que los atributos de los nodos o los arcos sean diferentes, pero aún así se establezca
 una relación entre ellos que permita continuar con la comparación.
@@ -107,9 +107,9 @@ proceso de comparación comienza por el cálculo de todos los MCS y partiendo de
 estructura se calcula una medida de similaridad, ``s`` que combina la similaridad
 conceptual :math:`s_c` y la relacional :math:`s_r`.
 
-Dados dos grafos conceptuales :math:`G_1` y :math:`G_2` y el grafo :math:`G_1 \uncup G_2 = G_c`
-se calculan la similaridad conceptual de forma análaga al coeficiente de Dice utilizado en
-recuperación de información:
+Dados dos grafos conceptuales :math:`G_1` y :math:`G_2` y el grafo :math:`G_1 \cap G_2 = G_c`
+se calculan la similaridad conceptual de forma análaga al coeficiente de Sørensen-Dice
+utilizado en recuperación de información:
 
 .. math::
     
@@ -136,17 +136,23 @@ El valor final de similaridad se obtiene como combinación lineal de los otros d
 de tal forma que aunque no compartan ninguna conexión podrá haber una similaridad basada en
 los conceptos presentes en ambos grafos.
 
+Un año después, **Montes-y-Gómez et al.** :cite:`Montes2001` proponen un nuevo algoritmo
+que permite una mayor flexibilidad en la correspondencia de los términos utilizando un
+tesauro con relaciones de hiponimia adaptado al usuario. En primer lugar calculan el conjunto
+de todas las superposiciones (*overlaps*) posibles de tamaño máximo entre los dos grafos
+a comparar :math:`G_1` y :math:`G_2`.
+
+A continuación calculan la similaridad entre los grafos de partida y cada uno de los
+*overlaps* calculados utilizando una formulación igual a la del anterior artículo donde
+combinan similaridad conceptual y relacional: :math:`s = s_c \cdot (a + b \cdot s_r)`.
+
+Para la comparación entre cada par de conceptos y de relaciones utilizan una formulación
+en la que intervienen numerosos parámetros que debe definir el usuario que ponderan el
+peso de cada concepto según su categoría gramatical o la distancia en el tesauro, y lo mismo
+para las relaciones.
 
 
 
-
-En :cite:`Montes2001` Montes-y-Gómez *et al.* proponen un modelo flexible para comparar grafos
-conceptuales, en él primero se construye el conjunto de todos los solapamientos posibles entre
-ambos grafos y posteriomente se calcula la similaridad a partir de dos valores de similaridad
-conceptual y relacional igual que en :cite:`Montes2000`, cada uno de estos valores se obtiene
-utilizando una expresión análoga al coeficiente Sørensen-Dice. En los cálculos el modelo
-propuesto utiliza un tesauro de conceptos (con relaciones de hiponimia) y varios parámetros
-que el usuario puede modificar de acuerdo a sus intereses.
 
 Otra aproximación interesante es la mostrada por Zhong *et al.* en :cite:`Zhong2002`, en ella
 se utiliza el nodo de entrada del grafo conceptual como nodo de comienzo del algoritmo y se
