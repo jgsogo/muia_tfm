@@ -152,19 +152,39 @@ peso de cada concepto según su categoría gramatical o la distancia en el tesau
 para las relaciones.
 
 
+**Zhong et al.** :cite:`Zhong2002` proponen un algoritmo para recuperación de información
+en motores de búsqueda para un dominio específico. El algoritmo utiliza una medida de
+similaridad entre conceptos y otra entre relaciones para utilizarlas en la comparación de
+los grafos conceptuales.
 
+La similaridad entre conceptos la basan en la profundidad de éstos dentro de la red jerárquica
+de hiponimia de WordNet, desarrollan una medida propia de una manera análoga a la mostrada en la
+:num:`sección #redes-conceptos-estructura`.
 
-Otra aproximación interesante es la mostrada por Zhong *et al.* en :cite:`Zhong2002`, en ella
-se utiliza el nodo de entrada del grafo conceptual como nodo de comienzo del algoritmo y se
-propone un método recursivo. La similaridad entre dos grafos conceptuales consistirá en la
-similaridad entre estos dos nodos de entrada y el máximo valor de similaridad que se obtenga
-de todas las combinaciones de subgrafos que sean hijos de estos nodos ponderadas 
-por el peso de las relaciones que los unen con el nodo de entrada correspondiente.
-El algoritmo va progresando por el grafo hasta que se agotan todas las combinaciones posibles.
-En el artículo limitan la aplicación a grafos con estructura de árbol (no presentan ciclos).
+Para la similaridad entre relaciones también utilizan una jerarquía de relaciones desarrollada
+por ellos mismos, de tal forma que el valor de similaridad entre una relación :math:`r_Q` del
+grafo de búsqueda y otra :math:`r_R` del grafo en el que se busca es:
 
+.. math::
 
-.. warning:: Artículos pendientes de revisión:
+    sim_r(r_Q, r_R) = 1 - d_r(r_Q, r_R) = \begin{cases}
+    1, & r_Q subsumes r_R\\
+    0, & otherwise.
+    \end{cases}
+
+es decir, que la similaridad sólo valdrá ``1`` en el caso de que la relación presente en el
+grafo de búsqueda sea más general que la presente en el grafo con el que se compara. Esta
+circunstancia provoca que la medida resultante del algoritmo no sea simétrica.
+
+Para la comparación de los grafos, Zhong *et al.* además tienen en cuenta que éstos poseen un
+nodo de entrada o raíz (este nodo está presente en los grafos conceptuales y también en
+los grafos UNL), que será por el que comience su algoritmo.
+
+De este modo crean un algoritmo recursivo que comienza por el nodo raíz de cada grafo y
+continúa comparando todas las posibles combinaciones de los subgrafos que cuelgan de éste, el
+algoritmo devolverá el valor máximo de similaridad entre todas las posibles combinaciones.
+
+.. TODO: Artículos pendientes de revisión:
 
    :cite:`Ganapathy2013` (sin acceso al contenido)
 
@@ -176,7 +196,7 @@ En el artículo limitan la aplicación a grafos con estructura de árbol (no pre
    similaridad entre los grafos. Es una idea que lleva un tiempo rondándote por la cabeza,
    al menos ver cómo la implementa.
 
-Ambas aproximaciones utilizan modelos combinatorios cuya aplicación en grafos grandes es
-cuestionable, no obstante, al igual que en nuestro caso, se centran en pequeñas oraciones donde
-el número de nodos y conexiones es relativamente pequeño por lo que los tiempos de cálculo
-son aceptables para la experimentación.
+.. Ambas aproximaciones utilizan modelos combinatorios cuya aplicación en grafos grandes es
+   cuestionable, no obstante, al igual que en nuestro caso, se centran en pequeñas oraciones donde
+   el número de nodos y conexiones es relativamente pequeño por lo que los tiempos de cálculo
+   son aceptables para la experimentación.
