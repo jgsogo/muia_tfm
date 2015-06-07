@@ -306,7 +306,7 @@ o la *EuroWordNet Top Concept Ontology* que citábamos :cite:`Alvez2008`.
 Interlingua
 ```````````
 En el capítulo introductorio hablamos de la traducción automática utilizando sistemas basados
-en interlinguas (ver :num:`sección #traduccion-interlingua`) como ULTRA, KANT o PIVOT. El
+en interlinguas (ver :num:`sección #traduccion-interlingua`). El
 argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
 de abstracción y universalidad que debe tener esta lengua, lo que la convertiría en inviable
 económicamente :cite:`Martins2002`: no sólo debería ser capaz de expresar cualquier significado
@@ -322,15 +322,38 @@ Eurotra
 +++++++
 Ante la dificultad (en la práctica insalvable) que supone construir una interlingua universal,
 se proponen interlinguas restringidas que permitan una representación exacta para un 
-conjunto cerrado de lenguas. Un ejemplo de este tipo ha sido el proyecto Eurotra que se concibe en 1978 y se dota de fondos en noviembre de 1982 con el objetivo de producir traducciones
+conjunto cerrado de lenguas.
+Un ejemplo de este tipo ha sido el proyecto Eurotra que se concibe en 1978 y se dota de fondos
+en noviembre de 1982 con el objetivo de producir traducciones
 satisfactorias para los todos los idiomas de la Comunidad Europea :cite:`Hutchins1992a`.
+Es un proyecto a medio camino entre una interlingua y los
+sistemas *transfer* entre pares de lenguas.
 
 El proyecto se detiene en 1992 sin que lograra desembocar en un sistema comercial de traducción
 automática, sin embargo sí que llegó a crear un prototipo de investigación y sentó las
 bases para el nacimiento de grupos de investigación asociados con la traducción en los
 países del sur del continente europeo.
 
+PIVOT
++++++
 
+.. La información está sacada de aquí: http://www.tendencias21.net/iartificial/m/Haciendo-memoria_a17.html
+
+A finales de los 1980s también se iniciaba el proyecto de traducción automática multilingüe
+conocido como PIVOT, a diferencia del programa EUROTRA, éste sí planteaba la creación de una
+interlingua que sirviera como eje de las traducciones.
+No era el único proyecto en este sentido, Fujitsu lo estaba haciendo en su proyecto ATLAS
+(Dr. Uchida) y la universidad Carnegie Mellon de Pittsburg (USA) con KANT (Jaime Carbonell).
+
+PIVOT estaba dirigido por el Dr. Muraki desde Japón y patrocinado por NEC, la Universidad
+Politécnica de Madrid se encargó de desarrollar el módulo de español, cuyo objetivo era
+convertir los textos de español en la interlingua y generar las traducciones a español.
+
+Este proyecto también finaliza en 1992, al igual que EUROTRA. El proyecto ATLAS, por su
+parte, aún puede ser encontrado en la página web de Fujitsu como un producto comercial
+relacionado con la traducción, aunque sólo entre el par de lenguas inglés-japonés [#]_.
+
+.. [#] Fujitsu. ATLAS V14. Información disponible en https://www.fujitsu.com/global/products/software/packaged-software/translation/atlas/ (accedido en junio de 2015)
 
 
 El lenguaje universal UNL
