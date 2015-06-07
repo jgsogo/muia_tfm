@@ -146,7 +146,7 @@ involucradas en esta tesis:
  #. **Corpus etiquetado con UWs**: algunas medidas de distancia, las basadas en el contenido
     de información, requieren de un corpus para poder calcular la frecuencia de aparición
     de los diferentes conceptos. Etiquetado para WordNet sólo se ha encontrado el
-    corpus SemCor que es un subconjunto del Brown Corpus [#]_ anotado con los conceptos de
+    corpus SemCor [#]_ que es un subconjunto del Brown Corpus [#]_ anotado con los conceptos de
     WordNet 1.6 y mapeado automáticamente a las versiones posteriores de WordNet.
 
  #. **Modelo de distancia entre UWs**: la mayoría de los modelos propuestos sobre WordNet
@@ -178,11 +178,16 @@ involucradas en esta tesis:
    Disponible online en http://pacifico.dia.fi.upm.es:8080/dicweb/index.jsp (accedido en
    junio de 2015).
 
+.. [#] El corpus SemCor lo hemos podido encontrar en la página de R. Mihalcea (Universidad
+   de Michigan, USA). http://web.eecs.umich.edu/~mihalcea/downloads.html#semcor (accedido
+   en junio de 2015). También está disponible en los corpus de datos que ofrece la
+   librería NLTK de Python (http://www.nltk.org/).
+
 .. [#] El Brown Corpus se crea en los 1960s por Henry Kucera y
    W. Nelson Francis (Brown University, Providence, Rhode Island) tomando 500 muestras de
    artículos de periódico escritos por hablantes nativos de inglés americano. Hay que hacer
-   notar el triple filtro: local (USA), temporal (1961) y cuantitativo (un millón de
-   palabras); no podemos darle una validez general.
+   notar la triple limitación: medio (escrito), local (USA), temporal (1961) y
+   cuantitativo (un millón de palabras); no podemos darle una validez general.
 
 
 Los trabajos reseñados anteriormente exceden con mucho el alcance de esta tesis, pero hemos
