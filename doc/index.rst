@@ -16,10 +16,10 @@ Medida de distancia en grafos UNL
    0.intro
    1.state-of-the-art/index
    2.problem/index
+   3.hypothesis/index
+   4.model/index
    zreferences
-..   iii.hypothesis/index
-..   iv.model/index
-..   examples/index
+..   5.examples/index
 
 
 
