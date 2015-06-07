@@ -91,7 +91,7 @@ Modelos propuestos en la bibliografía
 La mayoría de los modelos de comparación de grafos conceptuales aparecen relacionados con
 la investigación en el campo de la recuperación de información; muchos de ellos se limitan
 al problema de determinar si un grafo está contenido dentro de otro, son problemas de
-búsqueda donde no se obtiene ninguna medida de similaridad :cite:`Ellis1994` :cite:`Huibers1996`.
+recuperación de información donde no se obtiene ninguna medida de similaridad :cite:`Ellis1994` :cite:`Huibers1996` :cite:`Cardenosa2013`.
 En el problema que nos ocupa necesitamos poder comparar grafos de una forma flexible, donde se
 permita que los atributos de los nodos o los arcos sean diferentes, pero aún así se establezca
 una relación entre ellos que permita continuar con la comparación.
