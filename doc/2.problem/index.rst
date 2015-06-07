@@ -106,7 +106,7 @@ nuestra medida.
    de lenguaje partiendo de grafos codificados en UNL:
    http://www.unl.fi.upm.es/CLE/spanish/fr_examples.htm (accedido en junio de 2015).
 
-
+.. planteamiento-problema_
 Plantemaiento del problema
 --------------------------
 A la vista del estado del arte, las dificultades encontradas en la bibliografía y las
