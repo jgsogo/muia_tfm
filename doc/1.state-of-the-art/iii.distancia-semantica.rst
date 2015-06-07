@@ -88,15 +88,57 @@ Eco :cite:`Eco1999`)
 
 Modelos propuestos en la bibliografía
 `````````````````````````````````````
-La mayoría de los modelos de comparación de grafos aparecen relacionados con la investigación
-en el campo de la recuperación de información; muchos de ellos se limitan al problema de
-determinar si un grafo está contenido dentro de otro, son problemas de búsqueda donde
-no se obtiene ninguna medida de similaridad. Otros métodos más generales miden la similaridad
-en base al conjunto de elementos que son comunes en ambos grafos a comparar :cite:`Montes2000`.
-
+La mayoría de los modelos de comparación de grafos conceptuales aparecen relacionados con
+la investigación en el campo de la recuperación de información; muchos de ellos se limitan
+al problema de determinar si un grafo está contenido dentro de otro, son problemas de
+búsqueda donde no se obtiene ninguna medida de similaridad :cite:`Ellis1994`.
 En el problema que nos ocupa necesitamos poder comparar grafos de una forma flexible, donde se
 permita que los atributos de los nodos o los arcos sean diferentes, pero aún así se establezca
 una relación entre ellos que permita continuar con la comparación.
+
+Algunos algoritmos, como el de Myaeng y López-López :cite:`Myaeng1992` son algo más flexibles
+pues realizan la búsqueda utilizando el concepto de máximo subgrafo común
+(ver :num:`sección #maximo-grafo-comun`); su algoritmo calcula una medida de similaridad
+en función del conjunto de todos los MCS, sin embargo, la correspondencia entre los elementos
+tiene que ser exacta.
+
+**Montes-y-Gómez et al.** :cite:`Montes2000` utilizan el mismo planteamiento: el
+proceso de comparación comienza por el cálculo de todos los MCS y partiendo de esta nueva
+estructura se calcula una medida de similaridad, ``s`` que combina la similaridad
+conceptual :math:`s_c` y la relacional :math:`s_r`.
+
+Dados dos grafos conceptuales :math:`G_1` y :math:`G_2` y el grafo :math:`G_1 \uncup G_2 = G_c`
+se calculan la similaridad conceptual de forma análaga al coeficiente de Dice utilizado en
+recuperación de información:
+
+.. math::
+    
+    s_c = \frac{2 \cdot n(G_c)}{n(G_1) + n(G_2)}
+
+donde :math:`n(G)` es el número de nodos tipo concepto del grafo ``G``.
+
+Para la similaridad relacional utilizan los arcos que unen los conceptos y que están presentes
+en :math:`G_c` o en conexión con él:
+
+.. math::
+
+    s_r = \frac{2 \cdot m(G_c)}{m_{G_c}(G_1) + m_{G_c}(G_2)}
+
+:math:`m(G_c)` es el número de arcos que hay en :math:`G_c`, y :math:`m_{G_c}(G)` es el número
+de arcos que hay en la inmediata vecindad de :math:`G_c` y que pertenecen al grafo ``G``.
+
+El valor final de similaridad se obtiene como combinación lineal de los otros dos:
+
+.. math::
+
+    s = s_c \cdot (a + b \cdot s_r)
+
+de tal forma que aunque no compartan ninguna conexión podrá haber una similaridad basada en
+los conceptos presentes en ambos grafos.
+
+
+
+
 
 En :cite:`Montes2001` Montes-y-Gómez *et al.* proponen un modelo flexible para comparar grafos
 conceptuales, en él primero se construye el conjunto de todos los solapamientos posibles entre
