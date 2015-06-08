@@ -151,7 +151,7 @@ if "%1" == "latexpdf" (
 	cp sphinx.sty %BUILDDIR%/latex/sphinx.sty
 	cd %BUILDDIR%/latex
 	make all-pdf
-	cd %BUILDDIR%/..
+	cd ../../
 	echo.
 	echo.Build finished; the PDF files are in %BUILDDIR%/latex.
 	goto end
@@ -161,7 +161,7 @@ if "%1" == "latexpdfja" (
 	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
 	cd %BUILDDIR%/latex
 	make all-pdf-ja
-	cd %BUILDDIR%/..
+	cd ../../
 	echo.
 	echo.Build finished; the PDF files are in %BUILDDIR%/latex.
 	goto end
