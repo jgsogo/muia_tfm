@@ -75,3 +75,9 @@ float sussna::upper_bound() const {
     }
     return 2 * (minmax_hyperonym_r.second + minmax_hyponym_r.second) * max_v;
 }
+
+float sussna::similarity(const synset& s1, const synset& s2) const {
+    auto distance = this->operator()(s1, s2);
+    auto upper_bound = this->upper_bound();
+    return (upper_bound - distance) / upper_bound;
+}

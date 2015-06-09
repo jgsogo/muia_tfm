@@ -18,24 +18,37 @@ lin::~lin() {
 }
 
 float lin::operator()(const synset& s1, const synset& s2) const {
+    auto sim_value = this->similarity(s1, s2);
+    return 1.f - sim_value;
+}
+
+float lin::similarity(const synset& s1, const synset& s2) const {
+    if (s1 == s2) {
+        return 1.f;
+    }
+    auto sim_value = this->similarity_exact(s1, s2);
+    auto max_sim_value = 2 * log(max_count) / (log(2) + log(1)); // TODO: it is a little bit weird..
+    return (sim_value / max_sim_value);    
+}
+
+float lin::similarity_exact(const synset& s1, const synset& s2) const {
     auto similarity = 0.f;
     auto it_s1 = concept_count.find(s1);
     auto it_s2 = concept_count.find(s2);
     if (it_s1 != concept_count.end() && it_s2 != concept_count.end()) {
-        auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
-        for (auto& lch : lowest_common_hypernym) {
-            auto it_lch = concept_count.find(lch);
-            if (it_lch != concept_count.end()) {
-                // TODO: Formula in Lin does not work as expected.
-                auto aux_similarity = 2 * log(it_lch->second) / (log(it_s1->second) + log(it_s2->second));
-                similarity = std::max(similarity, float(aux_similarity));
-            }            
+        if ((it_s1->second > 1) || (it_s2->second > 1)) {
+            auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
+            for (auto& lch : lowest_common_hypernym) {
+                auto it_lch = concept_count.find(lch);
+                if (it_lch != concept_count.end()) {
+                    // TODO: Formula in Lin does not work as expected.
+                    auto aux_similarity = 2 * log(it_lch->second) / (log(it_s1->second) + log(it_s2->second));
+                    similarity = std::max(similarity, float(aux_similarity));
+                }
+            }
         }
     }
-    if (similarity == 0.f) {
-        return this->upper_bound();
-    }
-    return 1.f/similarity;
+    return similarity;
 }
 
 float lin::upper_bound() const {

@@ -35,25 +35,32 @@ resnik::~resnik() {
 }
 
 float resnik::operator()(const synset& s1, const synset& s2) const {
+    auto sim_value = this->similarity(s1, s2);
+    return 1.f - sim_value;
+}
+
+float resnik::similarity(const synset& s1, const synset& s2) const {
+    if (s1 == s2) {
+        return 1.f;
+    }
+    auto sim_value = this->similarity_exact(s1, s2);
+    auto max_sim_value = -log(1 / float(max_count));
+    return (sim_value / max_sim_value);
+}
+
+float resnik::similarity_exact(const synset& s1, const synset& s2) const {
     auto similarity = 0.f;
-	auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
-	for(auto& lch: lowest_common_hypernym) {
+    auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
+    for (auto& lch : lowest_common_hypernym) {
         auto it_lch = concept_count.find(lch);
         if (it_lch != concept_count.end()) {
-            auto aux_similarity = -log(it_lch->second/float(all_count));
+            auto aux_similarity = -log(it_lch->second / float(max_count));
             similarity = std::max(similarity, aux_similarity);
-        }        
-	}
-
-    if (similarity == 0) {
-        return this->upper_bound();
+        }
     }
-
-    return 1.f/similarity;
+    return similarity;
 }
 
 float resnik::upper_bound() const {
-    // TODO: Think about a better approach for this 'max_distance' computation.
-    auto min_similarity = -log(max_count / float(all_count));
-    return 1.f / min_similarity;
+    return 1.f;
 }

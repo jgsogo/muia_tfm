@@ -35,9 +35,11 @@ float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
 }
 
 float jiang_conrath::similarity(const synset& s1, const synset& s2) const {
-    return 0.f;
+    auto distance = this->operator()(s1, s2);
+    auto upper_bound = this->upper_bound();
+    return (upper_bound - distance) / upper_bound;    
 }
 
 float jiang_conrath::upper_bound() const {
-    return 2 * log(all_count) - (log(1) + log(1));
+    return 2 * log(max_count) - (log(1) + log(1));
 }
