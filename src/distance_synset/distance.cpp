@@ -108,8 +108,12 @@ float base_synset::similarity(const synset& s1, const synset& s2) const {
     return wn::distance::similarity(*this, distance);
 }
 
-float similarity(const base_synset& metric, const float& distance_value) {
-    auto upper_bound = metric.upper_bound();
-    throw(std::exception("not implemented"));
-    return 0.f;
+namespace wn {
+    namespace distance {
+        float similarity(const base_synset& metric, const float& distance_value) {
+            auto upper_bound = metric.upper_bound();
+            throw(std::exception("not implemented"));
+            return 0.f;
+        }
+    }
 }

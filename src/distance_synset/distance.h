@@ -26,7 +26,7 @@ namespace wn {
 
                 //! Distance between two synsets
                 virtual float operator()(const synset& s1, const synset& s2) const = 0;
-                //! Similarity between two synsets
+                //! Similarity between two synsets (value in the interval [0,1])
                 virtual float similarity(const synset& s1, const synset& s2) const;
                 //! Min distance between two bags of synsets
                 float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs) const;
@@ -38,8 +38,8 @@ namespace wn {
             protected:
         };
 
-        //! Compute similarity based on a distance value (for a given distance metric)
-        float similarity(const base_synset&, const float& distance_value);
+        //! Compute similarity based on a distance value (value of similarity in the interval [0,1])
+        WN_DISTANCE_SYNSET_EXPORT float similarity(const base_synset&, const float& distance_value);
 
     }
 }

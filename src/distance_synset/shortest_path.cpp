@@ -30,3 +30,9 @@ float shortest_path::operator()(const synset& s1, const synset& s2) const {
 float shortest_path::upper_bound() const {
 	return 2 * max_depth;
 }
+
+float shortest_path::similarity(const synset& s1, const synset& s2) const {
+    auto distance = this->operator()(s1, s2);
+    auto max_distance = this->upper_bound();
+    return (max_distance - distance) / max_distance;
+}

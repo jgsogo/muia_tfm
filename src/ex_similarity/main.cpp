@@ -144,21 +144,30 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance between synsets" << endl;
     cout << "#-------------------------------" << endl;
-    vector<synset> synsets1 = wnet.get_synsets("cat");
-    vector<synset> synsets2 = wnet.get_synsets("dog");
-    cout << "cat[0] = " << synsets1[0] << endl;
-    cout << "dog[0] = " << synsets2[0] << endl;
-    cout << "shortest_path(cat[0], dog[0]) = " << shortest_path(synsets1[0], synsets2[0]) << endl;
-    cout << "sussna(cat[0], dog[0]) = " << distance_sussna(synsets1[0], synsets2[0]) << endl;
-    cout << "wu_palmer(cat[0], dog[0]) = " << distance_wu_palmer(synsets1[0], synsets2[0]) << endl;
-    cout << "leacock_chodorow(cat[0], dog[0]) = " << distance_leacock_chodorow(synsets1[0], synsets2[0]) << endl;
-    cout << "resnik(cat[0], dog[0]) = " << distance_resnik(synsets1[0], synsets2[0]) << endl;
-    cout << "jiang_conrath(cat[0], dog[0]) = " << distance_jiang_conrath(synsets1[0], synsets2[0]) << endl;
-    cout << "lin(cat[0], dog[0]) = " << distance_lin(synsets1[0], synsets2[0]) << endl;
+    vector<synset> synsets1 = wnet.get_synsets("cat", pos_t::N);
+    vector<synset> synsets2 = wnet.get_synsets("dog", pos_t::N);
+    auto synset1 = synsets1[0];
+    auto synset2 = synsets2[0];
+    cout << "cat[0] = " << synset1 << endl;
+    cout << "dog[0] = " << synset2 << endl;
+    auto distance_synset = [&synset1, &synset2](distance::base_synset& dist, const std::string& id_dist){
+        cout << endl << id_dist << ":" << endl;
+        cout << "\t" << "distance(cat, dog)   = " << dist(synset1, synset2) << endl;
+        cout << "\t" << "similarity(cat, dog) = " << dist.similarity(synset1, synset2) << endl;
+    };
+    distance_synset(shortest_path, "shortest_path");
+    distance_synset(distance_sussna, "distance_sussna");
+    distance_synset(distance_wu_palmer, "distance_wu_palmer");
+    distance_synset(distance_leacock_chodorow, "distance_leacock_chodorow");
+    distance_synset(distance_resnik, "distance_resnik");
+    distance_synset(distance_jiang_conrath, "distance_jiang_conrath");
+    distance_synset(distance_lin, "distance_lin");
 
+    cout << "Press ENTER to continue...";
+    getchar();
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
-    auto distance_synsets = [n, &synsets1, &synsets2](distance::base_synset& dist){
+    auto distance_synsets = [n, &synsets1, &synsets2](distance::base_synset& dist, bool stop){
         auto penalize_each = dist.upper_bound();
         vector<wn::distance::base_synset::_t_distance> distances;
         auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);
@@ -181,42 +190,47 @@ int main(int argc, char** argv) {
             cout << "\t" << penalize_each << "*" << synsets2.size()-n << "=" << penalize_each*(synsets2.size()-n) << endl;
             cout << "\t=" << data << endl;
         }
+
+        if (stop) {
+            cout << "Press ENTER to continue...";
+            getchar();
+        }
     };
 
     cout << endl;
     cout << "# Distance 'shortest_path' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(shortest_path);
+    distance_synsets(shortest_path, true);
 
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_sussna);
+    distance_synsets(distance_sussna, true);
 
     cout << endl;
     cout << "# Distance 'Wu Palmer' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_wu_palmer);
+    distance_synsets(distance_wu_palmer, true);
 
     cout << endl;
     cout << "# Distance 'Leacock & Chodorow' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_leacock_chodorow);
+    distance_synsets(distance_leacock_chodorow, true);
 
     cout << endl;
     cout << "# Distance 'Resnik' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_resnik);
+    distance_synsets(distance_resnik, true);
 
     cout << endl;
     cout << "# Distance 'Jiang && Conrath' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_jiang_conrath);
+    distance_synsets(distance_jiang_conrath, true);
 
     cout << endl;
     cout << "# Distance 'Lin' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    distance_synsets(distance_lin);
+    distance_synsets(distance_lin, true);
 
 
 }
