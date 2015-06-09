@@ -17,10 +17,12 @@ namespace wn {
             public:
                 shortest_path(const wordnet& wnet);
                 
-                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
                 virtual float similarity(const synset& s1, const synset& s2) const;
                 
+            protected:
+                virtual float max_distance() const;
+
             protected:
                 std::size_t max_depth;
                 const wordnet& wnet;

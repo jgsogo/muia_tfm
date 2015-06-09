@@ -25,7 +25,6 @@ namespace wn {
                     std::size_t max_count);
                 ~resnik();
 
-                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
                 virtual float similarity(const synset& s1, const synset& s2) const;
 

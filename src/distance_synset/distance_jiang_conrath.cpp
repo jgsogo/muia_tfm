@@ -18,7 +18,7 @@ jiang_conrath::~jiang_conrath() {
 }
 
 float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
-    auto distance = this->upper_bound();
+    auto distance = this->max_distance();
     auto it_s1 = concept_count.find(s1);
     auto it_s2 = concept_count.find(s2);
     if (it_s1 != concept_count.end() && it_s2 != concept_count.end()) {
@@ -31,15 +31,14 @@ float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
             }            
         }
     }
-    return distance;
+    return distance / this->max_distance();
 }
 
 float jiang_conrath::similarity(const synset& s1, const synset& s2) const {
     auto distance = this->operator()(s1, s2);
-    auto upper_bound = this->upper_bound();
-    return (upper_bound - distance) / upper_bound;    
+    return 1.f - distance;
 }
 
-float jiang_conrath::upper_bound() const {
+float jiang_conrath::max_distance() const {
     return 2.f * log(max_count / (float)all_count) - (log(1.f / (float)all_count) + log(1.f / (float)all_count));
 }

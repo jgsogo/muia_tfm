@@ -42,7 +42,3 @@ float leacock_chodorow::similarity_exact(const synset& s1, const synset& s2) con
     }
     return -log(path_length / float(max_path_length));
 }
-
-float leacock_chodorow::upper_bound() const {
-    return 1.f;
-}
