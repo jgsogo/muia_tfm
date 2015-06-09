@@ -27,6 +27,6 @@ float shortest_path::operator()(const synset& s1, const synset& s2) const {
 	return path_length;
 }
 
-float shortest_path::max() const {
+float shortest_path::upper_bound() const {
 	return 2 * max_depth;
 }

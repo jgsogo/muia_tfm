@@ -11,20 +11,20 @@ const float base_relation::max_distance = 1.f; // TODO: Max for any type of dist
 base_relation::base_relation() {
 }
 
-float base_relation::min() const {
+float base_relation::lower_bound() const {
     return 0.f;
 }
 
-float base_relation::max() const {
+float base_relation::upper_bound() const {
     return 1.f;
 }
 
 float base_relation::operator()(const relation& r1, const relation& r2) const {
     if (r1.type == r2.type) {
-        return this->min();
+        return this->lower_bound();
     }
     else {
-        return this->max();
+        return this->upper_bound();
     }
 }
 
@@ -100,7 +100,7 @@ float base_relation::min_distance(const vector<relation>& r1, const vector<relat
     }
     else {
         assert(r2.size() >= r1.size());
-        float distance = r1.size()*this->max();
+        float distance = r1.size()*this->upper_bound();
         auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
         vector<relation> aux_rel2(r2.begin(), r2.end());
         sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
@@ -114,13 +114,14 @@ float base_relation::min_distance(const vector<relation>& r1, const vector<relat
     }
 }
 
-float base_relation::min(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const {
-    return abs(int(r2.size()) - int(r1.size()))*penalization;
+float base_relation::lower_bound(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const {
+    auto min_elements = std::min(r2.size(), r1.size());
+    return min_elements*this->lower_bound() + abs(int(r2.size()) - int(r1.size()))*penalization;
 }
 
-float base_relation::max(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const {
+float base_relation::upper_bound(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const {
     auto min_elements = std::min(r2.size(), r1.size());
-    return min_elements*this->max() + abs(int(r2.size()) - int(r1.size()))*penalization;
+    return min_elements*this->upper_bound() + abs(int(r2.size()) - int(r1.size()))*penalization;
 }
 
 

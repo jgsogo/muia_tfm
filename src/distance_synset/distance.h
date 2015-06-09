@@ -9,22 +9,31 @@ namespace wn {
 
         class WN_DISTANCE_SYNSET_EXPORT base_synset {
             public:
+                typedef std::vector<std::tuple<synset, synset, float>> _t_distance;
                 static const float max_distance; //! max_distance to consider synsets connected
 
             public:
                 base_synset();
-                virtual float min() const; //! min distance by default is 0
-                virtual float max() const; //! max distance between two synsets (by default is '''distance::max_distance''');
+                //! Lower bound for the distance between two synsets (0.f iff synsets are equal)
+                float lower_bound() const;
+                //! Upper bound for the distance between two synsets (defaults to '''distance::base_synset::max_distance''')
+                virtual float upper_bound() const;
+
+                //! Lower bound value for the distance between two synset sets.
+                float lower_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
+                //! Upper bound bound value for the distance between two synset sets.
+                float upper_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
+
+
+                //! Distance between two synsets
                 virtual float operator()(const synset& s1, const synset& s2) const = 0;
-                virtual bool connected(const synset& s1, const synset& s2) const;
+                //! Min distance between two bags of synsets
+                float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs) const;
+                //! Min distance between two bags of synsets (can be of different size)
+                float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs, float penalization) const;
 
-                typedef std::vector<std::tuple<synset, synset, float>> _t_distance;
-                virtual float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs) const;
-                virtual float min_distance(const std::vector<synset>& v1, const std::vector<synset>& v2, std::vector<_t_distance>& dist_combs, float penalization) const;
-
-                //! Max and min values for the distance between two synset sets.
-                virtual float min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
-                virtual float max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;
+            
+                //virtual bool connected(const synset& s1, const synset& s2) const;
             protected:
         };
 

@@ -40,11 +40,11 @@ float lin::operator()(const synset& s1, const synset& s2) const {
         }
     }
     if (similarity == 0.f) {
-        return this->max();
+        return this->upper_bound();
     }
     return 1.f/similarity;
 }
 
-float lin::max() const {
+float lin::upper_bound() const {
     return 1.f;
 }

@@ -30,7 +30,7 @@ float leacock_chodorow::operator()(const synset& s1, const synset& s2) const {
         return 0;
     }
     else if (path_length == max_path_length) {
-        return this->max();
+        return this->upper_bound();
     }
     else {
         auto similarity = -log(path_length / float(max_path_length));
@@ -38,7 +38,7 @@ float leacock_chodorow::operator()(const synset& s1, const synset& s2) const {
     }
 }
 
-float leacock_chodorow::max() const {
+float leacock_chodorow::upper_bound() const {
     auto max_path_length = 2 * graph.max_depth();
     auto min_similarity = -log((max_path_length-1) / float(max_path_length));
     return 1.f / min_similarity;

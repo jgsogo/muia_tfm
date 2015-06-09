@@ -13,9 +13,10 @@ namespace wn {
             public:
                 lin(const hyperonym_graph& graph, const wn::corpus& corpus);
                 ~lin();
-                virtual float operator()(const synset& s1, const synset& s2) const;
-                virtual float max() const;
 
+                virtual float upper_bound() const;
+                virtual float operator()(const synset& s1, const synset& s2) const;
+                
             protected:
                 std::map<synset, std::size_t> concept_count;
                 std::size_t all_count;

@@ -29,7 +29,7 @@ float sussna::edge_weight(const synset& child, const synset& parent) const {
 
 float sussna::operator()(const synset& s1, const synset& s2) const {
 	//hyperonym_graph graph(wordnet);
-	auto distance = this->max();
+    auto distance = this->upper_bound();
 	auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
 	for(auto& lch: lowest_common_hypernym) {
         auto paths_s1 = graph.hypernym_path(s1, lch);
@@ -49,13 +49,13 @@ float sussna::operator()(const synset& s1, const synset& s2) const {
             };
 
             // Work on paths s1->lch
-            auto min_weight_s1 = this->max();
+            auto min_weight_s1 = this->upper_bound();
             for (auto& path : paths_s1) {
                 min_weight_s1 = std::min(min_weight_s1, path_weight(path));
             }
             // Work on paths s2->lch
 
-            auto min_weight_s2 = this->max();
+            auto min_weight_s2 = this->upper_bound();
             for (auto& path : paths_s2) {
                 min_weight_s2 = std::min(min_weight_s2, path_weight(path));
             }
@@ -67,7 +67,7 @@ float sussna::operator()(const synset& s1, const synset& s2) const {
 	return distance;
 }
 
-float sussna::max() const {
+float sussna::upper_bound() const {
     // Max distance will happen on the longest path and with the highest edge-weights
     float max_v = 0.f;
     for (auto i = 1; i <= graph.max_depth(); ++i) {

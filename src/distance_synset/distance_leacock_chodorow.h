@@ -16,8 +16,9 @@ namespace wn {
             public:
                 leacock_chodorow(const hyperonym_graph& graph);
                 ~leacock_chodorow();
+
+                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
-                virtual float max() const;
             protected:
 
         };

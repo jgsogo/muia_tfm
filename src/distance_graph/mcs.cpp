@@ -34,10 +34,10 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     };
 
     synset_cmp cmp_synset(dist_synset);
-    cmp_synset.synset_threshold = dist_synset.min() + 0.1f*(dist_synset.max()-dist_synset.min());
+    cmp_synset.synset_threshold = dist_synset.lower_bound() + 0.1f*(dist_synset.upper_bound()-dist_synset.lower_bound());
 
     relation_cmp cmp_relation(dist_relation);
-    cmp_relation.edge_threshold = dist_relation.min() + 0.1f*(dist_relation.max()-dist_relation.min());
+    cmp_relation.edge_threshold = dist_relation.lower_bound() + 0.1f*(dist_relation.upper_bound()-dist_relation.lower_bound());
 
     std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>> mcs_subgraphs;
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);

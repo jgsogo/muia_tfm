@@ -27,11 +27,11 @@ struct graph_dist {
     template <class GraphDistance>
     void distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist) {
         GraphDistance graph_distance(words_dist, rels_dist);
-        auto penalize_node = words_dist.max();
-        auto penalize_edge = rels_dist.max();
+        auto penalize_node = words_dist.upper_bound();
+        auto penalize_edge = rels_dist.upper_bound();
         auto data = graph_distance.min_distance(graph1, graph2, penalize_node, penalize_edge);
-        auto min_d = graph_distance.min(graph1, graph2, penalize_node, penalize_edge);
-        auto max_d = graph_distance.max(graph1, graph2, penalize_node, penalize_edge);
+        auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
+        auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
         cout << " - Distance in [" << min_d << ", " << max_d << "]" << endl;
         cout << " - Min distance is " << data << endl;
         cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;

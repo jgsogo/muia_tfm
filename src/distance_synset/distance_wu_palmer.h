@@ -12,8 +12,9 @@ namespace wn {
             public:
                 wu_palmer(const hyperonym_graph& graph);
                 ~wu_palmer();
+
+                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
-                virtual float max() const;
 
             protected:
 

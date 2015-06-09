@@ -90,38 +90,38 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     cout << "Distance 'shortest_path':" << endl;
     distance::shortest_path shortest_path(wnet);
-    cout << " - min_distance = " << shortest_path.min() << endl;
-    cout << " - max_distance = " << shortest_path.max() << endl;
+    cout << " - min_distance = " << shortest_path.lower_bound() << endl;
+    cout << " - max_distance = " << shortest_path.upper_bound() << endl;
 
     cout << "Distance 'sussna':" << endl;
     distance::sussna distance_sussna(graph);
-    cout << " - min_distance = " << distance_sussna.min() << endl;
-    cout << " - max_distance = " << distance_sussna.max() << endl;
+    cout << " - min_distance = " << distance_sussna.lower_bound() << endl;
+    cout << " - max_distance = " << distance_sussna.upper_bound() << endl;
 
     cout << "Distance 'Wu and Palmer':" << endl;
     distance::wu_palmer distance_wu_palmer(graph);
-    cout << " - min_distance = " << distance_wu_palmer.min() << endl;
-    cout << " - max_distance = " << distance_wu_palmer.max() << endl;
+    cout << " - min_distance = " << distance_wu_palmer.lower_bound() << endl;
+    cout << " - max_distance = " << distance_wu_palmer.upper_bound() << endl;
 
     cout << "Distance 'Leacock and Chodorow':" << endl;
     distance::leacock_chodorow distance_leacock_chodorow(graph);
-    cout << " - min_distance = " << distance_leacock_chodorow.min() << endl;
-    cout << " - max_distance = " << distance_leacock_chodorow.max() << endl;
+    cout << " - min_distance = " << distance_leacock_chodorow.lower_bound() << endl;
+    cout << " - max_distance = " << distance_leacock_chodorow.upper_bound() << endl;
 
     cout << "Distance 'Resnik 1995':" << endl;
     distance::resnik distance_resnik(graph, corpus);
-    cout << " - min_distance = " << distance_resnik.min() << endl;
-    cout << " - max_distance = " << distance_resnik.max() << endl;
+    cout << " - min_distance = " << distance_resnik.lower_bound() << endl;
+    cout << " - max_distance = " << distance_resnik.upper_bound() << endl;
 
     cout << "Distance 'Jiang && Conrath':" << endl;
     distance::jiang_conrath distance_jiang_conrath(graph, corpus);
-    cout << " - min_distance = " << distance_jiang_conrath.min() << endl;
-    cout << " - max_distance = " << distance_jiang_conrath.max() << endl;
+    cout << " - min_distance = " << distance_jiang_conrath.lower_bound() << endl;
+    cout << " - max_distance = " << distance_jiang_conrath.upper_bound() << endl;
 
     cout << "Distance 'Lin':" << endl;
     distance::lin distance_lin(graph, corpus);
-    cout << " - min_distance = " << distance_lin.min() << endl;
-    cout << " - max_distance = " << distance_lin.max() << endl;
+    cout << " - min_distance = " << distance_lin.lower_bound() << endl;
+    cout << " - max_distance = " << distance_lin.upper_bound() << endl;
 
     /*
     auto orphs = wn::hyperonym_graph::orphans(wn, true);
@@ -159,12 +159,12 @@ int main(int argc, char** argv) {
 
     auto n = std::min(size_t(3), std::min(synsets1.size(), synsets2.size()));
     auto distance_synsets = [n, &synsets1, &synsets2](distance::base_synset& dist){
-        auto penalize_each = dist.max();
+        auto penalize_each = dist.upper_bound();
         vector<wn::distance::base_synset::_t_distance> distances;
         auto s1 = vector<synset>(synsets1.begin(), synsets1.begin() + n);
         auto data = dist.min_distance(s1, synsets2, distances, penalize_each);
-        auto min_d = dist.min(s1, synsets2, penalize_each);
-        auto max_d = dist.max(s1, synsets2, penalize_each);
+        auto min_d = dist.lower_bound(s1, synsets2, penalize_each);
+        auto max_d = dist.upper_bound(s1, synsets2, penalize_each);
         cout << " - Distance € [" << min_d << ", " << max_d  << "]" << endl;
         cout << " - Min distance is " << data << endl;
         cout << " - Ratio " << (data-min_d) / (max_d-min_d) << endl;

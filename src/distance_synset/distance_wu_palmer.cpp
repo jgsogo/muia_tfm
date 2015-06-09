@@ -36,6 +36,6 @@ float wu_palmer::operator()(const synset& s1, const synset& s2) const {
     return 1.f-similarity;
 }
 
-float wu_palmer::max() const {
+float wu_palmer::upper_bound() const {
 	return 1.f;
 }
