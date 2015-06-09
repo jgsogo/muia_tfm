@@ -1,4 +1,6 @@
 
+#pragma once 
+
 #include "depth_relative.h"
 
 namespace wn {
