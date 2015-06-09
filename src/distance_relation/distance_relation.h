@@ -18,7 +18,7 @@ namespace wn {
                 //! Lower bound for the distance between two relations (0.f iff relations are equal)
                 float lower_bound() const;
                 //! Upper bound for the distance between two relations (defaults to '''distance::base_relation::max_distance''')
-                virtual float upper_bound() const;
+                float upper_bound() const;
 
                 //! Lower bound value for the distance between two relation sets.
                 float lower_bound(const std::vector<relation>& r1, const std::vector<relation>& r2, float penalization) const;
