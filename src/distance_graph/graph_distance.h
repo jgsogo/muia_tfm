@@ -19,7 +19,7 @@ namespace wn {
                 virtual float upper_bound(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const;
 
                 //! Compute minimum distance between two conceptual_graphs
-                virtual float min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const = 0;
+                virtual float max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const = 0;
 
         protected:
                 const base_synset& dist_synset;

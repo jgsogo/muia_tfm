@@ -12,7 +12,7 @@ mcs::mcs(const base_synset& base_distance, const base_relation& dist_relation) :
 mcs::~mcs() {
 }
 
-float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
+float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
     struct synset_cmp {
         synset_cmp(const base_synset& syn) : dist_synset(syn) {}
         bool operator() (const synset& a, const synset& b) {
@@ -43,27 +43,31 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);
 
     // Rank candidates and keep the best one (minimizes distance)
-    auto min_value = std::numeric_limits<float>::max();
+    auto max_value = std::numeric_limits<float>::min();
     conceptual_graph best;
     conceptual_graph_corresponde correspondence_s1;
     conceptual_graph_corresponde correspondence_s2;
     for (auto& candidate: mcs_subgraphs) {
         auto value = 0.f;
         auto candidate_graph = get<0>(candidate);
-        // Distance between nodes:
+        
+        // Similarity between nodes:
         auto it_s1 = get<1>(candidate).begin();
         auto it_s2 = get<2>(candidate).begin();
         for (; it_s1 != get<1>(candidate).end(); ++it_s1, ++it_s2) {
-            value += dist_synset(s1.get_node(it_s1->second), s2.get_node(it_s2->second));
+            value += dist_synset.similarity(s1.get_node(it_s1->second), s2.get_node(it_s2->second));
         }
-        // Distance by relations
-        // TODO(jgsogo): Sum also distance by relations.
+
+        // Similarity by relations
+        // TODO(jgsogo): Sum also similarity by relations.
+
         // Graph coverage
-        auto max_size = std::max(s1.get_nodes().size(), s2.get_nodes().size());
-        value = value + cmp_synset.synset_threshold*(max_size-candidate_graph.get_nodes().size());
-        // Update minimum
-        if (value < min_value) {
-            min_value = value;
+        //auto max_size = std::max(s1.get_nodes().size(), s2.get_nodes().size());
+        //value = value + cmp_synset.synset_threshold*(max_size-candidate_graph.get_nodes().size());
+
+        // Update maximum
+        if (value > max_value) {
+            max_value = value;
             best = get<0>(candidate);
             correspondence_s1 = get<1>(candidate);
             correspondence_s2 = get<2>(candidate);
@@ -79,12 +83,12 @@ float mcs::min_distance(const conceptual_graph& s1, const conceptual_graph& s2, 
     */
     std::cout << std::endl << "Best graph:" << std::endl << std::endl;
     best.print(std::cout);
-    std::cout << std::endl << "Punctuation = " << min_value << std::endl;
+    std::cout << std::endl << "Punctuation = " << max_value << std::endl;
     std::cout << "Correspondences = " << std::endl;
     auto it_cor_s1 = correspondence_s1.begin();
     auto it_cor_s2 = correspondence_s2.begin();
     for (; it_cor_s1 != correspondence_s1.end(); ++it_cor_s1, ++it_cor_s2) {
         std::cout << it_cor_s1->first << ">>> " << it_cor_s1->second << " <--> " << it_cor_s2->second << std::endl;
     }
-    return min_value;
+    return max_value;
 }

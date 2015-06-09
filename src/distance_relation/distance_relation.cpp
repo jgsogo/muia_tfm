@@ -28,6 +28,10 @@ float base_relation::operator()(const relation& r1, const relation& r2) const {
     }
 }
 
+float base_relation::similarity(const relation& r1, const relation& r2) const {
+    return 1.f - this->operator()(r1, r2);
+}
+
 float base_relation::min_distance(const std::vector<relation>& r1, const std::vector<relation>& r2, std::vector<_t_distance>& dist_combs) const {
     assert(r1.size() == r2.size());
     return this->min_distance(r1, r2, dist_combs, 0.f);
