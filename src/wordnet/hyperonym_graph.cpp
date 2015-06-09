@@ -180,7 +180,10 @@ map<synset, size_t> hyperonym_graph::hypernym_map(const wordnet& wnet, const syn
 
 	map<synset, std::size_t> ret;
 	for (auto& vertex_data : vertices) {
-		ret.insert(make_pair(d.hyperonym_graph[vertex_data.first], vertex_data.second));
+		auto it = ret.insert(make_pair(d.hyperonym_graph[vertex_data.first], vertex_data.second));
+        if (!it.second) {
+            it.first->second = std::min(it.first->second, vertex_data.second);
+        }
 	}
 	return ret;
 }

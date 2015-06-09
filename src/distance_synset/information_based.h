@@ -25,9 +25,9 @@ namespace wn {
 
             protected:
                 const hyperonym_graph& graph;
-                //const corpus& corpus_;
+                
                 std::map<synset, std::size_t> concept_count;
-                //std::size_t all_count;
+                std::size_t all_count;
                 std::size_t max_count;
 
         };
