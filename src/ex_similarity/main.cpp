@@ -176,7 +176,9 @@ int main(int argc, char** argv) {
         auto max_d = dist.upper_bound(s1, synsets2, penalize_each);
         cout << " - Distance € [" << min_d << ", " << max_d  << "]" << endl;
         cout << " - Min distance is " << data << endl;
-        cout << " - Ratio " << (data-min_d) / (max_d-min_d) << endl;
+        cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
+        cout << " - Sim_ration " << (max_d - data) / (max_d) << endl;
+        /*
         cout << " - Combinations: " << distances.size() << endl;
         for (auto it_dist = distances.begin(); it_dist != distances.end(); ++it_dist) {
             cout << " - Candidate pairs: " << endl;
@@ -195,6 +197,7 @@ int main(int argc, char** argv) {
             cout << "Press ENTER to continue...";
             getchar();
         }
+        */
     };
 
     cout << endl;

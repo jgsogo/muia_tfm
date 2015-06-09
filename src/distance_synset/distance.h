@@ -10,14 +10,14 @@ namespace wn {
         class WN_DISTANCE_SYNSET_EXPORT base_synset {
             public:
                 typedef std::vector<std::tuple<synset, synset, float>> _t_distance;
-                static const float max_distance; //! max_distance to consider synsets connected
+                //static const float max_distance; //! max_distance to consider synsets connected
 
             public:
                 base_synset();
                 //! Lower bound for the distance between two synsets (0.f iff synsets are equal)
                 float lower_bound() const;
-                //! Upper bound for the distance between two synsets (defaults to '''distance::base_synset::max_distance''')
-                virtual float upper_bound() const;
+                //! Upper bound for the distance between two synsets (1.f is the max distance for any synset pair)
+                float upper_bound() const;
 
                 //! Lower bound value for the distance between two synset sets.
                 float lower_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const;

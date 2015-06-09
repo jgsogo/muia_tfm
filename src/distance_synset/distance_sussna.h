@@ -18,13 +18,14 @@ namespace wn {
                 sussna(const hyperonym_graph& graph);
                 ~sussna();
 
-                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
                 virtual float similarity(const synset& s1, const synset& s2) const;
 
                 float edge_weight(const synset& child, const synset& parent) const;
 
             protected:
+                float max_distance() const;
+
                 static const std::pair<float, float> minmax_hyperonym_r;
                 static const std::pair<float, float> minmax_hyponym_r;
 

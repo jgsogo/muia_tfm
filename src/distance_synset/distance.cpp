@@ -7,17 +7,17 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-const float base_synset::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
+//const float base_synset::max_distance = 100000.f; //! TODO: ¿De alguna forma quiero/puedo saber cuál es el mayor valor de distancia posible?
 
 base_synset::base_synset() {
 }
 
 float base_synset::lower_bound() const {
-	return 0;
+	return 0.f;
 }
 
 float base_synset::upper_bound() const {
-    return max_distance;
+    return 1.f;
 }
 
 float base_synset::lower_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
@@ -61,7 +61,7 @@ float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& 
     std::iota(indexes.begin(), indexes.end(), 0);
 
     vector<pair<vector<size_t>, float>> permutations;
-    float min_value = base_synset::max_distance;
+    float min_value = this->upper_bound(v1, v2, penalize_each);
     do {
         float sum = 0.f;
         for (auto i = 0; i < v1.size(); ++i) {

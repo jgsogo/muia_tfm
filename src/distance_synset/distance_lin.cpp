@@ -46,7 +46,3 @@ float lin::similarity_exact(const synset& s1, const synset& s2) const {
     }
     return similarity;
 }
-
-float lin::upper_bound() const {
-    return 1.f;
-}

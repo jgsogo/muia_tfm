@@ -27,16 +27,17 @@ float wu_palmer::similarity_exact(const synset& s1, const synset& s2) const {
     auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
     //auto lch_depth = graph.max_depth();
     float similarity = 0.f;
+    float max_depth = graph.max_depth();
     for (auto& lch : lowest_common_hypernym) {
         // Work on paths s1->lch
-        auto min_distance_s1 = base_synset::max_distance;
+        auto min_distance_s1 = max_depth;
         auto paths_s1 = graph.hypernym_path(s1, lch);
         for (auto& path : paths_s1) {
             min_distance_s1 = std::min(min_distance_s1, float(path.size() - 1));
         }
         // Work on paths s2->lch
         auto paths_s2 = graph.hypernym_path(s2, lch);
-        auto min_distance_s2 = base_synset::max_distance;
+        auto min_distance_s2 = max_depth;
         for (auto& path : paths_s2) {
             min_distance_s2 = std::min(min_distance_s2, float(path.size() - 1));
         }
@@ -46,8 +47,4 @@ float wu_palmer::similarity_exact(const synset& s1, const synset& s2) const {
         similarity = std::max(similarity, aux_similarity);
     }
     return similarity;
-}
-
-float wu_palmer::upper_bound() const {
-	return 1.f;
 }
