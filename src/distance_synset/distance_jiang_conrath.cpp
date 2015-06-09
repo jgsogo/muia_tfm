@@ -26,7 +26,7 @@ float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
         for (auto& lch : lowest_common_hypernym) {
             auto it_lch = concept_count.find(lch);
             if (it_lch != concept_count.end()) {
-                auto aux_distance = 2 * log(it_lch->second) - (log(it_s1->second) + log(it_s2->second));
+                auto aux_distance = 2.f * log(it_lch->second / (float)all_count) - (log(it_s1->second / (float)all_count) + log(it_s2->second / (float)all_count));
                 distance = std::min(distance, float(aux_distance));
             }            
         }
@@ -41,5 +41,5 @@ float jiang_conrath::similarity(const synset& s1, const synset& s2) const {
 }
 
 float jiang_conrath::upper_bound() const {
-    return 2 * log(max_count) - (log(1) + log(1));
+    return 2.f * log(max_count / (float)all_count) - (log(1.f / (float)all_count) + log(1.f / (float)all_count));
 }
