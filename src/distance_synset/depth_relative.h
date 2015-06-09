@@ -16,6 +16,7 @@ namespace wn {
 
                 virtual float upper_bound() const = 0;
                 virtual float operator()(const synset& s1, const synset& s2) const = 0;
+                virtual float similarity(const synset& s1, const synset& s2) const = 0;
 
             protected:
                 const hyperonym_graph& graph;

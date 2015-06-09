@@ -13,14 +13,22 @@ namespace wn {
         class WN_DISTANCE_SYNSET_EXPORT information_based : public base_synset {
             public:
                 information_based(const hyperonym_graph& graph, const corpus& corpus_);
+                information_based(  const hyperonym_graph& graph, 
+                                    const std::map<synset, std::size_t>& concept_count, 
+                                    std::size_t all_count,
+                                    std::size_t max_count);
                 ~information_based();
 
                 virtual float upper_bound() const = 0;
                 virtual float operator()(const synset& s1, const synset& s2) const = 0;
+                virtual float similarity(const synset& s1, const synset& s2) const = 0;
 
             protected:
                 const hyperonym_graph& graph;
-                const corpus& corpus_;
+                //const corpus& corpus_;
+                std::map<synset, std::size_t> concept_count;
+                std::size_t all_count;
+                std::size_t max_count;
 
         };
     }

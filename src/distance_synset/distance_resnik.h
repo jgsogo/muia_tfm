@@ -14,16 +14,21 @@ namespace wn {
         */
         class WN_DISTANCE_SYNSET_EXPORT resnik : public information_based {
             public:
+                static void parse_corpus(const hyperonym_graph& graph, const corpus& corpus_, std::map<synset, 
+                                         std::size_t>& concept_count, std::size_t& all_count, std::size_t& max_count);
+
+            public:
                 resnik(const hyperonym_graph& graph, const wn::corpus& corpus);
+                resnik(const hyperonym_graph& graph,
+                    const std::map<synset, std::size_t>& concept_count,
+                    std::size_t all_count,
+                    std::size_t max_count);
                 ~resnik();
 
                 virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
 
             protected:
-                std::map<synset, std::size_t> concept_count;
-                std::size_t all_count;
-                std::size_t max_count;
         };
         typedef distance::resnik distance_resnik;
     }

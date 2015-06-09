@@ -101,3 +101,15 @@ float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& 
 
     return min_value + penalization;
 }
+
+
+float base_synset::similarity(const synset& s1, const synset& s2) const {
+    auto distance = this->operator()(s1, s2);
+    return wn::distance::similarity(*this, distance);
+}
+
+float similarity(const base_synset& metric, const float& distance_value) {
+    auto upper_bound = metric.upper_bound();
+    throw(std::exception("not implemented"));
+    return 0.f;
+}

@@ -6,19 +6,29 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-resnik::resnik(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {
+void resnik::parse_corpus(const hyperonym_graph& graph, const corpus& corpus_, 
+                          std::map<synset, std::size_t>& concept_count, std::size_t& all_count, std::size_t& max_count) {
     auto corpus_index = corpus_.get_index();
-    for (auto& s: corpus_index) {
+    for (auto& s : corpus_index) {
         auto hypernyms = graph.hypernym_map(s.first);
-        auto synset_count = std::accumulate(s.second.begin(), s.second.end(), 0, [](const size_t& lhs, const pair<corpus::doc_id, size_t>& doc_count){ return lhs+doc_count.second;});
+        auto synset_count = std::accumulate(s.second.begin(), s.second.end(), 0, [](const size_t& lhs, const pair<corpus::doc_id, size_t>& doc_count){ return lhs + doc_count.second; });
         // Append counts
         concept_count.insert(make_pair(s.first, 0)).first->second += synset_count;
-        for (auto& hypernym: hypernyms) {
+        for (auto& hypernym : hypernyms) {
             concept_count.insert(make_pair(hypernym.first, 0)).first->second += synset_count;
         }
-        all_count += synset_count*(hypernyms.size()+1); // TODO: Verificar esta operación. Podría ser simplemente ``all_count += synset_count``.
+        all_count += synset_count*(hypernyms.size() + 1);
     }
     max_count = std::max_element(concept_count.begin(), concept_count.end(), [](const pair<synset, size_t>& lhs, const pair<synset, size_t>& rhs){return lhs.second < rhs.second; })->second;
+}
+
+
+resnik::resnik(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {    
+}
+
+resnik::resnik( const hyperonym_graph& graph, const std::map<synset, std::size_t>& concept_count,
+                std::size_t all_count, std::size_t max_count)
+    : information_based(graph, concept_count, all_count, max_count) {
 }
 
 resnik::~resnik() {

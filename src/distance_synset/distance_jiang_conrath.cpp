@@ -6,18 +6,12 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-jiang_conrath::jiang_conrath(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {
-    auto corpus_index = corpus_.get_index();
-    for (auto& s: corpus_index) {
-        auto hypernyms = graph.hypernym_map(s.first);
-        auto synset_count = std::accumulate(s.second.begin(), s.second.end(), 0, [](const size_t& lhs, const pair<corpus::doc_id, std::size_t>& doc_count){ return lhs+doc_count.second;});
-        // Append counts
-        concept_count.insert(make_pair(s.first, 0)).first->second += synset_count;
-        for (auto& hypernym: hypernyms) {
-            concept_count.insert(make_pair(hypernym.first, 0)).first->second += synset_count;
-        }
-        all_count += synset_count*(hypernyms.size()+1);
-    }
+jiang_conrath::jiang_conrath(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {    
+}
+
+jiang_conrath::jiang_conrath(   const hyperonym_graph& graph, const std::map<synset, std::size_t>& concept_count,
+                                std::size_t all_count, std::size_t max_count) 
+    : information_based(graph, concept_count, all_count, max_count) {
 }
 
 jiang_conrath::~jiang_conrath() {
@@ -38,6 +32,10 @@ float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
         }
     }
     return distance;
+}
+
+float jiang_conrath::similarity(const synset& s1, const synset& s2) const {
+    return 0.f;
 }
 
 float jiang_conrath::upper_bound() const {
