@@ -27,6 +27,9 @@ namespace wn {
 
                 //! Distance between two relations
                 virtual float operator()(const relation& r1, const relation& r2) const;
+                //! Similarity between two relations
+                virtual float similarity(const relation& r1, const relation& r2) const;
+
                 //! Min distance between two bags of relations
                 float min_distance(const std::vector<relation>& r1, const std::vector<relation>& r2, std::vector<_t_distance>& dist_combs) const;
                 //! Min distance between two bags of relations (can be of different size)

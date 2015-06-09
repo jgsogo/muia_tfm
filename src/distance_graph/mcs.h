@@ -12,7 +12,7 @@ namespace wn {
                 ~mcs();
 
                 //! Compute minimum distance between two conceptual_graphs
-                virtual float min_distance(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const;
+                virtual float max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const;
 
         };
 

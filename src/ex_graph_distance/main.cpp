@@ -29,12 +29,12 @@ struct graph_dist {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
-        auto data = graph_distance.min_distance(graph1, graph2, penalize_node, penalize_edge);
+        auto data = graph_distance.max_similarity(graph1, graph2, penalize_node, penalize_edge);
         auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
         auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
-        cout << " - Distance in [" << min_d << ", " << max_d << "]" << endl;
-        cout << " - Min distance is " << data << endl;
-        cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
+        cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
+        cout << " - Max similarity is " << data << endl;
+        cout << " - Ratio " << data / max_d << endl;
     }
 
     conceptual_graph& graph1;
@@ -172,39 +172,39 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     //cout << "###### Using 'distance::mine' for graphs" << endl;
     //dist_graphs.distance_graphs<distance::mine>(shortest_path, distance_relation);
-    cout << "###### Using 'distance::mcs' for graphs" << endl;
+    //cout << "###### Using 'distance::mcs' for graphs" << endl;
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);
-    exit(1);
+    //exit(1);
 
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_sussna, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_sussna, distance_relation);
 
     cout << endl;
     cout << "# Distance 'Wu Palmer' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_wu_palmer, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation);
 
     cout << endl;
     cout << "# Distance 'Leacock & Chodorow' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_leacock_chodorow, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation);
 
     cout << endl;
     cout << "# Distance 'Resnik' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_resnik, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_resnik, distance_relation);
 
     cout << endl;
     cout << "# Distance 'Jiang && Conrath' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_jiang_conrath, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation);
 
     cout << endl;
     cout << "# Distance 'Lin' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mine>(distance_lin, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(distance_lin, distance_relation);
 
 
 }
