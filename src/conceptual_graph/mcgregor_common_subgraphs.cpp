@@ -1,6 +1,7 @@
 
 
 #include "mcgregor_common_subgraphs.h"
+#include <numeric>
 #include <boost/graph/mcgregor_common_subgraphs.hpp>
 #include "mcs_callback_print.h"
 #include "mcs_callback_store.h"
