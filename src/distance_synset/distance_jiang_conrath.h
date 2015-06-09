@@ -15,8 +15,9 @@ namespace wn {
             public:
                 jiang_conrath(const hyperonym_graph& graph, const wn::corpus& corpus_);
                 ~jiang_conrath();
+
+                virtual float upper_bound() const;
                 virtual float operator()(const synset& s1, const synset& s2) const;
-                virtual float max() const;
 
             protected:
                 std::map<synset, std::size_t> concept_count;

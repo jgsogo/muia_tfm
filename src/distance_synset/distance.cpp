@@ -12,27 +12,29 @@ const float base_synset::max_distance = 100000.f; //! TODO: ¿De alguna forma qui
 base_synset::base_synset() {
 }
 
-float base_synset::min() const {
+float base_synset::lower_bound() const {
 	return 0;
 }
 
-float base_synset::max() const {
+float base_synset::upper_bound() const {
     return max_distance;
 }
 
-float base_synset::min(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
-    return abs(int(v2.size()) - int(v1.size()))*penalization;
-}
-
-float base_synset::max(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
+float base_synset::lower_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
     auto min_elements = std::min(v2.size(), v1.size());
-    return min_elements*this->max() + abs(int(v2.size()) - int(v1.size()))*penalization;
+    return min_elements*this->lower_bound() + abs(int(v2.size()) - int(v1.size()))*penalization;
 }
 
+float base_synset::upper_bound(const std::vector<synset>& v1, const std::vector<synset>& v2, float penalization) const {
+    auto min_elements = std::min(v2.size(), v1.size());
+    return min_elements*this->upper_bound() + abs(int(v2.size()) - int(v1.size()))*penalization;
+}
 
+/*
 bool base_synset::connected(const synset& s1, const synset& s2) const {
     return (this->operator()(s1, s2) < base_synset::max_distance);
 }
+*/
 
 float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& v2, vector<_t_distance>& dist_combs) const {
     assert(v1.size() == v2.size());

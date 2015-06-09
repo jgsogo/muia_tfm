@@ -36,13 +36,13 @@ float resnik::operator()(const synset& s1, const synset& s2) const {
 	}
 
     if (similarity == 0) {
-        return this->max();
+        return this->upper_bound();
     }
 
     return 1.f/similarity;
 }
 
-float resnik::max() const {
+float resnik::upper_bound() const {
     // TODO: Think about a better approach for this 'max_distance' computation.
     auto min_similarity = -log(max_count / float(all_count));
     return 1.f / min_similarity;
