@@ -38,7 +38,6 @@ namespace wn {
             bool operator()(CorrespondenceMapFirstToSecond correspondence_map_1_to_2,
                             CorrespondenceMapSecondToFirst correspondence_map_2_to_1,
                             typename graph_traits<GraphFirst>::vertices_size_type subgraph_size) {
-
                 // Fill membership map for first graph
                 MembershipMap membership_map1(num_vertices(m_graph1), get(vertex_index, m_graph1));
                 fill_membership_map<GraphFirst>(m_graph1, correspondence_map_1_to_2, membership_map1);
