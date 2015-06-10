@@ -19,9 +19,9 @@ namespace wn {
     void mcgregor_common_subgraphs(
         const conceptual_graph& lhs,
         const conceptual_graph& rhs,
-        std::function<bool(const synset&, const synset&)> cmp_synset,
-        std::function<bool(const relation&, const relation&)> cmp_relation,
-        std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>>& ret) {
+        const cmp_synset& cmp_synset_,
+        const cmp_relation& cmp_relation_,
+        std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde, float>>& ret) {
 
         struct equivalence_func {
             equivalence_func(const _t_graph& g1,
@@ -43,7 +43,7 @@ namespace wn {
             const _t_graph& graph1;
             const _t_graph& graph2;
         };
-        equivalence_func funcs(lhs.d->graph, rhs.d->graph, cmp_synset, cmp_relation);
+        equivalence_func funcs(lhs.d->graph, rhs.d->graph, cmp_synset_, cmp_relation_);
 
         /*
         // Print out all connected common subgraphs between graph1 and graph2.
@@ -54,8 +54,8 @@ namespace wn {
 
         // Store all connected common subgraphs between graph1 and graph2 (from both perspectives).
         typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
-        std::vector<std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, std::map<std::size_t, std::size_t>>> subgraphs;
-        store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs);
+        std::vector<std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float>> subgraphs;
+        store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_);
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
 
@@ -63,6 +63,15 @@ namespace wn {
         The objective is to return every possible combination of subgraphs which is compatible; but it
         must be compatible in graph1 and graph2
         */
+        auto compatible_correspondences = [](const conceptual_graph_corresponde& lhs, const conceptual_graph_corresponde& rhs)->bool {
+            // Two correspondences are compatible if they don't share any common element;
+            for (auto& it_lhs : lhs) {
+                if (rhs.find(it_lhs.first) != rhs.end()) {
+                    return false;
+                }
+            }
+            return true;
+        };
         auto compatible_f = [](const store_callback::MembershipFilteredGraph& g, const conceptual_graph_corresponde& correspondence_graph)->bool{
             // Two graphs are compatible if they don't share any common element;
             store_callback::MembershipFilteredGraph::vertex_iterator v, v_end;
@@ -74,7 +83,7 @@ namespace wn {
             }
             return true;
         };
-        auto compatible_pairs = [&compatible_f](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, std::map<std::size_t, std::size_t>>& lhs,
+        auto compatible_pairs = [&compatible_f](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float>& lhs,
                                                 const conceptual_graph_corresponde& correspondence_graph1,
                                                 const conceptual_graph_corresponde& correspondence_graph2)->bool {
             // Tow pairs of graphs are compatible if each one-to-one comparison is also compatible.
@@ -85,7 +94,7 @@ namespace wn {
 
         /* Building conceptual graph from filtered one and building correspondence maps
         */
-        auto append_correspondence_tuple = [&lhs, &rhs](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, std::map<std::size_t, std::size_t>>& pair,
+        auto append_correspondence_tuple = [&lhs, &rhs](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float>& pair,
                                                         conceptual_graph& graph,
                                                         conceptual_graph_corresponde& correspondence_to_lhs,
                                                         conceptual_graph_corresponde& correspondence_to_rhs) {
@@ -112,26 +121,46 @@ namespace wn {
         };
 
         // We need to check for all permutations
-        //std::cout << "We will do " << subgraphs.size() << "! permutations" << std::endl;
+        std::cout << "We will do " << subgraphs.size() << "! permutations" << std::endl;
+        getchar();
         std::vector<size_t> indexes(subgraphs.size());
         std::iota(indexes.begin(), indexes.end(), 0);
+
+        std::vector<bool> compatibility_matrix(subgraphs.size()*subgraphs.size());
+        for (auto i = 0; i < subgraphs.size(); ++i) {
+            for (auto j = i; j < subgraphs.size(); ++j) {
+                if (i == j) {
+                    compatibility_matrix[i*subgraphs.size() + j] = false;
+                }
+                else {
+                    auto compatible = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
+                    compatibility_matrix[i*subgraphs.size() + j] = compatible;
+                    compatibility_matrix[j*subgraphs.size() + i] = compatible;
+                }
+            }
+        }
+
+        
         do {
-            //std::cout << ">>> graph[" << indexes[0] << "]" << std::endl;
+            std::cout << ">>> graph[" << indexes[0] << "]" << std::endl;
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
+            float similarity = 0.f;
             // Append myself
             append_correspondence_tuple(subgraphs[indexes[0]], graph, correspondence_to_lhs, correspondence_to_rhs);
-            for (auto i = 1; i<indexes.size(); ++i) {
-                if (compatible_pairs(subgraphs[indexes[i]], correspondence_to_lhs, correspondence_to_rhs)) {
-                    //std::cout << "\t" << indexes[i] << " compatible." << std::endl;
-                    append_correspondence_tuple(subgraphs[indexes[i]], graph, correspondence_to_lhs, correspondence_to_rhs);
-                    }
+            for (auto j = 1; j < indexes.size(); ++j) {
+                if (compatibility_matrix[indexes[0] * subgraphs.size() + indexes[j]]) {
+                    std::cout << "\t" << indexes[j] << " compatible." << std::endl;
+                    append_correspondence_tuple(subgraphs[indexes[j]], graph, correspondence_to_lhs, correspondence_to_rhs);
+                    similarity += get<3>(subgraphs[indexes[j]]);
+                }
                 else {
-                    //std::cout << "\t" << indexes[i] << " NON compatible." << std::endl;
+                    std::cout << "\t" << indexes[j] << " NON compatible." << std::endl;
                 }
             }
-            ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs));
+            std::cout << "\t sim_value = " << similarity << std::endl;
+            ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
         } while (next_permutation(indexes.begin(), indexes.end()));
     }
 }
