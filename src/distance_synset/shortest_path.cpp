@@ -11,6 +11,10 @@ shortest_path::shortest_path(const wordnet& wnet) :wnet(wnet) {
 }
 
 float shortest_path::operator()(const synset& s1, const synset& s2) const {
+    if (s1 == s2) {
+        return 0.f;
+    }
+
     auto map1 = hyperonym_graph::hypernym_map(wnet, s1);
     auto map2 = hyperonym_graph::hypernym_map(wnet, s2);
 

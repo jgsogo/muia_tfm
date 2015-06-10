@@ -18,6 +18,9 @@ jiang_conrath::~jiang_conrath() {
 }
 
 float jiang_conrath::operator()(const synset& s1, const synset& s2) const {
+    if (s1 == s2) {
+        return 0.f;
+    }
     auto distance = this->max_distance();
     auto it_s1 = concept_count.find(s1);
     auto it_s2 = concept_count.find(s2);
