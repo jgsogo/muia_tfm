@@ -54,7 +54,6 @@ float sussna::operator()(const synset& s1, const synset& s2) const {
                 min_weight_s1 = std::min(min_weight_s1, path_weight(path));
             }
             // Work on paths s2->lch
-
             auto min_weight_s2 = this->max_distance()/2.f;
             for (auto& path : paths_s2) {
                 min_weight_s2 = std::min(min_weight_s2, path_weight(path));
