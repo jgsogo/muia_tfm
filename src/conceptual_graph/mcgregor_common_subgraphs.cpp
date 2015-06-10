@@ -26,9 +26,9 @@ namespace wn {
         struct equivalence_func {
             equivalence_func(const _t_graph& g1,
                 const _t_graph& g2,
-                std::function<bool(const synset&, const synset&)> synset_dist,
-                std::function<bool(const relation&, const relation&)> relation_dist)
-                : graph1(g1), graph2(g2), dist_synset(synset_dist), dist_relation(relation_dist) {
+                const cmp_synset& cmp_synset_,
+                const cmp_relation& cmp_relation_)
+                : graph1(g1), graph2(g2), dist_synset(cmp_synset_), dist_relation(cmp_relation_) {
             };
 
             bool operator()(graph_traits<_t_graph>::vertex_descriptor v1, graph_traits<_t_graph>::vertex_descriptor v2) {
@@ -38,8 +38,8 @@ namespace wn {
                 return dist_relation(graph1[e1], graph2[e2]);
             };
 
-            std::function<bool(const synset&, const synset&)> dist_synset;
-            std::function<bool(const relation&, const relation&)> dist_relation;
+            const cmp_synset& dist_synset;
+            const cmp_relation& dist_relation;
             const _t_graph& graph1;
             const _t_graph& graph2;
         };
@@ -120,7 +120,7 @@ namespace wn {
         }
 
         /*
-        std::cout << "Compatibility matrix: " << std::endl;
+        std::cout << "Compatibility matrix: " << subgraphs.size() << std::endl;
         for (auto i = 0; i < subgraphs.size(); ++i) {
             for (auto j = 0; j < subgraphs.size(); ++j) {
                 std::cout << compatibility_matrix[i*subgraphs.size() + j] << " ";

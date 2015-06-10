@@ -25,7 +25,7 @@ struct graph_dist {
     graph_dist(conceptual_graph& g1, conceptual_graph& g2) : graph1(g1), graph2(g2) {};
 
     template <class GraphDistance>
-    void distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist) {
+    void distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f) {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
@@ -33,7 +33,7 @@ struct graph_dist {
         auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
         cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
-        auto data = graph_distance.max_similarity(graph1, graph2, penalize_node, penalize_edge);
+        auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance);
         cout << " - Max similarity is " << data << endl;
         cout << " - Ratio " << data / max_d << endl;
     }
@@ -154,7 +154,9 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);
+    dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);// , 0.1f, 0.1f);
+    //dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, 0.5f, 0.5f);// 1.f, 1.f);
+    //exit(1);
 
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;

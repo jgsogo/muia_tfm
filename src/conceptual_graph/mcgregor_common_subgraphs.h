@@ -7,13 +7,13 @@
 namespace wn {
 
     struct cmp_synset {
-        virtual bool operator()(const synset& s1, const synset& s2) const { return s1 == s2; };
-        virtual float similarity(const synset& s1, const synset& s2) const { return (s1 == s2) ? 1.f : 0.f; };
+        virtual bool operator()(const synset& s1, const synset& s2) const = 0;// { return s1 == s2; };
+        virtual float similarity(const synset& s1, const synset& s2) const = 0;// { return (s1 == s2) ? 1.f : 0.f; };
     };
 
     struct cmp_relation {
-        virtual bool operator()(const relation& r1, const relation& r2) const { return r1 == r2; };
-        virtual float similarity(const relation& r1, const relation& r2) const { return (r1 == r2) ? 1.f : 0.f; };
+        virtual bool operator()(const relation& r1, const relation& r2) const = 0;// { return r1 == r2; };
+        virtual float similarity(const relation& r1, const relation& r2) const = 0;// { return (r1 == r2) ? 1.f : 0.f; };
     };
 
     typedef std::map<conceptual_graph::synset_id, conceptual_graph::synset_id> conceptual_graph_corresponde;
