@@ -12,6 +12,7 @@ namespace wn {
         class WN_DISTANCE_GRAPH_EXPORT base_graph {
             public:
                 base_graph(const base_synset& base_distance, const base_relation& dist_relation);
+                ~base_graph();
 
                 //! Lower bound for the distance between two graphs
                 virtual float lower_bound(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const;

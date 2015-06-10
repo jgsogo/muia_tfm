@@ -8,6 +8,10 @@ using namespace wn::distance;
 base_graph::base_graph(const base_synset& dist, const base_relation& dist_relation) : dist_synset(dist), dist_relation(dist_relation) {
 }
 
+base_graph::~base_graph() {
+
+}
+
 float base_graph::lower_bound(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
     // Due to nodes
     auto s1_nodes = s1.get_nodes();

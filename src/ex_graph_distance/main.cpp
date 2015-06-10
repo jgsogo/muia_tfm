@@ -29,10 +29,11 @@ struct graph_dist {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
-        auto data = graph_distance.max_similarity(graph1, graph2, penalize_node, penalize_edge);
         auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
         auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
         cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
+
+        auto data = graph_distance.max_similarity(graph1, graph2, penalize_node, penalize_edge);
         cout << " - Max similarity is " << data << endl;
         cout << " - Ratio " << data / max_d << endl;
     }
