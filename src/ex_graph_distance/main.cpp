@@ -33,9 +33,12 @@ struct graph_dist {
         auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
         cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
-        auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance);
+        // Variables to hold results
+        conceptual_graph result;
+        auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance, result);
         cout << " - Max similarity is " << data << endl;
         cout << " - Ratio " << data / max_d << endl;
+        result.print(std::cout);
     }
 
     conceptual_graph& graph1;
@@ -154,10 +157,9 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
-    dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);// , 0.1f, 0.1f);
-    //dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, 0.5f, 0.5f);// 1.f, 1.f);
-    //exit(1);
-
+    dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, 0.1f, 0.1f);
+    dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, .9f, .9f);
+    
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
     cout << "#-------------------------------" << endl;

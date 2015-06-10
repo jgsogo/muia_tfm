@@ -32,6 +32,12 @@ conceptual_graph& conceptual_graph::operator+=(const conceptual_graph& other) {
     return *this;
 }
 
+conceptual_graph& conceptual_graph::operator=(const conceptual_graph& other) {
+    delete d;
+    d = new data(*other.d);
+    return *this;
+}
+
 conceptual_graph::~conceptual_graph() {
     delete d;
 }

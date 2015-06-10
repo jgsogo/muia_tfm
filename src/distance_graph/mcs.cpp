@@ -12,9 +12,15 @@ mcs::mcs(const base_synset& base_distance, const base_relation& dist_relation) :
 mcs::~mcs() {
 }
 
-float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float synset_tolerance, float relation_tolerance) const {
-    assert(synset_tolerance >= 0.f && synset_tolerance <= 1.f);
-    assert(relation_tolerance >= 0.f && relation_tolerance <= 1.f);
+//! Compute max_similarity between two conceptual_graphs (tolerances must belong to [0, 1))
+float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2,
+                          float synset_tolerance, float relation_tolerance,
+                          conceptual_graph& result,
+                          conceptual_graph_corresponde& s1_to_result,
+                          conceptual_graph_corresponde& s2_to_result) const {
+    assert(synset_tolerance >= 0.f && synset_tolerance < 1.f);
+    assert(relation_tolerance >= 0.f && relation_tolerance < 1.f);
+
     struct synset_cmp : cmp_synset {
         synset_cmp(const base_synset& syn) : dist_synset(syn) {}
         virtual bool operator() (const synset& a, const synset& b) const {
@@ -55,9 +61,9 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     });
 
     if (it != mcs_subgraphs.end()) {
-        auto best = get<0>(*it);
-        auto correspondence_s1 = get<1>(*it);
-        auto correspondence_s2 = get<2>(*it);
+        result = get<0>(*it);
+        s1_to_result = get<1>(*it);
+        s2_to_result = get<2>(*it);
         auto max_value = get<3>(*it);
 
         /*
@@ -78,4 +84,12 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     else {
         return 0.f;
     }
+}
+
+
+float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float synset_tolerance, float relation_tolerance) const {
+    conceptual_graph result;
+    conceptual_graph_corresponde s1_to_result;
+    conceptual_graph_corresponde s2_to_result;
+    return this->max_similarity(s1, s2, synset_tolerance, relation_tolerance, result, s1_to_result, s2_to_result);
 }
