@@ -28,6 +28,10 @@ float sussna::edge_weight(const synset& child, const synset& parent) const {
 }
 
 float sussna::operator()(const synset& s1, const synset& s2) const {
+    if (s1 == s2) {
+        return 0.f;
+    }
+
 	//hyperonym_graph graph(wordnet);
     auto distance = this->max_distance();
 	auto lowest_common_hypernym = graph.lowest_hypernym(s1, s2);
