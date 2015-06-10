@@ -152,10 +152,15 @@ namespace wn {
             else {
                 for (auto& i : indexes_) {
                     _t_indexes aux = filter_compatibles(indexes_, i);
-                    std::vector<_t_indexes> tmp = recurse_indexes(aux);
-                    for (auto& seq : tmp) {
-                        auto it = ret.insert(ret.end(), {i});
-                        it->insert(it->end(), seq.begin(), seq.end());
+                    if (aux.size()) { // Always look for maximum correpondence
+                        std::vector<_t_indexes> tmp = recurse_indexes(aux);
+                        for (auto& seq : tmp) {
+                            auto it = ret.insert(ret.end(), { i });
+                            it->insert(it->end(), seq.begin(), seq.end());
+                        }
+                    }
+                    else {
+                        ret.insert(ret.end(), { i });
                     }
                 }
             }

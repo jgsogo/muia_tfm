@@ -17,6 +17,7 @@ namespace wn {
             conceptual_graph(const conceptual_graph& other);
             ~conceptual_graph();
 
+            conceptual_graph& operator=(const conceptual_graph&);
             conceptual_graph& operator+=(const conceptual_graph&);
 
             synset_id add_node(const synset& s); //! returns 'id' for the given node (the same synset can appear more than once).
