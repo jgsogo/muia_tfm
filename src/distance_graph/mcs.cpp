@@ -57,6 +57,7 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     auto correspondence_s2 = get<2>(*it);
     auto max_value = get<3>(*it);
 
+    /*
     std::cout << "\t - init print_best_graph" << std::endl;
     std::cout << std::endl << "Best graph:" << std::endl << std::endl;
     best.print(std::cout);
@@ -68,5 +69,6 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
         std::cout << it_cor_s1->first << ">>> " << it_cor_s1->second << " <--> " << it_cor_s2->second << std::endl;
     }
     std::cout << "\t - end  print_best_graph" << std::endl;
+    */
     return max_value;
 }
