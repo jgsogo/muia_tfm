@@ -45,7 +45,6 @@ float base_synset::min_distance(const vector<synset>& v1, const vector<synset>& 
     // Look for the combination that minimizes distance between the two sets.
     assert(v1.size() <= v2.size());
     auto penalization = (v2.size() - v1.size())*penalize_each;
-    assert(v1.size()*base_synset::max_distance <= (std::numeric_limits<float>::max() - penalization));
 
     // v1.size() is number of rows
     // v2.size() is number of columns

@@ -13,21 +13,25 @@ mcs::~mcs() {
 }
 
 float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
-    struct synset_cmp {
+    struct synset_cmp : cmp_synset {
         synset_cmp(const base_synset& syn) : dist_synset(syn) {}
-        bool operator() (const synset& a, const synset& b) {
-            auto distance = dist_synset(a, b);
-            return distance <= synset_threshold;
+        virtual bool operator() (const synset& a, const synset& b) const {
+            return dist_synset(a, b) <= synset_threshold;
+        }
+        virtual float similarity(const synset& a, const synset& b) const {
+            return dist_synset.similarity(a, b);
         }
         const base_synset& dist_synset;
         float synset_threshold;
     };
 
-    struct relation_cmp {
+    struct relation_cmp : cmp_relation {
         relation_cmp(const base_relation& rel) : dist_relation(rel) {}
-        bool operator() (const relation& a, const relation& b) {
-            auto distance = dist_relation(a, b);
-            return distance <= edge_threshold;
+        virtual bool operator() (const relation& a, const relation& b) const {
+            return dist_relation(a, b) <= edge_threshold;
+        }
+        virtual float similarity(const relation& a, const relation& b) const {
+            return dist_relation.similarity(a, b);
         }
         const base_relation& dist_relation;
         float edge_threshold;
@@ -39,8 +43,10 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.lower_bound() + 0.1f*(dist_relation.upper_bound()-dist_relation.lower_bound());
 
-    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde>> mcs_subgraphs;
+    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde, float>> mcs_subgraphs;
+    std::cout << "\t + init mcgregor_common_subgraphs" << std::endl;
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);
+    std::cout << "\t - end mcgregor_common_subgraphs" << std::endl;
 
     // Rank candidates and keep the best one (minimizes distance)
     auto max_value = std::numeric_limits<float>::min();

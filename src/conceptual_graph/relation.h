@@ -9,6 +9,9 @@ namespace wn {
         int type;
         synset source;
         synset target;       
+        bool operator==(const relation& other) const {
+            return type == other.type;
+        };
     };
 
     inline std::ostream& operator<<(std::ostream& os, const relation& rel) {

@@ -6,6 +6,9 @@
 #include "relation.h"
 
 namespace wn {
+    struct cmp_synset;
+    struct cmp_relation;
+
     class WN_CONCEPTUAL_GRAPH_EXPORT conceptual_graph {
         public:
             typedef std::size_t synset_id;
@@ -30,9 +33,9 @@ namespace wn {
             friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
                 const conceptual_graph& lhs,
                 const conceptual_graph& rhs,
-                std::function<bool (const synset&, const synset&)>,
-                std::function<bool (const relation&, const relation&)>,
-                std::vector<std::tuple<conceptual_graph, std::map<synset_id, synset_id>, std::map<synset_id, synset_id>>>&
+                const cmp_synset&,
+                const cmp_relation&,
+                std::vector<std::tuple<conceptual_graph, std::map<synset_id, synset_id>, std::map<synset_id, synset_id>, float>>&
                 );
         protected:
             struct data;

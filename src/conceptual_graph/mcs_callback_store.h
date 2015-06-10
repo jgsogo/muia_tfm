@@ -5,6 +5,7 @@
 #include <boost/graph/mcgregor_common_subgraphs.hpp>
 #include "conceptual_graph.h"
 #include "conceptual_graph_data.h"
+#include "mcgregor_common_subgraphs.h"
 
 namespace wn {
     namespace mcs {
@@ -27,7 +28,10 @@ namespace wn {
 
             store_callback(const GraphFirst& graph1,
                 const GraphSecond& graph2,
-                std::vector < std::tuple < MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>>> &out_vector) : m_graph1(graph1), m_graph2(graph2), graphs(out_vector) {
+                std::vector < std::tuple < MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>, float>> &out_vector,
+                const wn::cmp_synset& cmp_synset,
+                const wn::cmp_relation& cmp_relation)
+                : m_graph1(graph1), m_graph2(graph2), graphs(out_vector), cmp_synset(cmp_synset), cmp_relation(cmp_relation) {
             }
 
             template <typename CorrespondenceMapFirstToSecond, typename CorrespondenceMapSecondToFirst>
@@ -49,22 +53,30 @@ namespace wn {
 
                 // Build corresponde-map between graph1->graph2
                 std::map<std::size_t, std::size_t> correspondence;
+                float similarity = 0.f;
                 BGL_FORALL_VERTICES_T(vertex1, m_graph1, GraphFirst) {
                     // Skip unmapped vertices
                     if (get(correspondence_map_1_to_2, vertex1) != graph_traits<GraphSecond>::null_vertex()) {
-                        correspondence[vertex1] = get(correspondence_map_1_to_2, vertex1);
-                        //std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << std::endl;
+                        auto v2 = get(correspondence_map_1_to_2, vertex1);
+                        correspondence[vertex1] = v2;
+                        similarity += cmp_synset.similarity(m_graph1[vertex1], m_graph2[v2]);
+                        std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << "\t sim_value = " << cmp_synset.similarity(m_graph1[vertex1], m_graph2[v2]) << std::endl;
                     }
                 }
-                //std::cout << "---" << std::endl;
-                graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence));
+
+                // TODO(jgsogo): Append similarity due to relations...
+
+                std::cout << "---" << std::endl;
+                graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
                 return (true);
             }
 
             private:
+                const wn::cmp_synset& cmp_synset;
+                const wn::cmp_relation& cmp_relation;
                 const GraphFirst& m_graph1;
                 const GraphSecond& m_graph2;
-                std::vector<std::tuple<MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>>>& graphs;
+                std::vector<std::tuple<MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>, float>>& graphs;
         };
     }
 }

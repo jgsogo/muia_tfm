@@ -73,9 +73,9 @@ int main(int argc, char** argv) {
             }
         }
     };
-    read_corpus_dir(basepath + "brown1/");
-    read_corpus_dir(basepath + "brown2/");
-    read_corpus_dir(basepath + "brownv/");
+    //read_corpus_dir(basepath + "brown1/");
+    //read_corpus_dir(basepath + "brown2/");
+    //read_corpus_dir(basepath + "brownv/");
 
 
     cout << endl;
