@@ -43,50 +43,21 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     relation_cmp cmp_relation(dist_relation);
     cmp_relation.edge_threshold = dist_relation.lower_bound() + 0.1f*(dist_relation.upper_bound()-dist_relation.lower_bound());
 
-    std::vector<std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde, float>> mcs_subgraphs;
-    std::cout << "\t + init mcgregor_common_subgraphs" << std::endl;
+    typedef std::tuple<conceptual_graph, conceptual_graph_corresponde, conceptual_graph_corresponde, float> _t_subgraph_data;
+    std::vector<_t_subgraph_data> mcs_subgraphs;
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);
-    std::cout << "\t - end mcgregor_common_subgraphs" << std::endl;
 
     // Rank candidates and keep the best one (minimizes distance)
-    auto max_value = std::numeric_limits<float>::min();
-    conceptual_graph best;
-    conceptual_graph_corresponde correspondence_s1;
-    conceptual_graph_corresponde correspondence_s2;
-    for (auto& candidate: mcs_subgraphs) {
-        auto value = 0.f;
-        auto candidate_graph = get<0>(candidate);
-        
-        // Similarity between nodes:
-        auto it_s1 = get<1>(candidate).begin();
-        auto it_s2 = get<2>(candidate).begin();
-        for (; it_s1 != get<1>(candidate).end(); ++it_s1, ++it_s2) {
-            value += dist_synset.similarity(s1.get_node(it_s1->second), s2.get_node(it_s2->second));
-        }
+    auto it = std::max_element(mcs_subgraphs.begin(), mcs_subgraphs.end(), [](_t_subgraph_data& lhs, _t_subgraph_data& rhs){
+        return get<3>(lhs) < get<3>(rhs);
+    });
 
-        // Similarity by relations
-        // TODO(jgsogo): Sum also similarity by relations.
+    auto best = get<0>(*it);
+    auto correspondence_s1 = get<1>(*it);
+    auto correspondence_s2 = get<2>(*it);
+    auto max_value = get<3>(*it);
 
-        // Graph coverage
-        //auto max_size = std::max(s1.get_nodes().size(), s2.get_nodes().size());
-        //value = value + cmp_synset.synset_threshold*(max_size-candidate_graph.get_nodes().size());
-
-        // Update maximum
-        if (value > max_value) {
-            max_value = value;
-            best = get<0>(candidate);
-            correspondence_s1 = get<1>(candidate);
-            correspondence_s2 = get<2>(candidate);
-        }
-    }
-
-    /*
-    std::cout << "All candidates: " << std::endl;
-    for (auto& graph : mcs_subgraphs) {
-        std::cout << std::endl << "wn::distance::mcs" << std::endl;
-        std::get<0>(graph).print(std::cout);
-    }
-    */
+    std::cout << "\t - init print_best_graph" << std::endl;
     std::cout << std::endl << "Best graph:" << std::endl << std::endl;
     best.print(std::cout);
     std::cout << std::endl << "Punctuation = " << max_value << std::endl;
@@ -96,5 +67,6 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     for (; it_cor_s1 != correspondence_s1.end(); ++it_cor_s1, ++it_cor_s2) {
         std::cout << it_cor_s1->first << ">>> " << it_cor_s1->second << " <--> " << it_cor_s2->second << std::endl;
     }
+    std::cout << "\t - end  print_best_graph" << std::endl;
     return max_value;
 }

@@ -59,6 +59,7 @@ namespace wn {
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
 
+
         /* Combination of subgraphs must be done here, where I have original node_ids (I have filtered graphs).
         The objective is to return every possible combination of subgraphs which is compatible; but it
         must be compatible in graph1 and graph2
@@ -72,25 +73,7 @@ namespace wn {
             }
             return true;
         };
-        auto compatible_f = [](const store_callback::MembershipFilteredGraph& g, const conceptual_graph_corresponde& correspondence_graph)->bool{
-            // Two graphs are compatible if they don't share any common element;
-            store_callback::MembershipFilteredGraph::vertex_iterator v, v_end;
-            std::tie(v, v_end) = vertices(g);
-            for (; v != v_end; ++v) {
-                if (correspondence_graph.find(*v) != correspondence_graph.end()) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        auto compatible_pairs = [&compatible_f](const std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float>& lhs,
-                                                const conceptual_graph_corresponde& correspondence_graph1,
-                                                const conceptual_graph_corresponde& correspondence_graph2)->bool {
-            // Tow pairs of graphs are compatible if each one-to-one comparison is also compatible.
-            auto g1_map = std::get<0>(lhs);
-            auto g2_map = std::get<1>(lhs);
-            return (compatible_f(g1_map, correspondence_graph1) && compatible_f(g2_map, correspondence_graph2));
-        };
+
 
         /* Building conceptual graph from filtered one and building correspondence maps
         */
@@ -120,47 +103,120 @@ namespace wn {
             }
         };
 
-        // We need to check for all permutations
-        std::cout << "We will do " << subgraphs.size() << "! permutations" << std::endl;
-        getchar();
-        std::vector<size_t> indexes(subgraphs.size());
-        std::iota(indexes.begin(), indexes.end(), 0);
-
-        std::vector<bool> compatibility_matrix(subgraphs.size()*subgraphs.size());
-        for (auto i = 0; i < subgraphs.size(); ++i) {
-            for (auto j = i; j < subgraphs.size(); ++j) {
+        auto n_subgraphs = subgraphs.size();
+        // Build compatibility matrix
+        std::vector<bool> compatibility_matrix(n_subgraphs*n_subgraphs);
+        for (auto i = 0; i < n_subgraphs; ++i) {
+            for (auto j = i; j < n_subgraphs; ++j) {
                 if (i == j) {
-                    compatibility_matrix[i*subgraphs.size() + j] = false;
+                    compatibility_matrix[i*n_subgraphs + j] = false;
                 }
                 else {
                     auto compatible = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
-                    compatibility_matrix[i*subgraphs.size() + j] = compatible;
-                    compatibility_matrix[j*subgraphs.size() + i] = compatible;
+                    compatibility_matrix[i*n_subgraphs + j] = compatible;
+                    compatibility_matrix[j*n_subgraphs + i] = compatible;
                 }
             }
         }
 
-        
-        do {
-            std::cout << ">>> graph[" << indexes[0] << "]" << std::endl;
+        /*
+        std::cout << "Compatibility matrix: " << std::endl;
+        for (auto i = 0; i < subgraphs.size(); ++i) {
+            for (auto j = 0; j < subgraphs.size(); ++j) {
+                std::cout << compatibility_matrix[i*subgraphs.size() + j] << " ";
+            }
+            std::cout << std::endl;
+        }
+        getchar();
+        */
+
+        // Build all posible compatible combinations (without order)
+        typedef std::vector<std::size_t> _t_indexes;
+        std::vector<_t_indexes> compatible_subgraphs;
+        auto filter_compatibles = [&compatibility_matrix, &n_subgraphs](const _t_indexes& original, const std::size_t& row)->_t_indexes{
+            _t_indexes ret;
+            for (auto& i : original) {
+                if (compatibility_matrix[row*n_subgraphs + i]) {
+                    ret.push_back(i);
+                }
+            }
+            return ret;
+        };
+
+
+        std::function<std::vector<_t_indexes>(const _t_indexes&)> recurse_indexes = [&recurse_indexes, &filter_compatibles](const _t_indexes& indexes_)->std::vector<_t_indexes>{
+            std::vector<_t_indexes> ret;
+            if (indexes_.size() == 1) {
+                ret.insert(ret.end(), { indexes_[0] });
+            }
+            else {
+                for (auto& i : indexes_) {
+                    _t_indexes aux = filter_compatibles(indexes_, i);
+                    std::vector<_t_indexes> tmp = recurse_indexes(aux);
+                    for (auto& seq : tmp) {
+                        auto it = ret.insert(ret.end(), {i});
+                        it->insert(it->end(), seq.begin(), seq.end());
+                    }
+                }
+            }
+            return ret;
+        };
+
+        std::vector<std::size_t> indexes(n_subgraphs);
+        std::iota(indexes.begin(), indexes.end(), 0);
+        auto all_compatible_combinations = recurse_indexes(indexes);
+
+        // Filter combinations
+        decltype(all_compatible_combinations) all_compatible_filtered;
+        for (auto& comb : all_compatible_combinations) {
+            std::sort(comb.begin(), comb.end());
+            auto repeated = std::any_of(all_compatible_filtered.begin(), all_compatible_filtered.end(), [&comb](const _t_indexes& item)->bool{
+                auto it_comb = comb.begin();
+                auto it_item = item.begin();
+                while (it_comb != comb.end() && it_item != item.end() && *it_comb == *it_item) {
+                    ++it_comb, ++it_item;
+                }
+                return (it_comb == comb.end() && it_item == item.end());
+            });
+            if (!repeated) { all_compatible_filtered.push_back(comb); }
+        }
+
+        /*
+        std::cout << "Compatible combinations (filtered): " << all_compatible_filtered.size() << std::endl;
+        auto i = 0;
+        for (auto& comb : all_compatible_filtered) {
+            std::cout << i++ << ": ";
+            for (auto& item : comb) {
+                std::cout << item << ", ";
+            }
+            std::cout << std::endl;
+        }
+        getchar();
+        */
+
+        // Build return vector
+        for (auto& combination : all_compatible_filtered) {
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
             float similarity = 0.f;
-            // Append myself
-            append_correspondence_tuple(subgraphs[indexes[0]], graph, correspondence_to_lhs, correspondence_to_rhs);
-            for (auto j = 1; j < indexes.size(); ++j) {
-                if (compatibility_matrix[indexes[0] * subgraphs.size() + indexes[j]]) {
-                    std::cout << "\t" << indexes[j] << " compatible." << std::endl;
-                    append_correspondence_tuple(subgraphs[indexes[j]], graph, correspondence_to_lhs, correspondence_to_rhs);
-                    similarity += get<3>(subgraphs[indexes[j]]);
-                }
-                else {
-                    std::cout << "\t" << indexes[j] << " NON compatible." << std::endl;
-                }
-            }
-            std::cout << "\t sim_value = " << similarity << std::endl;
+            for (auto& index : combination) {
+                append_correspondence_tuple(subgraphs[index], graph, correspondence_to_lhs, correspondence_to_rhs);
+                similarity += get<3>(subgraphs[index]);
+            }            
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
-        } while (next_permutation(indexes.begin(), indexes.end()));
+        }
+
+
+        /* TODO: Aquí se puede implementar un algoritmo recursivo basado en la compatibilidad. A medida que voy
+            seleccionando/añadiendo grafos las opciones compatibles van disminuyendo (sólo es compatible la
+            intersección de los que son compatibles con cada uno de los grafos que he añadido) ==> nace un 
+            concepto de "Compatibility cascade/recursive algorithm" o quizá se puede convertir la matriz en
+            un árbol donde cada camino sea un una combinación posible.
+
+            Todo este preprocesado, bien implementado, seguro que reduce los tiempos de cálculo (y la explosión
+            combinatoria) de forma drástica.
+        */
+        
     }
 }
