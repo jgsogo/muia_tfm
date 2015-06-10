@@ -74,9 +74,9 @@ int main(int argc, char** argv) {
             }
         }
     };
-    //read_corpus_dir(basepath + "brown1/");
-    //read_corpus_dir(basepath + "brown2/");
-    //read_corpus_dir(basepath + "brownv/");
+    read_corpus_dir(basepath + "brown1/");
+    read_corpus_dir(basepath + "brown2/");
+    read_corpus_dir(basepath + "brownv/");
 
 
     cout << endl;
@@ -139,24 +139,7 @@ int main(int argc, char** argv) {
     cgraph2.print(std::cout);
     }
 
-
-
-
-
-
-    /*
-    auto distance_graphs = [&cgraph1, &cgraph2](distance::base& words) {
-        distance::mine mine_distance(dist);
-        auto penalize_node = dist.max();
-        auto penalize_edge = mine_distance.max_edge_distance();
-        auto data = mine_distance.min_distance(cgraph1, cgraph2, penalize_node, penalize_edge);
-        auto min_d = mine_distance.min(cgraph1, cgraph2, penalize_node, penalize_edge);
-        auto max_d = mine_distance.max(cgraph1, cgraph2, penalize_node, penalize_edge);
-        cout << " - Distance in [" << min_d << ", " << max_d << "]" << endl;
-        cout << " - Min distance is " << data << endl;
-        cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
-    };
-    */
+    
     distance::shortest_path shortest_path(wnet);
     distance::sussna distance_sussna(graph);
     distance::wu_palmer distance_wu_palmer(graph);
@@ -171,11 +154,7 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
-    //cout << "###### Using 'distance::mine' for graphs" << endl;
-    //dist_graphs.distance_graphs<distance::mine>(shortest_path, distance_relation);
-    //cout << "###### Using 'distance::mcs' for graphs" << endl;
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation);
-    //exit(1);
 
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
