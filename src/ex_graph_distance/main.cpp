@@ -118,7 +118,7 @@ int main(int argc, char** argv) {
     auto id_top = cgraph1.add_node(top);
     auto id_mountain = cgraph1.add_node(mountain);
 
-    cgraph1.add_relation(id_drink, id_dog, 1);
+    cgraph1.add_relation(id_drink, id_dog, relation::AGT);
     cgraph1.add_relation(id_dog, id_red, 1);
     cgraph1.add_relation(id_drink, id_water, 1);
     cgraph1.add_relation(id_drink, id_top, 1);
@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
     cgraph2.print(std::cout);
     }
 
-    
+
     distance::shortest_path shortest_path(wnet);
     distance::sussna distance_sussna(graph);
     distance::wu_palmer distance_wu_palmer(graph);
@@ -159,7 +159,7 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, 0.1f, 0.1f);
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, .9f, .9f);
-    
+
     cout << endl;
     cout << "# Distance 'Sussna' between synset sets" << endl;
     cout << "#-------------------------------" << endl;
