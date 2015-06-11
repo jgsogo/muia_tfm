@@ -155,8 +155,8 @@ tipología de primer nivel (agt, and, aoj,...) y distintas en caso contrario (ve
                 n15_m01_l01[label="met\n[method]"]
             n15_m02[label="pur\n[purpose]"]
 
-        n15[label="rsn\n[reason]"]
-        n15[label="seq\n[consequence]"]
+        n16[label="rsn\n[reason]"]
+        n17[label="seq\n[consequence]"]
         
         r -> n01
         r -> n02
