@@ -111,7 +111,7 @@ namespace wn {
     namespace distance {
         float similarity(const base_synset& metric, const float& distance_value) {
             auto upper_bound = metric.upper_bound();
-            throw(std::exception("not implemented"));
+            throw(std::exception());
             return 0.f;
         }
     }

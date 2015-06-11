@@ -8,7 +8,7 @@ using namespace wn::distance;
 using namespace std;
 
 
-information_based::information_based(const hyperonym_graph& graph_, const corpus& corpus_) : graph(graph_) {
+information_based::information_based(const hyperonym_graph& graph_, const corpus& corpus_) : graph(graph_), all_count(0) {
     // Word count based on Resnik (1995)
     resnik::parse_corpus(graph_, corpus_, concept_count, all_count, max_count);
 }

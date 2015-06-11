@@ -98,7 +98,7 @@ namespace wn {
                 tie(e, e_end) = boost::out_edges(*v, std::get<0>(pair));
                 for (; e != e_end; ++e) {
                     auto tgt = target(*e, std::get<0>(pair));
-                    graph.add_relation(tmp_map[*v], tmp_map[tgt], lhs.d->graph[*e].type);
+                    graph.add_relation(tmp_map[*v], tmp_map[tgt], lhs.d->graph[*e].type_);
                 }
             }
         };
@@ -208,20 +208,20 @@ namespace wn {
             for (auto& index : combination) {
                 append_correspondence_tuple(subgraphs[index], graph, correspondence_to_lhs, correspondence_to_rhs);
                 similarity += get<3>(subgraphs[index]);
-            }            
+            }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
         }
 
 
         /* TODO: Aquí se puede implementar un algoritmo recursivo basado en la compatibilidad. A medida que voy
             seleccionando/añadiendo grafos las opciones compatibles van disminuyendo (sólo es compatible la
-            intersección de los que son compatibles con cada uno de los grafos que he añadido) ==> nace un 
+            intersección de los que son compatibles con cada uno de los grafos que he añadido) ==> nace un
             concepto de "Compatibility cascade/recursive algorithm" o quizá se puede convertir la matriz en
             un árbol donde cada camino sea un una combinación posible.
 
             Todo este preprocesado, bien implementado, seguro que reduce los tiempos de cálculo (y la explosión
             combinatoria) de forma drástica.
         */
-        
+
     }
 }

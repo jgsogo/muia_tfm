@@ -20,7 +20,7 @@ float base_relation::upper_bound() const {
 }
 
 float base_relation::operator()(const relation& r1, const relation& r2) const {
-    if (r1.type == r2.type) {
+    if (r1.type_ == r2.type_) {
         return this->lower_bound();
     }
     else {
@@ -105,7 +105,7 @@ float base_relation::min_distance(const vector<relation>& r1, const vector<relat
     else {
         assert(r2.size() >= r1.size());
         float distance = r1.size()*this->upper_bound();
-        auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type < rhs.type; };
+        auto relation_less = [](const relation& lhs, const relation& rhs){ return lhs.type_ < rhs.type_; };
         vector<relation> aux_rel2(r2.begin(), r2.end());
         sort(aux_rel2.begin(), aux_rel2.end(), relation_less);
         do {
