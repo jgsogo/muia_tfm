@@ -34,7 +34,7 @@ struct graph_dist {
         cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
         // Variables to hold results
-        conceptual_graph result;
+        unl_graph result;
         auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance, result);
         cout << " - Max similarity is " << data << endl;
         cout << " - Ratio " << data / max_d << endl;
