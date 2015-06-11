@@ -2,7 +2,7 @@
 
 sussna_edge_weight <- function(n, min, max) {
     r <- max - (max-min)/n
-    1/r
+    #1/r
 }
 
 sussna_edge_weight_fixed <- function(n, min, max) {
@@ -11,7 +11,7 @@ sussna_edge_weight_fixed <- function(n, min, max) {
 
 sussna <- function(n, min, max, depth, edge_weight) {
     w1 <- edge_weight(n, min, max)
-    w2 <- edge_weight(1, min, max)
+    w2 <- edge_weight(n, min, max)
     (w1+w2)/(2*depth)
 }
 
@@ -28,10 +28,10 @@ debug <- function(upto, min, max, depth) {
     par(mfrow=c(1,2)) # all plots on one page
     
     heading = paste("Sussna (1993)") 
-    plot(n, sussna, type="l", main=heading, xlab="number of edges", ylab="edge weight")
+    plot(n, sussna, type="l", main=heading, xlab="n. relaciones", ylab="distancia")
     #lines(n, sussna, type="l")
     
-    heading = paste("Fixed") 
-    plot(n, sussna_fixed, type="l", main=heading, xlab="number of edges", ylab="edge weight")
+    heading = paste("Modificado") 
+    plot(n, sussna_fixed, type="l", main=heading, xlab="n. relaciones", ylab="distancia")
     #lines(n, sussna_fixed, type="l")
 }
