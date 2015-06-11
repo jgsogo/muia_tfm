@@ -26,4 +26,5 @@ dejado a un lado, pero que sin duda son importantes:
    en oraciones más largas, donde los grafos tengan un número mayor de nodos, la búsqueda
    por fuerza bruta puede resultar intratable.
    
- * 
+ * Demostrar si el algoritmo de similaridad entre grafos que se ha propuesto devuelve un
+   valor que cumple las propiedades de distancia.
