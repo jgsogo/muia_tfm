@@ -58,7 +58,7 @@ la RAE define como "valiente", pero que en su uso está más próxima al concept
 Distancia entre oraciones
 `````````````````````````
 El otro gran problema asociado a la representación del conocimiento es la interpretación
-del mensaje, que también tiene un componente subjetivo dificilmente medible. Una parte
+del mensaje, que también tiene un componente subjetivo difícilmente medible. Una parte
 muy importante del mensaje es implícito y su comprensión depende del sustrato cultural
 común de los interlocutores, es un problema que mencionábamos al hablar de los 
 fenómenos lingüísticos (:num:`sección #fenomenos-linguisticos`).
@@ -69,7 +69,7 @@ bajo que indicara que son muy similares, o bien, el mismo mensaje puede ser
 interpretado de manera diferente por distintos sujetos y entonces sí que existirá
 distancia real entre los grafos producidos.
 
-A pesar de que existen numeros artículos en torno a la comparación de grafos, la literatura
+A pesar de que existen numerosos artículos en torno a la comparación de grafos, la literatura
 no es tan prolífica a la hora de comparar grafos conceptuales y, mucho menos, en la
 comparación flexible de grafos UNL. No se ha encontrado ningún artículo en el que
 se ofrezca una comparativa entre los resultados obtenidos por diferentes algoritmos.
@@ -106,6 +106,7 @@ nuestra medida.
    de lenguaje partiendo de grafos codificados en UNL:
    http://www.unl.fi.upm.es/CLE/spanish/fr_examples.htm (accedido en junio de 2015).
 
+   
 .. planteamiento-problema_
 Plantemaiento del problema
 --------------------------
