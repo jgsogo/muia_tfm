@@ -273,7 +273,8 @@ condujo a la creación de un proyecto europeo (LE-2 4003 y LE-4 8328) para gener
 en otros idiomas europeos y unir todos ellos en una base de datos multilingüe que permite,
 a partir de una palabra, consultar palabras similares en cualquier otro idioma [#]_.
 
-.. [#] EuroWordNet: Building a multilingual database with wordnets for several European languages. http://www.illc.uva.nl/EuroWordNet/ (accedida en mayo de 2015) 
+.. [#] EuroWordNet: Building a multilingual database with wordnets for several European
+   languages. http://www.illc.uva.nl/EuroWordNet/ (accedida en mayo de 2015) 
 
 Los primeros cuatro idiomas que se adhirieron al proyecto fueron holandés (Universidad de
 Amsterdam), italiano (CNR, Pisa), español (Fundación Universidad Empresa) e inglés (Universidad
