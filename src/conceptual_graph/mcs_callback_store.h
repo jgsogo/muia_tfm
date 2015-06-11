@@ -66,8 +66,8 @@ namespace wn {
                 // Append similarity due to relations...
                 // TODO: This code snippet can misbehave if there are more than one edge between the two same nodes
                 for (auto& vertices : correspondence) {
-                    graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g1_begin, it_edges_g1_end;
-                    graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g2_begin, it_edges_g2_end;
+                    typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g1_begin, it_edges_g1_end;
+                    typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g2_begin, it_edges_g2_end;
                     std::tie(it_edges_g1_begin, it_edges_g1_end) = boost::out_edges(vertices.first, subgraph1);
                     std::tie(it_edges_g2_begin, it_edges_g2_end) = boost::out_edges(vertices.second, subgraph2);
                     for (; it_edges_g1_begin != it_edges_g1_end; ++it_edges_g1_begin) {
