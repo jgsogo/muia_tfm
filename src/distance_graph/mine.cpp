@@ -9,22 +9,16 @@ using namespace std;
 mine::mine(const base_synset& base_distance, const base_relation& dist_relation) : base_graph(base_distance, dist_relation) {
 }
 
-//! Compute max_similarity between two conceptual_graphs (tolerances must belong to [0, 1))
 float mine::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2,
-    float synset_tolerance, float relation_tolerance,
-    conceptual_graph& result,
-    conceptual_graph_corresponde& s1_to_result,
-    conceptual_graph_corresponde& s2_to_result
-    ) const {
-    throw std::exception();
-}
-
-float mine::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float node_penalization, float edge_penalization) const {
+                           float node_penalization, float edge_penalization,
+                           conceptual_graph& result,
+                           conceptual_graph_corresponde& s1_to_result,
+                           conceptual_graph_corresponde& s2_to_result) const {
     auto s1_nodes = s1.get_nodes();
     auto s2_nodes = s2.get_nodes();
 
     if (s1_nodes.size() > s2_nodes.size()) {
-        return this->max_similarity(s2, s1, node_penalization, edge_penalization);
+        return this->max_similarity(s2, s1, node_penalization, edge_penalization, result, s1_to_result, s2_to_result);
     }
     else {
         assert(s2_nodes.size() >= s1_nodes.size());

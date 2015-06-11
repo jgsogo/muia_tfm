@@ -87,9 +87,4 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
 }
 
 
-float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2, float synset_tolerance, float relation_tolerance) const {
-    conceptual_graph result;
-    conceptual_graph_corresponde s1_to_result;
-    conceptual_graph_corresponde s2_to_result;
-    return this->max_similarity(s1, s2, synset_tolerance, relation_tolerance, result, s1_to_result, s2_to_result);
-}
+
