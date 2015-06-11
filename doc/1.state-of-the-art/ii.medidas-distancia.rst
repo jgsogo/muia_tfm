@@ -294,7 +294,8 @@ parte de un node :math:`c_1` un peso dentro de un intervalo :math:`[min_r, max_r
 función del número de relaciones del mismo tipo que parten de él:
 
 .. math::
-	
+    :label: sussna
+    
     wt(c_1 \rightarrow_r) = min_r + \frac{max_r - min_r}{edges_r (c_1)}
 
 
@@ -303,6 +304,8 @@ función del número de relaciones del mismo tipo que parten de él:
    está expresado como :math:`max_r - \frac{max_r - min_r}{edges_r (c_1)}`, así ocurre que el peso 
    es mayor cuanto mayor sea el número de arcos lo que es contrario a la intuición de que a
    mayor densidad de la red menor es la distancia entre conceptos.
+   
+   ¿Cómo y dónde planteo esta duda?
 
 
 La distancia entre dos conceptos adyacentes :math:`c_1` y :math:`c_2` es la media
