@@ -24,7 +24,7 @@ namespace wn {
             synset get_node(const synset_id& s1) const;
             std::map<synset_id, synset> get_nodes() const;
 
-            void add_relation(const synset_id& s1, const synset_id& s2, int rel_type);
+            void add_relation(const synset_id& s1, const synset_id& s2, relation::type&);
             std::vector<relation> get_edges() const;
             std::vector<relation> get_outgoing_edges(const synset_id& id) const;
 
@@ -42,5 +42,5 @@ namespace wn {
             struct data;
             data* d;
     };
-    
+
 }

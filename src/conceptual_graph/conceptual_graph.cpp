@@ -52,9 +52,9 @@ synset conceptual_graph::get_node(const synset_id& s1) const {
     return d->graph[s1];
 }
 
-void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, int rel_type) {
+void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, relation::type& rel_type) {
     relation rel;
-    rel.type = rel_type;
+    rel.type_ = rel_type;
     rel.source = get_node(s1);
     rel.target = get_node(s2);
     boost::add_edge(s1, s2, rel, d->graph);
