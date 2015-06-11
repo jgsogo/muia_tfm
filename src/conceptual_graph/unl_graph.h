@@ -1,8 +1,9 @@
 
 #pragma once
 
-#include "conceptual_graph.h"
 #include <vector>
+#include "conceptual_graph.h"
+#include "unl_relation.h"
 
 namespace wn {
 

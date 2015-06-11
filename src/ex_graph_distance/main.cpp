@@ -5,7 +5,7 @@
 #include <boost/filesystem.hpp>
 #include "../wordnet/wordnet.h"
 #include "../wordnet/hyperonym_graph.h"
-#include "../conceptual_graph/conceptual_graph.h"
+#include "../conceptual_graph/unl_graph.h"
 #include "../distance_synset/shortest_path.h"
 #include "../distance_synset/distance_sussna.h"
 #include "../distance_synset/distance_wu_palmer.h"
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
 
 
 
-    conceptual_graph cgraph1;
+    unl_graph cgraph1;
     { // Graph#1: The red dog drinks water in the top of a mountain
     cout << endl;
     cout << "Graph#1: The red dog drinks water in the top of a mountain." << endl;
@@ -118,15 +118,15 @@ int main(int argc, char** argv) {
     auto id_top = cgraph1.add_node(top);
     auto id_mountain = cgraph1.add_node(mountain);
 
-    cgraph1.add_relation(id_drink, id_dog, relation::AGT);
-    cgraph1.add_relation(id_dog, id_red, 1);
-    cgraph1.add_relation(id_drink, id_water, 1);
-    cgraph1.add_relation(id_drink, id_top, 1);
-    cgraph1.add_relation(id_top, id_mountain, 1);
+    cgraph1.add_relation(id_drink, id_dog, unl::relation::AGT);
+    cgraph1.add_relation(id_dog, id_red, unl::relation::AGT);
+    cgraph1.add_relation(id_drink, id_water, unl::relation::AGT);
+    cgraph1.add_relation(id_drink, id_top, unl::relation::AGT);
+    cgraph1.add_relation(id_top, id_mountain, unl::relation::AGT);
     cgraph1.print(std::cout);
     }
 
-    conceptual_graph cgraph2;
+    unl_graph cgraph2;
     { // Graph#2: The dog drinks water under the top of a mountain
     cout << endl;
     cout << "Graph#2: The dog drinks water under the top of a mountain." << endl;
@@ -135,10 +135,10 @@ int main(int argc, char** argv) {
     auto id_water = cgraph2.add_node(water);
     auto id_top = cgraph2.add_node(top);
     auto id_mountain = cgraph2.add_node(mountain);
-    cgraph2.add_relation(id_drink, id_dog, 1);
-    cgraph2.add_relation(id_drink, id_water, 1);
-    cgraph2.add_relation(id_drink, id_top, 100);
-    cgraph2.add_relation(id_top, id_mountain, 1);
+    cgraph2.add_relation(id_drink, id_dog, unl::relation::AGT);
+    cgraph2.add_relation(id_drink, id_water, unl::relation::AGT);
+    cgraph2.add_relation(id_drink, id_top, unl::relation::BEN);
+    cgraph2.add_relation(id_top, id_mountain, unl::relation::AGT);
     cgraph2.print(std::cout);
     }
 
@@ -161,32 +161,32 @@ int main(int argc, char** argv) {
     dist_graphs.distance_graphs<distance::mcs>(shortest_path, distance_relation, .9f, .9f);
 
     cout << endl;
-    cout << "# Distance 'Sussna' between synset sets" << endl;
+    cout << "# Distance 'Sussna' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_sussna, distance_relation);
 
     cout << endl;
-    cout << "# Distance 'Wu Palmer' between synset sets" << endl;
+    cout << "# Distance 'Wu Palmer' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation);
 
     cout << endl;
-    cout << "# Distance 'Leacock & Chodorow' between synset sets" << endl;
+    cout << "# Distance 'Leacock & Chodorow' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation);
 
     cout << endl;
-    cout << "# Distance 'Resnik' between synset sets" << endl;
+    cout << "# Distance 'Resnik' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_resnik, distance_relation);
 
     cout << endl;
-    cout << "# Distance 'Jiang && Conrath' between synset sets" << endl;
+    cout << "# Distance 'Jiang && Conrath' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation);
 
     cout << endl;
-    cout << "# Distance 'Lin' between synset sets" << endl;
+    cout << "# Distance 'Lin' between graphs" << endl;
     cout << "#-------------------------------" << endl;
     dist_graphs.distance_graphs<distance::mcs>(distance_lin, distance_relation);
 

@@ -6,7 +6,7 @@ using namespace wn;
 using namespace wn::distance;
 using namespace std;
 
-void resnik::parse_corpus(const hyperonym_graph& graph, const corpus& corpus_, 
+void resnik::parse_corpus(const hyperonym_graph& graph, const corpus& corpus_,
                           std::map<synset, std::size_t>& concept_count, std::size_t& all_count, std::size_t& max_count) {
     auto corpus_index = corpus_.get_index();
     for (auto& s : corpus_index) {
@@ -20,11 +20,11 @@ void resnik::parse_corpus(const hyperonym_graph& graph, const corpus& corpus_,
         all_count += synset_count;
     }
     max_count = std::max_element(concept_count.begin(), concept_count.end(), [](const pair<synset, size_t>& lhs, const pair<synset, size_t>& rhs){return lhs.second < rhs.second; })->second;
-    assert(all_count <= max_count);
+    assert(all_count >= max_count);
 }
 
 
-resnik::resnik(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {    
+resnik::resnik(const hyperonym_graph& graph, const corpus& corpus_) : information_based(graph, corpus_) {
 }
 
 resnik::resnik( const hyperonym_graph& graph, const std::map<synset, std::size_t>& concept_count,
