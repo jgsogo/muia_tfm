@@ -15,3 +15,4 @@ install
 *.pyc
 *.orig
 *~
+*.Rhistory
