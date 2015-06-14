@@ -45,6 +45,8 @@ if (BUILD_EXAMPLES)
     add_subdirectory(ex_graph_distance)
 endif(BUILD_EXAMPLES)
 
+add_subdirectory(work_sample)
+
 
 # Data
 #------------------------

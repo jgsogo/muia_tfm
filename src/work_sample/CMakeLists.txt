@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( ex_similarity )
+project( work_sample )
 
 
 file(GLOB _headers "*.h")
@@ -11,18 +11,17 @@ set(SRC_FILES
             )
 
 # Dependencies
-include_directories(${wn_distance_INCLUDE_DIR})
 
 # Project example
-add_executable( ex_similarity ${SRC_FILES})
-set_property(TARGET ex_similarity PROPERTY CXX_STANDARD 11)
+add_executable( work_sample ${SRC_FILES})
+set_property(TARGET work_sample PROPERTY CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-target_link_libraries(ex_similarity ${WNB_LIBRARIES} wn_wordnet wn_corpus wn_distance_synset ${XML_PARSER_LIBRARIES})
-set_target_properties(ex_similarity PROPERTIES DEBUG_POSTFIX d
+target_link_libraries(work_sample ${Boost_LIBRARIES} ${WNB_LIBRARIES} wn_corpus wn_wordnet wn_distance_synset wn_conceptual_graph wn_distance_graph wn_distance_relation)
+set_target_properties(work_sample PROPERTIES DEBUG_POSTFIX d
                                                LINKER_LANGUAGE CXX
-                                               FOLDER "examples")
+                                               FOLDER "work")
 
-install(TARGETS ex_similarity
+install(TARGETS work_sample
   RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" COMPONENT bin
   LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT shlib
   ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" COMPONENT lib

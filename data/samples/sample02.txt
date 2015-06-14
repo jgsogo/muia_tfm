@@ -1,0 +1,103 @@
+# Original
+> In their 29th General Conference, the 186 member states of the Unesco ratified their unanimous support of the project, jointly organized by the Spanish government, the Catalan autonomous government and the Barcelona City Council. 
+
+[S:6]
+agt(ratify(icl>do).@complete.@entry.@past,member state.@def.@pl)
+qua(member state.@def.@pl,186)
+mod(member state.@def.@pl,unesco.@def)
+scn(ratify(icl>do).@complete.@entry.@past,conference(icl>meeting).@def)
+mod(conference(icl>meeting).@def,29.@ordinal)
+mod(conference(icl>meeting).@def,member state.@def.@pl)
+obj(ratify(icl>do).@complete.@entry.@past,support(icl>action))
+mod(support(icl>action),unanimous(mod<thing))
+mod(support(icl>action),member state.@def.@pl)
+obj(support(icl>action),project(icl>plan(icl>thing)).@def)
+obj(organize(icl>do),project(icl>plan(icl>thing)).@def)
+man(organize(icl>do),jointly)
+agt(organize(icl>do),government(icl>organization):01.@def)
+mod(government(icl>organization):01.@def,spanish(mod<thing))
+and(government(icl>organization):01.@def,government(icl>organization):02.@def)
+mod(government(icl>organization):02.@def,Catalonian)
+mod(government(icl>organization):02.@def,autonomous(mod<thing))
+and(government(icl>organization):02.@def,:02)
+mod:02(council(icl>organization).@def.@entry,city.@def)
+mod(:02,Barcelona)
+[/S]
+
+{unl}
+agt(ratify%2:41:00::, state%1:14:00::)
+;qua(state%1:14:00::, 186)
+mod(state%1:14:00::, unesco%1:14:00::)
+scn(ratify%2:41:00::, conference%1:14:00::)
+;mod(conference%1:14:00::, 29)
+mod(conference%1:14:00::, state%1:14:00::)
+obj(ratify%2:41:00::, support%1:04:00::)
+mod(support%1:04:00::, consentaneous%3:00:00:accordant:00)
+mod(support%1:04:00::, state%1:14:00::)
+obj(support%1:04:00::, project%1:04:00::)
+obj(organize%2:41:00::, project%1:04:00::)
+man(organize%2:41:00::, jointly%4:02:02::)
+agt(organize%2:41:00::, 01%government%1:14:00::)
+mod(01%government%1:14:00::, spanish%3:01:00::)
+and(01%government%1:14:00::, 02%government%1:14:00::)
+;mod(02%government%1:14:00::, catalonian)
+mod(02%government%1:14:00::, autonomous%3:00:00:free:00)
+and(02%government%1:14:00::, council%1:14:01::)
+mod(council%1:14:01::, city%1:15:01::)
+mod(council%1:14:01::, barcelona%1:15:00::)
+{/unl}
+
+# Systran
+> En su 29na conferencia general, los 186 Estados miembros de la UNESCO ratificaron su ayuda unánime del proyecto, organizada en común por el gobierno español, el gobierno autónomo catalán y el Ayuntamiento de Barcelona.
+
+# Google
+> In its 29th general conference, the 186 Member States of UNESCO unanimously reaffirmed their support of the project, organized jointly by the Spanish government, the Catalan Autonomous Government and the City of Barcelona.
+
+{unl}
+agt(reaffirm%2:32:00::, state%1:14:00::)
+;qua(state%1:14:00::, 186)
+mod(state%1:14:00::, unesco%1:14:00::)
+scn(reaffirm%2:32:00::, conference%1:14:00::)
+;mod(conference%1:14:00::, 29)
+;mod(conference%1:14:00::, state%1:14:00::) <- "it's conference"
+mod(reaffirm%2:32:00::, unanimously%4:02:00::)
+obj(reaffirm%2:32:00::, support%1:04:00::)
+mod(support%1:04:00::, state%1:14:00::)
+obj(support%1:04:00::, project%1:04:00::)
+obj(organize%2:41:00::, project%1:04:00::)
+man(organize%2:41:00::, jointly%4:02:02::)
+agt(organize%2:41:00::, 01%government%1:14:00::)
+mod(01%government%1:14:00::, spanish%3:01:00::)
+and(01%government%1:14:00::, 02%government%1:14:00::)
+;mod(02%government%1:14:00::, catalonian)
+mod(02%government%1:14:00::, autonomous%3:00:00:free:00)
+and(02%government%1:14:00::, city%1:15:01::)
+mod(council%1:14:01::, barcelona%1:15:00::)
+{/unl}
+
+# Yandex
+> In your 29na general conference, the 186 member States of UNESCO have ratified their unanimous support of the project, organized jointly by the Spanish government, the autonomous government of catalonia and the Barcelona city Council.
+
+{unl}
+agt(ratify%2:41:00::, state%1:14:00::)
+;qua(state%1:14:00::, 186)
+mod(state%1:14:00::, unesco%1:14:00::)
+scn(ratify%2:41:00::, conference%1:14:00::)
+;mod(conference%1:14:00::, 29)
+;mod(conference%1:14:00::, state%1:14:00::) <- "your conference"
+obj(ratify%2:41:00::, support%1:04:00::)
+mod(support%1:04:00::, consentaneous%3:00:00:accordant:00)
+mod(support%1:04:00::, state%1:14:00::)
+obj(support%1:04:00::, project%1:04:00::)
+obj(organize%2:41:00::, project%1:04:00::)
+man(organize%2:41:00::, jointly%4:02:02::)
+agt(organize%2:41:00::, 01%government%1:14:00::)
+mod(01%government%1:14:00::, spanish%3:01:00::)
+and(01%government%1:14:00::, 02%government%1:14:00::)
+;mod(02%government%1:14:00::, catalonian)
+mod(02%government%1:14:00::, autonomous%3:00:00:free:00)
+and(02%government%1:14:00::, council%1:14:01::)
+mod(council%1:14:01::, city%1:15:01::)
+mod(council%1:14:01::, barcelona%1:15:00::)
+{/unl}
+

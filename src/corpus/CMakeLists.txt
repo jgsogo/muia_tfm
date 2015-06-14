@@ -17,7 +17,7 @@ set(HEADERS   corpus.h
               )
 
 add_library(wn_corpus ${SRC_FILES})
-target_link_libraries(wn_corpus ${XML_PARSER_LIBRARIES})
+target_link_libraries(wn_corpus wn_wordnet ${XML_PARSER_LIBRARIES})
 set_target_properties(wn_corpus PROPERTIES DEBUG_POSTFIX d
                                            PUBLIC_HEADER "${HEADERS}"
                                            LINKER_LANGUAGE CXX

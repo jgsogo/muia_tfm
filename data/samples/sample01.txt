@@ -1,0 +1,30 @@
+# Original
+
+; [3] The Universal Forum of Cultures will be held from April 23 to September 24, 2004, and will include exhibitions, debates and festivals to celebrate cultural diversity throughout the world. 
+
+[S:3]
+aoj(include(icl>be).@entry.@future,:01) 
+mod:01(forum.@def.@entry,universal) 
+mod:01(forum.@def.@entry,culture(icl>abstract thing).@def.@pl) 
+obj(include(icl>be).@entry.@future,festival(icl>event).@pl) 
+and(festival(icl>event).@pl,debate(icl>event).@pl) 
+and(debate(icl>event).@pl,exhibition(icl>event).@pl) 
+pur(include(icl>be).@entry.@future,celebrate(icl>do)) 
+obj(celebrate(icl>do),diversity(icl>variety).@def) 
+mod(diversity(icl>variety).@def,cultural) 
+scn(diversity(icl>variety).@def,throughout) 
+obj(throughout,world(icl>region).@def) 
+[/S]
+
+
+# Systran
+
+El foro universal de culturas será sostenido del 23 de abril al 24 de septiembre de 2004, e incluirá exposiciones, discusiones y festivales para celebrar diversidad cultural en el mundo entero. 
+
+# Google
+
+; The Universal Forum of Cultures will be held from April 23 to September 24, 2004, and will include exhibitions, debates and festivals to celebrate cultural diversity in the world.
+
+# Yandex
+ 	
+; The universal forum of cultures will be held from April 23 to September 24, 2004, and will include exhibitions, discussions, and festivals that celebrate cultural diversity in the world.
