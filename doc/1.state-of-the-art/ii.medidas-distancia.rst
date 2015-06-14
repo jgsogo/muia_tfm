@@ -487,4 +487,4 @@ Como referencia citamos los trabajos de Petrakis *et al.* :cite:`Petrakis2006` y
 Tversky :cite:`Tversky1977`, pero su enfoque se aparta del planteamiento de esta tesis donde contamos
 con los conceptos desambiguados y con una red de conceptos a nuestra disposición.
 
-
+.. TODO: Añadir medidas basadas en buscadores web (ver :cite:`Maind2012`)

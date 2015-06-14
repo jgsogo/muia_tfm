@@ -6,21 +6,6 @@
 using namespace wn;
 using namespace std;
 
-tuple<pos_t, size_t, size_t> parse_lexsn(const std::string& lexsn) {
-    // lex_sense ::= ss_type:lex_filenum:lex_id:head_word:head_id
-    pos_t pos;
-    size_t filenum, lex_id;
-    stringstream ss(lexsn);
-    string item;
-    vector<string> elems;
-    while (getline(ss, item, ':')) {
-        elems.push_back(item);
-    }
-    pos = static_cast<pos_t>(atoi(elems[0].c_str()));
-    filenum = atoi(elems[1].c_str());
-    lex_id = atoi(elems[2].c_str());
-    return make_tuple(pos, filenum, lex_id);
-}
 
 semcor::semcor(const wordnet& wnet) : corpus(wnet) {
 }
@@ -33,7 +18,7 @@ corpus::_t_doc_index semcor::parse_document(const std::string& filename) const {
         string lemma = wf.get_attribute("lemma", has_lemma);
         string lexsn = wf.get_attribute("lexsn", has_lexsn);
         if (has_lemma && has_lexsn) {
-            auto data = parse_lexsn(lexsn);
+            auto data = wn::parse_lexsn(lexsn);
             vector<wn::index>::const_iterator i, i_end;
             tie(i, i_end) = wnet.get_indexes(lemma);
             for (; i!=i_end; ++i) {
