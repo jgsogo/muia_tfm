@@ -119,8 +119,9 @@ namespace wn {
             }
         }
 
-        /*
+        
         std::cout << "Compatibility matrix: " << subgraphs.size() << std::endl;
+        /*
         for (auto i = 0; i < subgraphs.size(); ++i) {
             for (auto j = 0; j < subgraphs.size(); ++j) {
                 std::cout << compatibility_matrix[i*subgraphs.size() + j] << " ";
@@ -171,6 +172,7 @@ namespace wn {
         std::iota(indexes.begin(), indexes.end(), 0);
         auto all_compatible_combinations = recurse_indexes(indexes);
 
+        std::cout << "Compatible combinations: " << all_compatible_combinations.size() << std::endl;
         // Filter combinations
         decltype(all_compatible_combinations) all_compatible_filtered;
         for (auto& comb : all_compatible_combinations) {
@@ -186,8 +188,9 @@ namespace wn {
             if (!repeated) { all_compatible_filtered.push_back(comb); }
         }
 
-        /*
+        
         std::cout << "Compatible combinations (filtered): " << all_compatible_filtered.size() << std::endl;
+        /*
         auto i = 0;
         for (auto& comb : all_compatible_filtered) {
             std::cout << i++ << ": ";

@@ -70,8 +70,9 @@ int main(int argc, char** argv) {
             while (it != endit) {
                 if (fs::is_regular_file(*it) && it->path().extension() == ".xml") {
                     auto filename = fs::absolute(it->path());
+                    cout << "\t" << filename;
                     auto doc_index = corpus.add_document(filename.string());
-                    cout << "\t" << filename << " --> " << doc_index.size() << " synsets." << endl;
+                    cout << " --> " << doc_index.size() << " synsets." << endl;
                 }
                 ++it;
             }

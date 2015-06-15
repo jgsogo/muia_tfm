@@ -34,7 +34,6 @@ corpus::_t_doc_index semcor::parse_document(const std::string& filename) const {
                     }
                 }
             }
-            //cout << endl;
         }
     };
     // Parser

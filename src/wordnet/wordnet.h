@@ -17,4 +17,6 @@ namespace wn {
     typedef std::tuple<pos_t, std::size_t, std::size_t, std::string, std::size_t> lex_sense;
     WN_WORDNET_EXPORT lex_sense parse_lexsn(const std::string& lexsn_str);
 
+    WN_WORDNET_EXPORT int search_synset(const wordnet&, const std::string&, const lex_sense&);
+
 }
