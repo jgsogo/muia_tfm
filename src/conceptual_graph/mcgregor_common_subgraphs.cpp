@@ -105,7 +105,7 @@ namespace wn {
 
         // Build compatibility matrix
         auto n_subgraphs = subgraphs.size();
-        std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
+        //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
         std::vector<std::vector<bool>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
             std::vector<bool> i_compatible(n_subgraphs);
@@ -125,7 +125,7 @@ namespace wn {
         auto unique_matrix = compatibility_matrix;
         std::sort(unique_matrix.begin(), unique_matrix.end());
         unique_matrix.erase(std::unique(unique_matrix.begin(), unique_matrix.end()), unique_matrix.end());
-        std::cout << "Unique combinations: " << unique_matrix.size() << std::endl;
+        //std::cout << "Unique combinations: " << unique_matrix.size() << std::endl;
 
         // Build return vector
         for (auto& row : unique_matrix) {
@@ -142,7 +142,7 @@ namespace wn {
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
         }
-        std::cout << "Return vector: " << ret.size() << std::endl;
+        //std::cout << "Return vector: " << ret.size() << std::endl;
 
         /* TODO: Aquí se puede implementar un algoritmo recursivo basado en la compatibilidad. A medida que voy
             seleccionando/añadiendo grafos las opciones compatibles van disminuyendo (sólo es compatible la

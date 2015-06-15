@@ -16,6 +16,19 @@ scn(diversity(icl>variety).@def,throughout)
 obj(throughout,world(icl>region).@def) 
 [/S]
 
+{unl}
+aoj(include%2:42:00::, forum%1:14:00::)
+mod(forum%1:14:00::, universal%5:00:00:comprehensive:00)
+mod(forum%1:14:00::, culture%1:14:00::)
+obj(include%2:42:00::, festival%1:04:00::)
+and(festival%1:04:00::, debate%1:10:01::)
+and(debate%1:10:01::, exhibition%1:04:00::)
+pur(include%2:42:00::, celebrate%2:41:00::)
+obj(celebrate%2:41:00::, diversity%1:07:02::)
+mod(diversity%1:07:02::, cultural%5:00:00:social:00)
+plc(diversity%1:07:02::, throughout%4:02:00::)
+obj(throughout%4:02:00::, world%1:17:00::)
+{/unl}
 
 # Systran
 
@@ -25,6 +38,33 @@ El foro universal de culturas será sostenido del 23 de abril al 24 de septiembr
 
 ; The Universal Forum of Cultures will be held from April 23 to September 24, 2004, and will include exhibitions, debates and festivals to celebrate cultural diversity in the world.
 
+{unl}
+aoj(include%2:42:00::, forum%1:14:00::)
+mod(forum%1:14:00::, universal%5:00:00:comprehensive:00)
+mod(forum%1:14:00::, culture%1:14:00::)
+obj(include%2:42:00::, festival%1:04:00::)
+and(festival%1:04:00::, debate%1:10:01::)
+and(debate%1:10:01::, exhibition%1:04:00::)
+pur(include%2:42:00::, celebrate%2:41:00::)
+obj(celebrate%2:41:00::, diversity%1:07:02::)
+mod(diversity%1:07:02::, cultural%5:00:00:social:00)
+plc(diversity%1:07:02::, world%1:17:00::)
+{/unl}
+
 # Yandex
  	
 ; The universal forum of cultures will be held from April 23 to September 24, 2004, and will include exhibitions, discussions, and festivals that celebrate cultural diversity in the world.
+
+{unl}
+aoj(include%2:42:00::, forum%1:14:00::)
+mod(forum%1:14:00::, universal%5:00:00:comprehensive:00)
+mod(forum%1:14:00::, culture%1:14:00::)
+obj(include%2:42:00::, festival%1:04:00::)
+and(festival%1:04:00::, discussion%1:10:02::)
+and(discussion%1:10:02::, exhibition%1:04:00::)
+gol(include%2:42:00::, celebrate%2:41:00::)
+obj(celebrate%2:41:00::, diversity%1:07:02::)
+mod(diversity%1:07:02::, cultural%5:00:00:social:00)
+plc(diversity%1:07:02::, world%1:17:00::)
+{/unl}
+
