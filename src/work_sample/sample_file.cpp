@@ -44,7 +44,7 @@ tuple<size_t, string, wn::lex_sense> parse_term(const string& term) {
     wn::lex_sense lexsn = wn::parse_lexsn(*it_rev++);
     string lemma = (*it_rev++);
     size_t id = (it_rev != elems.rend()) ? atoi((*it_rev).c_str()) : 0;
-    
+
     return make_tuple(id, lemma, lexsn);
 }
 
@@ -82,7 +82,7 @@ void parse_graph(const string& filename, const string& section,
             auto term2 = line.substr(found_c+1, found_e-found_c-1);
             boost::trim(term2);
 
-            cout << ".." << rel_type << "|" << term1 << "|" << term2 << "|" << endl;
+            //cout << ".." << rel_type << "|" << term1 << "|" << term2 << "|" << endl;
             auto term1_data = parse_term(term1);
             auto term2_data = parse_term(term2);
 

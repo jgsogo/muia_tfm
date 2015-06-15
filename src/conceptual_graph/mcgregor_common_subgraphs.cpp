@@ -103,119 +103,46 @@ namespace wn {
             }
         };
 
-        auto n_subgraphs = subgraphs.size();
         // Build compatibility matrix
-        std::cout << " - Build compatibility matrix" << std::endl;
-        std::vector<std::vector<bool>> compatibility_matrix;
+        auto n_subgraphs = subgraphs.size();
+        std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
+        std::vector<std::vector<bool>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
             std::vector<bool> i_compatible(n_subgraphs);
             for (auto j = 0; j < n_subgraphs; ++j) {
                 if (i == j) {
                     i_compatible[j] = false;
-                    //compatibility_matrix[i*n_subgraphs + j] = false;
                 }
                 else {
                     auto compatible = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
                     i_compatible[j] = compatible;
-                    //compatibility_matrix[i*n_subgraphs + j] = compatible;
-                    //compatibility_matrix[j*n_subgraphs + i] = compatible;
                 }
             }
-        }
-        std::sort(compatibility_matrix.begin(), compatibility_matrix.end());
-        compatibility_matrix.erase(std::unique(compatibility_matrix.begin(), compatibility_matrix.end()), compatibility_matrix.end());
-        
-        std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
-        std::cout << "Unique combinations: " << compatibility_matrix.size() << std::endl;
-        return;
-        /*
-        for (auto i = 0; i < n_subgraphs; ++i) {
-            for (auto j = 0; j < n_subgraphs; ++j) {
-                std::cout << compatibility_matrix[i*subgraphs.size() + j] << " ";
-            }
-            std::cout << std::endl;
-        }
-        getchar();
-        */
-        /*
-        // Check all posible compatible combinations
-        for (auto i = 0; i < n_subgraphs; ++i) {
-            for (auto j = 0; j < n_subgraphs; ++j) {
-
-            }
+            compatibility_matrix[i] = i_compatible;
         }
 
-        // Build all posible compatible combinations (without order)
-        typedef std::vector<std::size_t> _t_indexes;
-        std::vector<_t_indexes> compatible_subgraphs;
-        auto filter_compatibles = [&compatibility_matrix, &n_subgraphs](const _t_indexes& original, const std::size_t& row)->_t_indexes{
-            _t_indexes ret;
-            for (auto& i : original) {
-                if (compatibility_matrix[row*n_subgraphs + i]) {
-                    ret.push_back(i);
-                }
-            }
-            return ret;
-        };
+        // Build unique matrix
+        auto unique_matrix = compatibility_matrix;
+        std::sort(unique_matrix.begin(), unique_matrix.end());
+        unique_matrix.erase(std::unique(unique_matrix.begin(), unique_matrix.end()), unique_matrix.end());
+        std::cout << "Unique combinations: " << unique_matrix.size() << std::endl;
 
-
-        std::function<std::vector<_t_indexes>(const _t_indexes&)> recurse_indexes = [&recurse_indexes, &filter_compatibles](const _t_indexes& indexes_)->std::vector<_t_indexes>{
-            std::vector<_t_indexes> ret;
-            if (indexes_.size() == 1) {
-                ret.insert(ret.end(), { indexes_[0] });
-            }
-            else {
-                for (auto& i : indexes_) {
-                    _t_indexes aux = filter_compatibles(indexes_, i);
-                    if (aux.size()) { // Always look for maximum correpondence
-                        std::vector<_t_indexes> tmp = recurse_indexes(aux);
-                        for (auto& seq : tmp) {
-                            auto it = ret.insert(ret.end(), { i });
-                            it->insert(it->end(), seq.begin(), seq.end());
-                        }
-                    }
-                    else {
-                        ret.insert(ret.end(), { i });
-                    }
-                }
-            }
-            return ret;
-        };
-
-        std::vector<std::size_t> indexes(n_subgraphs);
-        std::iota(indexes.begin(), indexes.end(), 0);
-        auto all_compatible_combinations = recurse_indexes(indexes);
-
-        std::cout << "Compatible combinations: " << all_compatible_combinations.size() << std::endl;
-        // Filter combinations
-        decltype(all_compatible_combinations) all_compatible_filtered;
-        for (auto& comb : all_compatible_combinations) {
-            std::sort(comb.begin(), comb.end());
-            auto repeated = std::any_of(all_compatible_filtered.begin(), all_compatible_filtered.end(), [&comb](const _t_indexes& item)->bool{
-                auto it_comb = comb.begin();
-                auto it_item = item.begin();
-                while (it_comb != comb.end() && it_item != item.end() && *it_comb == *it_item) {
-                    ++it_comb, ++it_item;
-                }
-                return (it_comb == comb.end() && it_item == item.end());
-            });
-            if (!repeated) { all_compatible_filtered.push_back(comb); }
-        }
-
-        
         // Build return vector
-        for (auto& combination : all_compatible_filtered) {
+        for (auto& row : unique_matrix) {
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
             float similarity = 0.f;
-            for (auto& index : combination) {
-                append_correspondence_tuple(subgraphs[index], graph, correspondence_to_lhs, correspondence_to_rhs);
-                similarity += get<3>(subgraphs[index]);
+
+            for (auto i = 0; i<row.size(); ++i) {
+                if (compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
+                    append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
+                    similarity += get<3>(subgraphs[i]);
+                }
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
         }
-        */
+        std::cout << "Return vector: " << ret.size() << std::endl;
 
         /* TODO: Aquí se puede implementar un algoritmo recursivo basado en la compatibilidad. A medida que voy
             seleccionando/añadiendo grafos las opciones compatibles van disminuyendo (sólo es compatible la
