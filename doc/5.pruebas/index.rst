@@ -3,6 +3,8 @@
 
     \newpage
 
+.. Brown corpus plain text: http://dingo.sbs.arizona.edu/~hammond/ling696f-sp03/browncorpus.txt
+
 
 Pruebas
 =======
