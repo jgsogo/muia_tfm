@@ -2,11 +2,13 @@
 #pragma once
 
 #include <ostream>
+#include <cstdint>
 #include "../wordnet/synset.h"
 
 namespace wn {
     struct relation {
-        std::uint16_t type_;
+        typedef std::uint16_t type;
+        type type_;
         synset source;
         synset target;
         bool operator==(const relation& other) const {

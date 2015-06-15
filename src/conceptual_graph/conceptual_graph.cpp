@@ -52,7 +52,7 @@ synset conceptual_graph::get_node(const synset_id& s1) const {
     return d->graph[s1];
 }
 
-void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, const std::uint16_t& rel_type) {
+void conceptual_graph::add_relation(const synset_id& s1, const synset_id& s2, const relation::type& rel_type) {
     relation rel;
     rel.type_ = rel_type;
     rel.source = get_node(s1);

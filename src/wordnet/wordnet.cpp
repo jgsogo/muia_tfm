@@ -12,9 +12,10 @@ namespace wn {
 
         stringstream ss(lexsn_str);
         string item;
-        vector<string> elems;
-        while (getline(ss, item, ':')) {
-            elems.push_back(item);
+        vector<string> elems(5);
+        auto i = 0;
+        while (getline(ss, item, ':') && i<5) {
+            elems[i++] = item;
         }
 
         pos = static_cast<pos_t>(atoi(elems[0].c_str()));
@@ -24,4 +25,24 @@ namespace wn {
         head_id = atoi(elems[4].c_str());
         return make_tuple(pos, filenum, lex_id, head_word, head_id);
     }
+
+    int search_synset(const wordnet& wnet, const std::string& lemma, const lex_sense& data) {
+        // TODO: It should be possible to look for the synset without the lemma, shouldn't it?
+        vector<wn::index>::const_iterator i, i_end;
+        tie(i, i_end) = wnet.get_indexes(lemma);
+        for (; i != i_end; ++i) {
+            for (auto& synset_id : i->synset_ids) {
+                auto synset = wnet.wordnet_graph[synset_id];
+                if (synset.pos == get<0>(data) && synset.lex_filenum == get<1>(data)) {
+                    for (auto& id : synset.lex_ids) {                        
+                        if (id == get<2>(data)) {
+                            return synset_id;
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
 }
