@@ -82,7 +82,7 @@ namespace wn {
                     
                 }
 
-                std::cout << "---" << std::endl;
+                //std::cout << "---" << std::endl;
                 graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
                 return (true);
             }
