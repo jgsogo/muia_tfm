@@ -22,7 +22,7 @@ obj(establish%2:36:00::, dialogue%1:10:03::)
 mod(dialogue%1:10:03::, constructive%3:00:00::)
 plc(establish%2:36:00::, between%4:02:00::)
 obj(between%4:02:00::, community%1:14:03::)
-mod(community%1:14:03::, various%5:00:02:different:00)
+mod(community%1:14:03::, different%3:00:00::)
 {/unl}
 
 # Systrans
@@ -41,7 +41,7 @@ obj(establish%2:36:00::, dialogue%1:10:03::)
 mod(dialogue%1:10:03::, constructive%3:00:00::)
 plc(establish%2:36:00::, between%4:02:00::)
 obj(between%4:02:00::, community%1:14:03::)
-mod(community%1:14:03::, various%5:00:02:different:00)
+mod(community%1:14:03::, different%3:00:00::)
 {/unl}
 
 
