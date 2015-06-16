@@ -108,14 +108,10 @@ namespace wn {
         //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
         std::vector<std::vector<bool>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
-            std::vector<bool> i_compatible(n_subgraphs);
+            std::vector<bool> i_compatible(n_subgraphs, false);
             for (auto j = 0; j < n_subgraphs; ++j) {
-                if (i == j) {
-                    i_compatible[j] = false;
-                }
-                else {
-                    auto compatible = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
-                    i_compatible[j] = compatible;
+                if (i != j) {
+                    i_compatible[j] = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
                 }
             }
             compatibility_matrix[i] = i_compatible;
@@ -135,12 +131,14 @@ namespace wn {
             float similarity = 0.f;
 
             for (auto i = 0; i<row.size(); ++i) {
-                if (compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
+                if (row[i] && compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
                     append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
+                    //std::cout << get<3>(subgraphs[i]) << ", ";
                     similarity += get<3>(subgraphs[i]);
                 }
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
+            //std::cout << " = " << similarity << std::endl;
         }
         //std::cout << "Return vector: " << ret.size() << std::endl;
 
