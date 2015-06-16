@@ -72,7 +72,7 @@ and(01%government%1:14:00::, 02%government%1:14:00::)
 ;mod(02%government%1:14:00::, catalonian)
 mod(02%government%1:14:00::, autonomous%5:00:00:free:00)
 and(02%government%1:14:00::, city%1:15:01::)
-mod(council%1:14:01::, barcelona%1:15:00::)
+mod(city%1:15:01::, barcelona%1:15:00::)
 {/unl}
 
 # Yandex
