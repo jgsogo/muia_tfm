@@ -28,7 +28,7 @@ namespace wn {
             std::vector<relation> get_edges() const;
             std::vector<relation> get_outgoing_edges(const synset_id& id) const;
 
-            virtual void print(std::ostream& os) const;
+            virtual void print(std::ostream& os, bool only_headword=false) const;
 
             // Functions for algorithms
             friend WN_CONCEPTUAL_GRAPH_EXPORT void mcgregor_common_subgraphs(
