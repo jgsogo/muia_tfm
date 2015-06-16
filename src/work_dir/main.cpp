@@ -69,7 +69,8 @@ struct graph_dist {
 std::mutex fout_mutex;
 void comparison_task(std::ofstream& fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
     const clock_t begin_time = clock();
-    auto data = graph_dist_.distance_graphs<distance::mcs>(words_dist, rels_dist, tol_synset_value, tol_relation_value, distance);
+    //auto data = graph_dist_.distance_graphs<distance::mcs>(words_dist, rels_dist, tol_synset_value, tol_relation_value, distance);
+    auto data = 0.f;
     auto seconds = float(clock() - begin_time) / CLOCKS_PER_SEC;
 
     fout_mutex.lock();
@@ -211,7 +212,7 @@ int main(int argc, char** argv) {
                             ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "leacock-chodorow", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_leacock_chodorow), std::ref(distance_relation)));
                             ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "resnik", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_resnik), std::ref(distance_relation)));
                             ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "jiang-conrath", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_jiang_conrath), std::ref(distance_relation)));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "lin", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_lin), distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "lin", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_lin), std::ref(distance_relation)));
 
                             cout << "waiting for threads to join..." << endl;
                             for (auto& th : ths) {
