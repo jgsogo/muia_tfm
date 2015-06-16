@@ -25,27 +25,29 @@ namespace fs = ::boost::filesystem;
 
 
 struct graph_dist {
-    graph_dist(conceptual_graph& g1, conceptual_graph& g2) : graph1(g1), graph2(g2) {};
+    graph_dist(conceptual_graph& g1, conceptual_graph& g2, const std::string& title) : graph1(g1), graph2(g2), title(title) {};
 
     template <class GraphDistance>
-    void distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f) {
+    float distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f) {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
         auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
         auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
-        cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
+        //cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
         // Variables to hold results
         unl_graph result;
         auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance, result);
         //cout << " - Max similarity is " << data << endl;
-        cout << " - Ratio " << data / max_d << endl;
+        cout << title << data / max_d << endl;
         //result.print(std::cout);
+        return data / max_d;
     }
 
     conceptual_graph& graph1;
     conceptual_graph& graph2;
+    std::string title;
 };
 
 
@@ -117,11 +119,58 @@ int main(int argc, char** argv) {
     distance::jiang_conrath distance_jiang_conrath(graph, corpus);
     distance::lin distance_lin(graph, corpus);
 
-    graph_dist dist_original(original, google);
-    graph_dist dist_yandex(original, yandex);
+    graph_dist dist_original(original, google, "- Google/Original: ");
+    graph_dist dist_yandex(original, yandex,   "- Yandex/Original: ");
     distance::base_relation_unl distance_relation;
 
     auto tolerance = .5f;
+    cout << ">>>>> tolerance = " << tolerance << std::endl;
+    cout << endl;
+    cout << "# Distance 'shortest_path' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_sussna' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    //dist_original.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
+    //dist_yandex.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_wu_palmer' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_leacock_chodorow' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_resnik' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_jiang_conrath' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
+
+    cout << endl;
+    cout << "# Distance 'distance_lin' between graphs" << endl;
+    cout << "#-------------------------------" << endl;
+    dist_original.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
+    dist_yandex.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
+
+    ///////////////////////////////////////////////
+    //// Change tolerance
+    tolerance = .1f;
+    cout << ">>>>> tolerance = " << tolerance << std::endl;
     cout << endl;
     cout << "# Distance 'shortest_path' between graphs" << endl;
     cout << "#-------------------------------" << endl;
