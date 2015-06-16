@@ -166,10 +166,10 @@ int main(int argc, char** argv) {
                 ofstream fori; fori.open(directory + fileid + "_original.dot"); original.print(fori, true); fori.close();
                 wn::unl_graph google;
                 auto google_graph = parse_graph(filename, "Google", wnet, google);
-                ofstream fgoo; fgoo.open(directory + fileid + "_google.dot"); original.print(fgoo, true); fgoo.close();
+                ofstream fgoo; fgoo.open(directory + fileid + "_google.dot"); google.print(fgoo, true); fgoo.close();
                 wn::unl_graph yandex;
                 auto yandex_graph = parse_graph(filename, "Yandex", wnet, yandex);
-                ofstream fyan; fyan.open(directory + fileid + "_yandex.dot"); original.print(fyan, true); fyan.close();
+                ofstream fyan; fyan.open(directory + fileid + "_yandex.dot"); yandex.print(fyan, true); fyan.close();
 
                 if (ori_graph && google_graph) {
                     graph_dist dist_original(original, google, "google");
