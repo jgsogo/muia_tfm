@@ -16,3 +16,5 @@ install
 *.orig
 *~
 *.Rhistory
+*.dot
+*.csv
