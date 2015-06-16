@@ -18,3 +18,4 @@ install
 *.Rhistory
 *.dot
 *.csv
+data/samples/.png
