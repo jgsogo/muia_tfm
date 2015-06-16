@@ -181,12 +181,12 @@ int main(int argc, char** argv) {
                             vector<thread> ths;
                             //void comparison_task(ofstream fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
                             ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "shortest_path", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(shortest_path), std::ref(distance_relation)));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "sussna", tol_synset_value, tol_relation_value, dist_original, distance_sussna, distance_relation));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "wu-palmer", tol_synset_value, tol_relation_value, dist_original, distance_wu_palmer, distance_relation));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "leacock-chodorow", tol_synset_value, tol_relation_value, dist_original, distance_leacock_chodorow, distance_relation));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "resnik", tol_synset_value, tol_relation_value, dist_original, distance_resnik, distance_relation));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "jiang-conrath", tol_synset_value, tol_relation_value, dist_original, distance_jiang_conrath, distance_relation));
-                            //ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "lin", tol_synset_value, tol_relation_value, dist_original, distance_lin, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "sussna", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_sussna), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "wu-palmer", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_wu_palmer), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "leacock-chodorow", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_leacock_chodorow), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "resnik", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_resnik), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "jiang-conrath", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_jiang_conrath), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "lin", tol_synset_value, tol_relation_value, std::ref(dist_original), std::ref(distance_lin), std::ref(distance_relation)));
 
                             cout << "waiting for threads to join..." << endl;
                             for (auto& th : ths) {
@@ -205,15 +205,13 @@ int main(int argc, char** argv) {
 
                             vector<thread> ths;
                             //void comparison_task(ofstream fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
-                            /*
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "shortest_path", tol_synset_value, tol_relation_value, dist_yandex, shortest_path, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "sussna", tol_synset_value, tol_relation_value, dist_yandex, distance_sussna, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "wu-palmer", tol_synset_value, tol_relation_value, dist_yandex, distance_wu_palmer, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "leacock-chodorow", tol_synset_value, tol_relation_value, dist_yandex, distance_leacock_chodorow, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "resnik", tol_synset_value, tol_relation_value, dist_yandex, distance_resnik, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "jiang-conrath", tol_synset_value, tol_relation_value, dist_yandex, distance_jiang_conrath, distance_relation));
-                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "lin", tol_synset_value, tol_relation_value, dist_yandex, distance_lin, distance_relation));
-                            */
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "shortest_path", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(shortest_path), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "sussna", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_sussna), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "wu-palmer", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_wu_palmer), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "leacock-chodorow", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_leacock_chodorow), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "resnik", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_resnik), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "jiang-conrath", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_jiang_conrath), std::ref(distance_relation)));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "lin", tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(distance_lin), distance_relation));
 
                             cout << "waiting for threads to join..." << endl;
                             for (auto& th : ths) {
