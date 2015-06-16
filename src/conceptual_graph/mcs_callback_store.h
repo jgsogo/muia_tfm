@@ -63,27 +63,29 @@ namespace wn {
                     }
                 }
 
-                // Append similarity due to relations...
-                // TODO: This code snippet can misbehave if there are more than one edge between the two same nodes
-                for (auto& vertices : correspondence) {
-                    typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g1_begin, it_edges_g1_end;
-                    typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g2_begin, it_edges_g2_end;
-                    std::tie(it_edges_g1_begin, it_edges_g1_end) = boost::out_edges(vertices.first, subgraph1);
-                    std::tie(it_edges_g2_begin, it_edges_g2_end) = boost::out_edges(vertices.second, subgraph2);
-                    for (; it_edges_g1_begin != it_edges_g1_end; ++it_edges_g1_begin) {
-                        auto target_g1 = boost::target(*it_edges_g1_begin, subgraph1);
-                        for (auto it = it_edges_g2_begin; it != it_edges_g2_end; ++it) {
-                            auto target_g2 = boost::target(*it, subgraph2);
-                            if (subgraph1[target_g1] == subgraph2[target_g2]) {
-                                similarity += cmp_relation.similarity(subgraph1[*it_edges_g1_begin], subgraph2[*it]);
+                if (correspondence.size() >= 2) {
+                    // Append similarity due to relations...
+                    // TODO: This code snippet can misbehave if there are more than one edge between the two same nodes
+                    for (auto& vertices : correspondence) {
+                        typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g1_begin, it_edges_g1_end;
+                        typename graph_traits<MembershipFilteredGraph>::out_edge_iterator it_edges_g2_begin, it_edges_g2_end;
+                        std::tie(it_edges_g1_begin, it_edges_g1_end) = boost::out_edges(vertices.first, subgraph1);
+                        std::tie(it_edges_g2_begin, it_edges_g2_end) = boost::out_edges(vertices.second, subgraph2);
+                        for (; it_edges_g1_begin != it_edges_g1_end; ++it_edges_g1_begin) {
+                            auto target_g1 = boost::target(*it_edges_g1_begin, subgraph1);
+                            for (auto it = it_edges_g2_begin; it != it_edges_g2_end; ++it) {
+                                auto target_g2 = boost::target(*it, subgraph2);
+                                if (subgraph1[target_g1] == subgraph2[target_g2]) {
+                                    similarity += cmp_relation.similarity(subgraph1[*it_edges_g1_begin], subgraph2[*it]);
+                                }
                             }
                         }
-                    }
-                    
-                }
 
-                //std::cout << "---" << std::endl;
-                graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
+                    }
+
+                    //std::cout << "---" << std::endl;
+                    graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
+                }
                 return (true);
             }
 
