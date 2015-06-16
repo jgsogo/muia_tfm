@@ -15,7 +15,7 @@ namespace wn {
             void add_attribute(const synset_id& id, const std::string& attr);
             std::vector<std::string> get_attributes(const synset_id& id) const;
 
-            virtual void print(std::ostream& os) const;
+            virtual void print(std::ostream& os, bool only_headword = false) const;
         protected:
             std::map<synset_id, std::vector<std::string>> attributes;
     };

@@ -8,9 +8,15 @@ using namespace std;
 
 class conceptual_graph_printer : public boost::default_writer {
     public:
-        conceptual_graph_printer(const _t_graph& g) : graph(g) {}
+        conceptual_graph_printer(const _t_graph& g, bool only_headword = false) : graph(g), only_headword(only_headword) {}
         void operator()(std::ostream& os, const boost::graph_traits<_t_graph>::vertex_descriptor& v) const {
-            os << "[label=\"" << graph[v] << "\"]";
+            auto synset = graph[v];
+            if (only_headword) {
+                os << "[label=\"" << synset.words[0] << "\"]";
+            }
+            else {
+                os << "[label=\"" << graph[v] << "\"]";
+            }
         }
         void operator()(std::ostream& os, const boost::graph_traits<_t_graph>::edge_descriptor& e) const {
             const relation& rel = graph[e];
@@ -18,6 +24,7 @@ class conceptual_graph_printer : public boost::default_writer {
         }
     private:
         const _t_graph& graph;
+        bool only_headword;
 };
 
 
@@ -91,7 +98,7 @@ vector<relation> conceptual_graph::get_outgoing_edges(const synset_id& id) const
     return ret;
 }
 
-void conceptual_graph::print(std::ostream& os) const {
-    conceptual_graph_printer writer(d->graph);
+void conceptual_graph::print(std::ostream& os, bool only_headword) const {
+    conceptual_graph_printer writer(d->graph, only_headword);
     d->print(os, d->graph, writer);
 }
