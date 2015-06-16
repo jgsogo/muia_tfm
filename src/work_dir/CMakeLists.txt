@@ -9,6 +9,7 @@ set(SRC_FILES
             ${_src}
             ../work_sample/sample_file.h
             ../work_sample/sample_file.cpp
+            ../work_sample/utils.h
             CMakeLists.txt
             )
 add_executable( work_dir ${SRC_FILES})

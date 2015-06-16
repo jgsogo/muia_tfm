@@ -1,7 +1,9 @@
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <boost/filesystem.hpp>
+#include <thread>
 
 #include "../wordnet/wordnet.h"
 #include "../wordnet/hyperonym_graph.h"
@@ -18,37 +20,11 @@
 #include "../corpus/semcor.h"
 
 #include "sample_file.h"
+#include "utils.h"
 
 using namespace wn;
 using namespace std;
 namespace fs = ::boost::filesystem;
-
-
-struct graph_dist {
-    graph_dist(conceptual_graph& g1, conceptual_graph& g2, const std::string& title) : graph1(g1), graph2(g2), title(title) {};
-
-    template <class GraphDistance>
-    float distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f) {
-        GraphDistance graph_distance(words_dist, rels_dist);
-        auto penalize_node = words_dist.upper_bound();
-        auto penalize_edge = rels_dist.upper_bound();
-        auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
-        auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
-        //cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
-
-        // Variables to hold results
-        unl_graph result;
-        auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance, result);
-        //cout << " - Max similarity is " << data << endl;
-        cout << title << data / max_d << endl;
-        //result.print(std::cout);
-        return data / max_d;
-    }
-
-    conceptual_graph& graph1;
-    conceptual_graph& graph2;
-    std::string title;
-};
 
 
 int main(int argc, char** argv) {
@@ -92,21 +68,28 @@ int main(int argc, char** argv) {
     cout << "# Reading sample file" << endl;
     cout << "#-------------------------------" << endl;
     string sample_file = argv[3];
+    cout << "Sample file '" << sample_file << "'" << endl;
 
     cout << "## Original graph" << endl;
     wn::unl_graph original;
     parse_graph(sample_file, "Original", wnet, original);
-    original.print(std::cout);
+    //original.print(std::cout);
+    cout << " - num_nodes = " << original.get_nodes().size() << endl;
+    cout << " - num_edges = " << original.get_edges().size() << endl;
 
     cout << "## Google graph" << endl;
     wn::unl_graph google;
     parse_graph(sample_file, "Google", wnet, google);
-    google.print(std::cout);
+    //google.print(std::cout);
+    cout << " - num_nodes = " << google.get_nodes().size() << endl;
+    cout << " - num_edges = " << google.get_edges().size() << endl;
 
     cout << "## Yandex graph" << endl;
     wn::unl_graph yandex;
     parse_graph(sample_file, "Yandex", wnet, yandex);
-    yandex.print(std::cout);
+    //yandex.print(std::cout);
+    cout << " - num_nodes = " << yandex.get_nodes().size() << endl;
+    cout << " - num_edges = " << yandex.get_edges().size() << endl;
 
     cout << endl;
     cout << "# Computing distances" << endl;
@@ -119,98 +102,64 @@ int main(int argc, char** argv) {
     distance::jiang_conrath distance_jiang_conrath(graph, corpus);
     distance::lin distance_lin(graph, corpus);
 
-    graph_dist dist_original(original, google, "- Google/Original: ");
-    graph_dist dist_yandex(original, yandex,   "- Yandex/Original: ");
     distance::base_relation_unl distance_relation;
 
-    auto tolerance = .5f;
-    cout << ">>>>> tolerance = " << tolerance << std::endl;
-    cout << endl;
-    cout << "# Distance 'shortest_path' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
+    // Preparing output
+    auto tol_synset_values = {0.f, 0.2f, 0.4f, 0.6f, 0.8f, 0.99f};
+    auto tol_relation_values = {0.f, 0.2f, 0.4f, 0.8f, 0.99f};
+    string sample_file_id = sample_file.substr(sample_file.find_last_of("\\/")+1);
+    string output = sample_file.substr(0, sample_file.find_last_of(".")) + "-" + get_current_datetime() + ".csv";
+    cout << "Output file '" << output << "'" << endl;
+    ofstream fout;
+    fout.open(output, ofstream::out | ofstream::app);
+    if (fout.fail()) {
+        cerr << "open failed: " << strerror(errno) << '\n';
+        return -1;
+    }
+    fout << "# file;\ttranslator;\tdistance-meassure;\tsynset-tolerance;\trelation-tolerance;\tsimilarity-value;\tcomputation-time" << endl;
 
-    cout << endl;
-    cout << "# Distance 'distance_sussna' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    //dist_original.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
-    //dist_yandex.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
+    // DO WORK!
+    graph_dist dist_google(original, google, "google");
+    graph_dist dist_yandex(original, yandex,   "yandex");
+    for (auto& tol_synset_value: tol_synset_values) {
+        for (auto& tol_relation_value: tol_relation_values) {
+            cout << " - tol_synset_value = " << tol_synset_value << endl;
+            cout << " - tol_relation_value = " << tol_relation_value << endl;
 
-    cout << endl;
-    cout << "# Distance 'distance_wu_palmer' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
+            vector<thread> ths;
 
-    cout << endl;
-    cout << "# Distance 'distance_leacock_chodorow' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
+            auto work_google = [&](distance::base_synset& words_dist, const string& dtype) {
+                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "-google-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
+                ths.push_back(std::thread(&comparison_task_plot, std::ref(fout), sample_file_id, "google", dtype, tol_synset_value, tol_relation_value, std::ref(dist_google), std::ref(words_dist), std::ref(distance_relation), ss.str()));
+            };
 
-    cout << endl;
-    cout << "# Distance 'distance_resnik' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
+            auto work_yandex = [&](distance::base_synset& words_dist, const string& dtype) {
+                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "-yandex-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
+                ths.push_back(std::thread(&comparison_task_plot, std::ref(fout), sample_file_id, "yandex", dtype, tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(words_dist), std::ref(distance_relation), ss.str()));
+            };
 
-    cout << endl;
-    cout << "# Distance 'distance_jiang_conrath' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
+            //void comparison_task(ofstream fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist)
+            work_google(shortest_path, "shortest_path");
+            work_google(distance_sussna, "sussna");
+            work_google(distance_wu_palmer, "wu-palmer");
+            work_google(distance_leacock_chodorow, "leacock-chodorow");
+            work_google(distance_resnik, "resnik");
+            work_google(distance_jiang_conrath, "jiang-conrath");
+            work_google(distance_lin, "lin");
 
-    cout << endl;
-    cout << "# Distance 'distance_lin' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
+            work_yandex(shortest_path, "shortest_path");
+            work_yandex(distance_sussna, "sussna");
+            work_yandex(distance_wu_palmer, "wu-palmer");
+            work_yandex(distance_leacock_chodorow, "leacock-chodorow");
+            work_yandex(distance_resnik, "resnik");
+            work_yandex(distance_jiang_conrath, "jiang-conrath");
+            work_yandex(distance_lin, "lin");
 
-    ///////////////////////////////////////////////
-    //// Change tolerance
-    tolerance = .1f;
-    cout << ">>>>> tolerance = " << tolerance << std::endl;
-    cout << endl;
-    cout << "# Distance 'shortest_path' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(shortest_path, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_sussna' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    //dist_original.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
-    //dist_yandex.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_wu_palmer' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_leacock_chodorow' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_resnik' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_jiang_conrath' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tolerance, tolerance);
-
-    cout << endl;
-    cout << "# Distance 'distance_lin' between graphs" << endl;
-    cout << "#-------------------------------" << endl;
-    dist_original.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
-    dist_yandex.distance_graphs<distance::mcs>(distance_lin, distance_relation, tolerance, tolerance);
-
+            cout << "waiting for threads to join..." << endl;
+            for (auto& th : ths) {
+                th.join();
+            }
+        }
+    }
+    fout.close();
 }

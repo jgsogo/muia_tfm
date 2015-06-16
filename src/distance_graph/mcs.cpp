@@ -24,6 +24,7 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     struct synset_cmp : cmp_synset {
         synset_cmp(const base_synset& syn) : dist_synset(syn) {}
         virtual bool operator() (const synset& a, const synset& b) const {
+            //std::cout << dist_synset(a, b) << " <= " << synset_threshold << " = " << (dist_synset(a, b) <= synset_threshold) << std::endl;
             return dist_synset(a, b) <= synset_threshold;
         }
         virtual float similarity(const synset& a, const synset& b) const {
