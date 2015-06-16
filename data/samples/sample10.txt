@@ -1,0 +1,62 @@
+# Original
+> Stable and lasting peace requires something more than stopping war and other situations of conflict.
+
+[S:27]
+aoj(require(icl>need(icl>be)).@entry,peace(icl>abstract thing).@def)
+mod(peace(icl>abstract thing).@def,lasting(mod<thing))
+and(lasting(mod<thing),stable(mod<thing))
+obj(require(icl>need(icl>be)).@entry,more(icl>thing))
+mod(more(icl>thing),a_little)
+bas(more(icl>thing),stop(icl>do))
+obj(stop(icl>do),situation(icl>condition).@pl)
+mod(situation(icl>condition).@pl,other(mod<thing))
+mod(situation(icl>condition).@pl,conflict)
+and(situation(icl>condition).@pl,war.@def)
+[/S]
+
+{unl}
+aoj(require%2:34:00::, peace%1:26:00::)
+mod(peace%1:26:00::, lasting%3:00:00:long:02)
+and(lasting%3:00:00:long:02, stable%3:00:00::)
+obj(require%2:34:00::, more%4:02:00::)
+bas(more%4:02:00::, stop%2:42:00::)
+obj(stop%2:42:00::, situation%1:26:00::)
+mod(situation%1:26:00::, other%3:00:00::)
+mod(situation%1:26:00::, conflict%1:26:00::)
+and(situation%1:26:00::, war%1:04:00::)
+{/unl}
+
+
+# Systrans
+> La paz estable y duradera requiere algo más que parando guerra y otras situaciones del conflicto.
+
+
+# Google
+> Stable and lasting peace requires more than stopping war and conflict situations.
+
+{unl}
+aoj(require%2:34:00::, peace%1:26:00::)
+mod(peace%1:26:00::, lasting%3:00:00:long:02)
+and(lasting%3:00:00:long:02, stable%3:00:00::)
+obj(require%2:34:00::, more%4:02:00::)
+bas(more%4:02:00::, stop%2:42:00::)
+obj(stop%2:42:00::, situation%1:26:00::)
+mod(situation%1:26:00::, conflict%1:26:00::)
+and(situation%1:26:00::, war%1:04:00::)
+{/unl}
+
+
+# Yandex
+> The stable and lasting peace requires more than stopping war and other situations of conflict.
+
+{unl}
+aoj(require%2:34:00::, peace%1:26:00::)
+mod(peace%1:26:00::, lasting%3:00:00:long:02)
+and(lasting%3:00:00:long:02, stable%3:00:00::)
+obj(require%2:34:00::, more%4:02:00::)
+bas(more%4:02:00::, stop%2:42:00::)
+obj(stop%2:42:00::, situation%1:26:00::)
+mod(situation%1:26:00::, other%3:00:00::)
+mod(situation%1:26:00::, conflict%1:26:00::)
+and(situation%1:26:00::, war%1:04:00::)
+{/unl}
