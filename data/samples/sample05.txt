@@ -1,0 +1,73 @@
+# Original
+> This knowledge implies reflection about the common ground between all individuals as well as the qualities that differentiate them.
+
+[S:12]
+aoj(imply(icl>be).@entry,knowledge(icl>notion))
+mod(knowledge(icl>notion),this)
+obj(imply(icl>be).@entry,reflection(icl>activity))
+man(reflection(icl>activity),about(icl>concerning))
+obj(about(icl>concerning),:02)
+agt:02(differentiate(icl>do),quality(icl>attribute).@def.@entry.@pl)
+obj:02(differentiate(icl>do),individual(icl>person).@def.@pl)
+mod:02(individual(icl>person).@def.@pl,all)
+and(:02,:01)
+mod:01(ground(icl>abstract thing).@def.@entry,common(icl>shared))
+obj:01(common(icl>shared),individual(icl>person).@def.@pl)
+mod:01(individual(icl>person).@def.@pl,all)
+[/S]
+
+{unl}
+aoj(imply%2:42:00::, knowledge%1:03:00::)
+;mod(knowledge%1:03:00::, this)
+obj(imply%2:42:00::, reflection%1:09:00::)
+man(reflection%1:09:00::, about%4:02:06::)
+obj(about%4:02:06::, differentiate%2:31:01::)
+agt(differentiate%2:31:01::, quality%1:07:00::)
+obj(differentiate%2:31:01::, 01%individual%1:03:00::)
+mod(01%individual%1:03:00::, all%3:00:00::)
+and(differentiate%2:31:01::, ground%1:09:01::)
+mod(ground%1:09:01::, common%3:00:02::)
+obj(common%3:00:02::, 02%individual%1:03:00::)
+mod(02%individual%1:03:00::, all%3:00:00::)
+{/unl}
+
+
+# Systrans
+> Este conocimiento implica la reflexión sobre el terreno común entre todos los individuos así como las calidades que las distingan.
+
+# Google
+> This knowledge involves reflection on the common ground between all individuals and the qualities that distinguish them.
+
+{unl}
+aoj(involve%2:42:00::, knowledge%1:03:00::)
+;mod(knowledge%1:03:00::, this)
+obj(involve%2:42:00::, reflection%1:09:00::)
+man(reflection%1:09:00::, about%4:02:06::)
+obj(about%4:02:06::, differentiate%2:31:01::)
+agt(differentiate%2:31:01::, quality%1:07:00::)
+obj(differentiate%2:31:01::, 01%individual%1:03:00::)
+mod(01%individual%1:03:00::, all%3:00:00::)
+and(differentiate%2:31:01::, ground%1:09:01::)
+mod(ground%1:09:01::, common%3:00:02::)
+obj(common%3:00:02::, 02%individual%1:03:00::)
+mod(02%individual%1:03:00::, all%3:00:00::)
+{/unl}
+
+
+# Yandex
+> This knowledge implies reflection on the common ground between all individuals as well as the qualities that distinguish them.
+
+{unl}
+aoj(imply%2:42:00::, knowledge%1:03:00::)
+;mod(knowledge%1:03:00::, this)
+obj(imply%2:42:00::, reflection%1:09:00::)
+man(reflection%1:09:00::, about%4:02:06::)
+obj(about%4:02:06::, differentiate%2:31:01::)
+agt(differentiate%2:31:01::, quality%1:07:00::)
+obj(differentiate%2:31:01::, 01%individual%1:03:00::)
+mod(01%individual%1:03:00::, all%3:00:00::)
+and(differentiate%2:31:01::, ground%1:09:01::)
+mod(ground%1:09:01::, common%3:00:02::)
+obj(common%3:00:02::, 02%individual%1:03:00::)
+mod(02%individual%1:03:00::, all%3:00:00::)
+{/unl}
