@@ -47,7 +47,7 @@ endif(BUILD_EXAMPLES)
 
 add_subdirectory(work_sample)
 add_subdirectory(work_dir)
-
+add_subdirectory(work_debug)
 
 # Data
 #------------------------
