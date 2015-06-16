@@ -48,8 +48,9 @@ tuple<size_t, string, wn::lex_sense> parse_term(const string& term) {
     return make_tuple(id, lemma, lexsn);
 }
 
-void parse_graph(const string& filename, const string& section,
+bool parse_graph(const string& filename, const string& section,
                  const wn::wordnet& wnet, wn::unl_graph& graph) {
+    bool hret = false;
     // Look for file and point to section
     ifstream infile(filename);
     find_section(infile, section);
@@ -66,6 +67,7 @@ void parse_graph(const string& filename, const string& section,
         // Look for unl graph
         if (!in_graph) {
             in_graph = (line.compare("{unl}")==0);
+            hret = true;
         }
         else {
             if (line.compare("{/unl}")==0) {
@@ -87,26 +89,37 @@ void parse_graph(const string& filename, const string& section,
             auto term2_data = parse_term(term2);
 
             auto term1_it = node_map.insert(make_pair(term1_data, 0));
-            auto term2_it = node_map.insert(make_pair(term2_data, 0));
             if (term1_it.second) {
                 auto term1_id = wn::search_synset(wnet, get<1>(term1_data), get<2>(term1_data));
                 if (term1_id == -1) {
                     cerr << "Error: term '" << term1 << "' not found!" << endl;
+                    hret = false;
+                    node_map.erase(term1_it.first);
+                    continue;
                 }
-                term1_it.first->second = graph.add_node(wnet.wordnet_graph[term1_id]);
+                else {
+                    term1_it.first->second = graph.add_node(wnet.wordnet_graph[term1_id]);
+                }
             }
+            auto term2_it = node_map.insert(make_pair(term2_data, 0));
             if (term2_it.second) {
                 auto term2_id = wn::search_synset(wnet, get<1>(term2_data), get<2>(term2_data));
                 if (term2_id == -1) {
                     cerr << "Error: term '" << term2 << "' not found!" << endl;
+                    hret = false;
+                    node_map.erase(term2_it.first);
+                    continue;
                 }
-                term2_it.first->second = graph.add_node(wnet.wordnet_graph[term2_id]);
+                else {
+                    term2_it.first->second = graph.add_node(wnet.wordnet_graph[term2_id]);
+                }
             }
-
+            
             wn::unl::relation::type unl_rel_type;
             wn::unl::from_string(rel_type, unl_rel_type);
 
             graph.add_relation(term1_it.first->second, term2_it.first->second, unl_rel_type);
         }
     }
+    return hret;
  }

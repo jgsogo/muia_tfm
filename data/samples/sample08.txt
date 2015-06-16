@@ -40,7 +40,7 @@ obj(find%2:32:00::, solution%1:10:00::)
 ben(solution%1:10:00::, problem%1:26:00::)
 mod(problem%1:26:00::, impact%1:19:00::)
 and(impact%1:19:00::, scope%1:07:00::)
-mod(impact%1:19:00::, global%3:00:00:international:00)
+mod(impact%1:19:00::, global%5:00:00:international:00)
 {/unl}
 
 
@@ -68,7 +68,7 @@ obj(find%2:32:00::, solution%1:10:00::)
 ben(solution%1:10:00::, problem%1:26:00::)
 mod(problem%1:26:00::, impact%1:19:00::)
 and(impact%1:19:00::, scope%1:07:00::)
-mod(impact%1:19:00::, global%3:00:00:international:00)
+mod(impact%1:19:00::, global%5:00:00:international:00)
 {/unl}
 
 
@@ -92,5 +92,5 @@ obj(find%2:32:00::, solution%1:10:00::)
 ben(solution%1:10:00::, problem%1:26:00::)
 mod(problem%1:26:00::, impact%1:19:00::)
 and(impact%1:19:00::, scope%1:07:00::)
-mod(impact%1:19:00::, global%3:00:00:international:00)
+mod(impact%1:19:00::, global%5:00:00:international:00)
 {/unl}

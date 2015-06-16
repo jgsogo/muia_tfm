@@ -46,6 +46,7 @@ if (BUILD_EXAMPLES)
 endif(BUILD_EXAMPLES)
 
 add_subdirectory(work_sample)
+add_subdirectory(work_dir)
 
 
 # Data
