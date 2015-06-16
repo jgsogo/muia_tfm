@@ -4,6 +4,8 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 #include <time.h>
+#include <thread>
+#include <mutex>
 
 #include "../wordnet/wordnet.h"
 #include "../wordnet/hyperonym_graph.h"
@@ -42,7 +44,7 @@ struct graph_dist {
     graph_dist(conceptual_graph& g1, conceptual_graph& g2, const std::string& title) : graph1(g1), graph2(g2), title(title) {};
 
     template <class GraphDistance>
-    float distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f, const std::string& more_txt = "") {
+    float distance_graphs(distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f, const std::string& more_txt = "") const {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
@@ -59,10 +61,24 @@ struct graph_dist {
         return data / max_d;
     }
 
-    conceptual_graph& graph1;
-    conceptual_graph& graph2;
+    const conceptual_graph& graph1;
+    const conceptual_graph& graph2;
     std::string title;
 };
+
+std::mutex fout_mutex;
+void comparison_task(std::ofstream& fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
+    const clock_t begin_time = clock();
+    auto data = graph_dist_.distance_graphs<distance::mcs>(words_dist, rels_dist, tol_synset_value, tol_relation_value, distance);
+    auto seconds = float(clock() - begin_time) / CLOCKS_PER_SEC;
+
+    fout_mutex.lock();
+    fout << filename << ";\t" << graph << ";\t" << distance << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
+        << data
+        << ";\t" << seconds << "\n";
+    fout.flush();
+    fout_mutex.unlock();
+}
 
 
 int main(int argc, char** argv) {
@@ -162,47 +178,21 @@ int main(int argc, char** argv) {
                             cout << " - tol_synset_value = " << tol_synset_value << endl;
                             cout << " - tol_relation_value = " << tol_relation_value << endl;
 
-                            clock_t begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "shortest_path" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(shortest_path, distance_relation, tol_synset_value, tol_relation_value, "shortest_path")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC  << "\n";
-                            fout.flush();
+                            vector<thread> ths;
+                            //void comparison_task(ofstream fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "shortest_path", tol_synset_value, tol_relation_value, dist_original, shortest_path, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "sussna", tol_synset_value, tol_relation_value, dist_original, distance_sussna, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "wu-palmer", tol_synset_value, tol_relation_value, dist_original, distance_wu_palmer, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "leacock-chodorow", tol_synset_value, tol_relation_value, dist_original, distance_leacock_chodorow, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "resnik", tol_synset_value, tol_relation_value, dist_original, distance_resnik, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "jiang-conrath", tol_synset_value, tol_relation_value, dist_original, distance_jiang_conrath, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "google", "lin", tol_synset_value, tol_relation_value, dist_original, distance_lin, distance_relation));
 
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "sussna" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tol_synset_value, tol_relation_value, "sussna")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
+                            cout << "waiting for threads to join..." << endl;
+                            for (auto& th : ths) {
+                                th.join();
+                            }
 
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "wu-palmer" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tol_synset_value, tol_relation_value, "wu-palmer")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "leacock-chodorow" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tol_synset_value, tol_relation_value, "leacock-chodorow")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "resnik" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tol_synset_value, tol_relation_value, "resnik")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "jiang-conrath" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tol_synset_value, tol_relation_value, "jiang-conrath")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "google" << ";\t" << "lin" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_original.distance_graphs<distance::mcs>(distance_lin, distance_relation, tol_synset_value, tol_relation_value, "lin")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
                         }
                     }
                 }
@@ -213,47 +203,20 @@ int main(int argc, char** argv) {
                             cout << " - tol_synset_value = " << tol_synset_value << endl;
                             cout << " - tol_relation_value = " << tol_relation_value << endl;
 
-                            clock_t begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "shortest_path" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(shortest_path, distance_relation, tol_synset_value, tol_relation_value, "shortest_path")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
+                            vector<thread> ths;
+                            //void comparison_task(ofstream fout, const std::string& filename, const std::string& graph, const std::string& distance, const float& tol_synset_value, const float& tol_relation_value, graph_dist& graph_dist_, distance::base_synset& words_dist, distance::base_relation& rels_dist) {
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "shortest_path", tol_synset_value, tol_relation_value, dist_yandex, shortest_path, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "sussna", tol_synset_value, tol_relation_value, dist_yandex, distance_sussna, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "wu-palmer", tol_synset_value, tol_relation_value, dist_yandex, distance_wu_palmer, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "leacock-chodorow", tol_synset_value, tol_relation_value, dist_yandex, distance_leacock_chodorow, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "resnik", tol_synset_value, tol_relation_value, dist_yandex, distance_resnik, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "jiang-conrath", tol_synset_value, tol_relation_value, dist_yandex, distance_jiang_conrath, distance_relation));
+                            ths.push_back(std::thread(&comparison_task, std::ref(fout), it->path().filename().string(), "yandex", "lin", tol_synset_value, tol_relation_value, dist_yandex, distance_lin, distance_relation));
 
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "sussna" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_sussna, distance_relation, tol_synset_value, tol_relation_value, "sussna")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "wu-palmer" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_wu_palmer, distance_relation, tol_synset_value, tol_relation_value, "wu-palmer")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "leacock-chodorow" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_leacock_chodorow, distance_relation, tol_synset_value, tol_relation_value, "leacock-chodorow")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "resnik" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_resnik, distance_relation, tol_synset_value, tol_relation_value, "resnik")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "jiang-conrath" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_jiang_conrath, distance_relation, tol_synset_value, tol_relation_value, "jiang-conrath")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
-
-                            begin_time = clock();
-                            fout << it->path().filename().string() << ";\t" << "yandex" << ";\t" << "lin" << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
-                                << dist_yandex.distance_graphs<distance::mcs>(distance_lin, distance_relation, tol_synset_value, tol_relation_value, "lin")
-                                << ";\t" << float(clock() - begin_time) / CLOCKS_PER_SEC << "\n";
-                            fout.flush();
+                            cout << "waiting for threads to join..." << endl;
+                            for (auto& th : ths) {
+                                th.join();
+                            }
                         }
                     }
                 }
