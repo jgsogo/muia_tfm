@@ -54,11 +54,14 @@ namespace wn {
 
         // Store all connected common subgraphs between graph1 and graph2 (from both perspectives).
         typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
-        std::vector<std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float>> subgraphs;
+        typedef std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float> _t_subgraphs;
+        std::vector<_t_subgraphs> subgraphs;
         store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_);
-        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
+        mcgregor_common_subgraphs_maximum_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
 
+        //std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
+        
 
         /* Combination of subgraphs must be done here, where I have original node_ids (I have filtered graphs).
         The objective is to return every possible combination of subgraphs which is compatible; but it
@@ -115,8 +118,13 @@ namespace wn {
 
         // Build compatibility matrix
         auto n_subgraphs = subgraphs.size();
-        auto min_similarity = mcs_graphs.single_graph_max_similarity;
+        //  - best single graph
+        auto it = std::max_element(subgraphs.begin(), subgraphs.end(), [](_t_subgraphs& lhs, _t_subgraphs& rhs){
+            return std::get<3>(lhs) < std::get<3>(rhs);
+        });
+        auto lower_bound = std::get<3>(*it);
         //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
+        //std::cout << "lower_bound: " << lower_bound << std::endl;
         std::vector<std::vector<float>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
             std::vector<float> i_compatible(n_subgraphs, 0.f);
@@ -134,11 +142,69 @@ namespace wn {
             compatibility_matrix[i] = i_compatible;
         }
 
+        typedef std::vector<float> _t_row;
+        auto sum_row = [](const _t_row& lhs)->float {
+            return std::accumulate(lhs.begin(), lhs.end(), 0.f, [](const float& item1, const float& item2){ return item1 + item2; });
+        };
+
         // Build unique matrix
         auto unique_matrix = compatibility_matrix;
+        unique_matrix.erase(std::remove_if(unique_matrix.begin(), unique_matrix.end(), [&lower_bound, &sum_row](const _t_row& row){
+            return (sum_row(row) < lower_bound);
+            }), unique_matrix.end());
         std::sort(unique_matrix.begin(), unique_matrix.end());
         unique_matrix.erase(std::unique(unique_matrix.begin(), unique_matrix.end()), unique_matrix.end());
-        //std::cout << "Unique combinations: " << unique_matrix.size() << std::endl;
+        //std::cout << "Unique matrix rows: " << unique_matrix.size() << std::endl;
+
+        // Build all compatible set (all permutations for every row)        
+        auto intersect_rows = [](const _t_row& lhs, const _t_row& rhs)->_t_row{
+            assert(lhs.size() == rhs.size());
+            _t_row row(lhs.size(), 0.f);
+            for (auto i = 0; i < lhs.size(); ++i) {
+                assert(lhs[i] == rhs[i]);
+                row[i] = (lhs[i] != 0.f && rhs[i] != 0.f) ? lhs[i] : 0.f;
+            }
+            return row;
+        };        
+        std::vector<std::vector<float>> compatible_sets;
+        auto i = 0;
+        for (auto& row : unique_matrix) {
+            if (sum_row(row) < lower_bound) {
+                continue;
+            }
+            // Build indexes
+            std::vector<int> indexes;
+            for (auto i = 0; i < row.size(); ++i) {
+                if (row[i] != 0.f) {
+                    indexes.push_back(i);
+                }
+            }
+            // Permutations
+            do {
+                std::vector<float> compatible_set = compatibility_matrix[indexes[0]];
+                for (auto i = 0; i < indexes.size(); ++i) {
+                    compatible_set = intersect_rows(compatible_set, compatibility_matrix[indexes[i]]);
+                    auto sum_row_ = sum_row(compatible_set);
+                    if (sum_row_ < lower_bound) {
+                        break;
+                    }
+                    else {
+                        if (sum_row_ > lower_bound) {
+                            compatible_sets.clear();
+                            lower_bound = sum_row_;
+                        }
+                        compatible_sets.push_back(compatible_set);
+                    }
+                }
+            } while (std::next_permutation(indexes.begin(), indexes.end()));
+        }
+        //std::cout << "Compatible sets: " << compatible_sets.size() << std::endl;
+
+        // Build unique compatible sets
+        std::sort(compatible_sets.begin(), compatible_sets.end());
+        compatible_sets.erase(std::unique(compatible_sets.begin(), compatible_sets.end()), compatible_sets.end());
+        //std::cout << "Unique compatible sets: " << compatible_sets.size() << std::endl;
+
 
         // Build return vector
         for (auto& row : unique_matrix) {
@@ -147,26 +213,12 @@ namespace wn {
             conceptual_graph_corresponde correspondence_to_rhs;
             float similarity = 0.f;
 
-            auto max = 0.f;
-            for (auto& ff : row) {
-                std::cout << ff << ", ";
-                max = std::max(max, ff);
-            }
-            std::cout << " --> max: " << max << std::endl;
-            for (auto i = 0; i<row.size(); ++i) {
-                if (row[i] != 0.f && compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
-                    append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
-                    std::cout << get<3>(subgraphs[i]) << ", ";
-                    similarity += get<3>(subgraphs[i]);
-                }
-                else {
-                    std::cout << "0, ";
-                }
+            for (auto i = 0; i < row.size(); ++i) {
+                append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
+                similarity += get<3>(subgraphs[i]);
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
-            std::cout << " = " << similarity << std::endl << std::endl;
         }
-        //std::cout << "Return vector: " << ret.size() << std::endl;
 
         /* TODO: Aquí se puede implementar un algoritmo recursivo basado en la compatibilidad. A medida que voy
             seleccionando/añadiendo grafos las opciones compatibles van disminuyendo (sólo es compatible la
