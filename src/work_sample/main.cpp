@@ -95,12 +95,17 @@ int main(int argc, char** argv) {
     cout << "# Computing distances" << endl;
     cout << "#-------------------------------" << endl;
     distance::shortest_path shortest_path(wnet);
-    distance::sussna distance_sussna(graph);
-    distance::wu_palmer distance_wu_palmer(graph);
-    distance::leacock_chodorow distance_leacock_chodorow(graph);
     distance::resnik distance_resnik(graph, corpus);
     distance::jiang_conrath distance_jiang_conrath(graph, corpus);
     distance::lin distance_lin(graph, corpus);
+    distance::sussna distance_sussna_(graph);
+    distance::wu_palmer distance_wu_palmer_(graph);
+    distance::leacock_chodorow distance_leacock_chodorow_(graph);
+
+    cache_distance distance_sussna(distance_sussna_);
+    cache_distance distance_wu_palmer(distance_wu_palmer_);
+    cache_distance distance_leacock_chodorow(distance_leacock_chodorow_);
+
 
     distance::base_relation_unl distance_relation;
 

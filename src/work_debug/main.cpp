@@ -92,7 +92,8 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Classes to compute distances: " << endl;
     cout << "#-------------------------------" << endl;
-    distance::shortest_path distance_synset(wnet);
+    distance::shortest_path distance_synset_(wnet);
+    cache_distance distance_synset(distance_synset_);
     distance::base_relation_unl distance_relation;
     auto tol_synset = 0.f;
     auto tol_relation = 0.f;
@@ -104,7 +105,7 @@ int main(int argc, char** argv) {
     distance::base_graph::conceptual_graph_corresponde s2_to_result;
 
     distance::mcs distance_mcs(distance_synset, distance_relation);
-    auto data = distance_mcs.max_similarity(original, google, tol_synset, tol_relation, result, s1_to_result, s2_to_result);
+    auto data = distance_mcs.max_similarity(original, yandex, tol_synset, tol_relation, result, s1_to_result, s2_to_result);
     cout << " - sim_value = " << data << endl;
 
     cout << endl << "# DEBUG" << endl;

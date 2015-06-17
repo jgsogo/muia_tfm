@@ -66,13 +66,13 @@ int main(int argc, char** argv) {
     cout << " - shortest path" << endl << " - sussna" << endl << " - wu-palmer" << endl;
     cout << " - leacock-chodorwo" << endl << " - resnik" << endl << " - jiang-conrath" << endl;
     cout << " - lin" << endl;
-    distance::shortest_path shortest_path(wnet);
-    distance::sussna distance_sussna(graph);
-    distance::wu_palmer distance_wu_palmer(graph);
-    distance::leacock_chodorow distance_leacock_chodorow(graph);
-    distance::resnik distance_resnik(graph, corpus);
-    distance::jiang_conrath distance_jiang_conrath(graph, corpus);
-    distance::lin distance_lin(graph, corpus);
+    distance::shortest_path shortest_path_(wnet);
+    distance::resnik distance_resnik_(graph, corpus);
+    distance::jiang_conrath distance_jiang_conrath_(graph, corpus);
+    distance::lin distance_lin_(graph, corpus);
+    distance::sussna distance_sussna_(graph);
+    distance::wu_palmer distance_wu_palmer_(graph);
+    distance::leacock_chodorow distance_leacock_chodorow_(graph);
 
     distance::base_relation_unl distance_relation;
 
@@ -112,6 +112,15 @@ int main(int argc, char** argv) {
                 wn::unl_graph yandex;
                 auto yandex_graph = parse_graph(filename, "Yandex", wnet, yandex);
                 ofstream fyan; fyan.open(directory + fileid + "_yandex.dot"); yandex.print(fyan, true); fyan.close();
+
+                // Some distance meassures required high overhead, but we can cache them
+                cache_distance shortest_path(shortest_path_);
+                cache_distance distance_resnik(distance_resnik_);
+                cache_distance distance_jiang_conrath(distance_jiang_conrath_);
+                cache_distance distance_lin(distance_lin_);
+                cache_distance distance_sussna(distance_sussna_);
+                cache_distance distance_wu_palmer(distance_wu_palmer_);
+                cache_distance distance_leacock_chodorow(distance_leacock_chodorow_);
 
                 if (ori_graph && google_graph) {
                     graph_dist dist_original(original, google, "google");
