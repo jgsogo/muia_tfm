@@ -54,14 +54,31 @@ namespace wn {
 
         // Store all connected common subgraphs between graph1 and graph2 (from both perspectives).
         typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
-        typedef std::tuple<store_callback::MembershipFilteredGraph, store_callback::MembershipFilteredGraph, conceptual_graph_corresponde, float> _t_subgraphs;
-        std::vector<_t_subgraphs> subgraphs;
+        typedef store_callback::_t_subgraphs _t_subgraphs;
+        std::vector<std::unique_ptr<_t_subgraphs>> subgraphs;
         store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_);
-        mcgregor_common_subgraphs_maximum_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
+        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
+        std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
 
-        //std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
-        
+        // Remove duplicated graphs
+        auto nested = [](const conceptual_graph_corresponde& lhs, const conceptual_graph_corresponde& rhs) {
+            return std::all_of(lhs.begin(), lhs.end(), [&rhs](const conceptual_graph_corresponde::value_type& item){
+                auto it = rhs.find(item.first);
+                return (it != rhs.end() && it->second == item.second);
+            });
+        };
+        for (auto it1 = subgraphs.begin(); it1 != subgraphs.end(); ++it1) {
+            for (auto it2 = subgraphs.begin(); it2 != subgraphs.end(); ++it2) {
+                if (it1 == it2) { continue; }
+                if (nested(get<2>(**it1), get<2>(**it2))) {
+                    subgraphs.erase(it1);
+                    it1 = subgraphs.begin();
+                    break;
+                }
+            }
+        }
+        std::cout << "Number of subgraphs (filtered): " << subgraphs.size() << std::endl;
 
         /* Combination of subgraphs must be done here, where I have original node_ids (I have filtered graphs).
         The objective is to return every possible combination of subgraphs which is compatible; but it
@@ -119,28 +136,35 @@ namespace wn {
         // Build compatibility matrix
         auto n_subgraphs = subgraphs.size();
         //  - best single graph
-        auto it = std::max_element(subgraphs.begin(), subgraphs.end(), [](_t_subgraphs& lhs, _t_subgraphs& rhs){
-            return std::get<3>(lhs) < std::get<3>(rhs);
+        auto it = std::max_element(subgraphs.begin(), subgraphs.end(), [](std::unique_ptr<_t_subgraphs>& lhs, std::unique_ptr<_t_subgraphs>& rhs){
+            return std::get<3>(*lhs) < std::get<3>(*rhs);
         });
-        auto lower_bound = std::get<3>(*it);
-        //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
-        //std::cout << "lower_bound: " << lower_bound << std::endl;
+        auto lower_bound = std::get<3>(**it);
+        std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
+        std::cout << "lower_bound: " << lower_bound << std::endl;
         std::vector<std::vector<float>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
             std::vector<float> i_compatible(n_subgraphs, 0.f);
             for (auto j = 0; j < n_subgraphs; ++j) {
                 if (i != j) {
-                    auto comp = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
+                    auto comp = compatible_correspondences(get<2>(*subgraphs[i]), get<2>(*subgraphs[j]));
                     if (comp) {
-                        i_compatible[j] = get<3>(subgraphs[j]);
+                        i_compatible[j] = get<3>(*subgraphs[j]);
                     }
                 }
                 else {
-                    i_compatible[j] = get<3>(subgraphs[j]);
+                    i_compatible[j] = get<3>(*subgraphs[j]);
                 }
             }
             compatibility_matrix[i] = i_compatible;
         }
+
+for (auto& row : compatibility_matrix) {
+    for (auto& ff : row) {
+        std::cout << ff << ", ";
+    }
+    std::cout << std::endl;
+}
 
         typedef std::vector<float> _t_row;
         auto sum_row = [](const _t_row& lhs)->float {
@@ -154,7 +178,14 @@ namespace wn {
             }), unique_matrix.end());
         std::sort(unique_matrix.begin(), unique_matrix.end());
         unique_matrix.erase(std::unique(unique_matrix.begin(), unique_matrix.end()), unique_matrix.end());
-        //std::cout << "Unique matrix rows: " << unique_matrix.size() << std::endl;
+        std::cout << "Unique matrix rows: " << unique_matrix.size() << std::endl;
+
+for (auto& row : unique_matrix) {
+    for (auto& ff : row) {
+        std::cout << ff << ", ";
+    }
+    std::cout << std::endl;
+}
 
         // Build all compatible set (all permutations for every row)        
         auto intersect_rows = [](const _t_row& lhs, const _t_row& rhs)->_t_row{
@@ -169,6 +200,7 @@ namespace wn {
         std::vector<std::vector<float>> compatible_sets;
         auto i = 0;
         for (auto& row : unique_matrix) {
+std::cout << std::endl << "work on row " << i++ << std::endl;
             if (sum_row(row) < lower_bound) {
                 continue;
             }
@@ -184,6 +216,10 @@ namespace wn {
                 std::vector<float> compatible_set = compatibility_matrix[indexes[0]];
                 for (auto i = 0; i < indexes.size(); ++i) {
                     compatible_set = intersect_rows(compatible_set, compatibility_matrix[indexes[i]]);
+for (auto& ff : compatible_set) {
+    std::cout << ff << ", ";
+}
+std::cout << std::endl;
                     auto sum_row_ = sum_row(compatible_set);
                     if (sum_row_ < lower_bound) {
                         break;
@@ -198,24 +234,32 @@ namespace wn {
                 }
             } while (std::next_permutation(indexes.begin(), indexes.end()));
         }
-        //std::cout << "Compatible sets: " << compatible_sets.size() << std::endl;
+        std::cout << "Compatible sets: " << compatible_sets.size() << std::endl;
 
+for (auto& s : compatible_sets) {
+    for (auto& ff : s) {
+        std::cout << ff << ", ";
+    }
+    std::cout << std::endl;
+}
         // Build unique compatible sets
         std::sort(compatible_sets.begin(), compatible_sets.end());
         compatible_sets.erase(std::unique(compatible_sets.begin(), compatible_sets.end()), compatible_sets.end());
-        //std::cout << "Unique compatible sets: " << compatible_sets.size() << std::endl;
+        std::cout << "Unique compatible sets: " << compatible_sets.size() << std::endl;
 
 
         // Build return vector
-        for (auto& row : unique_matrix) {
+        for (auto& row : compatible_sets) {
             conceptual_graph graph;
             conceptual_graph_corresponde correspondence_to_lhs;
             conceptual_graph_corresponde correspondence_to_rhs;
             float similarity = 0.f;
 
             for (auto i = 0; i < row.size(); ++i) {
-                append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
-                similarity += get<3>(subgraphs[i]);
+                if (row[i] != 0.f) {
+                    append_correspondence_tuple(*subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
+                    similarity += get<3>(*subgraphs[i]);
+                }
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
         }
