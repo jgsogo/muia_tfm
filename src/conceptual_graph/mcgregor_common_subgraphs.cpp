@@ -56,8 +56,9 @@ namespace wn {
         typedef mcs::store_callback<_t_graph, _t_graph> store_callback;
         typedef store_callback::_t_subgraphs _t_subgraphs;
         std::vector<std::unique_ptr<_t_subgraphs>> subgraphs;
-        store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_);
-        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
+        auto min_nodes = std::min(lhs.get_nodes().size(), rhs.get_nodes().size());
+        store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_, min_nodes*min_nodes);
+        mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, std::ref(mcs_graphs),
             edges_equivalent(funcs).vertices_equivalent(funcs));
         //std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
 
