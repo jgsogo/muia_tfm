@@ -115,6 +115,7 @@ namespace wn {
 
         // Build compatibility matrix
         auto n_subgraphs = subgraphs.size();
+        auto min_similarity = mcs_graphs.single_graph_max_similarity;
         //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
         std::vector<std::vector<float>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
