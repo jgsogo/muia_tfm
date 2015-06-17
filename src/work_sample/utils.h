@@ -5,6 +5,7 @@
 #include <fstream>
 #include <time.h>
 #include <mutex>
+#include <map>
 
 using namespace wn;
 using namespace std;
@@ -111,3 +112,39 @@ void comparison_task(std::ofstream& fout, const std::string& filename, const std
     fout.flush();
     fout_mutex.unlock();
 }
+
+
+
+class cache_distance : public wn::distance::base_synset {
+    public:
+        cache_distance(wn::distance::base_synset& dist) : dist(dist) {};
+
+        virtual float operator()(const synset& s1, const synset& s2) const {
+            auto key = std::make_pair(s1.id, s2.id);
+            auto it = dist_cache.insert(std::make_pair(key, 0.f));
+            if (it.second) {
+                it.first->second = dist(s1, s2);
+            }
+            return it.first->second;
+        }
+
+        virtual float similarity(const synset& s1, const synset& s2) const {
+            auto key = std::make_pair(s1.id, s2.id);
+            auto it = sim_cache.insert(std::make_pair(key, 0.f));
+            if (it.second) {
+                it.first->second = dist.similarity(s1, s2);
+            }
+            return it.first->second;
+        }
+
+
+        void reset() {
+            dist_cache.clear();
+            sim_cache.clear();
+        };
+
+    protected:
+        wn::distance::base_synset& dist;
+        mutable std::map<std::pair<int, int>, float> dist_cache;
+        mutable std::map<std::pair<int, int>, float> sim_cache;
+};
