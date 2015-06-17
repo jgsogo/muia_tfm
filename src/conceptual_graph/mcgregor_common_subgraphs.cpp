@@ -66,11 +66,21 @@ namespace wn {
         */
         auto compatible_correspondences = [](const conceptual_graph_corresponde& lhs, const conceptual_graph_corresponde& rhs)->bool {
             // Two correspondences are compatible if they don't share any common element;
+            //  - compare keys
             for (auto& it_lhs : lhs) {
                 if (rhs.find(it_lhs.first) != rhs.end()) {
                     return false;
                 }
             }
+            //  - compare values
+            for (auto& it_lhs : lhs) {
+                auto it = std::find_if(rhs.begin(), rhs.end(), [&it_lhs](const std::pair<size_t, size_t>& item){
+                    return (it_lhs.second == item.second);
+                });
+                if (it != rhs.end()) {
+                    return false;
+                }
+            }            
             return true;
         };
 
@@ -106,12 +116,18 @@ namespace wn {
         // Build compatibility matrix
         auto n_subgraphs = subgraphs.size();
         //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
-        std::vector<std::vector<bool>> compatibility_matrix(n_subgraphs);
+        std::vector<std::vector<float>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
-            std::vector<bool> i_compatible(n_subgraphs, false);
+            std::vector<float> i_compatible(n_subgraphs, 0.f);
             for (auto j = 0; j < n_subgraphs; ++j) {
                 if (i != j) {
-                    i_compatible[j] = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
+                    auto comp = compatible_correspondences(get<2>(subgraphs[i]), get<2>(subgraphs[j]));
+                    if (comp) {
+                        i_compatible[j] = get<3>(subgraphs[j]);
+                    }
+                }
+                else {
+                    i_compatible[j] = get<3>(subgraphs[j]);
                 }
             }
             compatibility_matrix[i] = i_compatible;
@@ -130,15 +146,24 @@ namespace wn {
             conceptual_graph_corresponde correspondence_to_rhs;
             float similarity = 0.f;
 
+            auto max = 0.f;
+            for (auto& ff : row) {
+                std::cout << ff << ", ";
+                max = std::max(max, ff);
+            }
+            std::cout << " --> max: " << max << std::endl;
             for (auto i = 0; i<row.size(); ++i) {
-                if (row[i] && compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
+                if (row[i] != 0.f && compatible_correspondences(correspondence_to_lhs, get<2>(subgraphs[i]))) {
                     append_correspondence_tuple(subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
-                    //std::cout << get<3>(subgraphs[i]) << ", ";
+                    std::cout << get<3>(subgraphs[i]) << ", ";
                     similarity += get<3>(subgraphs[i]);
+                }
+                else {
+                    std::cout << "0, ";
                 }
             }
             ret.insert(ret.end(), make_tuple(graph, correspondence_to_lhs, correspondence_to_rhs, similarity));
-            //std::cout << " = " << similarity << std::endl;
+            std::cout << " = " << similarity << std::endl << std::endl;
         }
         //std::cout << "Return vector: " << ret.size() << std::endl;
 
