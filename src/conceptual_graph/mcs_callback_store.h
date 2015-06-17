@@ -26,9 +26,11 @@ namespace wn {
             typedef typename membership_filtered_graph_traits<_t_graph, MembershipMap>::graph_type
                   MembershipFilteredGraph;
 
+            typedef typename std::tuple<MembershipFilteredGraph, MembershipFilteredGraph, conceptual_graph_corresponde, float> _t_subgraphs;
+
             store_callback(const GraphFirst& graph1,
                 const GraphSecond& graph2,
-                std::vector < std::tuple < MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>, float>> &out_vector,
+                std::vector<std::unique_ptr<_t_subgraphs>> &out_vector,
                 const wn::cmp_synset& cmp_synset,
                 const wn::cmp_relation& cmp_relation)
                 : m_graph1(graph1), m_graph2(graph2), graphs(out_vector), cmp_synset(cmp_synset), cmp_relation(cmp_relation) {
@@ -84,7 +86,7 @@ namespace wn {
                     }
 
                     //std::cout << "--- " << similarity << std::endl << std::endl;
-                    graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
+                    graphs.push_back(std::unique_ptr<_t_subgraphs>(new _t_subgraphs(subgraph1, subgraph2, correspondence, similarity)));
                 }
                 return (true);
             }
@@ -94,7 +96,7 @@ namespace wn {
                 const wn::cmp_relation& cmp_relation;
                 const GraphFirst& m_graph1;
                 const GraphSecond& m_graph2;
-                std::vector<std::tuple<MembershipFilteredGraph, MembershipFilteredGraph, std::map<std::size_t, std::size_t>, float>>& graphs;
+                std::vector<std::unique_ptr<_t_subgraphs>>& graphs;
         };
     }
 }

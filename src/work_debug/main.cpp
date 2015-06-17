@@ -94,8 +94,8 @@ int main(int argc, char** argv) {
     cout << "#-------------------------------" << endl;
     distance::shortest_path distance_synset(wnet);
     distance::base_relation_unl distance_relation;
-    auto tol_synset = 0.2f;
-    auto tol_relation = 0.2f;
+    auto tol_synset = 0.f;
+    auto tol_relation = 0.f;
     cout << " - tol_synset = " << tol_synset << endl;
     cout << " - tol_relation = " << tol_relation << endl;
 
