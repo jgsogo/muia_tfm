@@ -59,7 +59,7 @@ namespace wn {
         store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_);
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, mcs_graphs,
             edges_equivalent(funcs).vertices_equivalent(funcs));
-        std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
+        //std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
 
         // Remove duplicated graphs
         auto nested = [](const conceptual_graph_corresponde& lhs, const conceptual_graph_corresponde& rhs) {
@@ -78,7 +78,7 @@ namespace wn {
                 }
             }
         }
-        std::cout << "Number of subgraphs (filtered): " << subgraphs.size() << std::endl;
+        //std::cout << "Number of subgraphs (filtered): " << subgraphs.size() << std::endl;
 
         /* Combination of subgraphs must be done here, where I have original node_ids (I have filtered graphs).
         The objective is to return every possible combination of subgraphs which is compatible; but it
@@ -140,16 +140,10 @@ namespace wn {
             return std::get<3>(*lhs) < std::get<3>(*rhs);
         });
         auto lower_bound = std::get<3>(**it);
-        std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
-        std::cout << "lower_bound: " << lower_bound << std::endl;
+        //std::cout << "Compatibility matrix: " << n_subgraphs << std::endl;
+        //std::cout << "lower_bound: " << lower_bound << std::endl;
         std::vector<std::vector<float>> compatibility_matrix(n_subgraphs);
         for (auto i = 0; i < n_subgraphs; ++i) {
-conceptual_graph graph;
-conceptual_graph_corresponde correspondence_to_lhs;
-conceptual_graph_corresponde correspondence_to_rhs;
-append_correspondence_tuple(*subgraphs[i], graph, correspondence_to_lhs, correspondence_to_rhs);
-graph.print(std::cout);
-
             std::vector<float> i_compatible(n_subgraphs, 0.f);
             for (auto j = 0; j < n_subgraphs; ++j) {
                 if (i != j) {
@@ -157,43 +151,17 @@ graph.print(std::cout);
                     if (comp) {
                         i_compatible[j] = get<3>(*subgraphs[j]);
                     }
-                }/*
-                else {
-                    i_compatible[j] = get<3>(*subgraphs[j]);
-                }*/
+                }
             }
             compatibility_matrix[i] = i_compatible;
         }
 
-for (auto& row : compatibility_matrix) {
-    for (auto& ff : row) {
-        std::cout << ff << ", ";
-    }
-    std::cout << std::endl;
-}
 
         typedef std::vector<float> _t_row;
         auto sum_row = [](const _t_row& lhs, const float& init)->float {
             return std::accumulate(lhs.begin(), lhs.end(), init, [](const float& item1, const float& item2){ return item1 + item2; });
         };
 
-        /*
-        // Build unique matrix
-        auto unique_matrix = compatibility_matrix;
-        unique_matrix.erase(std::remove_if(unique_matrix.begin(), unique_matrix.end(), [&lower_bound, &sum_row](const _t_row& row){
-            return (sum_row(row) < lower_bound);
-            }), unique_matrix.end());
-        std::sort(unique_matrix.begin(), unique_matrix.end());
-        unique_matrix.erase(std::unique(unique_matrix.begin(), unique_matrix.end()), unique_matrix.end());
-        std::cout << "Unique matrix rows: " << unique_matrix.size() << std::endl;
-        
-for (auto& row : unique_matrix) {
-    for (auto& ff : row) {
-        std::cout << ff << ", ";
-    }
-    std::cout << std::endl;
-}
-        */
 
         // Build all compatible set (all permutations for every row)        
         auto intersect_rows = [](const _t_row& lhs, const _t_row& rhs)->_t_row{
@@ -211,11 +179,6 @@ for (auto& row : unique_matrix) {
             auto sim_value = std::accumulate(set.begin(), set.end(), 0.f, [&subgraphs](const float& lhs, const std::size_t& rhs){
                 return lhs + get<3>(*subgraphs[rhs]);
             });
-std::cout << "     set: ";
-for (auto& ff : set) {
-    std::cout << ff << ", ";
-}
-std::cout << " ---> " << sim_value;
             if (sim_value >= lower_bound) {
                 if (sim_value > lower_bound) {
                     compatible_sets.clear();
@@ -223,16 +186,13 @@ std::cout << " ---> " << sim_value;
                 }
                 std::sort(set.begin(), set.end());
                 compatible_sets.push_back(set);
-std::cout << ".";
             }
-std::cout << std::endl;
             return sim_value;
         };
 
         for (auto i = (std::size_t)0; i < compatibility_matrix.size(); ++i) {
             const std::vector<float>& row = compatibility_matrix[i];
             auto i_sim_value = get<3>(*subgraphs[i]);
-std::cout << std::endl << "work on row " << i << std::endl;
             if (sum_row(row, i_sim_value) < lower_bound) {
                 continue;
             }
@@ -245,11 +205,6 @@ std::cout << std::endl << "work on row " << i << std::endl;
             }
             // Permutations
             do {
-std::cout << " - indexes: ";
-for (auto& ff : indexes) {
-    std::cout << ff << ", ";
-}
-std::cout << std::endl;
                 std::vector<std::size_t> comp_set = { i };
                 std::vector<float> compatible_set = compatibility_matrix[i];
                 append_compatible_set(comp_set);
@@ -264,19 +219,12 @@ std::cout << std::endl;
                 }
             } while (std::next_permutation(indexes.begin(), indexes.end()));
         }
-        std::cout << "Compatible sets: " << compatible_sets.size() << std::endl;
+        //std::cout << "Compatible sets: " << compatible_sets.size() << std::endl;
 
-for (auto& s : compatible_sets) {
-    for (auto& ff : s) {
-        std::cout << ff << ", ";
-    }
-    std::cout << std::endl;
-}
         // Build unique compatible sets
         std::sort(compatible_sets.begin(), compatible_sets.end());
         compatible_sets.erase(std::unique(compatible_sets.begin(), compatible_sets.end()), compatible_sets.end());
-        std::cout << "Unique compatible sets: " << compatible_sets.size() << std::endl;
-
+        //std::cout << "Unique compatible sets: " << compatible_sets.size() << std::endl;
 
         // Build return vector
         for (auto& row : compatible_sets) {
