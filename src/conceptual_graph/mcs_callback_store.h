@@ -32,7 +32,6 @@ namespace wn {
                 const wn::cmp_synset& cmp_synset,
                 const wn::cmp_relation& cmp_relation)
                 : m_graph1(graph1), m_graph2(graph2), graphs(out_vector), cmp_synset(cmp_synset), cmp_relation(cmp_relation) {
-                single_graph_max_similarity = 0.f;
             }
 
             template <typename CorrespondenceMapFirstToSecond, typename CorrespondenceMapSecondToFirst>
@@ -60,7 +59,7 @@ namespace wn {
                         auto v2 = get(correspondence_map_1_to_2, vertex1);
                         correspondence[vertex1] = v2;
                         similarity += cmp_synset.similarity(m_graph1[vertex1], m_graph2[v2]);
-                        std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << "\t sim_value = " << cmp_synset.similarity(m_graph1[vertex1], m_graph2[v2]) << std::endl;
+                        //std::cout << vertex1 << " <-> " << get(correspondence_map_1_to_2, vertex1) << "\t sim_value = " << cmp_synset.similarity(m_graph1[vertex1], m_graph2[v2]) << std::endl;
                     }
                 }
 
@@ -84,15 +83,12 @@ namespace wn {
 
                     }
 
-                    std::cout << "--- " << similarity << std::endl << std::endl;
+                    //std::cout << "--- " << similarity << std::endl << std::endl;
                     graphs.push_back(std::make_tuple(subgraph1, subgraph2, correspondence, similarity));
-                    single_graph_max_similarity = std::max(single_graph_max_similarity, similarity);
                 }
                 return (true);
             }
 
-            public:
-                float single_graph_max_similarity;
             private:
                 const wn::cmp_synset& cmp_synset;
                 const wn::cmp_relation& cmp_relation;
