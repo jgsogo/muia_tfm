@@ -110,8 +110,8 @@ int main(int argc, char** argv) {
     distance::base_relation_unl distance_relation;
 
     // Preparing output
-    auto tol_synset_values = {0.f, 0.2f, 0.4f, 0.6f, 0.8f, 0.99f};
-    auto tol_relation_values = {0.f, 0.2f, 0.4f, 0.8f, 0.99f};
+    auto tol_synset_values = { 0.f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f };
+    auto tol_relation_values = tol_synset_values;
     string sample_file_id = sample_file.substr(sample_file.find_last_of("\\/")+1);
     string output = sample_file.substr(0, sample_file.find_last_of(".")) + "-" + get_current_datetime() + ".csv";
     cout << "Output file '" << output << "'" << endl;

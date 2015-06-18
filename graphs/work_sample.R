@@ -52,7 +52,7 @@ plot_relation_tol <- function(data, title, img_name) {
         ylab("Similaridad") + xlab("Tolerancia entre relaciones\nTolerancia entre conceptos = 0.0") +
         labs(title=title)
     
-    ggsave(paste(title, "relation_tol.png", sep="-"), g)
+    ggsave(paste(img_name, "relation_tol.png", sep="-"), g)
     g
 }
 
