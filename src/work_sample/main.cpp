@@ -73,21 +73,21 @@ int main(int argc, char** argv) {
     cout << "## Original graph" << endl;
     wn::unl_graph original;
     parse_graph(sample_file, "Original", wnet, original);
-    //original.print(std::cout);
+    original.print(std::cout);
     cout << " - num_nodes = " << original.get_nodes().size() << endl;
     cout << " - num_edges = " << original.get_edges().size() << endl;
 
     cout << "## Google graph" << endl;
     wn::unl_graph google;
     parse_graph(sample_file, "Google", wnet, google);
-    //google.print(std::cout);
+    google.print(std::cout);
     cout << " - num_nodes = " << google.get_nodes().size() << endl;
     cout << " - num_edges = " << google.get_edges().size() << endl;
 
     cout << "## Yandex graph" << endl;
     wn::unl_graph yandex;
     parse_graph(sample_file, "Yandex", wnet, yandex);
-    //yandex.print(std::cout);
+    yandex.print(std::cout);
     cout << " - num_nodes = " << yandex.get_nodes().size() << endl;
     cout << " - num_edges = " << yandex.get_edges().size() << endl;
 
@@ -113,7 +113,8 @@ int main(int argc, char** argv) {
     auto tol_synset_values = { 0.f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f };
     auto tol_relation_values = tol_synset_values;
     string sample_file_id = sample_file.substr(sample_file.find_last_of("\\/")+1);
-    string output = sample_file.substr(0, sample_file.find_last_of(".")) + "-" + get_current_datetime() + ".csv";
+    string output = sample_file.substr(0, sample_file.find_last_of(".")) + ".csv";
+    fs::create_directory(sample_file.substr(0, sample_file.find_last_of(".")));
     cout << "Output file '" << output << "'" << endl;
     ofstream fout;
     fout.open(output, ofstream::out | ofstream::app);
@@ -134,12 +135,12 @@ int main(int argc, char** argv) {
             vector<thread> ths;
 
             auto work_google = [&](distance::base_synset& words_dist, const string& dtype) {
-                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "-google-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
+                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "/google-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
                 ths.push_back(std::thread(&comparison_task_plot, std::ref(fout), sample_file_id, "google", dtype, tol_synset_value, tol_relation_value, std::ref(dist_google), std::ref(words_dist), std::ref(distance_relation), ss.str()));
             };
 
             auto work_yandex = [&](distance::base_synset& words_dist, const string& dtype) {
-                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "-yandex-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
+                stringstream ss; ss << sample_file.substr(0, sample_file.find_last_of(".")) << "/yandex-" << dtype  << "-synset_" << tol_synset_value << "-relation_" << tol_relation_value << ".dot";
                 ths.push_back(std::thread(&comparison_task_plot, std::ref(fout), sample_file_id, "yandex", dtype, tol_synset_value, tol_relation_value, std::ref(dist_yandex), std::ref(words_dist), std::ref(distance_relation), ss.str()));
             };
 
