@@ -16,14 +16,18 @@ importante que condicionará su desarrollo.
 Por todo lo anterior el alcance del presente trabajo se limitará a lo siguiente:
 
  * Implementación de varios modelos de distancia semántica entre conceptos. La entrada
-   serán dos conceptos UWs y la salida será una medida de distancia entre ellos.
+   serán dos conceptos UWs (que estarán mapeados a los conceptos equivalentes de
+   WordNet) y la salida será una medida de distancia entre ellos.
 
- * Desarrollo de un modelo para el cálculo de distancia entre grafos UNL. El modelo
+ * Desarrollo de un modelo para el cálculo de distancia entre grafos UNL (tal y como se indicó
+   en el punto anterior, las UWs estaran representadas por conceptos de WordNet). El modelo
    tomará como entrada dos grafos y su salida será un número real indicando la
    distancia entre los mismos (una distancia ``0`` indicará que los grafos son
-   idénticos, valores mayores indicarán grafos cada vez más distintos).
+   idénticos, valores mayores indicarán grafos cada vez más distintos hasta el máximo valor de ``1``).
+   Se cumplirá la igualdad :math:`d(g_1, g_2) + s(g_1, g_2) = 1` entre la distancia ``d`` y
+   la similaridad ``s`` para cualquier par de grafos :math:`g_1`, :math:`g_2`.
 
-   Este modelo de distancia entre grafos permitirá utilizar cualquiera de los modelos
+ * Este modelo de distancia entre grafos permitirá utilizar cualquiera de los modelos
    anteriores de distancia entre conceptos.
 
  * Implementación del modelo en un lenguaje de programación para probarlo: se 
@@ -35,7 +39,7 @@ Por todo lo anterior el alcance del presente trabajo se limitará a lo siguiente
 Durante el desarrollo del trabajo daremos por válidas las siguientes asunciones:
 
  * Las metodologías propuestas para distancias entre conceptos en WordNet son directamente
-   aplicables a los conceptos en la Ontología UNL.
+   aplicables a los conceptos en la Ontología UNL. La conversión entre unos y otros se
 
  * La información codificada en WordNet es válida para todos los contextos de trabajo y
    experimentación.

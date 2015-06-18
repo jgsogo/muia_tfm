@@ -193,6 +193,6 @@ involucradas en esta tesis:
 
 Los trabajos reseñados anteriormente exceden con mucho el alcance de esta tesis, pero hemos
 creído conveniente exponerlos como fruto de la investigación que se ha realizado sobre la
-materia y servirán para orientar trabajos futuros.
+materia y servirán para orientar el trabajo futuro.
 
 
