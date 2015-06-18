@@ -18,11 +18,11 @@ plot_synset_tol <- function(data, title) {
     df <- data.frame(tol=x, google=y1, yandex=y2)
     
     g <- ggplot(df, aes(tol)) +
-        geom_line(aes(y=google, colour="Google")) +
         geom_line(aes(y=yandex, colour="Yandex")) +
+        geom_line(aes(y=google, colour="Google")) +
         scale_colour_manual("Traductores", 
-                            breaks = c("Google", "Yandex"),
-                            values = c("red", "blue"))
+                            breaks = c("Yandex", "Google"),
+                            values = c("blue", "red"))
     g <- g + ylab("Similaridad") + xlab("Tolerancia entre conceptos")
     g <- g + labs(title=title)
     g
