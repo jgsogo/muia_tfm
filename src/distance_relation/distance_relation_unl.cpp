@@ -61,7 +61,7 @@ float base_relation_unl::operator()(const wn::unl::relation& rel1, const wn::unl
                 return 0.2f;
             }
             else {
-                return this->upper_bound();
+                return 0.8f;
             }
         }
     };
