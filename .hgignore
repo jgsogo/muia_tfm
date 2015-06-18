@@ -19,3 +19,4 @@ install
 *.dot
 *.csv
 data/samples/*.png
+data/samples/*/*.png
