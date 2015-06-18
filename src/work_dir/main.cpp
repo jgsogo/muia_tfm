@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
         cerr << "open failed: " << strerror(errno) << '\n';
         return -1;
     }
-    fout << "# file;\ttranslator;\tdistance-meassure;\tsynset-tolerance;\trelation-tolerance;\tsimilarity-value;\tcomputation-time" << endl;
+    fout << "# file\ttranslator\tdistance-meassure\tsynset-tolerance\trelation-tolerance\tsimilarity-value\tcomputation-time" << endl;
     // Variables to control loops
     auto tol_synset_values = { 0.f, .5f, .1f, .15f, .2f, .25f, .3f, .35f, .4f, .45f, .5f, .55f,
                               .6f, .65f, .7f, .75f, .8f, .85f, .9f, .95f, .99f };

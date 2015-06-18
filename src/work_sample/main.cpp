@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
         cerr << "open failed: " << strerror(errno) << '\n';
         return -1;
     }
-    fout << "# file;\ttranslator;\tdistance-meassure;\tsynset-tolerance;\trelation-tolerance;\tsimilarity-value;\tcomputation-time" << endl;
+    fout << "# file\ttranslator\tdistance-meassure\tsynset-tolerance\trelation-tolerance\tsimilarity-value\tcomputation-time" << endl;
 
     // DO WORK!
     graph_dist dist_google(original, google, "google");

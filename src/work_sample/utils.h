@@ -92,9 +92,9 @@ void comparison_task_plot(std::ofstream& fout, const std::string& filename, cons
     graph_match_file.close();
 
     fout_mutex.lock();
-    fout << filename << ";\t" << graph << ";\t" << distance << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
+    fout << filename << "\t" << graph << "\t" << distance << "\t" << tol_synset_value << "\t" << tol_relation_value << "\t"
         << data
-        << ";\t" << seconds << "\n";
+        << "\t" << seconds << "\n";
     fout.flush();
     fout_mutex.unlock();
 }
@@ -106,9 +106,9 @@ void comparison_task(std::ofstream& fout, const std::string& filename, const std
     auto seconds = float(clock() - begin_time) / CLOCKS_PER_SEC;
 
     fout_mutex.lock();
-    fout << filename << ";\t" << graph << ";\t" << distance << ";\t" << tol_synset_value << ";\t" << tol_relation_value << ";\t"
+    fout << filename << "\t" << graph << "\t" << distance << "\t" << tol_synset_value << "\t" << tol_relation_value << "\t"
         << data
-        << ";\t" << seconds << "\n";
+        << "\t" << seconds << "\n";
     fout.flush();
     fout_mutex.unlock();
 }

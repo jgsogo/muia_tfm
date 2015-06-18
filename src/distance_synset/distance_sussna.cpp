@@ -21,12 +21,12 @@ float sussna::edge_weight(const synset& child, const synset& parent) const {
     auto n_child_hypernyms = graph.hyperonyms(child).size();
     auto n_parent_hyponyms = graph.hyponyms(parent).size();
     // Formula in [Sussna, 1993]
-    // TODO: This formula may have an ERROR, it should be: `min + (max-min)/n`
-    //auto w_child_hypernyms = minmax_hyperonym_r.second - (minmax_hyperonym_r.second - minmax_hyperonym_r.first) / float(n_child_hypernyms);
-    //auto w_parent_hyponyms = minmax_hyponym_r.second - (minmax_hyponym_r.second - minmax_hyponym_r.first) / float(n_parent_hyponyms);
-    auto w_child_hypernyms = minmax_hyperonym_r.first + (minmax_hyperonym_r.second - minmax_hyperonym_r.first) / float(n_child_hypernyms);
-    auto w_parent_hyponyms = minmax_hyponym_r.first + (minmax_hyponym_r.second - minmax_hyponym_r.first) / float(n_parent_hyponyms);
-    return (w_child_hypernyms + w_parent_hyponyms) / (2 * (graph.get_max_depth(child)));
+    // TODO: This formula may have an ERROR
+    auto w_child_hypernyms = minmax_hyperonym_r.second - (minmax_hyperonym_r.second - minmax_hyperonym_r.first) / float(n_child_hypernyms);
+    auto w_parent_hyponyms = minmax_hyponym_r.second - (minmax_hyponym_r.second - minmax_hyponym_r.first) / float(n_parent_hyponyms);
+    //auto w_child_hypernyms = minmax_hyperonym_r.first + (minmax_hyperonym_r.second - minmax_hyperonym_r.first) / float(n_child_hypernyms);
+    //auto w_parent_hyponyms = minmax_hyponym_r.first + (minmax_hyponym_r.second - minmax_hyponym_r.first) / float(n_parent_hyponyms);
+    return (1/w_child_hypernyms + 1/w_parent_hyponyms) / (2 * (graph.get_max_depth(child)));
 }
 
 float sussna::operator()(const synset& s1, const synset& s2) const {
