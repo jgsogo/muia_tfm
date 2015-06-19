@@ -73,21 +73,24 @@ int main(int argc, char** argv) {
     cout << "## Original graph" << endl;
     wn::unl_graph original;
     parse_graph(sample_file, "Original", wnet, original);
-    original.print(std::cout);
+    //original.print(std::cout);
+    ofstream fori; fori.open(sample_file.substr(0, sample_file.find_last_of(".")) + "_original.dot"); original.print(fori, true); fori.close();
     cout << " - num_nodes = " << original.get_nodes().size() << endl;
     cout << " - num_edges = " << original.get_edges().size() << endl;
 
     cout << "## Google graph" << endl;
     wn::unl_graph google;
     parse_graph(sample_file, "Google", wnet, google);
-    google.print(std::cout);
+    //google.print(std::cout);
+    ofstream fgoo; fgoo.open(sample_file.substr(0, sample_file.find_last_of(".")) + "_google.dot"); google.print(fgoo, true); fgoo.close();
     cout << " - num_nodes = " << google.get_nodes().size() << endl;
     cout << " - num_edges = " << google.get_edges().size() << endl;
 
     cout << "## Yandex graph" << endl;
     wn::unl_graph yandex;
     parse_graph(sample_file, "Yandex", wnet, yandex);
-    yandex.print(std::cout);
+    //yandex.print(std::cout);
+    ofstream fyan; fyan.open(sample_file.substr(0, sample_file.find_last_of(".")) + "_yandex.dot"); yandex.print(fyan, true); fyan.close();
     cout << " - num_nodes = " << yandex.get_nodes().size() << endl;
     cout << " - num_edges = " << yandex.get_edges().size() << endl;
 
@@ -117,7 +120,7 @@ int main(int argc, char** argv) {
     fs::create_directory(sample_file.substr(0, sample_file.find_last_of(".")));
     cout << "Output file '" << output << "'" << endl;
     ofstream fout;
-    fout.open(output, ofstream::out | ofstream::app);
+    fout.open(output);
     if (fout.fail()) {
         cerr << "open failed: " << strerror(errno) << '\n';
         return -1;
