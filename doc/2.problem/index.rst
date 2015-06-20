@@ -131,8 +131,9 @@ involucradas en esta tesis:
     
  #. Creación de una **jerarquía de relaciones UNL**: las relaciones entre conceptos también
     deben ser tenidas en cuenta en la distancia entre oraciones; para ello es necesario
-    saber como se vinculan unas relaciones con otras. A este trabajo se añade el esfuerzo
-    de definir y acordar cuáles son las relaciones válidas.
+    saber cómo se vinculan unas relaciones con otras. A este trabajo se añade el esfuerzo
+    de definir y acordar entre los diferentes grupos de trabajo cuáles son las
+    relaciones válidas.
 
  #. Obtención de un **dataset con distancias semánticas etiquetadas** entre palabras que
     sea suficientemente amplio y generalista para cubrir cualquier dominio. Hay que
@@ -149,7 +150,7 @@ involucradas en esta tesis:
     de los diferentes conceptos. Etiquetado para WordNet sólo se ha encontrado el
     corpus SemCor [#]_ que es un subconjunto del Brown Corpus [#]_ anotado con los conceptos de
     WordNet 1.6 y mapeado automáticamente a las versiones posteriores de WordNet.
-
+    
  #. **Modelo de distancia entre UWs**: la mayoría de los modelos propuestos sobre WordNet
     pueden ser aplicados a la Ontología UNL. Con un dataset de validación adecuado puede
     realizarse una comparación de los diferentes modelos para caracterizar su comportamiento
@@ -158,7 +159,9 @@ involucradas en esta tesis:
  #. Obtención de un **dataset con distancias semánticas entre grafos UNL**: aunque no se
     ha realizado una búsqueda intensiva, parece que tampoco hay disponible un *dataset*
     con distancias entre oraciones y, menos, con distancias entre grafos conceptuales o
-    UNL. Hay aquí dos trabajos diferentes relacionados: la obtención de las oraciones y
+    UNL.
+    
+    Hay aquí dos trabajos diferentes relacionados: la obtención de las oraciones y
     su distancia semántica por un lado y, por otro, la construcción de los grafos con
     sus conceptos y los problemas de interpretación y ambigüedades que conllevan.
 
@@ -180,9 +183,14 @@ involucradas en esta tesis:
    junio de 2015).
 
 .. [#] El corpus SemCor lo hemos podido encontrar en la página de R. Mihalcea (Universidad
-   de Michigan, USA). http://web.eecs.umich.edu/~mihalcea/downloads.html#semcor (accedido
+   de Michigan, USA) http://web.eecs.umich.edu/~mihalcea/downloads.html#semcor (accedido
    en junio de 2015). También está disponible en los corpus de datos que ofrece la
    librería NLTK de Python (http://www.nltk.org/).
+   
+   Sin embargo, según ha podido saber el autor de este trabajo a través de correos
+   electrónicos intercambiados con la profesora R. Mihalcea, la actualización de este
+   corpus no está garantizada. A este hecho hay que añadir que no se ha encontrado ningún
+   otro corpus etiquetado para WordNet.
 
 .. [#] El Brown Corpus se crea en los 1960s por Henry Kucera y
    W. Nelson Francis (Brown University, Providence, Rhode Island) tomando 500 muestras de
