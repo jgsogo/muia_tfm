@@ -19,4 +19,8 @@ utilizado en este trabajo.
 .. include:: appendix-data/2.unl_original.rst
 .. include:: appendix-data/3.unl_work.rst
 .. include:: appendix-data/4.graph_original.rst
+.. include:: appendix-data/5.translations.rst
+.. include:: appendix-data/6.graph_google.rst
+.. include:: appendix-data/7.graph_yandex.rst
+
 

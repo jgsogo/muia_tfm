@@ -69,8 +69,8 @@ calcula la distancia de las traducciones obtenidas.
    únicamente las *headwords* correspondientes a cada concepto).
 
 
-.. figure:: ../data/samples/sample01_original.png
-   :name: sample01-original
+.. figure:: ../data/samples/sample08_original.png
+   :name: sample08-original
    :scale: 100 %
    :width: 100 %
    
