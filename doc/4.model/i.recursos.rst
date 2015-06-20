@@ -182,9 +182,8 @@ bastante tratado en la bibliografía. Existen dos aproximaciones muy frecuentes 
 resolución de este problema: convertirlo en un problema de búsqueda del máximo *clique* o
 realizar una búsqueda con retroceso.
 
-El algoritmos propuesto por McGregor en 1982 :cite:`McGregor1982` pertenece a los segundos, 
-según Bunke *et al* :cite:`Bunke2002` esta aproximación es más eficiente cuando el número de
-conexiones es pequeño, como es el caso de los grafos conceptuales.
+El algoritmo propuesto por McGregor en 1982 :cite:`McGregor1982` pertenece a los segundos, 
+según diferentes autores esta aproximación es más eficiente en grafos dispersos :cite:`Bunke2002` :cite:`Conte2007` :cite:`Welling2011`, como es el caso de los grafos conceptuales.
 
 Este algoritmo lo hemos incorporado a nuestro modelo utilizando la implementación disponible 
 en las librerías Boost de C++ [#]_.
@@ -192,5 +191,8 @@ en las librerías Boost de C++ [#]_.
 .. [#] Boost Graph Library: McGregor Common Subgraphs. Boost C++ Libraries.
    http://www.boost.org/doc/libs/1_58_0/libs/graph/doc/mcgregor_common_subgraphs.html
    (accedido en junio de 2015)
+   
+   
+.. warning:: ¿Debería exponer brevemente en qué consiste este algoritmo?
 
    
