@@ -7,7 +7,7 @@ La codificación realizada durante el Fórum de las oraciones anteriores:
 .. code-block:: unl
    :caption: Codificación UNL original de la oración ejemplo 1.
    
-   [S:3]
+   [S]
    aoj(include(icl>be).@entry.@future,:01) 
    mod:01(forum.@def.@entry,universal) 
    mod:01(forum.@def.@entry,culture(icl>abstract thing).@def.@pl) 
@@ -117,7 +117,7 @@ La codificación realizada durante el Fórum de las oraciones anteriores:
 .. code-block:: unl
    :caption: Codificación UNL original de la oración ejemplo 6.
    
-   [S:3]
+   [S]
    agt(strive(icl>do).@entry,forum.@def)
    obj(strive(icl>do).@entry,foster(icl>do))
    agt(foster(icl>do),forum.@def)
@@ -222,7 +222,7 @@ La codificación realizada durante el Fórum de las oraciones anteriores:
 .. code-block:: unl
    :caption: Codificación UNL original de la oración ejemplo 10.
    
-   [S:3]
+   [S]
    aoj(require(icl>need(icl>be)).@entry,peace(icl>abstract thing).@def)
    mod(peace(icl>abstract thing).@def,lasting(mod<thing))
    and(lasting(mod<thing),stable(mod<thing))
