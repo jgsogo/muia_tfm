@@ -1,0 +1,96 @@
+
+.. raw:: latex
+    
+    \clearpage
+
+
+Grafos correspondientes a la oración original
+---------------------------------------------
+
+Grafos de partida utilizados en la experimentación, con referencia a éstos se
+calcula la distancia de las traducciones obtenidas.
+
+
+.. figure:: ../data/samples/sample01_original.png
+   :name: sample01-original
+   
+   Grafo correspondiente al ejemplo #1 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample02_original.png
+   :name: sample02-original
+   :scale: 100 %
+   :width: 100 %
+   
+   Grafo correspondiente al ejemplo #2 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample03_original.png
+   :name: sample03-original
+   :scale: 100 %
+   :width: 100 %
+   
+   Grafo correspondiente al ejemplo #3 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample04_original.png
+   :name: sample04-original
+   :scale: 80 %
+   
+   Grafo correspondiente al ejemplo #4 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample05_original.png
+   :name: sample05-original
+   :scale: 60 %
+   
+   Grafo correspondiente al ejemplo #5 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+   
+
+.. figure:: ../data/samples/sample06_original.png
+   :name: sample06-original
+   :scale: 50 %
+   
+   Grafo correspondiente al ejemplo #6 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample07_original.png
+   :name: sample07-original
+   :scale: 100 %
+   :width: 100 %
+   
+   Grafo correspondiente al ejemplo #7 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample01_original.png
+   :name: sample01-original
+   :scale: 100 %
+   :width: 100 %
+   
+   Grafo correspondiente al ejemplo #8 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+   
+
+.. figure:: ../data/samples/sample09_original.png
+   :name: sample09-original
+   :scale: 80 %
+   
+   Grafo correspondiente al ejemplo #9 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+
+
+.. figure:: ../data/samples/sample10_original.png
+   :name: sample10-original
+   :scale: 70 %
+   
+   Grafo correspondiente al ejemplo #10 utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto).
+   
+

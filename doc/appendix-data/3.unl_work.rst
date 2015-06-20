@@ -1,0 +1,237 @@
+
+
+.. raw:: latex
+    
+    \clearpage
+
+
+Codificación utilizada en la experimentación
+--------------------------------------------
+
+Para la experimentación ha sido necesario adaptar los grafos originales UNL para
+que los conceptos indicados se correspondieran con los existentes en WordNet 3.1,
+como consecuencia en algunas ocasiones concretas no ha sido posible trasladar
+todo el contenido semántico de la oración. Asimismo, la restricción de no utilizar
+contextos en los grafos limita la expresividad de éstos.
+
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 1.
+   
+   {unl}
+   aoj(include%2:42:00::, forum%1:14:00::)
+   mod(forum%1:14:00::, universal%5:00:00:comprehensive:00)
+   mod(forum%1:14:00::, culture%1:14:00::)
+   obj(include%2:42:00::, festival%1:04:00::)
+   and(festival%1:04:00::, debate%1:10:01::)
+   and(debate%1:10:01::, exhibition%1:04:00::)
+   pur(include%2:42:00::, celebrate%2:41:00::)
+   obj(celebrate%2:41:00::, diversity%1:07:02::)
+   mod(diversity%1:07:02::, cultural%5:00:00:social:00)
+   plc(diversity%1:07:02::, throughout%4:02:00::)
+   obj(throughout%4:02:00::, world%1:17:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 2.
+   
+   {unl}
+   agt(ratify%2:41:00::, state%1:14:00::)
+   mod(state%1:14:00::, unesco%1:14:00::)
+   plc(ratify%2:41:00::, conference%1:14:00::)
+   mod(conference%1:14:00::, state%1:14:00::)
+   obj(ratify%2:41:00::, support%1:04:00::)
+   mod(support%1:04:00::, consentaneous%5:00:00:accordant:00)
+   mod(support%1:04:00::, state%1:14:00::)
+   obj(support%1:04:00::, project%1:04:00::)
+   obj(organize%2:41:00::, project%1:04:00::)
+   man(organize%2:41:00::, jointly%4:02:02::)
+   agt(organize%2:41:00::, 01%government%1:14:00::)
+   mod(01%government%1:14:00::, spanish%3:01:00::)
+   and(01%government%1:14:00::, 02%government%1:14:00::)
+   mod(02%government%1:14:00::, autonomous%5:00:00:free:00)
+   and(02%government%1:14:00::, council%1:14:01::)
+   mod(council%1:14:01::, city%1:15:01::)
+   mod(council%1:14:01::, barcelona%1:15:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 3.
+   
+   {unl}
+   obj(continue%2:42:01::, concept%1:09:00::)
+   man(continue%2:42:01::, undoubtedly%4:02:00::)
+   gol(continue%2:42:01::, be%2:42:03::)
+   aoj(be%2:42:03::, concept%1:09:00::)
+   obj(be%2:42:03::, relevant%3:00:00::)
+   dur(relevant%3:00:00::, year%1:28:01::)
+   mod(year%1:28:01::, many%3:00:00::)
+   mod(year%1:28:01::, forthcoming%5:00:00:future:00)
+   and(continue%2:42:01::, essential%3:00:00:necessary:00)
+   aoj(essential%3:00:00:necessary:00, concept%1:09:00::)
+   pur(essential%3:00:00:necessary:00, advance%2:38:00::)
+   plc(advance%2:38:00::, agenda%1:10:00::)
+   mod(agenda%1:10:00::, world%1:14:02::)
+   mod(agenda%1:10:00::, human%3:01:00::)
+   man(human%3:01:00::, more%4:02:00::)
+   and(human%3:01:00::, sustainable%3:01:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 4.
+   
+   {unl}
+   aoj(essential%3:00:00::, knowledge%1:03:00::)
+   mod(knowledge%1:03:00::, culture%1:14:00::)
+   mod(culture%1:14:00::, other%3:00:00::)
+   pur(essential%3:00:00::, establish%2:36:00::)
+   obj(establish%2:36:00::, dialogue%1:10:03::)
+   mod(dialogue%1:10:03::, constructive%3:00:00::)
+   plc(establish%2:36:00::, between%4:02:00::)
+   obj(between%4:02:00::, community%1:14:03::)
+   mod(community%1:14:03::, different%3:00:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 5.
+   
+   {unl}
+   aoj(imply%2:42:00::, knowledge%1:03:00::)
+   obj(imply%2:42:00::, reflection%1:09:00::)
+   man(reflection%1:09:00::, about%4:02:06::)
+   obj(about%4:02:06::, differentiate%2:31:01::)
+   agt(differentiate%2:31:01::, quality%1:07:00::)
+   obj(differentiate%2:31:01::, individual%1:03:00::)
+   mod(individual%1:03:00::, all%3:00:00::)
+   and(differentiate%2:31:01::, ground%1:09:01::)
+   mod(ground%1:09:01::, common%3:00:02::)
+   obj(common%3:00:02::, individual%1:03:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 6.
+   
+   {unl}
+   agt(strive%2:41:00::, forum%1:14:00::)
+   obj(strive%2:41:00::, foster%2:41:00::)
+   agt(foster%2:41:00::, forum%1:14:00::)
+   obj(foster%2:41:00::, kind%1:09:00::)
+   mod(kind%1:09:00::, respect%1:12:00::)
+   and(respect%1:12:00::, understanding%1:09:01::)
+   mod(kind%1:09:00::, capable%3:00:00:susceptible:00)
+   obj(capable%3:00:00:susceptible:00, increase%1:22:00::)
+   obj(increase%1:22:00::, ability%1:09:00::)
+   obj(ability%1:09:00::, work%1:04:00::)
+   man(work%1:04:00::, together%4:02:01::)
+   pur(work%1:04:00::, turn%2:30:04::)
+   obj(turn%2:30:04::, world%1:17:00::)
+   gol(turn%2:30:04::, place%1:15:04::)
+   mod(place%1:15:04::, good%3:00:01::)
+   man(good%3:00:01::, more%4:02:00::)
+   and(ability%1:09:00::, appreciation%1:09:00::)
+   obj(appreciation%1:09:00::, environment%1:15:00::)
+   mod(environment%1:15:00::, human%3:01:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 7.
+   
+   {unl}
+   aoj(rest%2:42:12::, development%1:22:02::)
+   mod(development%1:22:02::, sustainable%3:01:00::)
+   met(rest%2:42:12::, capacity%1:07:00::)
+   mod(capacity%1:07:00::, environment%1:15:00::)
+   mod(environment%1:15:00::, natural%3:00:02::)
+   obj(capacity%1:07:00::, provide%2:34:00::)
+   ben(provide%2:34:00::, humankind%1:05:00::)
+   and(rest%2:42:12::, satisfy%2:34:01::)
+   agt(satisfy%2:34:01::, development%1:22:02::)
+   obj(satisfy%2:34:01::, need%1:17:00::)
+   mod(need%1:17:00::, present%3:00:01::)
+   man(satisfy%2:34:01::, compromise%2:32:03::)
+   obj(compromise%2:32:03::, ability%1:07:00::)
+   mod(ability%1:07:00::, generation%1:14:01::)
+   mod(generation%1:14:01::, future%3:00:00::)
+   obj(ability%1:07:00::, 02%satisfy%2:34:01::)
+   obj(02%satisfy%2:34:01::, 02%need%1:17:00::)
+   mod(02%need%1:17:00::, generation%1:14:01::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 8.
+   
+   {unl}
+   agt(join%2:35:00::, people%1:14:00::)
+   mod(people%1:14:00::, culture%1:14:00::)
+   mod(culture%1:14:00::, all%3:00:00::)
+   obj(join%2:35:00::, force%1:18:00::)
+   pur(join%2:35:00::, achieve%2:41:00::)
+   obj(achieve%2:41:00::, goal%1:09:00::)
+   coo(join%2:35:00::, pool%2:40:00::)
+   obj(pool%2:40:00::, experience%1:09:01::)
+   pos(experience%1:09:01:: , people%1:14:00::)
+   and(experience%1:09:01::, knowledge%1:03:00::)
+   pur(pool%2:40:00::, find%2:32:00::)
+   obj(find%2:32:00::, solution%1:10:00::)
+   ben(solution%1:10:00::, problem%1:26:00::)
+   mod(problem%1:26:00::, impact%1:19:00::)
+   and(impact%1:19:00::, scope%1:07:00::)
+   mod(impact%1:19:00::, global%5:00:00:international:00)
+   {/unl}
+
+.. Comentario
+
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 9.
+   
+   {unl}
+   man(address%2:32:04::, also%4:02:00::)
+   obj(address%2:32:04::, element%1:09:00::)
+   mod(element%1:09:00::, culture%1:14:00::)
+   agt(produce%2:36:03::, element%1:09:00::)
+   obj(produce%2:36:03::, impact%1:19:00::)
+   mod(impact%1:19:00::, decisive%3:00:00::)
+   ben(impact%1:19:00::, development%1:22:02::)
+   mod(development%1:22:02::, condition%1:26:01::)
+   mod(condition%1:26:01::, collective%3:00:00:joint:00)
+   and(collective%3:00:00:joint:00, individual%3:00:00::)
+   mod(condition%1:26:01::, regard%2:42:00::)
+   obj(regard%2:42:00::, health%1:26:00::)
+   and(health%1:26:00::, work%1:04:01::)
+   and(work%1:04:01::, nutrition%1:13:00::)
+   {/unl}
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación utilizada en el experimento para la oración de ejemplo 10.
+   
+   {unl}
+   aoj(require%2:34:00::, peace%1:26:00::)
+   mod(peace%1:26:00::, lasting%3:00:00:long:02)
+   and(lasting%3:00:00:long:02, stable%3:00:00::)
+   obj(require%2:34:00::, more%4:02:00::)
+   bas(more%4:02:00::, stop%2:42:00::)
+   obj(stop%2:42:00::, situation%1:26:00::)
+   mod(situation%1:26:00::, other%3:00:00::)
+   mod(situation%1:26:00::, conflict%1:26:00::)
+   and(situation%1:26:00::, war%1:04:00::)
+   {/unl}
+
+
+
