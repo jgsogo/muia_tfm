@@ -4,7 +4,7 @@ Conjunto de datos
 
 En el experimento se han utilizado 10 oraciones pertenecientes a un 
 documento del Forum Universal de las Culturas 2004 [#]_ facilitado por el 
-Centro de Lengua español del Consorcio UNL.
+Centro de Lengua Española del Consorcio UNL.
 
 .. [#] Fòrum Universal de les Cultures. 
    http://www.barcelona2004.org/www.barcelona2004.org/cat/index.html
