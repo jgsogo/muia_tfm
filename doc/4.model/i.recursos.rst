@@ -3,19 +3,30 @@
 Recursos utilizados
 ===================
 El modelo propuesto se apoya en varios recursos, algoritmos y librerías desarrollados por
-otras personas, nosotros las combinamos y añadimos nuestra pequeña aportación para poder
-calcular la medida de similaridad.
+otras personas, nosotros las combinamos y añadimos nuestra aportación para poder
+calcular la medida que nos interesa.
 
 El autor ha podido utilizar algunos de los recursos tal cual estaban disponibles, pero en otros
 ha colaborado en su desarrollo o transcripción al lenguaje de programación seleccionado, se
 indicará en cada caso las contribuciones realizadas.
 
+
 WordNet 3.1
 -----------
+En la exposición del estado del arte hemos descrito sucintamente la base de datos WordNet y
+sus características (ver :num:`sección #wordnet`), no lo repetiremos aquí. Para este
+trabajo hemos utilizado el diccionario correspondiente a la versión 3.1.
 
 
 SemCor
 ------
+El corpus SemCor es el único recurso etiquetado con WordNet que hemos encontrado; su 
+utilización es imprescindible para poder hacer uso de medidas de distancia que tienen
+en cuenta el contenido de información
+(ver :num:`sección #redes-conceptos-contenido-informacion`). Sin embargo no hemos
+considerado cómo de representativo es este corpus para los el dominio de información
+en el que vamos a experimentar, los resultados de algunas medidas de distancia pueden
+verse profundamente afectados por esta circunstancia.
 
 
 WordNet-blast
@@ -45,14 +56,17 @@ WordNet. Nosotros hemos implementado las siguientes utilizando el lenguaje C++:
  * Lin (1998) :cite:`Lin1998`.
  * Resnik (1995) :cite:`Resnik1995`.
  
- * Sussna (1993) :cite:`Sussna1993`: en la :num:`sección #redes-conceptos-estructura` mostramos la formulación
-   que aparece en la bibliografía para el cálculo del peso de las conexiones entre los 
-   conceptos. Según Sussna este peso, que representa la distancia semántica, debe ser menor
-   cuanto mayor sea el número de conexiones del mismo tipo que parten de cada nodo; sin embargo
-   la formulación proporcionada no se comporta según lo pretendido.
+ * Sussna (1993) :cite:`Sussna1993`: en la :num:`sección #redes-conceptos-estructura
+   mostramos la formulación que aparece en la bibliografía para el cálculo del peso
+   de las conexiones entre los conceptos.
+   Según Sussna, este peso, que representa la distancia semántica, debe ser menor
+   cuanto mayor sea el número de conexiones del mismo tipo que parten de cada nodo; a pesar
+   de que en el texto del artículo de 1993 se expresa claramente que *"the two inverse
+   weights for an edge are averaged"* tanto en la formulación presente en dicho artículo
+   como en la literatura posterior no se tiene en cuenta este punto.
    
-   En nuestro modelo hemos implementado el comportamiento que creemos que debería ser el
-   correcto [#]_: a medida que el número de relaciones aumenta, la distancia semántica se 
+   En nuestro modelo hemos implementado la formulación que debería ser la
+   correcta [#]_: a medida que el número de relaciones aumenta, la distancia semántica se 
    hace más pequeña (ver :num:`figura #fig-sussna-fail`).
    
  * Wu y Palmer :cite:`Wu1994`.
@@ -63,9 +77,11 @@ WordNet. Nosotros hemos implementado las siguientes utilizando el lenguaje C++:
 .. figure:: ../img/sussnafail.png
    :name: fig-sussna-fail
 
-   Variación de la distancia asociada a una conexión en función del número relaciones entre los
-   elementos (mismo número en cada sentido). A la izquierda los resultados según la formulación de
-   Sussna, a la derecha los resultados según la modificación propuesta.
+   Variación de la distancia asociada a una conexión en función del número relaciones
+   entre los elementos. A la izquierda los resultados según la formulación de
+   Sussna, a la derecha los resultados según la modificación propuesta. La línea roja
+   muestra la variación de la distancia cuando el concepto está en el primer nivel de
+   profundidad de la jerarquía y la azul cuando está a una profundidad de 10.
    
  
 Todas estas medidas pueden ser intercambiadas en nuestro modelo obteniéndose diferentes valores
@@ -75,7 +91,7 @@ verificar cuál es la más adecuada para nuestro algoritmo.
 Al programar todas las medidas de distancia anteriores se han tenido en cuenta los siguientes
 puntos:
 
- * Todas utilizan la jerarquía de WordNet 3.1 construida con ```wordnet-blast``` haciendo uso
+ * Todas utilizan la jerarquía de WordNet 3.1 construida con ``wordnet-blast`` haciendo uso
    únicamente de las relaciones de hiponimia/hiperonima.
 
  * A las medidas basadas en el contenido de información que necesitaban de un *corpus* se les
@@ -89,7 +105,7 @@ puntos:
 Distancia y jerarquía entre relaciones UNL
 ------------------------------------------
 En la bibliografía no hemos encontrado ningún documento acerca de la distancia semántica entre
-relaciones UNL, así es que tenemos que proponer una. Para ello planteamos un modelo muy simple
+relaciones UNL, por lo que debemos proponer una. Para ello planteamos un modelo muy simple
 basado en la jerarquía de relaciones que aparece en UNLWeb [#]_.
 
 .. [#] UNL Wiki. Universal Relations. http://www.unlweb.net/wiki/Universal_Relations 
@@ -97,107 +113,66 @@ basado en la jerarquía de relaciones que aparece en UNLWeb [#]_.
    
 Proponemos un modelo según el cual dos relaciones son iguales si pertenecen a la misma
 tipología de primer nivel (agt, and, aoj,...) y distintas en caso contrario (ver
-:num:`figura #fig-unl-relations`).
+:num:`tabla #table-unl-relations`), así, sean dos relaciones :math:`r_1` y :math:`r_2`,
+se verifican las siguientes relaciones:
 
-.. _fig-unl-relations:
-.. graphviz::
-   :caption: Jerarquía de relaciones UNL propuesta en UNLWeb.
+ * :math:`d(r_1, r_2) = 0 \iff r_1 \equiv r_2`
+ * :math:`d(r_1, r_2) = 0.2` si :math:`r_1` y :math:`r_2` tienen un padre común.
+ * :math:`d(r_1, r_2) = 0.8` en cualquier otro caso.
+ 
+Como se puede observar, la máxima distancia entre dos relaciones es ``0.8``, se
+considera así que la mera existencia de una relación entre dos mismos conceptos
+indica un grado mínimo de similaridad.
 
-   digraph foo {
-        rankdir=LR
-        node [shape=box]
-        
-        r[label="rel\n[relation]"]
-        
-        n01[label="agt\n[agent]"]
-        n02[label="and\n[conjunction]"]
-        n03[label="aoj\n[object of an attribute]"]
-            n03_m01[label="ant\n[antyonym, different form]"]
-            n03_m02[label="equ\n[synonym, equal to]"]
-            n03_m03[label="fld\n[field]"]
-            n03_m04[label="icl\n[hyponym, a kind of]"]
-            n03_m05[label="iof\n[example, instance of]"]
-            n03_m06[label="pof\n[meronym, part of]"]
-            
-        n04[label="ben\n[beneficiary]"]
-        n05[label="cnt\n[content or theme]"]
-        n06[label="con\n[condition]"]
-        n07[label="exp\n[experiencer]"]
-        n08[label="mod\n[modifier]"]
-            n08_m01[label="mat\n[material]"]
-            n08_m02[label="nam\n[name]"]
-            n08_m03[label="pos\n[possessor]"]
-            n08_m04[label="qua\n[quantifier]"]
+.. _table-unl-relations:
+.. table:: Jerarquía de relaciones UNL según UNLWeb.
+   :class: longtable
+   
+   +------------------------------------------------------------------------+
+   | | **agt**: agent                                                       |
+   | | **and**: conjuntion                                                  |
+   | | **aoj**: object of an attribute                                      |
+   | |   **ant**: antonym, different from                                   |
+   | |   **equ**: synonym, equal to                                         |
+   | |   **fld**: field                                                     |
+   | |   **icl**: hyponym, a kind of                                        |
+   | |   **iof**: example, instance of                                      |
+   | |   **pof**: meronym, part of                                          |
+   | | **ben**: beneficiary                                                 |
+   | | **cnt**: content or theme                                            |
+   | | **con**: condition                                                   |
+   | | **exp**: experiencer                                                 |
+   | | **mod**: modifier                                                    |
+   | |   **mat**: material                                                  |
+   | |   **nam**: name                                                      |
+   | |   **pos**: possessor                                                 |
+   | |   **qua**: quantifier                                                |
+   | | **obj**: patient                                                     |
+   | |   **opl**: objective place                                           |
+   | |   **res**: result                                                    |
+   | | **or**: disjunction                                                  |
+   | | **per**: proportion, rate, distribution or basis for a comparison    |
+   | |   **bas**: basis for a comparison                                    |
+   | | **plc**: location: physical or logical                               |
+   | |   **gol**: final place or state, destination                         |
+   | |   **lpl**: logical place, scene                                      |
+   | |   **src**: initial place or state, origin                            |
+   | |   **via**: intermediate place, path                                  |
+   | | **ptn**: partner                                                     |
+   +------------------------------------------------------------------------+
+   | | **tim**: time                                                        |
+   | |   **tmf**: initial time                                              |
+   | |   **tmt**: final time                                                |
+   | |   **dur**: duration                                                  |
+   | |     **coo**: co-occurrence                                           |
+   | | **man**: manner                                                      |
+   | |   **ins**: instrument or method                                      |
+   | |     **met**: method                                                  |
+   | |   **pur**: purpose                                                   |
+   | | **rsn**: reason                                                      |
+   | | **seq**: consequence                                                 |
+   +------------------------------------------------------------------------+
 
-        n09[label="obj\n[patient]"]
-            n09_m01[label="opl\n[objective place]"]
-            n09_m02[label="res\n[result]"]
-            
-        n10[label="or\n[disjunction]"]
-        n11[label="per\n[proportion, rate, distribution\nor basis for a comparison]"]
-            n11_m01[label="bas\n[basis for a comparison]"]
-
-        n12[label="plc\n[location: physical or logical]"]
-            n12_m01[label="gol\n[final place or state, destination]"]
-            n12_m02[label="lpl\n[logical place, scene]"]
-            n12_m03[label="src\n[initial place or state, origin]"]
-            n12_m04[label="via\n[intermediate place, path]"]
-
-        n13[label="ptn\n[partner]"]
-        n14[label="tim\n[time]"]
-            n14_m01[label="tmf\n[initial time]"]
-            n14_m02[label="tmt\n[final time]"]
-            n14_m03[label="dur\n[duration]"]
-                n14_m03_l01[label="coo\n[co-occurrence]"]
-        
-        n15[label="man\n[manner]"]
-            n15_m01[label="ins\n[instrument or method]"]
-                n15_m01_l01[label="met\n[method]"]
-            n15_m02[label="pur\n[purpose]"]
-
-        n16[label="rsn\n[reason]"]
-        n17[label="seq\n[consequence]"]
-        
-        r -> n01
-        r -> n02
-        r -> n03
-            n03 -> n03_m01
-            n03 -> n03_m02
-            n03 -> n03_m03
-            n03 -> n03_m04
-            n03 -> n03_m05
-            n03 -> n03_m06
-        r -> n04
-        r -> n05
-        r -> n06
-        r -> n07
-        r -> n08
-            n08 -> n08_m01
-            n08 -> n08_m02
-            n08 -> n08_m03
-            n08 -> n08_m04
-        r -> n09
-            n09 -> n09_m01
-            n09 -> n09_m02
-        r -> n10
-        r -> n11
-            n11 -> n11_m01
-        r -> n12
-            n12 -> n12_m01
-            n12 -> n12_m02
-            n12 -> n12_m03
-            n12 -> n12_m04
-        r -> n13
-        r -> n14
-            n14 -> n14_m01
-            n14 -> n14_m02
-            n14 -> n14_m03
-                n14_m03 -> n14_m03_l01
-        r -> n15
-            n15 -> n15_m01
-                n15_m01 -> n15_m01_l01
-            n15 -> n15_m02
-   }
 
 
 Algoritmo de McGregor

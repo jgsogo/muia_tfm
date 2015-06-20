@@ -1,4 +1,7 @@
 # Sussna edge weight
+require(ggplot2)
+library(reshape)
+source("multiplot.R")
 
 sussna_edge_weight <- function(n, min, max) {
     r <- max - (max-min)/n
@@ -6,7 +9,8 @@ sussna_edge_weight <- function(n, min, max) {
 }
 
 sussna_edge_weight_fixed <- function(n, min, max) {
-    min + (max-min)/n
+    r <- max - (max-min)/n
+    1/r
 }
 
 sussna <- function(n, min, max, depth, edge_weight) {
@@ -15,23 +19,35 @@ sussna <- function(n, min, max, depth, edge_weight) {
     (w1+w2)/(2*depth)
 }
 
-debug <- function(upto, min, max, depth) {
+debug <- function(upto = 15, min = 1, max = 2) {
     print("Generate DEBUG graphs for Sussna semantic distance")
     n <- 1:upto
-    sussna_ori_edge <- sapply(n, sussna_edge_weight, min, max) 
-    sussna_fixed_edge <- sapply(n, sussna_edge_weight_fixed, min, max) 
+
+    sussna_ori <- sapply(n, sussna, min, max, 1, sussna_edge_weight)
+    sussna_fixed <- sapply(n, sussna, min, max, 1, sussna_edge_weight_fixed)
+
+    sussna_ori_10 <- sapply(n, sussna, min, max, 10, sussna_edge_weight)
+    sussna_fixed_10 <- sapply(n, sussna, min, max, 10, sussna_edge_weight_fixed)
     
-    sussna <- sapply(n, sussna, min, max, depth, sussna_edge_weight)
-    sussna_fixed <- sapply(n, sussna, min, max, depth, sussna_edge_weight_fixed)
+    # Formulación en Sussna
+    df <- data.frame(n, sussna_ori, sussna_ori_10)
+    colnames(df) <- c("n", "depth = 1", "depth = 10")
     
-    #par(pch=22, col="blue") # plotting symbol and color
-    par(mfrow=c(1,2)) # all plots on one page
+    df <- melt(df, id=c("n"))
+    p1 <- ggplot(df) + geom_line(aes(n, y=value, colour=variable)) +
+      ylab("Distancia") + xlab("Núm. conexiones") +
+      labs(title="Formulación en Sussna (1993)") +
+      theme(legend.position="none")
     
-    heading = paste("Sussna (1993)") 
-    plot(n, sussna, type="l", main=heading, xlab="n. relaciones", ylab="distancia")
-    #lines(n, sussna, type="l")
+    # Corrección propuesta
+    df <- data.frame(n, sussna_fixed, sussna_fixed_10)
+    colnames(df) <- c("n", "depth = 1", "depth = 10")
     
-    heading = paste("Modificado") 
-    plot(n, sussna_fixed, type="l", main=heading, xlab="n. relaciones", ylab="distancia")
-    #lines(n, sussna_fixed, type="l")
+    df <- melt(df, id=c("n"))
+    p2 <- ggplot(df) + geom_line(aes(n, y=value, colour=variable)) +
+      ylab("Distancia") + xlab("Núm. conexiones") +
+      labs(title="Formulación propuesta") +
+      theme(legend.position="none")
+    
+    multiplot(p1, p2, cols=2)
 }

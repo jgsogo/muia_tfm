@@ -296,17 +296,7 @@ función del número de relaciones del mismo tipo que parten de él:
 .. math::
     :label: sussna
     
-    wt(c_1 \rightarrow_r) = min_r + \frac{max_r - min_r}{edges_r (c_1)}
-
-
-.. warning:: Aquí he modificado la relación original porque creo que verdaderamente hay un error tanto
-   en el artículo original como en las referencias que apuntan a él. En origen el peso de los arcos
-   está expresado como :math:`max_r - \frac{max_r - min_r}{edges_r (c_1)}`, así ocurre que el peso 
-   es mayor cuanto mayor sea el número de arcos lo que es contrario a la intuición de que a
-   mayor densidad de la red menor es la distancia entre conceptos.
-   
-   ¿Cómo y dónde planteo esta duda?
-
+    wt(c_1 \rightarrow_r) = max_r - \frac{max_r - min_r}{edges_r (c_1)}
 
 La distancia entre dos conceptos adyacentes :math:`c_1` y :math:`c_2` es la media
 de los pesos de la relación en ambas direcciones ponderada por la profundidad de los nodos.
@@ -314,6 +304,13 @@ de los pesos de la relación en ambas direcciones ponderada por la profundidad d
 .. math::
 
     dist_s(c_1, c_2) = \frac{wt(c_1 \rightarrow_r) + wt(c_2 \rightarrow_{r'}) }{2 \cdot max\{depth(c_1), depth(c_2)\}}
+    
+.. warning:: En el artículo de Sussna se dice que en esta última ecuació los pesos
+   deben ser invertidos, pero tanto en la formulación del artículo como en la literatura
+   posterior, no se tiene en cuenta y el resultado NO ES EL ESPERADO.
+   
+   Hablo de esto más adelante, ¿debería tratarlo aquí?
+   
 
 La distancia semántica entre dos nodos cualesquiera de la red se calcularía como la suma de
 distancias entre cada par de nodos adyacentes a lo largo del camino más corto que los une.
@@ -353,6 +350,7 @@ análisis que realizan en el artículo concluyen que los parámetros óptimos en
 anterior son :math:`\alpha = 0.2` y :math:`\beta = 0.6`.
 
 
+.. redes-conceptos-contenido-informacion_
 Basadas en el contenido de información
 ++++++++++++++++++++++++++++++++++++++
 Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de
