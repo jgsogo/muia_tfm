@@ -49,7 +49,7 @@ source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
-#latex_appendices = ['appendix-data']
+latex_appendices = ['appendix-data']
 
 # General information about the project.
 project = u'Medida de distancia en grafos UNL'
