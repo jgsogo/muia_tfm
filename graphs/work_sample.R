@@ -35,7 +35,6 @@ plot_synset_tol <- function(data, title, save_path) {
       filename = paste(filename, "png", sep=".")
       filepath = file.path(save_path, filename)
       print(filepath)
-      g
       ggsave(filepath, g)
     }
 }
@@ -65,11 +64,47 @@ plot_relation_tol <- function(data, title, save_path) {
       filename = paste(filename, "png", sep=".")
       filepath = file.path(save_path, filename)
       print(filepath)
-      g
       ggsave(filepath, g)
     }
 }
 
+plot_distances_synset <- function(data, title, save_path, tol_relation = 0.0) {
+    distance_measures <- unique(data[, c("distance.meassure")])
+    translators <- unique(data[, c("translator")])
+    data <- subset(data, relation.tolerance==tol_relation)
+    data <- data[, c("translator", "distance.meassure", "synset.tolerance", "similarity.value")]
+    
+    colnames(data) <- c("Traductor", "Medida", "tol", "sim")
+    
+    # Google
+    google_data <- subset(data, Traductor=="google")
+    google_data <- google_data[, c("Medida", "tol", "sim")]
+    
+    g <- ggplot(google_data, aes(x=tol, y=sim, colour=Medida)) + 
+        geom_line() +
+        geom_point() +
+        ylab("Similaridad") + xlab(paste("Tolerancia entre conceptos\nTolerancia entre relaciones = ", tol_relation, sep="")) +
+        labs(title=title)
+
+    # Yandex
+    yandex_data <- subset(data, Traductor=="yandex")
+    yandex_data <- yandex_data[, c("Medida", "tol", "sim")]
+    
+    y <- ggplot(yandex_data, aes(x=tol, y=sim, colour=Medida)) + 
+        geom_line() +
+        geom_point() +
+        ylab("Similaridad") + xlab(paste("Tolerancia entre conceptos\nTolerancia entre relaciones = ", tol_relation, sep="")) +
+        labs(title=title)
+
+    # Save to files
+    file_google = paste("measures-google", "png", sep=".")
+    filepath = file.path(save_path, file_google)
+    ggsave(filepath, g)    
+
+    file_yandex = paste("measures-yandex", "png", sep=".")
+    filepath = file.path(save_path, file_yandex)
+    ggsave(filepath, y)    
+}
 
 work_sample <- function(file, title) {
     data <- parse_sample(file)
@@ -83,6 +118,6 @@ work_sample <- function(file, title) {
     
     plot_synset_tol(data, title, save_path)    
     plot_relation_tol(data, title, save_path)
-
+    plot_distances_synset(data, title, save_path)
 }
 
