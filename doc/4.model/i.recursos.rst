@@ -74,6 +74,7 @@ WordNet. Nosotros hemos implementado las siguientes utilizando el lenguaje C++:
 
 .. [#] No se ha contactado con el autor del artículo para consultar esta discrepancia.
 
+
 .. figure:: ../img/sussnafail.png
    :name: fig-sussna-fail
 
@@ -121,7 +122,7 @@ conceptos seleccionada, entonces:
 
     s_r(r_1, r_2) = 1 - d_r(r_1, r_2) = \begin{cases}
     1, & r_1 \equiv r_2\\
-    0.8, & \exists r_p \mid r_p subsumes {r_1, r_2}
+    0.8, & \exists r_p \mid r_p \quad subsumes \quad \{r_1, r_2\}\\
     0.2, & otherwise.
     \end{cases}
  
