@@ -16,7 +16,7 @@ como iguales cualquier pareja.
 
 La búsqueda de los subgrafos :math:`H_1` y :math:`H_2` se realiza utilizando el algoritmo
 McGregor y guardando todos los subgrafos comunes candidatos a ser máximo subgrafo común;
-en un paso posterior se escoge de entre los candidatos, el subconjunto que maximice la
+en un paso posterior se escoge de entre los candidatos el subconjunto que maximice la
 similaridad entre los grafos de partida. Así:
 
 .. math::
