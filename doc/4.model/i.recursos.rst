@@ -106,7 +106,7 @@ Distancia y jerarquía entre relaciones UNL
 ------------------------------------------
 En la bibliografía no hemos encontrado ningún documento acerca de la distancia semántica entre
 relaciones UNL, por lo que debemos proponer una. Para ello planteamos un modelo muy simple
-basado en la jerarquía de relaciones que aparece en UNLWeb [#]_.
+basado en la jerarquía de relaciones que aparece en UNLWeb [#]_ (ver :num:`tabla #table-unl-relations`).
 
 .. [#] UNL Wiki. Universal Relations. http://www.unlweb.net/wiki/Universal_Relations 
    (accedido en junio de 2015)
@@ -114,13 +114,18 @@ basado en la jerarquía de relaciones que aparece en UNLWeb [#]_.
 Proponemos un modelo según el cual dos relaciones son iguales si pertenecen a la misma
 tipología de primer nivel (agt, and, aoj,...) y distintas en caso contrario (ver
 :num:`tabla #table-unl-relations`), así, sean dos relaciones :math:`r_1` y :math:`r_2`,
-se verifican las siguientes relaciones:
+que conectan dos pares de conceptos equivalente según la medida de similaridad entre
+conceptos seleccionada, entonces:
 
- * :math:`d(r_1, r_2) = 0 \iff r_1 \equiv r_2`
- * :math:`d(r_1, r_2) = 0.2` si :math:`r_1` y :math:`r_2` tienen un padre común.
- * :math:`d(r_1, r_2) = 0.8` en cualquier otro caso.
+.. math::
+
+    s_r(r_1, r_2) = 1 - d_r(r_1, r_2) = \begin{cases}
+    1, & r_1 \equiv r_2\\
+    0.8, & \exists r_p \mid r_p subsumes {r_1, r_2}
+    0.2, & otherwise.
+    \end{cases}
  
-Como se puede observar, la máxima distancia entre dos relaciones es ``0.8``, se
+Como se puede observar, la mínima similaridad entre dos relaciones es ``0.2``, se
 considera así que la mera existencia de una relación entre dos mismos conceptos
 indica un grado mínimo de similaridad.
 
