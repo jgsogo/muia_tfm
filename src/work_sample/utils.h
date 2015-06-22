@@ -80,13 +80,23 @@ void comparison_task_plot(std::ofstream& fout, const std::string& filename, cons
 
     result.print(graph_match_file, true);
     graph_match_file << endl << endl;
-    graph_match_file << "// Correspondence to original (original -> intersect)" << endl;
+    graph_match_file << "// Correspondence to original (intersect -> original)" << endl;
     for (auto& item: s1_to_result) {
-        graph_match_file << "// " << item.first << " <-> " << item.second << endl;
+        graph_match_file << "// " << item.first << " <-> " << item.second << "\t||\t";
+        auto synset_result = result.get_node(item.first);
+        auto synset_graph1 = graph_dist_.graph1.get_node(item.second);
+        graph_match_file << synset_result.words[0] << " <-> ";
+        graph_match_file << synset_graph1.words[0] << "\t||\t";
+        graph_match_file << "sim = " << words_dist.similarity(synset_result, synset_graph1) << endl;
     }
-    graph_match_file << endl << "// Correspondence to other (" << graph << " -> intersect)" << endl;
+    graph_match_file << endl << "// Correspondence to other (intersect -> " << graph << ")" << endl;
     for (auto& item: s2_to_result) {
-        graph_match_file << "// " << item.first << " <-> " << item.second << endl;
+        graph_match_file << "// " << item.first << " <-> " << item.second << "\t||\t";
+        auto synset_result = result.get_node(item.first);
+        auto synset_graph2 = graph_dist_.graph2.get_node(item.second);
+        graph_match_file << synset_result.words[0] << " <-> ";
+        graph_match_file << synset_graph2.words[0] << "\t||\t";
+        graph_match_file << "sim = " << words_dist.similarity(synset_result, synset_graph2) << endl;
     }
     graph_match_file.flush();
     graph_match_file.close();
