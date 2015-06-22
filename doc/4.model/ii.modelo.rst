@@ -1,0 +1,137 @@
+
+
+El modelo
+=========
+Sean dos grafos conceptuales :math:`G_1` y :math:`G_2`, nuestro objetivo es encontrar un 
+subgrafo :math:`H_1` de :math:`G_1` y un subgrafo :math:`H_2` de :math:`G_2` tal que 
+:math:`H_1` y :math:`H_2` sean isomorfos y maximicen la similaridad entre los grafos
+de partida. Los subgrafos :math:`H_1` y :math:`H_2` no es necesario que sean conexos.
+
+La correspondencia entre los subgrafos :math:`H_1` y :math:`H_2` se realiza a través de una
+función de similaridad semántica entre conceptos :math:`s_c(c_i, c_j)` y de similaridad entre
+relaciones :math:`s_R(r_i, r_j)` que se pueden configurar con un umbral de tolerancia entre
+cada pareja de conceptos o relaciones, :math:`t_c` y :math:`t_r` respectivamente, en el
+intervalo :math:`[0, 1)` donde ``0`` exige una correspondencia exacta y ``1`` aceptaría
+como iguales cualquier pareja.
+
+La búsqueda de los subgrafos :math:`H_1` y :math:`H_2` se realiza utilizando el algoritmo
+McGregor y guardando todos los subgrafos comunes candidatos a ser máximo subgrafo común;
+en un paso posterior se escoge de entre los candidatos el subconjunto que maximice la
+similaridad entre los grafos de partida. Así:
+
+.. math::
+
+   sim(G_1, G_2) = argmax \sum_{i \in G_1, j \in G_2} sim(n_i, n_j) + sim(r_i, r_j)
+
+
+.. warning:: Meter un poco de formulación
+
+
+.. _fig-model-example-graph:
+.. graphviz::
+   :caption: Grafos de ejemplo :math:`g_1` (izda) y :math:`g_2` (dcha).
+
+   digraph foo {
+    # Grafo 1
+    A[label="A"]
+    B[label="B"]
+    C[label="C"]
+    D[label="D"]
+    E[label="E"]
+    
+    A -> B
+    A -> C
+    D -> C
+    D -> E
+    
+    # Grafo 2
+    A2[label="A"]
+    B2[label="B"]
+    C2[label="F"]
+    D2[label="d"]
+    E2[label="E"]
+    
+    A2 -> B2
+    A2 -> C2
+    D2 -> C2
+    D2 -> E2
+   }
+
+
+Así, por ejemplo, dada la pareja de grafos :math:`g_1` y :math:`g_2` de la
+:num:`figura #fig-model-example-graph`, el modelo deberá ser capaz de encontrar
+el máximo grafo común que comparten ambos, :math:`mcs(g_1, g_2)` para un nivel de
+tolerancia dado. 
+ 
+.. _fig-model-example-mcs1:
+.. graphviz::
+   :caption: Máximo grafo común de :math:`g_1` y :math:`g_2` con nivel de tolerancia, :math:`t_c=0`. NOTA.- En el modelo final se eliminarán los componentes del grafos que consten de un único nodo.
+
+   digraph foo {
+    # MCS
+    A[label="A"]
+    B[label="B"]
+    E[label="E"]
+    
+    A -> B
+   }
+
+En la :num:`figura #fig-model-example-mcs1` se muestra el resultado con un nivel de
+tolerancia, :math:`t_c=0`, que exige que los nodos sean idénticos. Como se puede
+comprobar sólo existen tres nodos que cumplan esta condición, y sólo hay una conexión
+entre ellos. Por lo tanto, la similaridad entre los grafos será:
+
+.. math::
+
+   sim(g_1, g_2)_{t_c=0}=s(A,A) + s(B,B) + s(E,E) + s(A \to B, A \to B)
+   
+Este valor se puede normalizar para poder comparar los resultados de diferentes
+experimentos, así lo podemos referir a un máximo de similaridad teórica que será:
+
+.. math::
+
+   sim_{MAX}(g_1, g_2) = max(|g_1|, |g_2|) + max(e_{g_1}, e_{g_2})
+   
+y en el caso de la :num:`figura #fig-model-example-mcs1` obtendríamos un valor de
+similaridad:
+
+.. math::
+
+   sim(g_1, g_2)_{t_c=0} = \frac{s(A,A) + s(B,B) + s(E,E) + s(A \to B, A \to B)}{sim_{MAX}(g_1, g_2)}
+
+
+Si aumentamos la tolerancia entre conceptos, :math:`t_c`, ocurrirá que nodos que
+antes no aparecían en el MCS comiencen a hacerlo puesto que su distancia semántica
+según la medida elegida, será menor que el umbral de tolerancia utilizado como
+parámetro. 
+
+.. _fig-model-example-mcs2:
+.. graphviz::
+   :caption: Máximo grafo común de :math:`g_1` y :math:`g_2` con nivel de toleracia, :math:`t_c \neq 0`, suficiente para considerar :math:`D \approx d`.
+
+   digraph foo {
+    # MCS
+    A[label="A"]
+    B[label="B"]
+    D[label="D = d"]
+    E[label="E"]
+    
+    A -> B
+    D -> E
+   }
+
+En la :num:`figura #fig-model-example-mcs2` se ha utilizado un umbral de tolerancia
+tal que :math:`d(D, d) \leq t_c` y, por lo tanto, aparece el nodo correspondiente
+en el grafo resultante en la figura. Además, también se incorpora una nueva conexión
+que antes no aparecía, puesto que la pareja de nodos que relaciona ahora sí está
+presente.
+
+En este caso, el valor de similaridad será:
+
+.. math::
+
+   sim(g_1, g_2)_{t_c \geq d(D,d)} = sim(g_1, g_2)_{t_c=0} + \frac{s(D, d), s(D \to E, d \to E)}{sim_{MAX}(g_1, g_2)}
+
+cuyo valor exacto dependerá del valor concreto de similaridad entre las parejas de
+elementos implicados.
+

@@ -1,0 +1,3 @@
+dependencies/wordnet-blast = [git]git://github.com/jardon-u/wordnet-blast.git
+dependencies/xml_parser = [git]git://github.com/jgsogo/xml_parser.git
+dependencies/expat = [git]git://github.com/jgsogo/expat.git

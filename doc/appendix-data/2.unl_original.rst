@@ -1,0 +1,241 @@
+
+Codificación original en grafos UNL
+-----------------------------------
+
+La codificación realizada durante el Fórum de las oraciones anteriores:
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 1.
+   
+   [S]
+   aoj(include(icl>be).@entry.@future,:01) 
+   mod:01(forum.@def.@entry,universal) 
+   mod:01(forum.@def.@entry,culture(icl>abstract thing).@def.@pl) 
+   obj(include(icl>be).@entry.@future,festival(icl>event).@pl) 
+   and(festival(icl>event).@pl,debate(icl>event).@pl) 
+   and(debate(icl>event).@pl,exhibition(icl>event).@pl) 
+   pur(include(icl>be).@entry.@future,celebrate(icl>do)) 
+   obj(celebrate(icl>do),diversity(icl>variety).@def) 
+   mod(diversity(icl>variety).@def,cultural) 
+   scn(diversity(icl>variety).@def,throughout) 
+   obj(throughout,world(icl>region).@def) 
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 2.
+   
+   [S]
+   agt(ratify(icl>do).@complete.@entry.@past,member state.@def.@pl)
+   qua(member state.@def.@pl,186)
+   mod(member state.@def.@pl,unesco.@def)
+   scn(ratify(icl>do).@complete.@entry.@past,conference(icl>meeting).@def)
+   mod(conference(icl>meeting).@def,29.@ordinal)
+   mod(conference(icl>meeting).@def,member state.@def.@pl)
+   obj(ratify(icl>do).@complete.@entry.@past,support(icl>action))
+   mod(support(icl>action),unanimous(mod<thing))
+   mod(support(icl>action),member state.@def.@pl)
+   obj(support(icl>action),project(icl>plan(icl>thing)).@def)
+   obj(organize(icl>do),project(icl>plan(icl>thing)).@def)
+   man(organize(icl>do),jointly)
+   agt(organize(icl>do),government(icl>organization):01.@def)
+   mod(government(icl>organization):01.@def,spanish(mod<thing))
+   and(government(icl>organization):01.@def,government(icl>organization):02.@def)
+   mod(government(icl>organization):02.@def,Catalonian)
+   mod(government(icl>organization):02.@def,autonomous(mod<thing))
+   and(government(icl>organization):02.@def,:02)
+   mod:02(council(icl>organization).@def.@entry,city.@def)
+   mod(:02,Barcelona) 
+   [/S]
+
+.. Comentario
+
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 3.
+   
+   [S]
+   obj(continue(icl>occur).@entry,:01)
+   mod:01(concept(icl>logic).@entry.@pl,this)
+   man(continue(icl>occur).@entry,undoubtedly(icl>man))
+   gol(continue(icl>occur).@entry,:02)
+   aoj:02(relevant(mod<thing).@entry,:01)
+   dur:02(relevant(mod<thing).@entry,year(icl>time).@pl)
+   mod:02(year(icl>time).@pl,many)
+   mod:02(year(icl>time).@pl,forthcoming(mod<thing))
+   and(continue(icl>occur).@entry,essential(mod<thing))
+   aoj(essential(mod<thing),:01)
+   pur(essential(mod<thing),advance(icl>progress(icl>do)))
+   man(advance(icl>progress(icl>do)),towards)
+   obj(towards,:03)
+   mod:03(agenda(icl>programme).@entry,world(mod<thing))
+   mod(:03,human(mod<thing))
+   man(human(mod<thing),more)
+   and(human(mod<thing),sustainable(mod<thing))
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 4.
+   
+   [S]
+   aoj(essential(mod<thing).@entry,knowledge(icl>notion).@def)
+   mod(knowledge(icl>notion).@def,culture(icl>abstract thing).@pl)
+   mod(culture(icl>abstract thing).@pl,other(mod<thing))
+   pur(essential(mod<thing).@entry,establish(icl>do))
+   obj(establish(icl>do),dialogue(icl>event))
+   mod(dialogue(icl>event),constructive(mod<thing))
+   scn(establish(icl>do),between(icl>how))
+   obj(between(icl>how),community(icl>group).@pl)
+   mod(community(icl>group).@pl,various)
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 5.
+   
+   [S]
+   aoj(imply(icl>be).@entry,knowledge(icl>notion))
+   mod(knowledge(icl>notion),this)
+   obj(imply(icl>be).@entry,reflection(icl>activity))
+   man(reflection(icl>activity),about(icl>concerning))
+   obj(about(icl>concerning),:02)
+   agt:02(differentiate(icl>do),quality(icl>attribute).@def.@entry.@pl)
+   obj:02(differentiate(icl>do),individual(icl>person).@def.@pl)
+   mod:02(individual(icl>person).@def.@pl,all)
+   and(:02,:01)
+   mod:01(ground(icl>abstract thing).@def.@entry,common(icl>shared))
+   obj:01(common(icl>shared),individual(icl>person).@def.@pl)
+   mod:01(individual(icl>person).@def.@pl,all)
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 6.
+   
+   [S]
+   agt(strive(icl>do).@entry,forum.@def)
+   obj(strive(icl>do).@entry,foster(icl>do))
+   agt(foster(icl>do),forum.@def)
+   obj(foster(icl>do),kind(icl>variety).@def)
+   mod(kind(icl>variety).@def,respect(icl>abstract thing))
+   and(respect(icl>abstract thing),understanding)
+   mod(kind(icl>variety).@def,capable(mod<thing))
+   obj(capable(mod<thing),increase(icl>do))
+   obj(increase(icl>do),:01)
+   pos:01(ability.@entry,we:01)
+   obj:01(ability.@entry,work(icl>do))
+   man:01(work(icl>do),together(icl>how))
+   pur:01(work(icl>do),turn(icl>transform(icl>do)))
+   obj:01(turn(icl>transform(icl>do)),world(icl>region))
+   gol:01(turn(icl>transform(icl>do)),place(icl>thing))
+   mod:01(place(icl>thing),good(mod<thing))
+   man:01(good(mod<thing),more)
+   and(:01,:02)
+   obj:02(appreciation.@entry,environment)
+   pos:02(environment,we:03)
+   mod:02(environment,human(mod<thing))
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 7.
+   
+   [S]
+   aoj:01(rest(icl>be).@entry,:02)
+   mod:02(development(icl>event).@def.@entry,sustainable(mod<thing))
+   met:01(rest(icl>be).@entry,capacity(icl>ability).@def)
+   mod:01(capacity(icl>ability).@def,environment.@def)
+   mod:01(environment.@def,natural(mod<thing))
+   obj:01(capacity(icl>ability).@def,provide_for)
+   ben:01(provide_for,humankind.@def)
+   and(:01.@entry,:03)
+   agt:03(satisfy(icl>do):01.@entry,:02)
+   obj:03(satisfy(icl>do):01.@entry,need(icl<abstract thing):01.@def.@pl)
+   mod:03(need(icl<abstract thing):01.@def.@pl,present(icl>time).@def)
+   man:03(satisfy(icl>do):01.@entry,without(icl>how))
+   obj:03(without(icl>how),compromise(icl>do))
+   obj:03(compromise(icl>do),ability)
+   mod:03(ability,:04)
+   mod:04(generation(icl>human group).@def.@entry.@pl,future(mod<thing))
+   obj:03(ability,satisfy(icl>do):02)
+   obj:03(satisfy(icl>do):02,need(icl<abstract thing):02.@def.@pl)
+   mod:03(need(icl<abstract thing):02.@def.@pl,:04)
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 8.
+   
+   [S]
+   agt(join(icl>do).@entry.@obligation,:01)
+   mod:01(people(icl>nation).@def.@entry.@pl,with(icl>have):01)
+   obj:01(with(icl>have):01,culture(icl>abstract thing).@pl)
+   mod:01(culture(icl>abstract thing).@def.@pl,all)
+   obj(join(icl>do).@entry.@obligation,force(icl>thing).@pl)
+   pur(join(icl>do).@entry.@obligation,achieve(icl>do))
+   obj(achieve(icl>do),goal(icl>notion).@def)
+   mod(goal(icl>notion).@def,this)
+   coo(join(icl>do).@entry.@obligation,pool(icl>do))
+   obj(pool(icl>do),:02)
+   pos(:02,:01)
+   and:02(experience(icl>knowledge).@def.@entry,knowledge(icl>notion).@def)
+   pur(pool(icl>do),find(icl>do))
+   obj(find(icl>do),solution(icl>abstract thing).@pl)
+   ben(solution(icl>abstract thing).@pl,problem(icl>abstract thing))
+   mod(problem(icl>abstract thing),with(icl>have):02)
+   obj(with(icl>have):02,:03)
+   and:03(impact(icl>abstract thing).@entry,scope(icl>extent))
+   mod(:03,global(mod<thing))
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 9.
+   
+   [S]
+   man(address(icl>occur(obj>topic)).@entry.@future,also)
+   obj(address(icl>occur(obj>topic)).@entry.@future,element(icl>part).@def.@pl)
+   mod(element(icl>part).@def.@pl,culture(icl>abstract thing).@def)
+   agt(produce(icl>do),element(icl>part).@def.@pl)
+   obj(produce(icl>do),impact(icl>event))
+   mod(impact(icl>event),decisive)
+   ben(impact(icl>event),development(icl>event).@def)
+   mod(development(icl>event).@def,condition(icl>circumstance).@def.@pl)
+   mod(condition(icl>circumstance).@def.@pl,collective(mod<thing))
+   and(collective(mod<thing),individual(mod<thing))
+   mod(condition(icl>circumstance).@def.@pl,regarding)
+   obj(regarding,health.@def)
+   and(health.@def,work(icl>employment).@def)
+   and(work(icl>employment).@def,nutrition.@def)
+   [/S]
+
+.. Comentario
+
+.. code-block:: unl
+   :caption: Codificación UNL original de la oración ejemplo 10.
+   
+   [S]
+   aoj(require(icl>need(icl>be)).@entry,peace(icl>abstract thing).@def)
+   mod(peace(icl>abstract thing).@def,lasting(mod<thing))
+   and(lasting(mod<thing),stable(mod<thing))
+   obj(require(icl>need(icl>be)).@entry,more(icl>thing))
+   mod(more(icl>thing),a_little)
+   bas(more(icl>thing),stop(icl>do))
+   obj(stop(icl>do),situation(icl>condition).@pl)
+   mod(situation(icl>condition).@pl,other(mod<thing))
+   mod(situation(icl>condition).@pl,conflict)
+   and(situation(icl>condition).@pl,war.@def)
+   [/S]
+
+.. Comentario
+
+
+
