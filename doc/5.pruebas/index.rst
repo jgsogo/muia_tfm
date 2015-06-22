@@ -274,7 +274,6 @@ Yandex en grafos. Los resultados obtenidos se pueden consultar en los listados
     mod(generation%1:14:01::, future%3:00:00::)
     mod(capability%1:07:00::, commitment%1:04:00::)
     mod(commitment%1:04:00::, 02%meet%2:42:02::)
-    ;obj(02%meet%2:42:02::, 02%capability%1:07:00::)
     {/unl}
 
 
