@@ -13,9 +13,9 @@ para evaluar la distancia con respecto al texto original.
 El experimento consiste en comparar un conjunto de grafos UNL
 (convertidos a grafos cuyos nodos son *synsets* de WordNet) extraídos de un 
 documento perteneciente al Forum Universal de las Culturas 2004 [#]_ celebrado
-en Barcelona, con los grafos resultantes de traducir estas oraciones al
-español y de vuelta al inglés utilizando software de traducción disponible
-en internet.
+en Barcelona. La comparación se realizará contra los grafos resultantes de traducir
+estas oraciones al español y de vuelta al inglés utilizando software de traducción
+disponible en internet.
 
 .. [#] Fòrum Universal de les Cultures. 
    http://www.barcelona2004.org/www.barcelona2004.org/cat/index.html
@@ -74,7 +74,8 @@ una de las oraciones seleccionadas y los actores que intervienen en la generaci�
 los recursos; como ya se indicó en la :num:`sección #planteamiento-problema`, al
 carecer de tiempo y medios para generar un conjunto de datos adecuado, ha sido 
 necesario crearlos *ex profeso* para este trabajo [#]_. Se asume así que los resultados
-deben ser revisados con un enfoque más científico.
+deben ser revisados con un enfoque más científico, pero creemos que los datos generados
+de esta forma pueden servir para realizar una primera evaluación del modelo.
 
 .. [#] En el :num:`apéndice #appendix-data` se encuentran disponibles todos los datos
    utilizado para la realización del experimento.
@@ -83,42 +84,40 @@ deben ser revisados con un enfoque más científico.
 Metodología
 -----------
 Ilustraremos la metodología mostrada en la :num:`figura #fig-experiment-layout` con
-el ejemplo número 7 del *dataset* que hemos elaborado. El procedimiento se detalla
+el ejemplo número 3 del *dataset* que hemos elaborado. El procedimiento se detalla
 en los siguientes apartados.
 
 Datos de partida: oración y grafo UNL
 `````````````````````````````````````
 En el documento al que hemos hecho referencia anteriormente tenemos disponibles las
-oraciones en inglés y su transcripción como grafo UNL (:num:`listado #code-example-unl-7`).
+oraciones en inglés y su transcripción como grafo UNL (:num:`listado #code-example-unl-3`).
 
-Ejemplo 7
-  : *Sustainable Development satisfies the needs of the present without compromising future generations' abilities to satisfy theirs, and is based on the natural environment's capacity to provide for humankind.*
+Ejemplo 3
+  : *These concepts are essential for advancing towards a sustainable, more human world agenda, and they will undoubtedly continue to be relevant for many years to come.*
   
   
 .. code-block:: unl
-   :caption: Codificación UNL original de la oración ejemplo 7.
-   :name: code-example-unl-7
+   :caption: Codificación UNL original de la oración ejemplo 3.
+   :name: code-example-unl-3
    
    [S]
-   aoj:01(rest(icl>be).@entry,:02)
-   mod:02(development(icl>event).@def.@entry,sustainable(mod<thing))
-   met:01(rest(icl>be).@entry,capacity(icl>ability).@def)
-   mod:01(capacity(icl>ability).@def,environment.@def)
-   mod:01(environment.@def,natural(mod<thing))
-   obj:01(capacity(icl>ability).@def,provide_for)
-   ben:01(provide_for,humankind.@def)
-   and(:01.@entry,:03)
-   agt:03(satisfy(icl>do):01.@entry,:02)
-   obj:03(satisfy(icl>do):01.@entry,need(icl<abstract thing):01.@def.@pl)
-   mod:03(need(icl<abstract thing):01.@def.@pl,present(icl>time).@def)
-   man:03(satisfy(icl>do):01.@entry,without(icl>how))
-   obj:03(without(icl>how),compromise(icl>do))
-   obj:03(compromise(icl>do),ability)
-   mod:03(ability,:04)
-   mod:04(generation(icl>human group).@def.@entry.@pl,future(mod<thing))
-   obj:03(ability,satisfy(icl>do):02)
-   obj:03(satisfy(icl>do):02,need(icl<abstract thing):02.@def.@pl)
-   mod:03(need(icl<abstract thing):02.@def.@pl,:04)
+   obj(continue(icl>occur).@entry,:01)
+   mod:01(concept(icl>logic).@entry.@pl,this)
+   man(continue(icl>occur).@entry,undoubtedly(icl>man))
+   gol(continue(icl>occur).@entry,:02)
+   aoj:02(relevant(mod<thing).@entry,:01)
+   dur:02(relevant(mod<thing).@entry,year(icl>time).@pl)
+   mod:02(year(icl>time).@pl,many)
+   mod:02(year(icl>time).@pl,forthcoming(mod<thing))
+   and(continue(icl>occur).@entry,essential(mod<thing))
+   aoj(essential(mod<thing),:01)
+   pur(essential(mod<thing),advance(icl>progress(icl>do)))
+   man(advance(icl>progress(icl>do)),towards)
+   obj(towards,:03)
+   mod:03(agenda(icl>programme).@entry,world(mod<thing))
+   mod(:03,human(mod<thing))
+   man(human(mod<thing),more)
+   and(human(mod<thing),sustainable(mod<thing))
    [/S]
    
 
@@ -135,7 +134,7 @@ utilizando Systrans [#]_.
    http://www.systranet.com/dictionary/english-spanish (accedido en junio
    de 2015)
      
-  **Systrans**: El desarrollo sostenible satisface las necesidades del presente sin las capacidades de las futuras generaciones de compromiso de satisfacer el suyo, y se basa en la capacidad del ambiente natural de prever humanidad.
+  **Systrans**: Estos conceptos son esenciales para avanzar hacia un orden del día sostenible, más humano del mundo, y continuarán indudablemente siendo relevantes durante muchos años de venir.
   
 
 Traducción al idioma original
@@ -144,16 +143,16 @@ La oración en español es traducida nuevamente al idioma de partida (inglés) u
 dos sistemas de traducción automática: Google [#]_ y Yandex [#]_, con los que obtenemos
 los siguientes resultados:
 
-  **Google**: *Sustainable development meets the needs of the present without the ability of future generations to meet his commitment, and is based on the ability of the natural environment to provide for humanity.*
+  **Google**: *These concepts are essential in order to move towards a more sustainable day human world, and will undoubtedly continue to be relevant for many years to come.*
   
-  **Yandex**: *Sustainable development meets the needs of the present without the capabilities of future generations of commitment to meet yours, and is based on the ability of the natural environment to provide for humanity.*
+  **Yandex**: *These concepts are essential for progress towards an agenda for sustainable, more human world, and undoubtedly will continue to remain relevant for many years to come.*
   
 .. [#] Traductor de Google. https://translate.google.es (accedido en junio de 2015)
 
 .. [#] Yandex.Translate. https://translate.yandex.com/ (accedido en junio de 2015)
 
-Leyendo las traducciones podemos observar cómo las traducciones no son idénticas entre
-ellas y se han alejado del contenido semántico original. Nuestro modelo trabaja conç
+Leyendo las oraciones resultantes podemos observar cómo las traducciones no son idénticas
+entre ellas y se han alejado del contenido semántico original. Nuestro modelo trabaja con
 estos datos para obtener una medida de distancia entre las traducciones y la oración
 original.
 
@@ -162,7 +161,7 @@ Identificación de los *synsets* de WordNet
 Como hemos indicado, la ontología UNL no está disponible, por lo que la manera
 de utilizar las medidas de distancia que hemos expuesto en el estado del arte debe
 ser a través de la jerarquía de conceptos de WordNet. Para ello hemos tenido que
-identificar los conceptos expresados por las UWs con un *synset* concreto en WordNet.
+identificar cada concepto expresado por las UWs con un *synset* concreto en WordNet.
 
 Este proceso se ha realizado manualmente y, con total seguridad, introduce una primera
 desviación semántica entre la oración original y el grafo base para la comparación; no
@@ -170,41 +169,39 @@ obstante, siempre que aparecen los mismos conceptos se tiene la precaución de
 sustituirlos por el mismo *synset*.
 
 De este modo, el grafo UNL original, se convierte en el grafo mostrado en el 
-:num:`listado #code-example-original-7` que también se muestra en la
-:num:`figura #sample07-original`.
+:num:`listado #code-example-original-3` que también se muestra en la
+:num:`figura #sample03-original`.
 
 .. code-block:: unl
    :caption: Codificación utilizando los *synsets* de WordNet de la oración ejemplo 7.
-   :name: code-example-original-7
+   :name: code-example-original-3
    
    {unl}
-   aoj(rest%2:42:12::, development%1:22:02::)
-   mod(development%1:22:02::, sustainable%3:01:00::)
-   met(rest%2:42:12::, capacity%1:07:00::)
-   mod(capacity%1:07:00::, environment%1:15:00::)
-   mod(environment%1:15:00::, natural%3:00:02::)
-   obj(capacity%1:07:00::, provide%2:34:00::)
-   ben(provide%2:34:00::, humankind%1:05:00::)
-   and(rest%2:42:12::, satisfy%2:34:01::)
-   agt(satisfy%2:34:01::, development%1:22:02::)
-   obj(satisfy%2:34:01::, need%1:17:00::)
-   mod(need%1:17:00::, present%3:00:01::)
-   man(satisfy%2:34:01::, compromise%2:32:03::)
-   obj(compromise%2:32:03::, ability%1:07:00::)
-   mod(ability%1:07:00::, generation%1:14:01::)
-   mod(generation%1:14:01::, future%3:00:00::)
-   obj(ability%1:07:00::, 02%satisfy%2:34:01::)
-   obj(02%satisfy%2:34:01::, 02%need%1:17:00::)
-   mod(02%need%1:17:00::, generation%1:14:01::)
+   obj(continue%2:42:01::, concept%1:09:00::)
+   man(continue%2:42:01::, undoubtedly%4:02:00::)
+   gol(continue%2:42:01::, be%2:42:03::)
+   aoj(be%2:42:03::, concept%1:09:00::)
+   obj(be%2:42:03::, relevant%3:00:00::)
+   dur(relevant%3:00:00::, year%1:28:01::)
+   mod(year%1:28:01::, many%3:00:00::)
+   mod(year%1:28:01::, forthcoming%5:00:00:future:00)
+   and(continue%2:42:01::, essential%3:00:00:necessary:00)
+   aoj(essential%3:00:00:necessary:00, concept%1:09:00::)
+   pur(essential%3:00:00:necessary:00, advance%2:38:00::)
+   plc(advance%2:38:00::, agenda%1:10:00::)
+   mod(agenda%1:10:00::, world%1:14:02::)
+   mod(agenda%1:10:00::, human%3:01:00::)
+   man(human%3:01:00::, more%4:02:00::)
+   and(human%3:01:00::, sustainable%3:01:00::)
    {/unl}
 
 
-.. figure:: ../../data/samples/sample07_original.png
-   :name: sample07-original
+.. figure:: ../../data/samples/sample03_original.png
+   :name: sample03-original
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente al ejemplo #7 utilizado en el experimento (se muestran
+   Grafo correspondiente al ejemplo #3 utilizado en el experimento (se muestran
    únicamente las *headwords* correspondientes a cada concepto).
 
 La conversión de los conceptos UNL expresados en las UWs en los *synsets* de WordNet
@@ -217,72 +214,70 @@ ha seleccionado el concepto más próximo dentro de la categoría gramatical ade
 
 El mismo procedimiento se ha realizado para convertir las traducciones de Google y
 Yandex en grafos. Los resultados obtenidos se pueden consultar en los listados
-:num:`#code-example-google-7` y :num:`#code-example-yandex-7` y las figuras
-:num:`#sample07-google` y :num:`#sample07-yandex`.
+:num:`#code-example-google-3` y :num:`#code-example-yandex-3` y las figuras
+:num:`#sample03-google` y :num:`#sample03-yandex`.
 
 .. code-block:: unl
-   :caption: Codificación utilizando los *synsets* de WordNet del resultado de la traducción de la oración ejemplo 7 mediante el sistema Google.
-   :name: code-example-google-7
+   :caption: Codificación utilizando los *synsets* de WordNet del resultado de la traducción de la oración ejemplo 3 mediante el sistema Google.
+   :name: code-example-google-3
 
     {unl}
-    aoj(rest%2:42:12::, development%1:22:02::)
-    mod(development%1:22:02::, sustainable%3:01:00::)
-    met(rest%2:42:12::, ability%1:07:00::)
-    mod(ability%1:07:00::, environment%1:15:00::)
-    mod(environment%1:15:00::, natural%3:00:02::)
-    obj(ability%1:07:00::, provide%2:34:00::)
-    ben(provide%2:34:00::, humankind%1:05:00::)
-    and(rest%2:42:12::, meet%2:42:02::)
-    agt(meet%2:42:02::, development%1:22:02::)
-    obj(meet%2:42:02::, need%1:17:00::)
-    mod(need%1:17:00::, present%3:00:01::)
-    man(meet%2:42:02::, 02%ability%1:07:00::)
-    mod(02%ability%1:07:00::, generation%1:14:01::)
-    mod(generation%1:14:01::, future%3:00:00::)
-    obj(02%ability%1:07:00::, 02%meet%2:42:02::)
-    agt(02%meet%2:42:02::, generation%1:14:01::)
-    agt(02%meet%2:42:02::, commitment%1:04:00::)
+    obj(continue%2:42:01::, concept%1:09:00::)
+    man(continue%2:42:01::, undoubtedly%4:02:00::)
+    gol(continue%2:42:01::, be%2:42:03::)
+    aoj(be%2:42:03::, concept%1:09:00::)
+    obj(be%2:42:03::, relevant%3:00:00::)
+    dur(relevant%3:00:00::, year%1:28:01::)
+    mod(year%1:28:01::, many%3:00:00::)
+    mod(year%1:28:01::, forthcoming%5:00:00:future:00)
+    and(continue%2:42:01::, essential%3:00:00:necessary:00)
+    aoj(essential%3:00:00:necessary:00, concept%1:09:00::)
+    pur(essential%3:00:00:necessary:00, move%2:41:01::)
+    plc(move%2:41:01::, day%1:26:00::)
+    mod(day%1:26:00::, world%1:14:02::)
+    mod(day%1:26:00::, human%3:01:00::)
+    mod(day%1:26:00::, sustainable%3:01:00::)
     {/unl}
 
 
-.. figure:: ../../data/samples/sample07_google.png
-   :name: sample07-google
+.. figure:: ../../data/samples/sample03_google.png
+   :name: sample03-google
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #7.
+   Grafo correspondiente a la traducción de Google del ejemplo #3.
    
    
 .. code-block:: unl
-   :caption: Codificación utilizando los *synsets* de WordNet del resultado de la traducción de la oración ejemplo 7 mediante el sistema Yandex.
-   :name: code-example-yandex-7
+   :caption: Codificación utilizando los *synsets* de WordNet del resultado de la traducción de la oración ejemplo 3 mediante el sistema Yandex.
+   :name: code-example-yandex-3
 
     {unl}
-    aoj(rest%2:42:12::, development%1:22:02::)
-    mod(development%1:22:02::, sustainable%3:01:00::)
-    met(rest%2:42:12::, ability%1:07:00::)
-    mod(ability%1:07:00::, environment%1:15:00::)
-    mod(environment%1:15:00::, natural%3:00:02::)
-    obj(ability%1:07:00::, provide%2:34:00::)
-    ben(provide%2:34:00::, humankind%1:05:00::)
-    and(rest%2:42:12::, meet%2:42:02::)
-    agt(meet%2:42:02::, development%1:22:02::)
-    obj(meet%2:42:02::, need%1:17:00::)
-    mod(need%1:17:00::, present%3:00:01::)
-    man(meet%2:42:02::, capability%1:07:00::)
-    mod(capability%1:07:00::, generation%1:14:01::)
-    mod(generation%1:14:01::, future%3:00:00::)
-    mod(capability%1:07:00::, commitment%1:04:00::)
-    mod(commitment%1:04:00::, 02%meet%2:42:02::)
+    obj(continue%2:42:01::, concept%1:09:00::)
+    man(continue%2:42:01::, undoubtedly%4:02:00::)
+    gol(continue%2:42:01::, be%2:42:03::)
+    aoj(be%2:42:03::, concept%1:09:00::)
+    obj(be%2:42:03::, relevant%3:00:00::)
+    dur(relevant%3:00:00::, year%1:28:01::)
+    mod(year%1:28:01::, many%3:00:00::)
+    mod(year%1:28:01::, forthcoming%5:00:00:future:00)
+    and(continue%2:42:01::, essential%3:00:00:necessary:00)
+    aoj(essential%3:00:00:necessary:00, concept%1:09:00::)
+    pur(essential%3:00:00:necessary:00, progress%2:30:00::)
+    plc(progress%2:30:00::, agenda%1:10:00::)
+    pur(agenda%1:10:00::, world%1:14:02::)
+    mod(world%1:14:02::, human%3:01:00::)
+    man(human%3:01:00::, more%4:02:00::)
+    and(world%1:14:02::, sustainable%3:01:00::)
     {/unl}
 
 
-.. figure:: ../../data/samples/sample07_yandex.png
-   :name: sample07-yandex
+.. figure:: ../../data/samples/sample03_yandex.png
+   :name: sample03-yandex
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Yandex del ejemplo #7.
+   Grafo correspondiente a la traducción de Yandex del ejemplo #3.
 
 
 Ejecución del modelo
@@ -299,6 +294,65 @@ A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros
  * Tolerancia en la comparación entre relaciones.
 
 
+.. figure:: ../../data/samples/sample03-brief/measures-yandex-synset.png
+   :name: 03-measures-yandex-synset
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+
+
+.. figure:: ../../data/samples/sample03-brief/measures-google-synset.png
+   :name: 03-measures-google-synset
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+   
+En la :num:`figura #03-measures-yandex-synset` y en la
+:num:`figura #03-measures-google-synset`
+se muestra el valor calculado de similaridad para estos grafos utilizando todas
+las medidas de similaridad/distancia entre conceptos disponibles y para
+diferentes valores de tolerancia entre conceptos, :math:`t_c \in [0.0, 0.9]`.
+
+Una gráfica similar podría realizarse fijando un valor de tolerancia para la
+distancia entre conceptos y variando la tolerancia entre relaciones, no se ha
+reproducido aquí porque no se produce ninguna variación en el valor de 
+similaridad.
+
+Tanto en la comparación con el grafo generado por el traductor de Google como
+en el de Yandex, existe un umbral de :math:`t_c` en el que se produce un salto
+en el valor de similaridad entre los grafos para la mayoría de los algoritmos
+de distancia semántica. Una inspección detallada de los resultados nos permite
+encontrar el par de palabras que empiezan a ser equivalentes cuando la tolerancia
+supera cierto umbral.
+
+En la comparación entre la traducción de Google y el grafo original, el par de
+palabras que pasa a ser considerado equivalente es ``agenda`` y ``day``, en cada
+caso con un valor de similaridad diferente:
+ 
+ * Sussna :math:`s_c(agenda, day) = 0.828666`
+ * Shortest-path :math:`s_c(agenda, day) = 0.684211`
+ * Leacock-Chodorow: :math:`s_c(agenda, day) = 0.31688`
+ * Wu-Palmer :math:`s_c(agenda, day) = 0.142857`
+ * Resnik :math:`s_c(agenda, day) = 0.122799`
+ * Jiang-Conrath :math:`s_c(agenda, day) < 0.1`
+ * Lin :math:`s_c(agenda, day) < 0.1`
+   
+En el caso de la traducción de Yandex el par de palabras que se incorpora al
+máximo grafo común es ``agenda`` y ``populace``, con los siguientes valores:
+
+ * Sussna :math:`s_c(agenda, populace) = 0.85633`
+ * Shortest-path :math:`s_c(agenda, populace) = 0.763158`
+ * Leacock-Chodorow :math:`s_c(agenda, populace) = 0.395966`
+ * Wu-Palmer :math:`s_c(agenda, populace) = 0.181818`
+ * Resnik :math:`s_c(agenda, populace) = 0.122799`
+ * Jiang-Conrath :math:`s_c(agenda, day) < 0.1`
+ * Lin :math:`s_c(agenda, day) < 0.1`
+
+Como consecuencia de la incorporación de un nuevo nodo al grafo resultante, 
+se añaden nuevas conexiones con sus valores de similaridad que incrementarán
+el valor calculado para la pareja de grafos.
 
 
 Resultados

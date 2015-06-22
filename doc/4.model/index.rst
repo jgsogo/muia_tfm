@@ -32,17 +32,14 @@ El modelo propuesto satisface los siguientes objetivos:
    ofrezca la mínima distancia (máxima similaridad) entre los grafos a comparar, el cálculo
    propuesto realiza una búsqueda exhaustiva por lo que está garantizado que
    encuentra el máximo global [#]_.
- 
-.. TODO: Asumimos aquí la idea optimista de que la similaridad que intentamos capturar es
-   la máxima entre los grafos. En algunos casos puede ser un planteamiento equivocado.
-   
+    
  * Permitir la utilización de diferentes métricas de distancias entre conceptos, incluyendo
    las que hemos expuesto en el estado del arte.
    
  * Permitir la utilización de diferentes métricas de distancias entre relaciones UNL.
  
  * Realizar la comparación con un parámetro configurable que permita modificar el umbral para
-   considerar dos conceptos o relaciones como iguales en la construcción del grafo común.
+   considerar dos conceptos o relaciones como iguales en la construcción del máximo grafo común.
  
 .. [#] Como se expondrá más adelante esta búsqueda exhaustiva resulta en muchos
    casos ineficiente en términos de tiempo de computación y se recomendará la utilización
