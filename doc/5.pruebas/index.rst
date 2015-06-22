@@ -355,6 +355,22 @@ se añaden nuevas conexiones con sus valores de similaridad que incrementarán
 el valor calculado para la pareja de grafos.
 
 
+.. figure:: ../../data/samples/sample03-brief/sussna-synset_tol-00.png
+   :name: 03-sussna-synset-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Conjunto de nodos y relaciones equivalentes en la comparación entre el grafo original y las traducciones de Google (en rojo) y Yandex (azul), cuando :math:`t_c = 0`.
+
+
+.. figure:: ../../data/samples/sample03-brief/sussna-synset_tol-09.png
+   :name: 03-sussna-synset-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Conjunto de nodos y relaciones equivalentes en la comparación entre el grafo original y las traducciones de Google (en rojo) y Yandex (azul), con tolerancia entre conceptos :math:`t_c = 0.9`.
+
+
 Resultados
 ----------
 
