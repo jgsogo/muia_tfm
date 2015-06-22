@@ -35,8 +35,9 @@ struct graph_dist {
         GraphDistance graph_distance(words_dist, rels_dist);
         auto penalize_node = words_dist.upper_bound();
         auto penalize_edge = rels_dist.upper_bound();
-        auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
-        auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
+        //auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
+        //auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
+        auto max_d = graph1.get_nodes().size() + graph1.get_edges().size();
         //cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
         // Variables to hold results
