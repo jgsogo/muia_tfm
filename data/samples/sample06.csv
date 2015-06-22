@@ -1,0 +1,22 @@
+# file	translator	distance-meassure	synset-tolerance	relation-tolerance	similarity-value	computation-time
+sample06.txt	yandex	leacock-chodorow	0	0	0.921053	17.874
+sample06.txt	google	wu-palmer	0	0	0.815789	21.871
+sample06.txt	google	leacock-chodorow	0	0	0.894737	36.625
+sample06.txt	yandex	wu-palmer	0	0	0.921053	39.978
+sample06.txt	google	sussna	0	0	0.815789	102.155
+sample06.txt	yandex	sussna	0	0	0.921053	111.433
+sample06.txt	google	lin	0	0	0.815789	192.109
+sample06.txt	google	jiang-conrath	0	0	0.815789	386.211
+sample06.txt	yandex	lin	0	0	0.921053	393.771
+sample06.txt	yandex	shortest_path	0	0	0.921053	435.536
+sample06.txt	yandex	resnik	0	0	0.921053	456.48
+sample06.txt	yandex	jiang-conrath	0	0	0.921053	467.824
+sample06.txt	google	resnik	0	0	0.815789	604.221
+sample06.txt	google	shortest_path	0	0	0.815789	607.619
+sample06.txt	google	leacock-chodorow	0	0.1	0.894737	18.605
+sample06.txt	yandex	sussna	0	0.1	0.921053	20.007
+sample06.txt	google	sussna	0	0.1	0.815789	22.513
+sample06.txt	google	wu-palmer	0	0.1	0.815789	24.37
+sample06.txt	yandex	leacock-chodorow	0	0.1	0.921053	25.389
+sample06.txt	yandex	wu-palmer	0	0.1	0.921053	35.571
+sample06.txt	google	lin	0	0.1	0.815789	228.313
