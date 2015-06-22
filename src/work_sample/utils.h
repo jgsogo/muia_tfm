@@ -33,20 +33,19 @@ struct graph_dist {
                           distance::base_graph::conceptual_graph_corresponde& s2_to_result,
                           distance::base_synset& words_dist, distance::base_relation& rels_dist, float synset_tolerance = 0.f, float relation_tolerance = 0.f, const std::string& more_txt = "") const {
         GraphDistance graph_distance(words_dist, rels_dist);
-        auto penalize_node = words_dist.upper_bound();
-        auto penalize_edge = rels_dist.upper_bound();
-        //auto min_d = graph_distance.lower_bound(graph1, graph2, penalize_node, penalize_edge);
-        //auto max_d = graph_distance.upper_bound(graph1, graph2, penalize_node, penalize_edge);
-        auto max_d = graph1.get_nodes().size() + graph1.get_edges().size();
-        //cout << " - Similarity in [" << min_d << ", " << max_d << "]" << endl;
 
+        auto max_nodes = std::max(graph1.get_nodes().size(), graph2.get_nodes().size());
+        auto max_edges = std::max(graph1.get_edges().size(), graph2.get_edges().size());
+        
+        auto max_similarity = max_nodes + max_edges;
+        
         // Variables to hold results
         auto data = graph_distance.max_similarity(graph1, graph2, synset_tolerance, relation_tolerance, result, s1_to_result, s2_to_result);
         //cout << " - Max similarity is " << data << endl;
-        cout << "\t - " << more_txt << " -- " << title << ": " << data / max_d;
+        cout << "\t - " << more_txt << " -- " << title << ": " << data / max_similarity;
         cout << "\t\t|>> nodes = " << result.get_nodes().size() << "  |>> edges = " << result.get_edges().size() << endl;
         //result.print(std::cout);
-        return data / max_d;
+        return data / max_similarity;
     }
 
     template <class GraphDistance>
