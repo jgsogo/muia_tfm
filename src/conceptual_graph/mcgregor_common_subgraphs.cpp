@@ -57,11 +57,14 @@ namespace wn {
         typedef store_callback::_t_subgraphs _t_subgraphs;
         std::vector<std::unique_ptr<_t_subgraphs>> subgraphs;
         auto min_nodes = std::min(lhs.get_nodes().size(), rhs.get_nodes().size());
-        auto max_search_space = min_nodes*min_nodes; // TODO: Esto es un tema controvertido, el espacio de búsqueda hay que limitarlo en algunos casos, pero tiene consecuencias...
+        auto max_search_space = min_nodes*min_nodes*min_nodes; // TODO: Esto es un tema controvertido, el espacio de búsqueda hay que limitarlo en algunos casos, pero tiene consecuencias...
         store_callback mcs_graphs(lhs.d->graph, rhs.d->graph, subgraphs, cmp_synset_, cmp_relation_, max_search_space);
         mcgregor_common_subgraphs_unique(lhs.d->graph, rhs.d->graph, true, std::ref(mcs_graphs),
             edges_equivalent(funcs).vertices_equivalent(funcs));
         //std::cout << "Number of subgraphs (original): " << subgraphs.size() << std::endl;
+        if (subgraphs.size() == 0) {
+            return;
+        }
 
         // Remove duplicated graphs
         auto nested = [](const conceptual_graph_corresponde& lhs, const conceptual_graph_corresponde& rhs) {

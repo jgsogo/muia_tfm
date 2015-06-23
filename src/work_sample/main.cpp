@@ -97,10 +97,10 @@ int main(int argc, char** argv) {
     cout << endl;
     cout << "# Computing distances" << endl;
     cout << "#-------------------------------" << endl;
-    distance::shortest_path shortest_path(wnet);
-    distance::resnik distance_resnik(graph, corpus);
-    distance::jiang_conrath distance_jiang_conrath(graph, corpus);
-    distance::lin distance_lin(graph, corpus);
+    distance::shortest_path shortest_path_(wnet);
+    distance::resnik distance_resnik_(graph, corpus);
+    distance::jiang_conrath distance_jiang_conrath_(graph, corpus);
+    distance::lin distance_lin_(graph, corpus);
     distance::sussna distance_sussna_(graph);
     distance::wu_palmer distance_wu_palmer_(graph);
     distance::leacock_chodorow distance_leacock_chodorow_(graph);
@@ -108,13 +108,19 @@ int main(int argc, char** argv) {
     cache_distance distance_sussna(distance_sussna_);
     cache_distance distance_wu_palmer(distance_wu_palmer_);
     cache_distance distance_leacock_chodorow(distance_leacock_chodorow_);
+    cache_distance shortest_path(shortest_path_);
+    cache_distance distance_resnik(distance_resnik_);
+    cache_distance distance_jiang_conrath(distance_jiang_conrath_);
+    cache_distance distance_lin(distance_lin_);
 
 
     distance::base_relation_unl distance_relation;
 
     // Preparing output
     auto tol_synset_values = { 0.f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f };
-    auto tol_relation_values = tol_synset_values;
+    //auto tol_relation_values = tol_synset_values;
+    auto tol_relation_values = { 0.f, 0.9f };
+    //auto tol_relation_values = { 0.f, 0.9f };
     string sample_file_id = sample_file.substr(sample_file.find_last_of("\\/")+1);
     string output = sample_file.substr(0, sample_file.find_last_of(".")) + ".csv";
     fs::create_directory(sample_file.substr(0, sample_file.find_last_of(".")));

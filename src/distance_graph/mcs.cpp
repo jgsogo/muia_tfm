@@ -56,6 +56,7 @@ float mcs::max_similarity(const conceptual_graph& s1, const conceptual_graph& s2
     std::vector<_t_subgraph_data> mcs_subgraphs;
     mcgregor_common_subgraphs(s1, s2, cmp_synset, cmp_relation, mcs_subgraphs);
 
+
     // Rank candidates and keep the best one (minimizes distance)
     auto it = std::max_element(mcs_subgraphs.begin(), mcs_subgraphs.end(), [](_t_subgraph_data& lhs, _t_subgraph_data& rhs){
         return get<3>(lhs) < get<3>(rhs);
