@@ -163,14 +163,24 @@ work_sample <- function(file, title) {
 }
 
 work_samples <- function() {
+  print("Sample 01")
   work_sample("sample01.csv", "Ejemplo 1")
+  print("Sample 02")
   work_sample("sample02.csv", "Ejemplo 2")
+  print("Sample 03")
   work_sample("sample03.csv", "Ejemplo 3")
+  print("Sample 04")
   work_sample("sample04.csv", "Ejemplo 4")
+  print("Sample 05")
   work_sample("sample05.csv", "Ejemplo 5")
+  print("Sample 06")
   work_sample("sample06.csv", "Ejemplo 6")
+  print("Sample 07")
   work_sample("sample07.csv", "Ejemplo 7")
+  print("Sample 08")
   work_sample("sample08.csv", "Ejemplo 8")
+  print("Sample 09")
   work_sample("sample09.csv", "Ejemplo 9")
+  print("Sample 10")
   work_sample("sample10.csv", "Ejemplo 10")
 }
