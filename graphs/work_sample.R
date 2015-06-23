@@ -35,7 +35,7 @@ plot_synset_tol <- function(data, title, save_path) {
       filename = paste(filename, "png", sep=".")
       filepath = file.path(save_path, filename)
       print(filepath)
-      ggsave(filepath, g)
+      ggsave(filepath, g, width=7, height=4)
     }
 }
 
@@ -64,7 +64,7 @@ plot_relation_tol <- function(data, title, save_path) {
       filename = paste(filename, "png", sep=".")
       filepath = file.path(save_path, filename)
       print(filepath)
-      ggsave(filepath, g)
+      ggsave(filepath, g, width=7, height=4)
     }
 }
 
@@ -99,11 +99,11 @@ plot_distances_synset <- function(data, title, save_path, tol_relation = 0.0) {
     # Save to files
     file_google = paste("measures-google-synset", "png", sep=".")
     filepath = file.path(save_path, file_google)
-    ggsave(filepath, g)    
+    ggsave(filepath, g, width=7, height=4)    
     
     file_yandex = paste("measures-yandex-synset", "png", sep=".")
     filepath = file.path(save_path, file_yandex)
-    ggsave(filepath, y)    
+    ggsave(filepath, y, width=7, height=4)    
 }
 
 
@@ -138,11 +138,11 @@ plot_distances_relation <- function(data, title, save_path, tol_synset = 0.0) {
     # Save to files
     file_google = paste("measures-google-relation", "png", sep=".")
     filepath = file.path(save_path, file_google)
-    ggsave(filepath, g)    
+    ggsave(filepath, g, width=7, height=4)    
     
     file_yandex = paste("measures-yandex-relation", "png", sep=".")
     filepath = file.path(save_path, file_yandex)
-    ggsave(filepath, y)    
+    ggsave(filepath, y, width=7, height=4)    
 }
 
 
@@ -162,3 +162,15 @@ work_sample <- function(file, title) {
     plot_distances_relation(data, title, save_path)
 }
 
+work_samples <- function() {
+  work_sample("sample01.csv", "Ejemplo 1")
+  work_sample("sample02.csv", "Ejemplo 2")
+  work_sample("sample03.csv", "Ejemplo 3")
+  work_sample("sample04.csv", "Ejemplo 4")
+  work_sample("sample05.csv", "Ejemplo 5")
+  work_sample("sample06.csv", "Ejemplo 6")
+  work_sample("sample07.csv", "Ejemplo 7")
+  work_sample("sample08.csv", "Ejemplo 8")
+  work_sample("sample09.csv", "Ejemplo 9")
+  work_sample("sample10.csv", "Ejemplo 10")
+}

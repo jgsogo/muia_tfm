@@ -383,7 +383,7 @@ conforme la tolerancia entre los conceptos aumenta.
    :scale: 100 %
    :width: 100 %
 
-   Similaridad semántica entre el grafo origianl y los grafos correspondientes a las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia :math:`t_c` entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y los grafos correspondientes a las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia :math:`t_c` entre conceptos (intervalo de confianza 95%).
 
 En este caso concreto, el algoritmo indica que la distancia semántica es menor en el caso de la traducción de Yandex
 que en la de Google; un conjunto de oraciones etiquetado adecuadamente (probablemente fuera necesario realizarlo
@@ -409,6 +409,14 @@ Ejemplo 1
   **Yandex**: *The universal forum of cultures will be held from April 23 to September 24, 2004, and will include exhibitions, discussions, and festivals that celebrate cultural diversity in the world.*
 
 
+.. figure:: ../../data/samples/sample01-brief/synset_tol-relation_tol-0.png
+   :name: 01-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+   
 Ejemplo 2
   : *In their 29th General Conference, the 186 member states of the Unesco ratified their unanimous support of the project, jointly organized by the Spanish government, the Catalan autonomous government and the Barcelona City Council.*
 
@@ -418,7 +426,10 @@ Ejemplo 2
 
   **Yandex**: *In your 29na general conference, the 186 member States of UNESCO have ratified their unanimous support of the project, organized jointly by the Spanish government, the autonomous government of catalonia and the Barcelona city Council.*
 
-
+  
+.. TODO: Falta incluir la figura del ejemplo 2
+ 
+      
 Ejemplo 3
   : *These concepts are essential for advancing towards a sustainable, more human world agenda, and they will undoubtedly continue to be relevant for many years to come*
 
@@ -439,6 +450,14 @@ Ejemplo 4
   **Yandex**: *The knowledge of other cultures is essential to establish a constructive dialogue between various communities.*
 
 
+.. figure:: ../../data/samples/sample04-brief/synset_tol-relation_tol-0.png
+   :name: 04-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+
 Ejemplo 5
   : *This knowledge implies reflection about the common ground between all individuals as well as the qualities that differentiate them.*
 
@@ -448,6 +467,14 @@ Ejemplo 5
 
   **Yandex**: *This knowledge implies reflection on the common ground between all individuals as well as the qualities that distinguish them.*
 
+
+.. figure:: ../../data/samples/sample05-brief/synset_tol-relation_tol-0.png
+   :name: 05-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
 
 Ejemplo 6
   : *The Forum strives to foster the kind of understanding and respect capable of increasing both our appreciation of our human environment and our ability to work together to make the world a better place.*
@@ -459,6 +486,14 @@ Ejemplo 6
   **Yandex**: *The forum strives to foster the kind of understanding and respect able to increase our appreciation of our human environment and our ability to work together to make the world a better place.*
 
 
+.. figure:: ../../data/samples/sample06-brief/synset_tol-relation_tol-0.png
+   :name: 06-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+   
 Ejemplo 7
   : *Sustainable Development satisfies the needs of the present without compromising future generations' abilities to satisfy theirs, and is based on the natural environment's capacity to provide for humankind.*
 
@@ -469,6 +504,14 @@ Ejemplo 7
   **Yandex**: *Sustainable development meets the needs of the present without the capabilities of future generations of commitment to meet yours, and is based on the ability of the natural environment to provide for humanity.*
 
 
+.. figure:: ../../data/samples/sample07-brief/synset_tol-relation_tol-0.png
+   :name: 07-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+   
 Ejemplo 8
   : *People from all cultures must join forces to achieve this goal, pooling their knowledge and experience to find solutions to a problem with a global scope and impact.*
 
@@ -479,6 +522,14 @@ Ejemplo 8
   **Yandex**: *People of all cultures must join forces to achieve this goal, bringing together their knowledge and experience to find solutions to a problem with a global scope and impact.*
 
 
+.. figure:: ../../data/samples/sample08-brief/synset_tol-relation_tol-0.png
+   :name: 08-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+   
 Ejemplo 9
   : *the elements of culture that have a decisive impact on the development of individual and collective conditions regarding nutrition, work and health will also be addressed.*
 
@@ -489,6 +540,14 @@ Ejemplo 9
   **Yandex**: *the elements of culture that have a decisive impact on the development of conditions for individual and collective regarding nutrition, work and health will also be addressed.*
 
 
+.. figure:: ../../data/samples/sample09-brief/synset_tol-relation_tol-0.png
+   :name: 09-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
+   
 Ejemplo 10
   : *Stable and lasting peace requires something more than stopping war and other situations of conflict.*
 
@@ -499,6 +558,12 @@ Ejemplo 10
   **Yandex**: *The stable and lasting peace requires more than stopping war and other situations of conflict.*
 
 
+.. figure:: ../../data/samples/sample10-brief/synset_tol-relation_tol-0.png
+   :name: 10-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
 
 
 Valoración
