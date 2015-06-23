@@ -14,7 +14,10 @@ el *software* de Google.
 .. figure:: ../data/samples/sample01_google.png
    :name: sample01-google
    
-   Grafo correspondiente a la traducción de Google del ejemplo #1.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #1**:
+   *The Universal Forum of Cultures will be held from April 23 to September
+   24, 2004, and will include exhibitions, debates and festivals to celebrate
+   cultural diversity in the world.*
 
 
 .. figure:: ../data/samples/sample02_google.png
@@ -22,7 +25,10 @@ el *software* de Google.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #2.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #2**:
+   *In its 29th general conference, the 186 Member States of UNESCO unanimously
+   reaffirmed their support of the project, organized jointly by the Spanish
+   government, the Catalan Autonomous Government and the City of Barcelona.*
 
 
 .. figure:: ../data/samples/sample03_google.png
@@ -30,35 +36,49 @@ el *software* de Google.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #3.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #3**:
+   *These concepts are essential in order to move towards a more sustainable
+   day human world, and will undoubtedly continue to be relevant for many
+   years to come*
 
 
 .. figure:: ../data/samples/sample04_google.png
    :name: sample04-google
    :scale: 80 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #4.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #4**:
+   *Knowledge of other cultures is essential to establish a constructive
+   dialogue between different communities.*
 
 
 .. figure:: ../data/samples/sample05_google.png
    :name: sample05-google
    :scale: 60 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #5.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #5**:
+   *This knowledge involves reflection on the common ground between all
+   individuals and the qualities that distinguish them.*
    
 
 .. figure:: ../data/samples/sample06_google.png
    :name: sample06-google
    :scale: 50 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #6.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #6**:
+   *The forum strives to promote the kind of understanding and respect able
+   to increase our appreciation of our human environment and our ability to
+   work together to make the world a better place.*
+
 
 .. figure:: ../data/samples/sample07_google.png
    :name: sample07-google
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #7.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #7**:
+   *Sustainable development meets the needs of the present without the ability
+   of future generations to meet his commitment, and is based on the ability
+   of the natural environment to provide for humanity.*
 
 
 .. figure:: ../data/samples/sample08_google.png
@@ -66,19 +86,28 @@ el *software* de Google.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #8.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #8**:
+   *People of all cultures must join forces to achieve this goal by bringing
+   together their knowledge and experience to find solutions to a problem
+   with a global scope and impact.*
    
 
 .. figure:: ../data/samples/sample09_google.png
    :name: sample09-google
    :scale: 80 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #9.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #9**:
+   *the elements of culture that have a decisive impact on the development
+   of individual and collective regarding nutrition conditions, work and
+   health will also be addressed.*
+
 
 .. figure:: ../data/samples/sample10_google.png
    :name: sample10-google
    :scale: 70 %
    
-   Grafo correspondiente a la traducción de Google del ejemplo #10.
+   Grafo correspondiente a la traducción de **Google** del **ejemplo #10**:
+   *Stable and lasting peace requires more than stopping war and conflict
+   situations.*
    
 
