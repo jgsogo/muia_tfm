@@ -48,6 +48,7 @@ namespace wn {
                             CorrespondenceMapSecondToFirst correspondence_map_2_to_1,
                             typename graph_traits<GraphFirst>::vertices_size_type subgraph_size) {
                 --limit_search;
+                //std::cout << limit_search << std::endl;
                 if (subgraph_size < 2) {                    
                     return (limit_search>0);
                 }
