@@ -6,6 +6,42 @@
 
 Conclusión y trabajo futuro
 ===========================
+A lo largo de este trabajo hemos tenido la ocasión de aproximarnos a la problemática que
+ofrecen los sistemas de traducción automáticos en cuanto a la fiabilidad de los textos 
+que producen. El objetivo de estos sistemas es generar un texto en un idioma desconocido
+por el cliente de un contenido que éste le proporciona, por lo tanto la principal
+característica que deben cumplir es que el mensaje sea el lo más próximo posible en
+ambas lenguas.
+
+El usuario que solicita la traducción lo hace precisamente porque desconoce el idioma de
+destino, si no generaría la traducción él mismo, y por lo tanto está incapacitado para
+valorarla. Surge así la necesidad de establecer una magnitud que permita evaluar la
+corrección del texto producido con relación al texto original, es lo que llamamos
+distancia semántica.
+
+En el recorrido que hemos realizado por el estado del arte relacionado con esta temática,
+hemos puesto de manifiesto que no existe una definición inequívoca de esta medida y que
+los retos para su evaluación siguen siendo un desafío y un campo en el que todavía
+hay investigación pendiente.
+
+Nosotros hemos propuesto un algoritmo que permite captar la distancia semántica entre dos
+oraciones representadas por sus grafos conceptuales, con lo que en teoría podríamos 
+automatizar el proceso de evaluación de un traductor y establecer un criterio para
+determinar cuál es mejor y cual peor en términos objetivos.
+
+No obstante, hemos dejado también de manifiesto que para realizar esta tarea con el 
+rigor científico necesario es imprescindible contar con recursos que ahora mismo no están
+disponibles. En primer lugar es fundamental contar con bases de datos con jerarquías de
+conceptos (inexistentes en el caso del UNL) y corpus de textos etiquetados con esos 
+conceptos que sean suficientemente representativos del lenguaje utilizado en las 
+traducciones, tanto en lo referente al dominio tratado como en su contemporaneidad.
+
+Además, para poder evaluar el modelo propuesto y compararlo con los pocos que están
+disponibles en la bibliografía resulta también imprescindible contar con un conjunto de
+datos de validación etiquetados manualmente que contengan una apreciación lo más objetiva
+y profesional posible de la distancia entre varias oraciones. Sólo así es posible
+evaluar el rendimiento del modelo y trabajar sobre él para mejorar sus resultados.
+
 
 Trabajo futuro
 --------------
@@ -26,5 +62,13 @@ dejado a un lado, pero que sin duda son importantes:
    en oraciones más largas, donde los grafos tengan un número mayor de nodos, la búsqueda
    por fuerza bruta puede resultar intratable.
    
- * Demostrar si el algoritmo de similaridad entre grafos que se ha propuesto devuelve un
+ * Demostrar si el modelo de similaridad entre grafos que se ha propuesto devuelve un
    valor que cumple las propiedades de distancia.
+   
+ * También es imprescindible incorporar los atributos de las UWs en el cálculo de la
+   distancia entre grafos, sin duda ésta será una de las principales incorporaciones
+   que se realicen al modelo en una futura versión.
+
+Por último, es necesario revisar los casos en los que el resultado del modelo ofrece
+valores de similaridad que *a priori* consideramos incorrectos (figuras
+:num:`07-measures-yandex-synset` y :num:`09-relation-tol-0`).
