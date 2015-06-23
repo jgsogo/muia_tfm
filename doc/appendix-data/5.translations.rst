@@ -1,0 +1,128 @@
+
+.. raw:: latex
+    
+    \clearpage
+
+
+Traducciones de los textos originales
+-------------------------------------
+
+Partiendo de las oraciones originales en inglés, se han realizado traducciones
+utilizando diferentes programas disponibles como servicio para generar dos versiones
+distintas de cada una de ellas en inglés y poder compararlas.
+
+Así, se ha utilizado el traductor Systrans [#]_ para producir las oraciones en
+español y, posteriormente, los traductores de Google [#]_ y Yandex [#]_ para obtener
+las versiones en inglés.
+
+.. [#] SYSTRANet – Online translation software and tools – Dictionary
+   http://www.systranet.com/dictionary/english-spanish (accedido en junio
+   de 2015)
+
+.. [#] Traductor de Google. https://translate.google.es (accedido en junio de 2015)
+
+.. [#] Yandex.Translate. https://translate.yandex.com/ (accedido en junio de 2015)
+
+A continuación se reproducen los resultados obtenidos con el *software* indicado:
+
+
+Ejemplo 1
+  : *The Universal Forum of Cultures will be held from April 23 to September 24, 2004, and will include exhibitions, debates and festivals to celebrate cultural diversity throughout the world.*
+  
+  **Systrans**: El foro universal de culturas será sostenido del 23 de abril al 24 de septiembre de 2004, e incluirá exposiciones, discusiones y festivales para celebrar diversidad cultural en el mundo entero.
+  
+  **Google**: *The Universal Forum of Cultures will be held from April 23 to September 24, 2004, and will include exhibitions, debates and festivals to celebrate cultural diversity in the world.*
+  
+  **Yandex**: *The universal forum of cultures will be held from April 23 to September 24, 2004, and will include exhibitions, discussions, and festivals that celebrate cultural diversity in the world.*
+  
+
+Ejemplo 2
+  : *In their 29th General Conference, the 186 member states of the Unesco ratified their unanimous support of the project, jointly organized by the Spanish government, the Catalan autonomous government and the Barcelona City Council.*
+  
+  **Systrans**: En su 29na conferencia general, los 186 Estados miembros de la UNESCO ratificaron su ayuda unánime del proyecto, organizada en común por el gobierno español, el gobierno autónomo catalán y el Ayuntamiento de Barcelona.
+  
+  **Google**: *In its 29th general conference, the 186 Member States of UNESCO unanimously reaffirmed their support of the project, organized jointly by the Spanish government, the Catalan Autonomous Government and the City of Barcelona.*
+  
+  **Yandex**: *In your 29na general conference, the 186 member States of UNESCO have ratified their unanimous support of the project, organized jointly by the Spanish government, the autonomous government of catalonia and the Barcelona city Council.*
+  
+
+Ejemplo 3
+  : *These concepts are essential for advancing towards a sustainable, more human world agenda, and they will undoubtedly continue to be relevant for many years to come*
+  
+  **Systrans**: Estos conceptos son esenciales para avanzar hacia un orden del día sostenible, más humano del mundo, y continuarán indudablemente siendo relevantes durante muchos años de venir
+  
+  **Google**: *These concepts are essential in order to move towards a more sustainable day human world, and will undoubtedly continue to be relevant for many years to come*
+  
+  **Yandex**: *These concepts are essential for progress towards an agenda for sustainable, more human world, and undoubtedly will continue to remain relevant for many years to come*
+  
+  
+Ejemplo 4
+  : *Knowledge of other cultures is essential for establishing a constructive dialogue between different communities.*
+  
+  **Systrans**: El conocimiento de otras culturas es esencial para establecer un diálogo constructivo entre diversas comunidades.
+  
+  **Google**: *Knowledge of other cultures is essential to establish a constructive dialogue between different communities.*
+  
+  **Yandex**: *The knowledge of other cultures is essential to establish a constructive dialogue between various communities.*
+  
+  
+Ejemplo 5
+  : *This knowledge implies reflection about the common ground between all individuals as well as the qualities that differentiate them.*
+  
+  **Systrans**: Este conocimiento implica la reflexión sobre el terreno común entre todos los individuos así como las calidades que las distingan.
+  
+  **Google**: *This knowledge involves reflection on the common ground between all individuals and the qualities that distinguish them.*
+  
+  **Yandex**: *This knowledge implies reflection on the common ground between all individuals as well as the qualities that distinguish them.*
+  
+ 
+Ejemplo 6
+  : *The Forum strives to foster the kind of understanding and respect capable of increasing both our appreciation of our human environment and our ability to work together to make the world a better place.*
+  
+  **Systrans**: El foro se esfuerza fomentar la clase de comprensión y respetar capaz de aumentar nuestro aprecio de nuestro ambiente humano y nuestra capacidad de trabajar junto para hacer el mundo un mejor lugar.
+  
+  **Google**: *The forum strives to promote the kind of understanding and respect able to increase our appreciation of our human environment and our ability to work together to make the world a better place.*
+  
+  **Yandex**: *The forum strives to foster the kind of understanding and respect able to increase our appreciation of our human environment and our ability to work together to make the world a better place.*
+  
+
+Ejemplo 7
+  : *Sustainable Development satisfies the needs of the present without compromising future generations' abilities to satisfy theirs, and is based on the natural environment's capacity to provide for humankind.*
+  
+  **Systrans**: El desarrollo sostenible satisface las necesidades del presente sin las capacidades de las futuras generaciones de compromiso de satisfacer el suyo, y se basa en la capacidad del ambiente natural de prever humanidad.
+  
+  **Google**: *Sustainable development meets the needs of the present without the ability of future generations to meet his commitment, and is based on the ability of the natural environment to provide for humanity.*
+  
+  **Yandex**: *Sustainable development meets the needs of the present without the capabilities of future generations of commitment to meet yours, and is based on the ability of the natural environment to provide for humanity.*
+  
+  
+Ejemplo 8
+  : *People from all cultures must join forces to achieve this goal, pooling their knowledge and experience to find solutions to a problem with a global scope and impact.*
+  
+  **Systrans**: La gente de todas las culturas debe unirse a fuerzas para alcanzar esta meta, reuniendo su conocimiento y experiencia para encontrar soluciones a un problema con un ámbito global y un impacto.
+  
+  **Google**: *People of all cultures must join forces to achieve this goal by bringing together their knowledge and experience to find solutions to a problem with a global scope and impact.*
+  
+  **Yandex**: *People of all cultures must join forces to achieve this goal, bringing together their knowledge and experience to find solutions to a problem with a global scope and impact.*
+  
+  
+Ejemplo 9
+  : *the elements of culture that have a decisive impact on the development of individual and collective conditions regarding nutrition, work and health will also be addressed.*
+  
+  **Systrans**: los elementos de la cultura que tienen un impacto decisivo en el desarrollo de condiciones individuales y colectivas con respecto la nutrición, el trabajo y a la salud también serán dirigidos.
+  
+  **Google**: *the elements of culture that have a decisive impact on the development of individual and collective regarding nutrition conditions, work and health will also be addressed.*
+  
+  **Yandex**: *the elements of culture that have a decisive impact on the development of conditions for individual and collective regarding nutrition, work and health will also be addressed.*
+  
+  
+Ejemplo 10
+  : *Stable and lasting peace requires something more than stopping war and other situations of conflict.*
+  
+  **Systrans**: La paz estable y duradera requiere algo más que parando guerra y otras situaciones del conflicto.
+  
+  **Google**: *Stable and lasting peace requires more than stopping war and conflict situations.*
+  
+  **Yandex**: *The stable and lasting peace requires more than stopping war and other situations of conflict.*
+  
+  

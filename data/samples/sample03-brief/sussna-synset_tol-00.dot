@@ -1,0 +1,33 @@
+digraph G {
+0[label="continue", color="red", style="filled", fillcolor="lightblue"];
+1[label="concept", color="red", style="filled", fillcolor="lightblue"];
+2[label="undoubtedly", color="red", style="filled", fillcolor="lightblue"];
+3[label="be", color="red", style="filled", fillcolor="lightblue"];
+4[label="relevant", color="red", style="filled", fillcolor="lightblue"];
+5[label="year", color="red", style="filled", fillcolor="lightblue"];
+6[label="many", color="red", style="filled", fillcolor="lightblue"];
+7[label="extroverted", color="red", style="filled", fillcolor="lightblue"];
+8[label="essential", color="red", style="filled", fillcolor="lightblue"];
+9[label="advance"];
+10[label="agenda"];
+11[label="populace"];
+12[label="human", style="filled", fillcolor="lightblue"];
+13[label="more", style="filled", fillcolor="lightblue"];
+14[label="sustainable"];
+0->1 [label="obj", color="red:blue"];
+0->2 [label="man", color="red:blue"];
+0->3 [label="gol", color="red:blue"];
+3->1 [label="aoj", color="red:blue"];
+3->4 [label="obj", color="red:blue"];
+4->5 [label="dur", color="red:blue"];
+5->6 [label="mod", color="red:blue"];
+5->7 [label="mod", color="red:blue"];
+0->8 [label="and", color="red:blue"];
+8->1 [label="aoj", color="red:blue"];
+8->9 [label="pur"];
+9->10 [label="plc"];
+10->11 [label="mod"];
+10->12 [label="mod"];
+12->13 [label="man", color="blue"];
+12->14 [label="and"];
+}
