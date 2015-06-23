@@ -11,16 +11,11 @@ Centro de Lengua Española del Consorcio UNL.
    http://www.barcelona2004.org/www.barcelona2004.org/cat/index.html
    (accedida en junio de 2015)
    
-A continuación se muestran todas estas oraciones, con la codificación UNL
-original realizada en su momento y los grafos conceptuales que se han
-utilizado en este trabajo.
+A continuación se muestran todas estas oraciones y los grafos conceptuales
+que se han utilizado en este trabajo.
 
 
-.. include:: appendix-data/1.oraciones.rst
-.. include:: appendix-data/2.unl_original.rst
-.. include:: appendix-data/3.unl_work.rst
 .. include:: appendix-data/4.graph_original.rst
-.. include:: appendix-data/5.translations.rst
 .. include:: appendix-data/6.graph_google.rst
 .. include:: appendix-data/7.graph_yandex.rst
 

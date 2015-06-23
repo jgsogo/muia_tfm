@@ -546,7 +546,7 @@ Ejemplo 9
    :width: 100 %
    
    Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
-   
+ 
    
 Ejemplo 10
   : *Stable and lasting peace requires something more than stopping war and other situations of conflict.*
@@ -568,3 +568,41 @@ Ejemplo 10
 
 Valoración
 ----------
+En el apartado anterior hemos mostrado los resultados obtenidos para el pequeño conjunto
+de datos que se ha preparado con objeto de probar el algoritmo. Se puede observar cómo
+la similaridad permanece constante o bien se incrementa a medida que se aumenta la
+tolerancia entre conceptos, tal y como se pretendía al plantear el modelo.
+
+También parece adecuada la aproximación que se ha realizado utilizando varios algoritmos
+de medida de distancia entre conceptos y calculando el valor de similaridad como la media
+de todos ellos; a pesar de que los intervalos de confianza mostrados en las imágenes se
+superponen, la media muestra un crecimiento suave.
+
+Sin embargo, existen un par de resultados que no parecen correctos:
+
+ * En el ejemplo 9 (ver :num:`figura #09-relation-tol-0`), la evolución de la similaridad
+   es contraria a lo que hemos comentado anteriormente. Un examen más detallado de los
+   resultados intermedios que se van generando durante la ejecución del algoritmo sugiere
+   que el error se produce en la elección de los subgrafos que forman el máximo grafo común
+   entre los candidatos encontrados por el algoritmo de McGregor. El estudio (y solución) de esta
+   circunstancia se deja como trabajo futuro.
+   
+ * En el ejemplo 7 se produce un fenómeno atípico con la similaridad calculada utilizando
+   la distancia semántica entre conceptos propuesta por Sussna. Como se ve en la
+   :num:`figura #03-measures-yandex-synset` la similaridad baja cuando la tolerancia entre
+   conceptos disminuye, para volver a subir posteriormente. Todo indica a pensar que
+   esta anomalía también comparte causa con la comentada anteriormente, pero su análisis
+   y solución deben aplazarse.
+
+
+.. figure:: ../../data/samples/sample07-brief/measures-yandex-synset.png
+   :name: 03-measures-yandex-synset
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+
+El objetivo de esta experimentación no es valorar los traductores, no creemos que la muestra
+de oraciones sobre la que hemos trabajado sea suficientemente significativa para ello.
+   
+

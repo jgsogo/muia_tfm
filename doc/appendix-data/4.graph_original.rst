@@ -14,8 +14,11 @@ calcula la distancia de las traducciones obtenidas.
 .. figure:: ../data/samples/sample01_original.png
    :name: sample01-original
    
-   Grafo correspondiente al ejemplo #1 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #1** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *The Universal
+   Forum of Cultures will be held from April 23 to September 24, 2004, and will
+   include exhibitions, debates and festivals to celebrate cultural diversity
+   throughout the world.*
 
 
 .. figure:: ../data/samples/sample02_original.png
@@ -23,8 +26,11 @@ calcula la distancia de las traducciones obtenidas.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente al ejemplo #2 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #2** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *In their 29th
+   General Conference, the 186 member states of the Unesco ratified their unanimous
+   support of the project, jointly organized by the Spanish government, the Catalan
+   autonomous government and the Barcelona City Council.*
 
 
 .. figure:: ../data/samples/sample03_original.png
@@ -32,32 +38,41 @@ calcula la distancia de las traducciones obtenidas.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente al ejemplo #3 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #3** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *These concepts
+   are essential for advancing towards a sustainable, more human world agenda,
+   and they will undoubtedly continue to be relevant for many years to come.*
 
 
 .. figure:: ../data/samples/sample04_original.png
    :name: sample04-original
    :scale: 80 %
    
-   Grafo correspondiente al ejemplo #4 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #4** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *Knowledge of
+   other cultures is essential for establishing a constructive dialogue between
+   different communities.*
 
 
 .. figure:: ../data/samples/sample05_original.png
    :name: sample05-original
    :scale: 60 %
    
-   Grafo correspondiente al ejemplo #5 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #5** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *This knowledge
+   implies reflection about the common ground between all individuals as well as
+   the qualities that differentiate them.*
    
 
 .. figure:: ../data/samples/sample06_original.png
    :name: sample06-original
    :scale: 50 %
    
-   Grafo correspondiente al ejemplo #6 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #6** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *The Forum
+   strives to foster the kind of understanding and respect capable of increasing
+   both our appreciation of our human environment and our ability to work together
+   to make the world a better place.*
 
 
 .. figure:: ../data/samples/sample07_original.png
@@ -65,32 +80,40 @@ calcula la distancia de las traducciones obtenidas.
    :scale: 100 %
    :width: 100 %
    
-   Grafo correspondiente al ejemplo #7 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #7** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *Sustainable
+   Development satisfies the needs of the present without compromising future
+   generations' abilities to satisfy theirs, and is based on the natural
+   environment's capacity to provide for humankind.*
 
 
 .. figure:: ../data/samples/sample08_original.png
    :name: sample08-original
-   :scale: 100 %
-   :width: 100 %
+   :scale: 70 %
    
-   Grafo correspondiente al ejemplo #8 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #8** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *People from
+   all cultures must join forces to achieve this goal, pooling their knowledge
+   and experience to find solutions to a problem with a global scope and impact.*
    
 
 .. figure:: ../data/samples/sample09_original.png
    :name: sample09-original
    :scale: 80 %
    
-   Grafo correspondiente al ejemplo #9 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #9** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *the elements
+   of culture that have a decisive impact on the development of individual and
+   collective conditions regarding nutrition, work and health will also be addressed.*
 
 
 .. figure:: ../data/samples/sample10_original.png
    :name: sample10-original
    :scale: 70 %
    
-   Grafo correspondiente al ejemplo #10 utilizado en el experimento (se muestran
-   únicamente las *headwords* correspondientes a cada concepto).
+   Grafo correspondiente al **ejemplo #10** utilizado en el experimento (se muestran
+   únicamente las *headwords* correspondientes a cada concepto): *Stable and
+   lasting peace requires something more than stopping war and other situations
+   of conflict.*
    
 
