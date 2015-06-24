@@ -103,8 +103,12 @@ fruto tanto de la elección de las palabras o los conceptos para expresar cierta
 como de la estructura sintáctica utilizada para expresar la oración. Lo que nos interesa
 es precisamente medir las variaciones introducidas por cada traductor con respecto al 
 texto original, el ruido que separa dos grafos que *a priori* deberían ser iguales, tal y
-como se plantea la Teoría de la Dependencia Conceptual
-(ver :num:`sección #teoria-dependencia-conceptual`).
+como se plantea la Teoría de la Dependencia Conceptual 
+(ver :num:`sección #teoria-de-la-dependencia-conceptual`).
+(ver :ref:`Whatever <teoria-dependencia-conceptual>`).
+(ver :ref:`<teoria-dependencia-conceptual>`).
+(ver :ref:`teoria-dependencia-conceptual`).
+
 
 Como hemos visto anteriormente, los grafos conceptuales y los grafos UNL que representan
 las oraciones tienen nodos y relaciones con atributos por lo que muchas de las técnicas
