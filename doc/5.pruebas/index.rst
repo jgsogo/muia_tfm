@@ -77,7 +77,7 @@ necesario crearlos *ex profeso* para este trabajo [#]_. Se asume así que los re
 deben ser revisados con un enfoque más científico, pero creemos que los datos generados
 de esta forma pueden servir para realizar una primera evaluación del modelo.
 
-.. [#] En el :ref:`Apéndice <appendix-data>` se encuentran disponibles todos los datos
+.. [#] En el :ref:`Apéndice A <appendix-data>` se encuentran disponibles todos los datos
    utilizados para la realización del experimento.
 
 
@@ -396,7 +396,7 @@ Para la experimentacion se ha preparado un *dataset* con 10 oraciones extraídas
 Universal de las Culturas de Barcelona 2004 y traducidas utilizando los servicios indicados anteriormente.
 El conjunto completo de oraciones se incluye a continuación, la codificacion original, asi como las
 correspondencias con WordNet y la representacion grafica tanto del original como de las traducciones puede
-consultarse en el *dataset* completo que se adjunta en el :ref:`Apéndice <appendix-data>`.
+consultarse en el *dataset* completo que se adjunta en el :ref:`Apéndice A <appendix-data>`.
 
 
 Ejemplo 1
