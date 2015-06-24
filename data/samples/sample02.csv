@@ -275,3 +275,7 @@ sample02.txt	google	shortest_path	0.9	0.9	0.655502	12.321
 sample02.txt	yandex	jiang-conrath	0.9	0.9	0.909091	1882.83
 sample02.txt	yandex	lin	0.9	0.9	0.909091	2032.96
 sample02.txt	yandex	leacock-chodorow	0.9	0.9	0.909091	2512.43
+sample02.txt	yandex	sussna	0.9	0.9	0.909091	3502.95
+sample02.txt	yandex	wu-palmer	0.9	0.9	0.909091	3540.24
+sample02.txt	yandex	resnik	0.9	0.9	0.909091	3689.55
+sample02.txt	yandex	shortest_path	0.9	0.9	0.909091	3811.62
