@@ -45,7 +45,7 @@ evaluar el rendimiento del modelo y trabajar sobre él para mejorar sus resultad
 
 Trabajo futuro
 --------------
-En la :num:`sección #planteamiento-problema` listábamos el conjunto de tareas que
+En la :ref:`sección 3.3 <planteamiento-problema>` listábamos el conjunto de tareas que
 consideramos necesarias para llevar a cabo un trabajo riguroso sobre la distancia semántica
 entre grafos en UNL. En esta tesis hemos dedicado un esfuerzo importante a investigar el estado
 del arte relacionado con el problema y además hemos planteado un modelo de distancia y
@@ -71,4 +71,4 @@ dejado a un lado, pero que sin duda son importantes:
 
 Por último, es necesario revisar los casos en los que el resultado del modelo ofrece
 valores de similaridad que *a priori* consideramos incorrectos (figuras
-:num:`sample07-measures-yandex-synset` y :num:`sample09-relation-tol-0`).
+:ref:`6.19 <sample07-measures-yandex-synset>` y :ref:`6.17 <sample09-relation-tol-0>`).

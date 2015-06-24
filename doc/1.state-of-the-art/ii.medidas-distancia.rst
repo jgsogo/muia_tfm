@@ -104,10 +104,7 @@ como de la estructura sintáctica utilizada para expresar la oración. Lo que no
 es precisamente medir las variaciones introducidas por cada traductor con respecto al 
 texto original, el ruido que separa dos grafos que *a priori* deberían ser iguales, tal y
 como se plantea la Teoría de la Dependencia Conceptual 
-(ver :num:`sección #teoria-de-la-dependencia-conceptual`).
-(ver :ref:`Whatever <teoria-dependencia-conceptual>`).
-(ver :ref:`<teoria-dependencia-conceptual>`).
-(ver :ref:`teoria-dependencia-conceptual`).
+(ver :ref:`sección 2.1.1 <teoria-dependencia-conceptual>`).
 
 
 Como hemos visto anteriormente, los grafos conceptuales y los grafos UNL que representan
@@ -251,7 +248,9 @@ La medida de la similaridad entre conceptos se ha abordado desde tres perspectiv
 Por supuesto, también hay otros propuestas que utilizan medidas híbridas que combinan
 varias de estas perspectivas. Desarrollamos cada uno de los puntos anteriores a continuación.
 
-.. redes-conceptos-estructura_
+
+.. _redes-conceptos-estructura:
+
 Basadas en la estructura
 ++++++++++++++++++++++++
 Considerar la jerarquía de conceptos y el número de conexiones existentes entre ellos es una

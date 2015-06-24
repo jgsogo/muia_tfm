@@ -61,7 +61,7 @@ El otro gran problema asociado a la representación del conocimiento es la inter
 del mensaje, que también tiene un componente subjetivo difícilmente medible. Una parte
 muy importante del mensaje es implícito y su comprensión depende del sustrato cultural
 común de los interlocutores, es un problema que mencionábamos al hablar de los 
-fenómenos lingüísticos (:num:`sección #fenomenos-linguisticos`).
+fenómenos lingüísticos (:ref:`sección 2.3.1 <fenomenos-linguisticos>`).
 
 Este hecho provoca que el mismo mensaje pueda ser codificado de diferentes
 formas (paráfrasis), en cuyo caso una buena medida de distancia debería obtener un valor
