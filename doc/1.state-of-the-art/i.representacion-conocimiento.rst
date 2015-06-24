@@ -48,7 +48,8 @@ memoria, el ser humano y el ordenador pueden elaborar razonamientos y responder 
 consultas o peticiones de información.
 
 
-.. grafos-conceptuales_
+.. _grafos-conceptuales:
+
 Grafos conceptuales
 ```````````````````
 La característica fundamental que debe tener una interlingua es su capacidad para 
@@ -233,7 +234,7 @@ ovoscopia.
    }
 
 
-.. wordnet_
+.. _wordnet:
 WordNet
 ```````
 Una de los esfuerzos más importantes para realizar una ontología de conceptos es WordNet
@@ -308,7 +309,7 @@ o la *EuroWordNet Top Concept Ontology* que citábamos :cite:`Alvez2008`.
 Interlingua
 ```````````
 En el capítulo introductorio hablamos de la traducción automática utilizando sistemas basados
-en interlinguas (ver :num:`sección #traduccion-interlingua`). El
+en interlinguas (ver :ref:`sección 1.3 <traduccion-interlingua>`). El
 argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
 de abstracción y universalidad que debe tener esta lengua, lo que la convertiría en inviable
 económicamente :cite:`Martins2002`: no sólo debería ser capaz de expresar cualquier significado

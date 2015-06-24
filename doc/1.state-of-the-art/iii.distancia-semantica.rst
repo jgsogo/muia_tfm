@@ -8,12 +8,13 @@ estructura de los mismos, pero también debemos medir cuál es la distancia que 
 atributos de los nodos (conceptos) y los arcos (relaciones).
 
 En la literatura encontramos algunas medidas de distancia asociadas a los grafos conceptuales
-(:num:`sección #grafos-conceptuales`), en ellas se aborda el problema conjunto que estamos
+(:ref:`sección 2.1.2 <grafos-conceptuales>`), en ellas se aborda el problema conjunto que estamos
 presentando aquí; en algunos casos se orienta hacia la búsqueda exacta de un patrón en un
 conjunto de grafos, pero en otros se implementan medidas de similaridad que pueden tomar
 valores en un rango continuo.
 
-.. fenomenos-linguisticos_
+.. _fenomenos-linguisticos:
+
 Fenómenos lingüísticos
 ``````````````````````
 El lenguaje natural está repleto de ambigüedades que sólo se resuelven en la interacción
@@ -59,7 +60,7 @@ valorar su influencia en las medidas propuestas.
 Limitaciones del lenguaje
 `````````````````````````
 En el proceso de traducción automática que hemos mostrado en la
-:num:`figura #fig-problema-interlingua` donde comparamos los grafos de interlingua producidos
+:ref:`figura 1.2 <fig-problema-interlingua>` donde comparamos los grafos de interlingua producidos
 a partir de los generadores con el grafo en interlingua de partida, la información que
 tendrán los grafos generados a partir de los textos traducidos no podrá ser mayor que la
 información que es posible expresar en los lenguajes de destino. Es decir, ningún grafo
@@ -98,7 +99,7 @@ una relación entre ellos que permita continuar con la comparación.
 
 Algunos algoritmos, como el de Myaeng y López-López :cite:`Myaeng1992` son algo más flexibles
 pues realizan la búsqueda utilizando el concepto de máximo subgrafo común
-(ver :num:`sección #maximo-grafo-comun`); su algoritmo calcula una medida de similaridad
+(ver :ref:`sección 2.2.1 <maximo-grafo-comun>`); su algoritmo calcula una medida de similaridad
 en función del conjunto de todos los MCS, sin embargo, la correspondencia entre los elementos
 tiene que ser exacta.
 
@@ -159,7 +160,7 @@ los grafos conceptuales.
 
 La similaridad entre conceptos la basan en la profundidad de éstos dentro de la red jerárquica
 de hiponimia de WordNet, desarrollan una medida propia de una manera análoga a la mostrada en la
-:num:`sección #redes-conceptos-estructura`.
+:ref:`sección 2.2.2 <redes-conceptos-estructura>`.
 
 Para la similaridad entre relaciones también utilizan una jerarquía de relaciones desarrollada
 por ellos mismos, de tal forma que el valor de similaridad entre una relación :math:`r_Q` del

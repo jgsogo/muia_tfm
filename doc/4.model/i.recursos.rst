@@ -14,7 +14,7 @@ indicará en cada caso las contribuciones realizadas.
 WordNet 3.1
 -----------
 En la exposición del estado del arte hemos descrito sucintamente la base de datos WordNet y
-sus características (ver :num:`sección #wordnet`), no lo repetiremos aquí. Para este
+sus características (ver :ref:`sección 2.1.4 <wordnet>`), no lo repetiremos aquí. Para este
 trabajo hemos utilizado el diccionario correspondiente a la versión 3.1.
 
 
@@ -23,7 +23,7 @@ SemCor
 El corpus SemCor es el único recurso etiquetado con WordNet que hemos encontrado; su 
 utilización es imprescindible para poder hacer uso de medidas de distancia que tienen
 en cuenta el contenido de información
-(ver :num:`sección #redes-conceptos-contenido-informacion`). Sin embargo no hemos
+(ver :ref:`sección 2.2.2 <redes-conceptos-contenido-informacion>`). Sin embargo no hemos
 considerado cómo de representativo es este corpus para los el dominio de información
 en el que vamos a experimentar, los resultados de algunas medidas de distancia pueden
 verse profundamente afectados por esta circunstancia.

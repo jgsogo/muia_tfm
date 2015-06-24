@@ -71,7 +71,7 @@ disponible en internet.
 
 En la :num:`figura #fig-experiment-layout` se muestra el proceso seguido para cada
 una de las oraciones seleccionadas y los actores que intervienen en la generación de
-los recursos; como ya se indicó en la :num:`sección #planteamiento-problema`, al
+los recursos; como ya se indicó en la :ref:`sección 3.3 <planteamiento-problema>`, al
 carecer de tiempo y medios para generar un conjunto de datos adecuado, ha sido 
 necesario crearlos *ex profeso* para este trabajo [#]_. Se asume así que los resultados
 deben ser revisados con un enfoque más científico, pero creemos que los datos generados
