@@ -427,7 +427,13 @@ Ejemplo 2
   **Yandex**: *In your 29na general conference, the 186 member States of UNESCO have ratified their unanimous support of the project, organized jointly by the Spanish government, the autonomous government of catalonia and the Barcelona city Council.*
 
   
-.. TODO: Falta incluir la figura del ejemplo 2
+.. figure:: ../../data/samples/sample02-brief/synset_tol-relation_tol-0.png
+   :name: 02-relation-tol-0
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   
  
       
 Ejemplo 3
@@ -578,29 +584,40 @@ de medida de distancia entre conceptos y calculando el valor de similaridad como
 de todos ellos; a pesar de que los intervalos de confianza mostrados en las imágenes se
 superponen, la media muestra un crecimiento suave.
 
-Sin embargo, existen un par de resultados que no parecen correctos:
+Sin embargo, existen algunos resultados que no parecen correctos:
 
  * En el ejemplo 9 (ver :num:`figura #09-relation-tol-0`), la evolución de la similaridad
-   es contraria a lo que hemos comentado anteriormente. Un examen más detallado de los
+   es contraria a lo que hemos comentado anteriormente, a medida que aumenta la tolerancia
+   entre conceptos, la similaridad disminuye. Un examen más detallado de los
    resultados intermedios que se van generando durante la ejecución del algoritmo sugiere
    que el error se produce en la elección de los subgrafos que forman el máximo grafo común
    entre los candidatos encontrados por el algoritmo de McGregor. El estudio (y solución) de esta
-   circunstancia se deja como trabajo futuro.
+   circunstancia se tiene que dejar como trabajo futuro.
    
  * En el ejemplo 7 se produce un fenómeno atípico con la similaridad calculada utilizando
    la distancia semántica entre conceptos propuesta por Sussna. Como se ve en la
-   :num:`figura #03-measures-yandex-synset` la similaridad baja cuando la tolerancia entre
-   conceptos disminuye, para volver a subir posteriormente. Todo indica a pensar que
+   :num:`figura #07-measures-yandex-synset` la similaridad baja cuando la tolerancia entre
+   conceptos aumenta, para volver a subir posteriormente. Todo indica a pensar que
    esta anomalía también comparte causa con la comentada anteriormente, pero su análisis
-   y solución deben aplazarse.
+   y solución deben aplazarse. Lo mismo ocurre en el ejemplo 2 con la distancia de
+   Wu-Palmer (ver :num:`figura #02-measures-yandex-synset`).
 
 
 .. figure:: ../../data/samples/sample07-brief/measures-yandex-synset.png
-   :name: 03-measures-yandex-synset
+   :name: 07-measures-yandex-synset
    :scale: 100 %
    :width: 100 %
    
    Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+
+
+.. figure:: ../../data/samples/sample02-brief/measures-yandex-synset.png
+   :name: 02-measures-yandex-synset
+   :scale: 100 %
+   :width: 100 %
+   
+   Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+
 
 El objetivo de esta experimentación no es valorar los traductores, no creemos que la muestra
 de oraciones sobre la que hemos trabajado sea suficientemente significativa para ello.

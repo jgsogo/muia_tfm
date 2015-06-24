@@ -542,9 +542,9 @@ también ejemplos de UWs extra.
      - state
      - icl>region
      - Región de un país
-   * - state(icl>express(agt>thing,gol>person,obj>thing))
+   * - state( icl>express(agt>thing, gol>person, obj>thing))
      - state
-     - icl>express(agt>thing,gol>person,obj>thing)
+     - icl>express(agt>thing, gol>person, obj>thing)
      - Acción por la que una persona expresa algo
    * - samba(icl>dance)
      - samba
