@@ -18,7 +18,8 @@ y que se basa en el "principio de cooperación" :cite:`Grice1975` que establece 
 es una actividad colaborativa que se rige por unas máximas aceptadas tácitamente por todos
 cuantos participan en la conversación.
 
-.. teoria-dependencia-conceptual_
+.. _teoria-dependencia-conceptual:
+
 Teoría de la Dependencia Conceptual
 ```````````````````````````````````
 La principal dificultad para desarrollar los sistemas de comprensión del discurso por

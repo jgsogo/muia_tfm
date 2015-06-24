@@ -77,8 +77,8 @@ necesario crearlos *ex profeso* para este trabajo [#]_. Se asume así que los re
 deben ser revisados con un enfoque más científico, pero creemos que los datos generados
 de esta forma pueden servir para realizar una primera evaluación del modelo.
 
-.. [#] En el :num:`apéndice #appendix-data` se encuentran disponibles todos los datos
-   utilizado para la realización del experimento.
+.. [#] En el :ref:`Apéndice <appendix-data>` se encuentran disponibles todos los datos
+   utilizados para la realización del experimento.
 
 
 Metodología
@@ -295,7 +295,7 @@ A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros
 
 
 .. figure:: ../../data/samples/sample03-brief/measures-yandex-synset.png
-   :name: 03-measures-yandex-synset
+   :name: sample03-measures-yandex-synset
    :scale: 100 %
    :width: 100 %
    
@@ -303,14 +303,14 @@ A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros
 
 
 .. figure:: ../../data/samples/sample03-brief/measures-google-synset.png
-   :name: 03-measures-google-synset
+   :name: sample03-measures-google-synset
    :scale: 100 %
    :width: 100 %
    
    Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
    
-En la :num:`figura #03-measures-yandex-synset` y en la
-:num:`figura #03-measures-google-synset`
+En la :num:`figura #sample03-measures-yandex-synset` y en la
+:num:`figura #sample03-measures-google-synset`
 se muestra el valor calculado de similaridad para estos grafos utilizando todas
 las medidas de similaridad/distancia entre conceptos disponibles y para
 diferentes valores de tolerancia entre conceptos, :math:`t_c \in [0.0, 0.9]`.
@@ -356,7 +356,7 @@ el valor calculado para la pareja de grafos.
 
 
 .. figure:: ../../data/samples/sample03-brief/sussna-synset_tol-00.png
-   :name: 03-sussna-synset-tol-0
+   :name: sample03-sussna-synset-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -364,22 +364,22 @@ el valor calculado para la pareja de grafos.
 
 
 .. figure:: ../../data/samples/sample03-brief/sussna-synset_tol-09.png
-   :name: 03-sussna-synset-tol-0
+   :name: sample03-sussna-synset-tol-0
    :scale: 100 %
    :width: 100 %
    
    Conjunto de nodos y relaciones equivalentes en la comparación entre el grafo original y las traducciones de Google (en rojo) y Yandex (azul), con tolerancia entre conceptos :math:`t_c = 0.9`.
 
 
-Ejecución del modelo
+Valor de similaridad
 ````````````````````
 Puesto que se dispone de varios algoritmos de medida de similaridad entre conceptos, para calcular el valor final
 de similaridad entre todos ellos se realizará la media de todos, de este modo se obtiene un resultado como el que
-se muestra en la :num:`figura #03-relation-tol-0`: el valor de similaridad muestra una incremento monótono
+se muestra en la :num:`figura #sample03-relation-tol-0`: el valor de similaridad muestra una incremento monótono
 conforme la tolerancia entre los conceptos aumenta.
 
 .. figure:: ../../data/samples/sample03-brief/synset_tol-relation_tol-0.png
-   :name: 03-relation-tol-0
+   :name: sample03-relation-tol-0
    :scale: 100 %
    :width: 100 %
 
@@ -396,7 +396,7 @@ Para la experimentacion se ha preparado un *dataset* con 10 oraciones extraídas
 Universal de las Culturas de Barcelona 2004 y traducidas utilizando los servicios indicados anteriormente.
 El conjunto completo de oraciones se incluye a continuación, la codificacion original, asi como las
 correspondencias con WordNet y la representacion grafica tanto del original como de las traducciones puede
-consultarse en el *dataset* completo que se adjunta en el :num:`apéndice #appendix-data`.
+consultarse en el *dataset* completo que se adjunta en el :ref:`Apéndice <appendix-data>`.
 
 
 Ejemplo 1
@@ -410,7 +410,7 @@ Ejemplo 1
 
 
 .. figure:: ../../data/samples/sample01-brief/synset_tol-relation_tol-0.png
-   :name: 01-relation-tol-0
+   :name: sample01-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -428,7 +428,7 @@ Ejemplo 2
 
   
 .. figure:: ../../data/samples/sample02-brief/synset_tol-relation_tol-0.png
-   :name: 02-relation-tol-0
+   :name: sample02-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -457,7 +457,7 @@ Ejemplo 4
 
 
 .. figure:: ../../data/samples/sample04-brief/synset_tol-relation_tol-0.png
-   :name: 04-relation-tol-0
+   :name: sample04-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -475,7 +475,7 @@ Ejemplo 5
 
 
 .. figure:: ../../data/samples/sample05-brief/synset_tol-relation_tol-0.png
-   :name: 05-relation-tol-0
+   :name: sample05-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -493,7 +493,7 @@ Ejemplo 6
 
 
 .. figure:: ../../data/samples/sample06-brief/synset_tol-relation_tol-0.png
-   :name: 06-relation-tol-0
+   :name: sample06-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -511,7 +511,7 @@ Ejemplo 7
 
 
 .. figure:: ../../data/samples/sample07-brief/synset_tol-relation_tol-0.png
-   :name: 07-relation-tol-0
+   :name: sample07-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -529,7 +529,7 @@ Ejemplo 8
 
 
 .. figure:: ../../data/samples/sample08-brief/synset_tol-relation_tol-0.png
-   :name: 08-relation-tol-0
+   :name: sample08-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -547,7 +547,7 @@ Ejemplo 9
 
 
 .. figure:: ../../data/samples/sample09-brief/synset_tol-relation_tol-0.png
-   :name: 09-relation-tol-0
+   :name: sample09-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -565,7 +565,7 @@ Ejemplo 10
 
 
 .. figure:: ../../data/samples/sample10-brief/synset_tol-relation_tol-0.png
-   :name: 10-relation-tol-0
+   :name: sample10-relation-tol-0
    :scale: 100 %
    :width: 100 %
    
@@ -586,7 +586,7 @@ superponen, la media muestra un crecimiento suave.
 
 Sin embargo, existen algunos resultados que no parecen correctos:
 
- * En el ejemplo 9 (ver :num:`figura #09-relation-tol-0`), la evolución de la similaridad
+ * En el ejemplo 9 (ver :num:`figura #sample09-relation-tol-0`), la evolución de la similaridad
    es contraria a lo que hemos comentado anteriormente, a medida que aumenta la tolerancia
    entre conceptos, la similaridad disminuye. Un examen más detallado de los
    resultados intermedios que se van generando durante la ejecución del algoritmo sugiere
@@ -596,15 +596,15 @@ Sin embargo, existen algunos resultados que no parecen correctos:
    
  * En el ejemplo 7 se produce un fenómeno atípico con la similaridad calculada utilizando
    la distancia semántica entre conceptos propuesta por Sussna. Como se ve en la
-   :num:`figura #07-measures-yandex-synset` la similaridad baja cuando la tolerancia entre
+   :num:`figura #sample07-measures-yandex-synset` la similaridad baja cuando la tolerancia entre
    conceptos aumenta, para volver a subir posteriormente. Todo indica a pensar que
    esta anomalía también comparte causa con la comentada anteriormente, pero su análisis
    y solución deben aplazarse. Lo mismo ocurre en el ejemplo 2 con la distancia de
-   Wu-Palmer (ver :num:`figura #02-measures-yandex-synset`).
+   Wu-Palmer (ver :num:`figura #sample02-measures-yandex-synset`).
 
 
 .. figure:: ../../data/samples/sample07-brief/measures-yandex-synset.png
-   :name: 07-measures-yandex-synset
+   :name: sample07-measures-yandex-synset
    :scale: 100 %
    :width: 100 %
    
@@ -612,7 +612,7 @@ Sin embargo, existen algunos resultados que no parecen correctos:
 
 
 .. figure:: ../../data/samples/sample02-brief/measures-yandex-synset.png
-   :name: 02-measures-yandex-synset
+   :name: sample02-measures-yandex-synset
    :scale: 100 %
    :width: 100 %
    

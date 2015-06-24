@@ -1,5 +1,6 @@
 
-.. appendix-data_
+.. _appendix-data:
+
 Conjunto de datos
 =================
 

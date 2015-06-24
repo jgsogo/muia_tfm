@@ -71,4 +71,4 @@ dejado a un lado, pero que sin duda son importantes:
 
 Por último, es necesario revisar los casos en los que el resultado del modelo ofrece
 valores de similaridad que *a priori* consideramos incorrectos (figuras
-:num:`07-measures-yandex-synset` y :num:`09-relation-tol-0`).
+:num:`sample07-measures-yandex-synset` y :num:`sample09-relation-tol-0`).
