@@ -7,7 +7,7 @@ si bien son diferentes de las estructuras lingüísticas, mantienen con estas un
 estrecha relación: para conocerlas, identificarlas y distinguirlas precisamos del
 lenguaje natural, pero también para describirlas y representarlas. Sin embargo, el
 aspecto lingüístico no es constitutivo de esas estructuras por más que sea su 
-mediador :cite:`IzquierdoArroyo1995`.
+mediador (Izquierdo Arroyo, 1995 :cite:`IzquierdoArroyo1995`).
 
 La bibliografía contemporánea recoge la problemática de las estructuras conceptuales
 desde que en 1966 apareciera el libro de Shera sobre la "Documentación y la Organización
@@ -43,7 +43,7 @@ pueden hacer referencia tanto a una acción (con la forma Actor-Acción-Objeto-D
 (Instrumento)) como a un estado (Objeto-(está en)-Estado-(con Valor)). Los autores
 identifican 11 actos primitivos que son los constituyentes esenciales de cualquier acción
 más compleja, con lo que las reglas de inferencia y razonamiento deben definirse sobre
-un conjunto finito y reducido de elementos. A partir de los *guiones* almacenados en la
+un conjunto finito y reducido de elementos. A partir de los guiones almacenados en la
 memoria, el ser humano y el ordenador pueden elaborar razonamientos y responder a las
 consultas o peticiones de información.
 
@@ -75,17 +75,23 @@ intermedia de comunicación entre los usuarios y las máquinas: el grafo describ
 significado desde el punto de vista del humano, pero su codificación puede ser fácilmente
 interpretada por un programa:
 
- * Los conceptos están representados por cajas que contienen un etiqueta identificativa del
-   tipo de concepto que representan. Los conceptos pueden identificar cualquier entidad real
-   o abstracción. También es importante señalar que Sowa introduce una propiedad de ordenamiento,
-   :math:`<`, entre conceptos; así, si :math:`a` y :math:`b` son conceptos y se
-   cumple que :math:`a < b` entonces :math:`a` es un *subtipo* de `b`. Hay que señalar que un
-   concepto :math:`a` puede ser un *subtipo común* a varios conceptos.
+ * Los **conceptos** están representados por cajas que contienen un etiqueta identificativa
+   del elemento cognitivo que representan, que puede tratarse de cualquier entidad real o 
+   abstracción. Sowa, además, introduce una propiedad de ordenamiento entre los conceptos
+   que le permite crear una estructura jerárquica; esta propiedad, representada por ''<'',
+   puede aplicarse a dos conceptos cualesquiera :math:`a` y :math:`b`, de tal forma que
+   si se cumple :math:`a < b` entonces :math:`a` es un *subtipo* de :math:`b`, es decir,
+   representa un concepto más específico. No hay ninguna restricción que impida que un
+   concepto sea *subtipo común* de varios otros, por lo que la jerarquía que puede
+   construirse de este modo será un grafo acíclico dirigido (DAG, *Directed Acyclic Graph*).   
 
- * Las relaciones conceptuales están representadas por círculos en el grafo y puede tener una
+ * Las **relaciones conceptuales** están representadas por círculos en el grafo y pueden tener una
    o más conexiones. Estas relaciones actúan como restricciones al seleccionar qué conceptos
-   pueden unir :cite:`Clancey1985`, incorporando una dimensión lógica en los grafos.
+   pueden unir :cite:`Clancey1985`, de esta forma incorporan una dimensión lógica en los grafos.
 
+ * En Sowa (2003) :cite:`Sowa2003` el autor introduce los *nested graph models* (NGM) que
+   permiten expresar el **contexto** de una relación, así es posible incorporar lógica modal y
+   temporal.
 
 .. [#] John F. Sowa desarrolla los CGs en más profundidad en sus libros
    *Conceptual Structures: Information Processing in Mind and Machine*, Addison Wesley
@@ -93,15 +99,16 @@ interpretada por un programa:
    Computational Foundations*, Brooks Cole Publishing Co., Pacific Grove, CA, 2000.
 
 Sowa habla de ontologías en relación a los nodos-concepto, indica que la selección de las
-categorías ontológicas debe ser el primer paso para diseñar una base de datos, de conocimiento o un
-sistema orientado a objetos :cite:`Shapiro2012`. Sin embargo no introduce ningún tipo de
-restricción en cuanto a los nodos-relación que pueden aparecer en el grafo.
+categorías ontológicas debe ser el primer paso para diseñar una base de datos, de
+conocimiento o un sistema orientado a objetos :cite:`Shapiro2012`; sin embargo no
+introduce ningún tipo de restricción en cuanto a los tipos de relaciones existentes que
+pueden aparecer en el grafo.
 
-.. En :cite:`Sowa2003` Sowa introduce los *nested graph models* (NGM) que permiten expresar el contexto de una relación, de tal forma que era posible incorporar lógica modal y temporal.
+.. figure:: ../img/sowagraph.png
+   :name: fig-sowa
 
-.. warning:: ¿Incluir algo de cómo escribir estos grafos? CGIF,...  ¿Algo de los contextos?
-   No añade nada en la dirección que queremos llevar.
-
+   Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003) :cite:`Sowa2003`.
+   
 
 Semántica estructural
 `````````````````````
@@ -111,12 +118,15 @@ o abstracta y ésta tiene que poder expresarse de una manera no ambigua. En su a
 por conveniencia son representados con una breve etiqueta en inglés, pero podría tratarse
 de un número o una dirección de memoria en un ordenador.
 
-Más importante es la jerarquización entre conceptos que introduce, en futuros artículos ya
-hablará de ontología y categorías. El término *ontología* hace referencia a la ciencia del
-ser, del todo; y es un concepto metafísico que se ha estudiado desde época clásica, tratando
-de realizar una clasificación de todo lo que *es*.
+Más importante es la jerarquización entre conceptos que introduce a través de la propiedad
+''<'' a la que hemos hecho mención, en artículos posteriores Sowa empezará a hablar de
+ontología y de categorías al hace referencia a la jerarquía de conceptos.
 
-Nosotros abordaremos las ontologías desde el punto de vista de la Ingeniería del Conocimiento,
+El término *ontología* hace referencia a una parte de la metafísica que trata del ser en
+general y sus propiedades trascendentales; es un concepto que se ha estudiado desde época
+clásica, con la intención de realizar una clasificación de todo lo que *es*.
+Sin embargo, nos interesa más abordar las ontologías desde el punto de vista de la
+Ingeniería del Conocimiento, en este ámbito
 una de las definiciones más extendidas y aceptadas es la que se ofrece en :cite:`Studer1998`:
 *"An ontology is a formal, explicit specification of a shared conceptualization"* [#]_. Por
 *conceptualización* se entiende una modelización abstracta de un fenómeno identificando sus
@@ -142,7 +152,7 @@ La semiótica comienza su andadura con lingüísticas y filólogos como Ferdinan
 Louis Hjelmslev, Roman Jakobson y Ludwig Wittgenstein en Europa y paralelamente en
 Estados Unidos con Charles Sanders Peirce. Peirce y Saussure son contemporáneos y abordan el
 mismo problema, la creación de una *ciencia de los signos*, pero desde perspectivas diferentes.
-Saussure, lingüísta, la aborda desde una perspectiva psicosocial e indica que se trata de una
+Saussure, lingüista, la aborda desde una perspectiva psicosocial e indica que se trata de una
 nueva ciencia a la que llama *semiología*, Peirce considera que esta
 ciencia de los signos ya existe desde la antigüedad, aunque no plenamente desarrollada
 :cite:`Castanares2000`, así su trabajo consistió en la exploración, sistematización y ampliación
@@ -176,7 +186,7 @@ fenómenos :cite:`WPSemantica`:
  * **Antonimia**: es la relación que mantienen dos palabras cuyos significados se oponen.
 
 En la :num:`figura #fig-wordnet-lightning` se muestran algunos casos de hiperonimia/hiponimia y
-holonimia/meronimia en torno a la palabra *candle*. En la misma imágen se puede ver también el
+holonimia/meronimia en torno a la palabra *candle*. En la misma imagen se puede ver también el
 fenómeno polisémico de esta palabra en inglés que puede denotar los conceptos de *vela*, *candela*
 o hacer referencia al verbo, inexistente en español, para referirse a la realización de una
 ovoscopia.
@@ -191,7 +201,6 @@ ovoscopia.
         wick2[label="(n) wick#2\n<es:mecha>"]
         candle1[label="(n) candle#1\n<es:vela>"]
         candlewick1[label="(n) candlewick#1\n<es:pabilo>"]
-        snuff1[label="(n) snuff#1"]
         lamp1[label="(n) lamp#1\n<es:lámpara>"]
         lantern1[label="(n) lantern#1\n<es:linterna>"]
         sourceofillumination1[label="(n) source of illumination#1\n<es:fuente de iluminación>"]
@@ -219,8 +228,8 @@ ovoscopia.
         candle1 -> vigillight1 [label="hyponym"]
 
         # Holónimos
-        {rank=same; snuff1 candlewick1 candle1}
-        snuff1 -> candlewick1 -> candle1 [style=dotted, label="meronym"]
+        {rank=same; candlewick1 candle1}
+        candlewick1 -> candle1 [style=dotted, label="meronym"]
         wick2 -> candle1 [style=dotted, label="meronym"]
 
         # Otra rama para candle
@@ -238,8 +247,10 @@ ovoscopia.
 WordNet
 ```````
 Una de los esfuerzos más importantes para realizar una ontología de conceptos es WordNet
-:cite:`Miller1990` :cite:`Fellbaum1998`, contiene información codificada manualmente sobre sustantivos, verbos, adjetivos y adverbios en inglés, y los organiza en torno al concepto
-de *synset*.
+:cite:`Miller1990` :cite:`Fellbaum1998`, se trata de una red de conceptos que contiene
+información codificada manualmente sobre sustantivos, verbos, adjetivos y adverbios
+en inglés; los términos que representan un mismo concepto están agrupados en *synsets* y 
+son estos elementos los que constituyen los nodos de la red.
 WordNet se creó en el Laboratorio de Ciencia Cognitiva de la Universidad de Princeton en
 1985 bajo la dirección del profesor de psicología George Armitage Miller (1920-2012).
 
@@ -262,9 +273,9 @@ adverbios, son la categoría gramatical menos representada, en general están re
 con los adjetivos de los que derivan.
 
 WordNet es un recurso valiosísimo para cualquier tipo de aplicación con contenido semántico,
-como lo es una interlingua para representación del conocimiento; WordNet se puede utilizar
+como lo es una interlingua para representación del conocimiento; así WordNet se puede utilizar
 como un diccionario para identificar sin ambigüedades los conceptos que se utilizan en los
-nodos de un grafo conceptual, además, como veremos posteriormente, es una herramienta ideal
+nodos de un grafo conceptual y también, como veremos posteriormente, es una herramienta ideal
 para medir distancias semánticas entre conceptos.
 
 
@@ -303,19 +314,24 @@ promover el desarrollo, difusión y estandarización de los *wordnets* que se va
 Apoyándose en estas redes de conceptos se han desarrollado multitud de aplicaciones
 de procesamiento de lenguaje natural, y recursos lingüísticos como el proyecto *MEANING
 Multilingual Central Repository* :cite:`Atserias2004`, ontologías como SUMO :cite:`Niles2001`
-o la *EuroWordNet Top Concept Ontology* que citábamos :cite:`Alvez2008`.
+o la *EuroWordNet Top Concept Ontology* que ya hemos citado :cite:`Alvez2008`.
 
 
 Interlingua
 ```````````
 En el capítulo introductorio hablamos de la traducción automática utilizando sistemas basados
-en interlinguas (ver :ref:`sección 1.3 <traduccion-interlingua>`). El
-argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
+en interlinguas (ver :ref:`sección 1.3 <traduccion-interlingua>`) como la aproximación
+adecuada en un entorno multilingüe, sin embargo existen algunos problemas que dificultan
+su utilización.
+
+El argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
 de abstracción y universalidad que debe tener esta lengua, lo que la convertiría en inviable
 económicamente :cite:`Martins2002`: no sólo debería ser capaz de expresar cualquier significado
-de cualquier lengua sino que también tendría que poder trabajar con particularidades
-cognitivas de caulquier cultura como la lógica trivalente del Aymara :cite:`Rojas1985` que 
-supone un desafío para el mundo occidental heredero de la lógica dicotómica aristotélica.
+de cualquier lengua sino que también tendría que poder trabajar con las particularidades
+cognitivas de todas las culturas, un problema sin acotar. Por ejemplo, una interlingua de
+carácter universal debería ser capaz de representar la lógica trivalente del
+aymara :cite:`Rojas1985`, que supone un desafío para el mundo occidental heredero de la
+lógica dicotómica aristotélica.
 Hutchins :cite:`Hutchins1992` expone otros muchos problemas acompañados de una gran
 colección de ejemplos.
 
@@ -328,7 +344,7 @@ se proponen interlinguas restringidas que permitan una representación exacta pa
 conjunto cerrado de lenguas.
 Un ejemplo de este tipo ha sido el proyecto Eurotra que se concibe en 1978 y se dota de fondos
 en noviembre de 1982 con el objetivo de producir traducciones
-satisfactorias para los todos los idiomas de la Comunidad Europea :cite:`Hutchins1992a`.
+satisfactorias para todos los idiomas de la Comunidad Europea :cite:`Hutchins1992a`.
 Es un proyecto a medio camino entre una interlingua y los
 sistemas *transfer* entre pares de lenguas.
 
@@ -343,14 +359,15 @@ PIVOT
 .. La información está sacada de aquí: http://www.tendencias21.net/iartificial/m/Haciendo-memoria_a17.html
 
 A finales de los 1980s también se iniciaba el proyecto de traducción automática multilingüe
-conocido como PIVOT, a diferencia del programa EUROTRA, éste sí planteaba la creación de una
+conocido como PIVOT; a diferencia del programa EUROTRA, éste sí planteaba la creación de una
 interlingua que sirviera como eje de las traducciones.
 No era el único proyecto en este sentido, Fujitsu lo estaba haciendo en su proyecto ATLAS
 (Dr. Uchida) y la universidad Carnegie Mellon de Pittsburg (USA) con KANT (Jaime Carbonell).
 
-PIVOT estaba dirigido por el Dr. Muraki desde Japón y patrocinado por NEC, la Universidad
-Politécnica de Madrid se encargó de desarrollar el módulo de español, cuyo objetivo era
-convertir los textos de español en la interlingua y generar las traducciones a español.
+PIVOT estaba dirigido por el Dr. Muraki desde Japón y patrocinado por NEC. En España, la
+Universidad Politécnica de Madrid se encargó de desarrollar el módulo de español cuyo
+objetivo era convertir los textos de español en la interlingua y generar las traducciones
+a español.
 
 Este proyecto también finaliza en 1992, al igual que EUROTRA. El proyecto ATLAS, por su
 parte, aún puede ser encontrado en la página web de Fujitsu como un producto comercial
@@ -362,7 +379,7 @@ relacionado con la traducción, aunque sólo entre el par de lenguas inglés-jap
 El lenguaje universal UNL
 `````````````````````````
 Un paso adelante en las interlinguas para representación del conocimiento es el lenguaje
-universal (UNL, *Universal Networking Language*); este *lenguaje* surgió como una
+universal (UNL, *Universal Networking Language*). Este *lenguaje* surgió como una
 iniciativa del Instituto de Estudios Avanzados de la Universidad de la Naciones Unidas
 en 1996 con el objetivo de eliminar las barreras lingüísticas para el comercio y la
 educación.
@@ -370,11 +387,14 @@ educación.
 La representación de un texto en UNL se realiza oración por oración, cada oración se
 codifica en un hipergrafo donde los conceptos son los nodos y las relaciones entre ellos
 constituyen los arcos. Este hipergrafo también puede ser representado como un conjunto
-de relaciones binarias que enlazan los conceptos presentes en la oración. Los conceptos
-se representan con etiquetas literales que reciben el nombre de *Palabras Universales*
-(UW, Universal Words) que además pueden ir acompañadas de diferentes attributos que
+de relaciones binarias que enlazan los conceptos presentes en la oración.
+
+Los conceptos se representan con etiquetas literales que reciben el nombre de
+*palabras universales* (UW, *Universal Words*) que además pueden ir acompañadas de
+varios attributos (se utiliza el símbolo ''@'' para indicarlos) que
 permiten mostrar más informacón sobre el uso específico del concepto en la oración
-original :cite:`Uchida1999`.
+original :cite:`Uchida1999`. Estas UWs son el equivalente a los nodos-concepto de Sowa
+y a los *synsets* de WordNet.
 
 Como ejemplo, mostramos el utilizado por Uchida y Zhu en :cite:`Uchida2001` donde muestran
 la codificación de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a
@@ -384,10 +404,11 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
 
 .. _fig-example-unl:
 .. graphviz::
-   :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.".
+   :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.". El atributo ''@entry'' indica el concepto principal de la oración.
 
    digraph foo {
-
+        rankdir=TB
+        
         begun[label="begin(icl>do).@entry.@past"]
         long_ago[label="long ago(icl>ago)"]
         city[label="city(icl>region).@def"]
@@ -423,7 +444,9 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
    
     [S:2]
     {org:es}
-    Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.
+    Hace tiempo, en la ciudad de Babilonia, la gente comenzó
+    a construir una torre enorme, que parecía alcanzar los
+    cielos.
     {/org}
     {unl}
     tim(begin(icl>do).@entry.@past, long ago(icl>ago))
@@ -436,14 +459,16 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
     aoj(huge(icl>big), tower(icl>building).@indef)
     aoj(seem(icl>be).@past, tower(icl>building).@indef)
     obj(seem(icl>be).@past, reach(icl>come).@begin.@soon)
-    obj(reach(icl>come).@begin-soon, tower(icl>building).@indef)
-    gol(reach(icl>come).@begin-soon, heaven(icl>region).@def.@pl)
+    obj(reach(icl>come).@begin-soon,
+        tower(icl>building).@indef)
+    gol(reach(icl>come).@begin-soon, 
+        heaven(icl>region).@def.@pl)
     {/unl}
     [/S]
 
 
-En el ejemplo indicado aparecen numerosas relaciones como ``mod``, ``agt``, ``aoj``, etc
-indicando la relación entre los conceptos (UWs) que enlazan, aparecen varias UWs como
+En el ejemplo indicado aparecen numerosas relaciones como ``mod``, ``agt``, ``aoj``, etc.
+que indican la relación entre los conceptos (UWs) que enlazan, aparecen varias UWs como
 ``city(icl>region)``, ``tower(icl>building)`` que indican objetos o ``seem(icl>be)``, 
 ``begin(icl>do)`` que son verbos, e incluso adjetivos como ``huge(icl>big)`` o el adverbio
 ``long ago(icl>ago)``; también aparece una UW que es un nombre propio de ciudad
@@ -456,7 +481,7 @@ no ser representables en todas las lenguas.
 
 La principal diferencia entre el UNL y otros sistemas de representación del conocimiento como
 los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
-Framework* (RDF :cite:`Brickley2014`) es que el número y el significado de las relaciones y
+Framework* (RDF) :cite:`Brickley2014` es que el número y el significado de las relaciones y
 attributos deben formar parte del estándar :cite:`TeixeiraMartins2005`.
 
 
@@ -506,8 +531,8 @@ restricciones:
 
 donde cada una de las partes es:
 
- * La *headword* es una expresión en inglés (usualmente es una plabra, pero puede ser una
-   palabra compuesta o una oración si es necesario) que representa un conjunto de conceptos
+ * La *headword* es una expresión en inglés (usualmente es una palabra, pero puede ser una
+   palabra compuesta o una oración si es necesario) que representa un conjunto de términos
    a los que hace referencia esa expresión en inglés, se conoce como *Basic UW*. Si no
    existe una etiqueta en inglés para hacer referencia al concepto, entonces se utiliza la
    palabra correspondiente en otro idioma y la UW se conoce como *Extra UW*.
@@ -520,14 +545,15 @@ La :num:`tabla #table-uws-example` muestra algunos ejemplos de UWs con los signi
 correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restringidas y 
 también ejemplos de UWs extra.
 
+.. tabularcolumns:: |p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.25\linewidth}|
 .. list-table:: Ejemplos de UWs.
    :name: table-uws-example
    :header-rows: 1
 
-   * - UW
-     - Headword
-     - Restricciones
-     - Significado
+   * - **UW**
+     - **Headword**
+     - **Restricciones**
+     - **Significado**
    * - go
      - go
      -
@@ -544,9 +570,9 @@ también ejemplos de UWs extra.
      - state
      - icl>region
      - Región de un país
-   * - state( icl>express(agt>thing, gol>person, obj>thing))
+   * - state( icl>express( agt>thing, gol>person, obj>thing))
      - state
-     - icl>express(agt>thing, gol>person, obj>thing)
+     - icl>express( agt>thing, gol>person, obj>thing)
      - Acción por la que una persona expresa algo
    * - samba(icl>dance)
      - samba
@@ -560,14 +586,14 @@ también ejemplos de UWs extra.
 Todas las UWs aceptadas deberían estar recogidas en un único repositorio centralizado conocido
 como *UNL Ontology* (anteriormente *UNL Knowledge Base*). Esta base de datos constituiría una red
 semántica con todas las relaciones binarias dirigidas que existen entre las palabras universales,  asignando a éstas relaciones un grado de certeza absoluto (imposible o verdadero) [#]_.
-De esta forma cualquier UW aceptada aparecerá en la ontología relacionada con otras palabras.
+De esta forma cualquier UW aceptada aparecería en la ontología relacionada con otras palabras.
 
 .. [#] La posibilidad de asignar a una relación un grado de certeza *imposible* sirve para
    eliminar relaciones heredadas. Por ejemplo, si una palabra permite una relación determinada
    todos sus hipónimos también la permitirán por haberla heredado; la única manera de eliminarlas
    es utilizar estas declaraciones de imposibles.
 
-Cualquier UW aparecería relacionada con otras mediante:
+Las relaciones principales entre UWs para construir la ontología son las siguientes:
 
  * ``icl`` (incluido en, tipo de): indica un concepto superior o más general, codifica la
    relación de hiponimia descrita en apartados anteriores.

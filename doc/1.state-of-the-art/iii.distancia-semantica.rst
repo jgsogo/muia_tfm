@@ -13,6 +13,10 @@ presentando aquí; en algunos casos se orienta hacia la búsqueda exacta de un p
 conjunto de grafos, pero en otros se implementan medidas de similaridad que pueden tomar
 valores en un rango continuo.
 
+Antes de mostrar los modelos propuestos en la bibliografía debemos exponer dos
+características del lenguaje que tenemos que tener muy presentes para valorar las
+dificultades a las que se enfrentan.
+
 .. _fenomenos-linguisticos:
 
 Fenómenos lingüísticos
@@ -26,8 +30,8 @@ interpretación de una misma oración puede ser muy distinta incluso entre perso
 mismo sustrato cultural como han mostrado Teixeira *et al.* :cite:`Martins2002` o
 Hutchins :cite:`Hutchins1992`.
 
-Estas ambigüedades pueden darse asociadas a dos fenómenos presentes en cualquier
-lenguaje natural, a saber:
+Estas ambigüedades pueden darse asociadas a tres fenómenos presentes en los
+lenguajes naturales, a saber:
 
  * **Sinonimia**: la RAE define el término sinónimo como "Dicho de un vocablo o de una
    expresión: Que tiene una misma o muy parecida significación que otro." [#]_, por lo
@@ -50,7 +54,7 @@ lenguaje natural, a saber:
 
 .. [#] Real Academia Española. Diccionario de la lengua española. 22ª edición (2012)
 
-Estos fenómenos pueden afectar muy sensiblemente a la medida de distancia semántica entre
+Estos fenómenos pueden afectar de forma importante a la medida de distancia semántica entre
 grafos indicando que son diferentes dos oraciones cuyo contenido semántico podría ser el
 mismo. Hay que ser consciente de estos fenómenos para identificarlos cuando aparezcan y 
 valorar su influencia en las medidas propuestas.
@@ -68,21 +72,22 @@ obtenido a partir de un texto puede contener más información que el propio tex
 
 Así, si el texto original es en japonés y aparece el término *ikebana*, éste será codificado
 en UNL mediante la UW ``ikebana(icl>flower arrangement)``, al traducir este texto al español,
-idioma en el que no existe una tradución fiel para este concepto, el generador tendrá que optar
-por un término aproximado como *arreglo floral* donde ya se han perdido las connotaciones que
-este término tenía en japonés.
+idioma en el que no existe una traducción exacta para este concepto, el generador tendrá que optar
+por un término aproximado como *arreglo floral* donde ya se han perdido las connotaciones
+artísticas que este término tenía en japonés.
 
-Al generar a partir de la traducción en español la interlingua
-de nuevo, no podrán recuperarse los matices que ya se han perdido y en el nuevo
+Al generar a partir de la traducción en español la interlingua no podrán recuperarse
+los matices que ya se han perdido y en el nuevo
 grafo aparecerá la UW ``flower arrangement``. En este ejemplo existirá una distancia entre la
 interlingua original (generada a partir del texto en japonés) y la producida después de la
 traducción (generada a partir del texto en español), pero esta distancia no podrá
-achacarse al generador sino a las limitaciones del lenguaje.
+achacarse al generador ni al algoritmo, sino que será consecuencia de las limitaciones
+del lenguaje.
 
 Esta pérdida de información que hemos mostrado como ejemplo está provocada por carencia de
 vocabulario, pero las diferencias entre las lenguas son muy diversas y mucho
 más profundas (el lector interesado podrá encontrar una buena muestra en la obra de
-Eco :cite:`Eco1999`)
+Eco :cite:`Eco1999`).
 
 .. TODO: Documentar las carencias del lenguaje en el libro de Bernárdez.
 
@@ -97,15 +102,15 @@ En el problema que nos ocupa necesitamos poder comparar grafos de una forma flex
 permita que los atributos de los nodos o los arcos sean diferentes, pero aún así se establezca
 una relación entre ellos que permita continuar con la comparación.
 
-Algunos algoritmos, como el de Myaeng y López-López :cite:`Myaeng1992` son algo más flexibles
-pues realizan la búsqueda utilizando el concepto de máximo subgrafo común
+Algunos algoritmos, como el de Myaeng y López-López :cite:`Myaeng1992` introducen un primer 
+nivel de flexibilidad al realizar la búsqueda utilizando el concepto de máximo subgrafo común
 (ver :ref:`sección 2.2.1 <maximo-grafo-comun>`); su algoritmo calcula una medida de similaridad
 en función del conjunto de todos los MCS, sin embargo, la correspondencia entre los elementos
 tiene que ser exacta.
 
 **Montes-y-Gómez et al.** :cite:`Montes2000` utilizan el mismo planteamiento: el
 proceso de comparación comienza por el cálculo de todos los MCS y partiendo de esta nueva
-estructura se calcula una medida de similaridad, ``s`` que combina la similaridad
+estructura se calcula una medida de similaridad, :math:`s`, que combina la similaridad
 conceptual :math:`s_c` y la relacional :math:`s_r`.
 
 Dados dos grafos conceptuales :math:`G_1` y :math:`G_2` y el grafo :math:`G_1 \cap G_2 = G_c`
@@ -168,12 +173,12 @@ grafo de búsqueda y otra :math:`r_R` del grafo en el que se busca es:
 
 .. math::
 
-    sim_r(r_Q, r_R) = 1 - d_r(r_Q, r_R) = \begin{cases}
-    1, & r_Q subsumes r_R\\
+    s(r_Q, r_R) = 1 - d(r_Q, r_R) = \begin{cases}
+    1, & r_Q \quad subsumes \quad r_R\\
     0, & otherwise.
     \end{cases}
 
-es decir, que la similaridad sólo valdrá ``1`` en el caso de que la relación presente en el
+es decir, que la similaridad sólo valdrá :math:`1` en el caso de que la relación presente en el
 grafo de búsqueda sea más general que la presente en el grafo con el que se compara. Esta
 circunstancia provoca que la medida resultante del algoritmo no sea simétrica.
 

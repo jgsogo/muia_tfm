@@ -1,11 +1,11 @@
 
 Medidas de distancia y similaridad
 ----------------------------------
-La diferencia semántica entre dos grafos que codifican información puede interpretarse en
+La diferencia semántica entre dos grafos que codifican información debe interpretarse en
 términos de distancia o similaridad entre la estructura de los grafos y también entre los
 conceptos que están presentes en cada grafo. Dos grafos (coceptuales o UNL) pueden
 codificar una información totalmente distinta a pesar de compartir la estructura, pero
-también pueden tener la misma información a pesar de mostrar estructuras
+también podrían contener la misma información a pesar de mostrar estructuras
 diferentes (paráfrasis).
 
 Una distancia o disimilaridad entre dos individuos :math:`i` y :math:`j` es una medida,
@@ -19,9 +19,9 @@ Toda medida de distancia debe verificar como mínimo las siguientes propiedades:
  * :math:`d(i,i)=0`
  * :math:`d(i,j)=d(j,i)` (simetría)
 
-Diremos que la distancia es euclidiana si además verifica que:
+Además, se dice que la distancia es euclidiana si verifica la desigualdad triangular:
 
- * :math:`d(i,j) \leq d(i,t)+d(t,j)` (desigualdad triangular)
+ * :math:`d(i,j) \leq d(i,t)+d(t,j)`
 
 Existe una gran cantidad de medidas de distancia e indicadores de disimilaridad, y no hay
 ninguna regla general que nos permita definir una medida que sea válida para todo tipo de
@@ -38,8 +38,8 @@ del rango de valores que pueda alcanzar la medida que se tome como referencia. P
 de distancia en el rango :math:`d(i,j) \in [0, 1]` la similaridad asociada podrá calcularse como 
 :math:`s(i,j) = 1-d(i,j)`, en el caso de medidas no acotadas donde :math:`d(i,j) \in [0, \infty)`
 tendrá que utilizarse algo como :math:`s(i,j) \propto \frac{1}{1 + d(i,j)}`. No obstante,
-la relación adecuada entre distancia y similaridad podría no ser lineal según el
-problema con el que se trabaje.
+la relación adecuada entre distancia y similaridad podría ser diferente según el
+problema concreto con el que se trabaje.
 
 
 Comparación de grafos
@@ -52,12 +52,14 @@ es precisa la búsqueda de patrones dentro de un conjunto de grafos, o la clasif
 un nuevo grafo. 
 
 El interés por los grafos aparece a finales los 1970s, momento en el que se plantean
-algoritmos y técnicas basadas en grafos para el reconocimiento de patrones, pero el coste
+algoritmos y técnicas basadas en ellos para el reconocimiento de patrones, sin embargo el coste
 computacional para su aplicación no es compatible con las tecnologías de la
-época :cite:`Conte2004`. A partir del año 2000 este interés despierta de nuevo, la
-potencia de los ordenadores empieza a ser suficiente para ejecutar los algoritmos de
-manera práctica y en las referencias bibliográficas empiezan a aparecer aplicaciones
-(:num:`tabla #table-graph-articles`).
+época :cite:`Conte2004` y su utilización queda limitada al marco teórico.
+
+A partir del año 2000 el interés despierta de nuevo, la
+potencia de los ordenadores empieza a ser suficiente para ejecutar los algoritmos en
+aplicaciones prácticas y así se puede comprobar en la evolución de las referencias
+bibliográficas (:num:`tabla #table-graph-articles`).
 
 
 .. tabularcolumns:: |p{3cm}|p{4cm}|p{4cm}|
@@ -69,9 +71,9 @@ manera práctica y en las referencias bibliográficas empiezan a aparecer aplica
    :header-rows: 1
    :stub-columns: 1
 
-   *  -  Período
-      -  Artículos
-      -  Aplicaciones
+   *  -  **Período**
+      -  **Artículos**
+      -  **Aplicaciones**
    *  -  hasta 1990
       -  4
       -  1
@@ -87,7 +89,7 @@ manera práctica y en las referencias bibliográficas empiezan a aparecer aplica
    
 
 
-El problema que se plantea, de acuerdo con Jolion :cite:`Jolion2001` es, ¿qué significa
+El problema que se plantea, de acuerdo con Jolion :cite:`Jolion2001`, es ¿qué significa
 exactamente comparar dos grafos? ¿Comparar su estructura? ¿Su contenido? ¿Con qué
 flexibilidad debe hacerse? Un planteamiento comunmente aceptado para comparar dos grafos
 consistiría en "encontrar en un grafo :math:`G_1` cuál es el subgrafo :math:`G'_1`
@@ -103,17 +105,18 @@ fruto tanto de la elección de las palabras o los conceptos para expresar cierta
 como de la estructura sintáctica utilizada para expresar la oración. Lo que nos interesa
 es precisamente medir las variaciones introducidas por cada traductor con respecto al 
 texto original, el ruido que separa dos grafos que *a priori* deberían ser iguales, tal y
-como se plantea la Teoría de la Dependencia Conceptual 
+como postulaba la Teoría de la Dependencia Conceptual 
 (ver :ref:`sección 2.1.1 <teoria-dependencia-conceptual>`).
-
 
 Como hemos visto anteriormente, los grafos conceptuales y los grafos UNL que representan
 las oraciones tienen nodos y relaciones con atributos por lo que muchas de las técnicas
 de comparación (aún inexacta) de grafos no serán aplicables, pero resulta imprescindible
-conocerlas para exponer posteriormente los algoritmos donde sí se tienen en cuenta estos
-atributos.
+conocerlas para exponer posteriormente los algoritmos donde sí se tienen en cuenta estas
+características.
 
-.. maximo-grafo-comun_
+
+.. _maximo-grafo-comun:
+
 Máximo grafo común
 ++++++++++++++++++
 Uno de los problemas que mayor interés atrae en la literatura asociado a la comparación
@@ -121,6 +124,9 @@ exacta de grafos es la búsqueda del **máximo grafo común** (MCS, *maximum com
 es decir, la búsqueda de un subgrafo del primer grafo que sea isomorfo con algún subgrafo
 que pueda extraerse del segundo, básicamente la idea de Jolion :cite:`Jolion2001` que
 exponíamos anteriormente.
+
+De esta forma la distancia entre dos grafos puede calcularse en función del tamaño
+relativo del MCS frente al de los grafos originales.
 
 El problema de búsqueda del MCS puede reducirse a la búsqueda del máximo
 *clique* :cite:`Ambler1973`. La mayoría de algoritmos utilizan una búsqueda en árbol
@@ -152,7 +158,7 @@ introducen penalizaciones cuando la correspondencia entre los nodos o los arcos 
 exacta. Por lo tanto, el algoritmo deberá encontrar la solución que minimice este coste.
 
 Hay algoritmos que garantizan la solución óptima (exacta en caso de que exista) y otros
-que sólo la aproximen ofreciendo un resultado que sea mínimo local, generalmente los
+que sólo la aproximan ofreciendo un resultado que es mínimo local, generalmente los
 segundos ofrecerán tiempos de respuesta mucho más breves.
 
 En función de la estrategia utilizada por los algoritmos podemos clasificarlos en:
@@ -194,7 +200,8 @@ son (el lector podrá encontrar una exposición más exhaustiva en el trabajo de
 
    Resulta interesante el trabajo de Cordella *et al.* :cite:`Cordella1996`
    :cite:`Cordella1998a` cuyo algoritmo incorpora un modelo de transformación que en
-   determinadas circunstancias permite sustituir un subgrafo por un único nodo.
+   determinadas circunstancias permite sustituir un subgrafo por un único nodo (podría
+   ser interesante su utilización cuando los grafos conceptuales tengan contextos).
    También el trabajo de Serratosa *et al.* :cite:`Serratosa2000` que proponen un
    algoritmo que utiliza información contextual.
 
@@ -264,12 +271,17 @@ considerar su distancia semántica proporcional a la longitud de este camino.
 conceptos en la red MeSH (*Medical Subject Headers*), Jarmasz y Szpakowicz
 :cite:`Jarmasz2003` utilizan la misma técnica con el *Roget's Thesaurus*.
 En ambos casos los resultados son bastante buenos debido a que sólo utilizan las relaciones
-``is-a`` :cite:`Lee1993`. Esta distancia se formularía como:
+``is-a`` :cite:`Lee1993`. Esta distancia se formularía como [#]_:
 
 .. math::
 
-    dist_r(c_1, c_2) = len(c_1, c_2)
+    d_{SP}(c_1, c_2) = len(c_1, c_2)
 
+
+.. [#] De ahora en adelante utilizaremos la nomenclatura :math:`d_{T}(c_1, c_2)` para indicar
+   la distancia ''d'' entre dos conceptos :math:`c_1` y :math:`c_2` utilizando el 
+   algoritmo ''T'' (''T'' deberá ser sustituído en cada caso por el identificador del
+   algoritmo concreto).
 
 No obstante, parece lógico pensar que la distancia entre dos nodos adyacentes cualesquiera
 no tiene por qué ser idéntica, así cada conexión debe tener un peso asignado en el cálculo
@@ -279,7 +291,7 @@ para cada conexión, deben implementarse algoritmos que permitan calcularlo bas�
 características de la red. Algunas de estas características estructurales típicamente
 relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
 
- * **Densidad**: la densidad de la red no es la misma en todas sus partes, se puede sugerir
+ * **Densidad**: la densidad de la red no es la misma en todas sus partes; se puede sugerir
    que cuanto mayor es la densidad en una zona, menor es la distancia entre los nodos que 
    están en esa zona :cite:`Richardson1995`.
  * **Profundidad**: cuanto más se desciende en la jerarquía más sutiles son las diferencias
@@ -293,8 +305,9 @@ relacionadas con una red de conceptos jerárquica son :cite:`Jiang1997`:
 **Sussna** :cite:`Sussna1993` propone una métrica de distancia que considera la profundidad
 dentro de la red de conceptos de tal forma que la distancia semántica entre ellos es
 tanto menor cuanto más se desciende en la jerarquía. Asigna a cada relación :math:`r` que 
-parte de un node :math:`c_1` un peso dentro de un intervalo :math:`[min_r, max_r]` en
-función del número de relaciones del mismo tipo que parten de él:
+parte de un nodo :math:`c_1` le asigna un peso :math:`wt` dentro del intervalo
+:math:`[min_r, max_r]` en función del número de relaciones de tipo :math:`r` que
+parten de él:
 
 .. math::
     :label: sussna
@@ -306,7 +319,12 @@ de los pesos de la relación en ambas direcciones ponderada por la profundidad d
 
 .. math::
 
-    dist_s(c_1, c_2) = \frac{wt(c_1 \rightarrow_r) + wt(c_2 \rightarrow_{r'}) }{2 \cdot max\{depth(c_1), depth(c_2)\}}
+    d_{S}(c_i, c_j) = \frac{wt(c_i \rightarrow_r) + wt(c_j \rightarrow_{r'}) }{2 \cdot max\{depth(c_i), depth(c_j)\}}
+    
+donde :math:`r'` es la relación inversa de :math:`r`, es decir, aquella que va en sentido
+contrario, y :math:`depth(c_i)` es la profundidad del concepto :math:`c_i` en la jerarquía.
+
+
     
 .. warning:: En el artículo de Sussna se dice que en esta última ecuació los pesos
    deben ser invertidos, pero tanto en la formulación del artículo como en la literatura
@@ -315,8 +333,14 @@ de los pesos de la relación en ambas direcciones ponderada por la profundidad d
    Hablo de esto más adelante, ¿debería tratarlo aquí?
    
 
-La distancia semántica entre dos nodos cualesquiera de la red se calcularía como la suma de
-distancias entre cada par de nodos adyacentes a lo largo del camino más corto que los une.
+La distancia semántica entre dos nodos cualesquiera de la red, :math:`c_1` y :math:`c_2`
+se calcularía como la suma de distancias entre cada par de nodos adyacentes a lo largo
+del camino más corto que los une:
+
+.. math::
+
+   d_{S}(c_1, c_2) = \sum\limits_{i,j \in len(c_1, c_2)} d_{S}(c_i, c_j)
+   
 
 **Wu and Palmer** :cite:`Wu1994` proponen una medida de similaridad entre conceptos que tiene
 en cuenta al hiperónimo común más profundo en la jerarquía (*lowest-super-ordinate*, ``lso``)
@@ -324,13 +348,13 @@ de ambos conceptos:
 
 .. math::
 
-    sim_{WP}(c_1, c_2) = \frac{2 \cdot depth(lso(c_1, c_2))}{len(c_1, lso(c_1, c_2)) + len(c_2, lso(c_1, c_2)) + 2 \cdot depth(lso(c_1, c_2))}
+    s_{WP}(c_1, c_2) = \frac{2 \cdot depth(lso(c_1, c_2))}{len(c_1, lso(c_1, c_2)) + len(c_2, lso(c_1, c_2)) + 2 \cdot depth(lso(c_1, c_2))}
 
 y la distancia se puede expresar como:
 
 .. math::
 
-    dist_{WP}(c_1, c_2) = 1 - sim_{WP}(c_1, c_2)
+    d_{WP}(c_1, c_2) = 1 - s_{WP}(c_1, c_2)
 
 Así, la distancia entre los conceptos es menor cuanto mayor es la profundidad del hiperónimo común dentro de la jerarquía.
 
@@ -339,14 +363,14 @@ que tiene en cuenta la profundidad máxima de la jerarquía de conceptos:
 
 .. math::
 
-    sim_{LC}(c_1, c_2) = -log \frac{len(c_1, c_2)}{2 \cdot \underset{c \in WordNet}{max} depth(c)}
+    s_{LC}(c_1, c_2) = -log \frac{len(c_1, c_2)}{2 \cdot \underset{c \in WordNet}{max} depth(c)}
 
 **Li et al.** :cite:`Li2003` plantean una función no lineal que pondera la longitud del camino
 más corto entre el par de conceptos y la profundidad del hiperónimo común:
 
 .. math::
 
-    sim_{Li}(c_1, c_2) = e^{-\alpha \cdot len(c_1, c_2)} \frac{e^{\beta \cdot N} - e^{-\beta \cdot N}}{e^{\beta \cdot N} + e^{-\beta \cdot N}}
+    s_{Li}(c_1, c_2) = e^{-\alpha \cdot len(c_1, c_2)} \frac{e^{\beta \cdot N} - e^{-\beta \cdot N}}{e^{\beta \cdot N} + e^{-\beta \cdot N}}
 
 donde :math:`N = depth(lso(c_1, c_2))`, :math:`\alpha \geq 0` y :math:`\beta \geq 0`. Después del
 análisis que realizan en el artículo concluyen que los parámetros óptimos en la fórmula
@@ -358,9 +382,9 @@ Basadas en el contenido de información
 ++++++++++++++++++++++++++++++++++++++
 Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de
 información de un concepto :cite:`Resnik1999`, para ello no basta con la red de conceptos
-sino que es necesario contar con un *corpus* suficientemente grande. Así, si la probabilidad
-de encontrar un concepto :math:`c` en el corpus es :math:`p(c)`, es contenido de información
-dado por este concepto, según la teoría de la información es:
+sino que es necesario contar con un *corpus* etiquetado suficientemente grande. Así,
+si la probabilidad de encontrar un concepto :math:`c` en el corpus es :math:`p(c)`,
+el contenido de información dado por este concepto, según la teoría de la información es:
 
 .. math::
 
@@ -374,7 +398,7 @@ en cuenta la frecuencia de aparición de un término para evaluarlo.
 
 .. math::
 
-    sim_R(c_1, c_2) = -log \, p(lso(c_1, c_2))
+    s_R(c_1, c_2) = -log \, p(lso(c_1, c_2))
 
 Para el cálculo de las frecuencias de aparición de los conceptos en el corpus, Resnik realiza
 el cálculo contando como una aparición del concepto cada vez que aparece el propio concepto
@@ -392,11 +416,7 @@ la probabilidad de un concepto puede calcularse como su frecuencia relativa de a
 
     p(c) = \frac{freq(c)}{N}
 
-siendo :math:`N` el número total de conceptos en la jerarquía. 
-
-.. warning:: Verificar que N es el número total de conceptos, hay que pensar que estamos sumando
-   una aparición cada vez que aparece un hipónimo, por lo que N podría referirse al número de
-   conceptos o también al número de elementos sumados que va a ser mucho mayor.
+siendo :math:`N` el número total de términos que aparecen en el *corpus*. 
 
 Como señala Budanitsky y Hirst :cite:`Budanitsky1998` uno de los mayores incovenientes de esta
 medida es que se obtiene el mismo valor de similaridad para cualesquiera dos conceptos que
@@ -405,7 +425,7 @@ no ocurre.
 
 **Jiang y Conrath** :cite:`Jiang1997` ofrecen una aproximación en la que combinan las técnicas
 basadas en nodos y las basadas en arcos, la estructura de la red y la información estadística
-ofrecida por el corpus.
+ofrecida por el *corpus*.
 
 En primer lugar consideran el peso de las conexiones en la red y postulan que este peso es
 proporcional a la probabilidad condicionada de encontrar una instancia de un concepto :math:`c`
@@ -416,7 +436,7 @@ cuando ha aparecido el concepto padre :math:`f`:
     p(c|f) = \frac{p(c \cap f)}{p(f)} = \frac{p(c)}{p(f)}
 
 la segunda igualdad se justifica según :cite:`Resnik1999` puesto que toda aparición de ``c``
-contará también como una aparición de ``par(c)``. De este modo el peso de cada conexión puede
+contará también como una aparición de ``f``. De este modo el peso de cada conexión puede
 calcularse a través de la teoría de la información como:
 
 .. math::
@@ -447,13 +467,13 @@ considera el peso de los enlaces de tipo hiperónimo/hipónimo con un peso 1,
 
 .. math::
 
-    dist_{JC}(c_1, c_2) = IC(c_1) + IC(c_2) - 2 \cdot IC(lso(c_1, c_2))
+    d_{JC}(c_1, c_2) = IC(c_1) + IC(c_2) - 2 \cdot IC(lso(c_1, c_2))
 
 es decir,
 
 .. math::
 
-    dist_{JC}(c_1, c_2) = 2log\, p(lso(c_1, c_2)) - (log \, p(c_1) + log \, p(c_2))
+    d_{JC}(c_1, c_2) = 2log\, p(lso(c_1, c_2)) - (log \, p(c_1) + log \, p(c_2))
 
 **Lin** :cite:`Lin1998` propone una medida de similaridad universal, que no dependa de la
 representación de los conceptos ni de un recurso o aplicación específico. Así Lin prueba
@@ -465,7 +485,7 @@ el siguiente teorema:
 
     .. math::
 
-        sim(A, B) = \frac{log P(common(A, B))}{log P(description(A,B))}
+        s(A, B) = \frac{log P(common(A, B))}{log P(description(A,B))}
 
 es decir, la similaridad es el ratio entre la información que ambos conceptos tienen en común
 y la información necesaria para describirlos. La aplicación de este teorema a una jerarquía
@@ -473,7 +493,7 @@ de conceptos es automática:
 
 .. math::
 
-    sim_{Lin}(c_1, c_2) = \frac{2 \cdot log \, p(lso(c_1, c_2))}{log(p(c_1)) + log(p(c_2))}
+    s_{Lin}(c_1, c_2) = \frac{2 \cdot log \, p(lso(c_1, c_2))}{log(p(c_1)) + log(p(c_2))}
 
 
 Basadas en características de los términos
@@ -485,7 +505,16 @@ Uno de los principales incovenientes para poder aplicar este tipo de modelos es 
 no se dispone de un conjunto de características homogeneo para todos los conceptos.
 
 Como referencia citamos los trabajos de Petrakis *et al.* :cite:`Petrakis2006` y
-Tversky :cite:`Tversky1977`, pero su enfoque se aparta del planteamiento de esta tesis donde contamos
-con los conceptos desambiguados y con una red de conceptos a nuestra disposición.
+Tversky :cite:`Tversky1977`, pero su enfoque se aparta del planteamiento de esta tesis
+donde contamos con los conceptos desambiguados y con una red de conceptos a nuestra
+disposición.
 
-.. TODO: Añadir medidas basadas en buscadores web (ver :cite:`Maind2012`)
+En Maind *et al.* :cite:`Maind2012` podemos encontrar otras medidas de similaridad que
+utilizan los resultados de motores de búsqueda de internet, de este modo no están sujetos
+a la limitación impuesta por el conjunto de palabras cerrado que está presente tanto en
+las ontologías como en los *corpus*. Para realizar el cálculo de la distancia entre
+palabras se han propuesto algoritmos que utilizan el número de resultados de búsqueda y
+otros que se apoyan en los contextos donde aparece la palabra y que son proporcionados
+por el buscador.
+
+

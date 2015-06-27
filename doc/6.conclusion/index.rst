@@ -62,6 +62,11 @@ dejado a un lado, pero que sin duda son importantes:
    en oraciones más largas, donde los grafos tengan un número mayor de nodos, la búsqueda
    por fuerza bruta puede resultar intratable.
    
+   Hay que estudiar la utilización de heurísticas genéricas como algoritmos evolutivos
+   para agilizar el cálculo cuando hay permutaciones, o bien algunas adaptadas al
+   problema como la utilizada por *Zhong et al.* :cite:`Zhong2002` que mostramos
+   en la bibliografía para ordenar el cálculo de similaridad.
+   
  * Demostrar si el modelo de similaridad entre grafos que se ha propuesto devuelve un
    valor que cumple las propiedades de distancia.
    
