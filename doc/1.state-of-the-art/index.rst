@@ -62,7 +62,7 @@ la distancia entre grafos conceptuales (manifiestan una distancia debida a la es
 del grafo y también al contenido de los nodos), analizando en profundidad cuáles son sus
 principales aportaciones y las dificultades que aún están presentes.
 
-.. warning:: Quizá estos párrafos anteriores son más introducción que estado del arte
+.. TODO: Quizá estos párrafos anteriores son más introducción que estado del arte
 
 .. toctree::
    :maxdepth: 4
