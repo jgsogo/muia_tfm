@@ -342,12 +342,12 @@ El trabajo está organizado en siete capítulos. Tras esta introducción que per
 contextualizar la problemática relacionada con los sistemas de traducción, se realiza
 una exposición en el capítulo 2 del estado del arte de los sistemas de traducción
 basados en interlingua y los trabajos previos que sirven de soporte para el modelo 
-que propondremos. El capítulo 3 se expone el problema que tratamos de abordar, el 
+que propondremos. El capítulo 3 expone el problema que tratamos de abordar, el 
 capítulo 4 muestra las limitaciones y restricciones a las que nos vemos sometidos o 
-que tenemos que asumir a la hora de abordar el problema. En el capítulo 5 se expone
+que tenemos que asumir a la hora de enfrentarnos a él. En el capítulo 5 se expone
 el modelo desarrollado, que se somete a experimentación en el capítulo 6, donde también
 se muestran los resultados de estas pruebas. Finalmente el capítulo 7 recoge las
 conclusiones del trabajo, la valoración del autor sobre el mismo y las líneas
-de investigación y de trabajo que deben continuarse para contribuir a la
+de investigación y desarrollo que deben continuarse para contribuir a la
 resolución del problema propuesto.
 
