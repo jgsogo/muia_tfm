@@ -11,11 +11,7 @@
 Introducción
 ============
 
-.. warning:: Inicio demasiado directo, pero en el momento en que tenga listo el
-   estado del arte se puede empezar con el objetivo/problema de la TFM y traer al lector
-   hasta el campo de las traducciones con UNL.
-
-Actualmente el inglés se ha erigido como la lengua vehicular en internet, para el
+Actualmente el inglés se ha erigido como la lengua vehicular en internet para el
 conocimiento científico, los negocios y la educación; quienes no son nativos
 angloparlantes deben dedicar dinero y tiempo para acceder a estos conocimientos,
 pero muchas otras personas no tendrán los recursos necesarios. Pero la barrera del
@@ -34,8 +30,21 @@ de traducción automática o como un esquema de representación en sistemas de
 recuperación de información :cite:`TeixeiraMartins2005`. Este
 lenguaje universal puede ser utilizado como la herramienta necesaria para romper
 la barrera del idioma que separa a muchas personas del acceso al conocimiento que
-no está expresado en un lenguaje que puedan entender.
+no está expresado en un lenguaje que puedan entender. De acuerdo con la 18ª edición
+de la publicación *The Ethnologue: Languages of the World* del *SIL Institute*
+existen 7.102 idiomas vivos en el mundo [#]_.
 
+.. [#] Ethnologue. http://www.ethnologue.com/about (accedido en junio de 2015).
+
+Disponer de sistemas de traducción adecuados que cubran el mayor espectro posible
+de lenguas y población es una necesidad en un mundo cada vez más globalizado en el
+que se están generalizando las tecnologías de interconexión. Estas traducciones
+deben ser inteligibles y fidedignas para garantizar una comunicación eficiente, se
+hace necesaria una medida objetiva que permita evaluar estas características para
+poder juzgar la bondad de los diferentes sistemas de traducción.
+
+En este trabajo proponemos un modelo para realizar esta evaluación de una forma
+automática basándonos en el lenguaje universal UNL.
 
 
 La barrera del lenguaje
@@ -48,7 +57,7 @@ La barrera del lenguaje
    * Primeras herramientas informáticas de traducción automática.
 
 A lo largo de los años se han tratado de adoptar diferentes soluciones para hacer
-frente a este problema; en la época del colonialismo la metropolis imponía su idioma
+frente a este problema: en la época del colonialismo la metropolis imponía su idioma
 en el gobierno de las colonias de tal forma que el acceso a los negocios, la
 justicia, el poder o a las clases altas quedaba supeditado a su conocimiento;
 así se extendieron algunos idiomas europeos como el inglés, francés o español,
@@ -60,9 +69,9 @@ el conjunto de la humanidad converja hacia una única lengua común.
 
 Durante el siglo XIX [#]_ se propusieron idiomas artificiales, construídos o planificados,
 que fueran neutrales (no tuvieran su base en una lengua dominante) y sencillos (eliminando
-muchas de las complicaciones del lenguaje natural). Surgieron propuestas más conocidas
-como el esperanto y otras que obtuvieron menor atención como el ido, el
-volapük o el *latino sine flexione* (interlingua de Peano). A pesar de que aún hoy
+muchas de las complicaciones del lenguaje natural). Surgieron propuestas muy conocidas
+como el esperanto y otras que obtuvieron menor atención como el *ido*, el
+*volapük* o el *latino sine flexione* (interlingua de Peano). A pesar de que aún hoy
 cuentan con algunos hablantes, la experiencia demuestra que no son la solución.
 
 .. [#] Algunos idiomas artificiales datan de fechas tan tempranas como la *Lingua ignota*
@@ -137,7 +146,7 @@ los 1970s. Por un lado el éxito del sistema americano Logos MT (hoy OpenLogos) 
 la traducción de manuales militares de inglés a vietnamita durante la Guerra de
 Vietnam; y por otro la aparición de la compañía SYSTRAN que inicialmente también
 trabajó vinculada a defensa, pero que pronto se orientaría además hacia usos comerciales.
-Cabe destacar que hoy en día ambas compañías siguen en activo, ambas enfocadas en la
+Cabe destacar que hoy en día ambas compañías siguen en activo, las dos enfocadas en la
 traducción bidireccional entre pares de lenguas :cite:`Scott2009` :cite:`Senellart2001`.
 
 En los 1980s, con el incremento de la potencia de cálculo de los ordenadores, renace
@@ -148,20 +157,21 @@ momento. Esta metodología de traducción sigue siendo hoy en día la más exten
 Los modelos utilizados son aplicables a cualquier lengua, pero tienen algunas
 dificultades relacionadas con la calidad de las traducciones o algunas
 características propias de los idiomas que provoca que los resultados deban ser
-revisados y, en consecuencia, su aceptación sea limitada.
+revisados manualmente y, en consecuencia, su aceptación y utilidad sea limitada.
 
 El problema de la traducción automática se ha abordado también desde otras perspectivas:
 
- * traducción automática basada en diccionarios: las palabras son traducidas
+ * traducción automática basada en **diccionarios**: las palabras son traducidas
    una a una según las entradas de un diccionario,
- * traducción automática mediante lengua intermedia: se trata de un tipo de traducción
+ * traducción automática mediante **lengua intermedia**: se trata de un tipo de traducción
    basada en reglas donde el texto original es convertido inicialmente a una
    interlingua desde la que se generan las traducciones a los idiomas de destino,
- * traducción automática mediante transferencia: es un caso de traducción basada en
-   lengua intermedia donde se tiene en cuenta además las lenguas de origen y destino,
- * traducción automática basada en ejemplos (EBMT, *Example-based Machine Translation*):
-   la traducción se realiza por analogía, utiliza un corpus alineado de textos, y
- * sistemas híbridos de traducción automática: utilizan una combinación de reglas y
+ * traducción automática mediante **transferencia**: es un caso de traducción basada en
+   lengua intermedia donde se tiene en cuenta además las lenguas de origen y destino y se
+   aprovechan las características comunes entre ellas,
+ * traducción automática basada en **ejemplos** (EBMT, *Example-based Machine Translation*):
+   la traducción se realiza por analogía, utilizando un corpus alineado de textos, y
+ * sistemas **híbridos** de traducción automática: utilizan una combinación de reglas y
    métodos estadísticos, tratando de explotar las mejores características de cada
    tipo :cite:`Costa-jussa2014`.
 
@@ -170,24 +180,27 @@ El problema de la traducción automática se ha abordado también desde otras pe
 Traducción automática mediante lengua intermedia
 ------------------------------------------------
 El conocido lingüista Noam Chomsky sostiene que el cerebro humano contiene un
-conjunto limitado de reglas para organizaar el lenguaje y, por lo tanto, todos
+conjunto limitado de reglas para organizar el lenguaje y en consecuencia todos
 los lenguajes tienen una base estructural común (Chomsky se refiere a ella como
-la *gramática universal*). El hecho de que palabras e ideas puedan ser traducidos
+la *gramática universal*). El hecho de que palabras e ideas puedan ser traducidas
 de un idioma a otro, o la existencia de lenguas criollas aporta evidencias a esta
-hipótesis :cite:`Kottak2002`. La utilización de una interlingua supone la
-adhesión a esta corriente [#]_.
+hipótesis :cite:`Kottak2002`. Un sistema de traducción que utiliza una interlingua
+sólo es posible si se acepta esta hipótesis como válida, los conceptos son independientes
+y anteriores al lenguaje en el que se articulan y, por lo tanto, pueden ser representados
+independientemente de éste [#]_.
 
 .. [#] La hipótesis contraria, conocida como Hipótesis de Sapir-Whorf, sostiene que
    las características del lenguaje condicionan la manera de pensar del hablante. Esta
    hipótesis toma el nombre de Edward Sapir, quien la formula originalmente, y de 
    Benajmin Lee Whorf, discípulo de aquél, que la desarrolla en la década de 1940.
 
-Una de las principales ventajas de los sistemas que utilizan una lengua pivot frente a
+Una de las principales ventajas de los sistemas que utilizan una lengua pivote frente a
 los que se enfocan en la traducción entre pares de lenguas es el número de *traductores*
 que se tienen que desarrollar para cubrir todas las necesidades (
 :num:`figura #fig-interlingua`). En general son necesarias :math:`n(n-1)` para el caso directo
 y :math:`2n` utilizando una interlingua; a partir de tres lenguas la aproximación con
-interlingua requierirá menores esfuerzos de desarrollo.
+interlingua requerirá menores esfuerzos de desarrollo y un ahorro en costes (sin
+considerar el esfuerzo necesario para crear la lengua intermedia).
 
 .. figure:: img/interlingua.png
    :name: fig-interlingua
@@ -212,34 +225,44 @@ Sin embargo, a pesar de estos beneficios, este tipo de traducción es una de las
 utilizadas en la práctica, la mayoría son prototipos de investigación y sólo el
 proyecto KANT [#]_ ha sido utilizado en un sistema comercial :cite:`Brown2006`, sin
 embargo su aplicación se limita a la traducción de textos técnicos en inglés
-controlado hacia francés, español y alemán :cite:`Lonsdale1994`.
+controlado [#]_ hacia francés, español y alemán :cite:`Lonsdale1994`.
 
 .. [#] El proyecto Kant fue iniciado en 1989 por el Centro de Traducción Automática de
    la Universidad Carnegie Mellon (Pittsburg) para la traducción de documentación
    técnica. Más información puede ser consultada en su web:
-   http://www.lti.cs.cmu.edu/Research/Kant/ (accedida 30 de marzo de 2015).
+   http://www.lti.cs.cmu.edu/Research/Kant/ (accedida 30 de marzo de 2015) y
+   también en Nyberg y Mitamura, 2000 (:cite:`Nyberg2000`).
+   
+.. [#] El adjetivo "controlado" aplicado a un lenguaje hace referencia a que el texto
+   original ha sido adaptado a una serie de reglas definidas de antemano con el
+   objetivo de mejorar su traducibilidad :cite:`Schwitter2010`.
 
 Alansary :cite:`AlAnsary2011` identifica cinco características que debe cumplir una
-interlingua: no puede ser ambigua; debe ser capaz de representar todos los
-matices del texto; tiene que ser universal para poder representar cualquier significado
-de cualquier dominio; debe representar únicamente el contenido independientemente de
-la representación formal del lenguaje de origen; y finalmente tiene que ser
-independiente tanto del lenguaje de origen como del de destino. Teniendo en cuenta
-estas características ningún lenguaje natural puede ser utilizado como interlingua
-puesto que no estará exento de ambigüedad e, igualmente, ninguna interlingua puede
-diseñarse con la idea de ser utilizada por las personas ya que con el tiempo
-evolucionará apartándose de la ortodoxia.
+interlingua:
+
+ * no puede ser ambigua,
+ * debe ser capaz de representar todos los matices del texto,
+ * tiene que ser universal para poder representar cualquier significado de cualquier
+   dominio,
+ * debe representar únicamente el contenido independientemente de la representación
+   formal del lenguaje de origen, y 
+ * tiene que ser independiente tanto del lenguaje de origen como del de destino.
+ 
+Teniendo en cuenta estas características ningún lenguaje natural puede ser utilizado
+como interlingua puesto que no estará exento de ambigüedad e, igualmente, ninguna
+interlingua puede diseñarse con la idea de ser utilizada por las personas ya que
+con el tiempo evolucionará apartándose de la ortodoxia de estos principios.
 
 .. TODO: Algo de Wittgenstein aquí lo petaba todo
 
 En consecuencia, una lengua pivot para un sistema de traducción automática sólo podrá ser
-un lenguaje artificial; este constructo, además de servir para realizar traducciones,
+un lenguaje artificial. Este constructo, además de servir para realizar traducciones,
 constituiría una herramienta de representación del conocimiento que podría ser utilizada
-en muchas otras aplicaciones de recuperación de información.
+en cualquier aplicación de recuperación de información. Como tendremos ocasión de
+exponer en el siguiente capítulo, el UNL constituye una propuesta muy interesante en este
+sentido que ha contado con el apoyo de instituciones públicas de primer nivel y que
+hoy en día se mantiene en desarrollo.
 
-.. warning:: Por aquí me gustaría mencionar el UNL, igual que lo he hecho antes en la
-   introducción... una vez que tenga el inicio de la introducción hay que volver aquí
-   para ver si encaja.
 
 
 La calidad de la traducción
@@ -270,9 +293,9 @@ traductores.
 En este documento abordamos precisamente este problema: la definición de una medida
 de distancia entre el texto original y la traducción que permita valorar el
 rendimiento de un sistema de traducción automática. Como tendremos la ocasión de
-exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua para
+exponer en el próximo capítulo, nuestra medida se apoyará en la interlingua UNL para
 poder realizar la comparación, tomará el grafo del texto original y medirá la
-distancia al grafo resultante de convertir el texto traducido nuevamente a la
+distancia al grafo resultante de convertir el texto traducido nuevamente a esta
 interlingua (ver :num:`figura #fig-problema-interlingua`).
 
 .. _fig-problema-interlingua:
@@ -281,29 +304,50 @@ interlingua (ver :num:`figura #fig-problema-interlingua`).
 
    digraph foo {
         rankdir=LR
-        n1[label="Texto original"]
+        n1[label="Texto\noriginal"]
         n2[label="Analizador", shape=box]
         n3[label="Interlingua"]
         
         n4a[label="Generador #1", shape=box]
-        n5a[label="Texto traducido #1"]
+        n4b[label="Generador #2", shape=box]
+
+        {rank=same n4a,n3,n4b}
+                       
+        n1 -> n2 -> n3
+        n4a -> n3 [dir=back]
+        n3 -> n4b        
+
+        n5a[label="Texto\ntraducido #1"]
         n6a[label="Analizador"]
         n7a[label="Interlingua #1"]
 
-        n4b[label="Generador #2", shape=box]
-        n5b[label="Texto traducido #2"]
+        n4a -> n5a -> n6a -> n7a
+        n7a -> n3 [dir=both, label="Medida distancia\nCalidad del Generador #1"]
+
+        n5b[label="Texto\ntraducido #2"]
         n6b[label="Analizador"]
         n7b[label="Interlingua #2"]
-
-        n1 -> n2 -> n3
-        n3 -> n4a -> n5a -> n6a -> n7a
-        n3 -> n4b -> n5b -> n6b -> n7b
         
-        n7a -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #1"]
-        n7b -> n3 [dir=both, label="Medida distancia ~ Calidad del Generador #2"]
+        n4b -> n5b -> n6b
+        n7b -> n6b [dir=back]
+        n7b -> n3 [dir=both, label="Medida distancia\nCalidad del Generador #2"]
+        
+        n7a -> n7b [style=invis]
+        
+        {rank=same n6a, n7a, n7b, n6b}
    }
 
-.. warning:: La conclusión de la introducción queda postpuesta a la definición del
-   problema, modelo (y del estado del arte), una vez que veamos si tenemos
-   que hablar de métricas de calidad de traducciones por aquí o esto lo
-   hemos abordado en el estado del arte... pienso en artículos como :cite:`Rossi2013`.
+
+El trabajo está organizado en siete capítulos. Tras esta introducción que permite 
+contextualizar la problemática relacionada con los sistemas de traducción, se realiza
+una exposición en el capítulo 2 del estado del arte de los sistemas de traducción
+basados en interlingua y los trabajos previos que sirven de soporte para el modelo 
+que propondremos. El capítulo 3 se expone el problema que tratamos de abordar, el 
+capítulo 4 muestra las limitaciones y restricciones a las que nos vemos sometidos o 
+que tenemos que asumir a la hora de abordar el problema. En el capítulo 5 se expone
+el modelo desarrollado, que se somete a experimentación en el capítulo 6, donde también
+se muestran los resultados de estas pruebas. Finalmente el capítulo 7 recoge las
+conclusiones del trabajo, la valoración del autor sobre el mismo y las líneas
+de investigación y de trabajo que deben continuarse para contribuir a la
+resolución del problema propuesto.
+
