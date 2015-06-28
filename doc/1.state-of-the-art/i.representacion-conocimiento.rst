@@ -2,6 +2,13 @@
 
 Sistemas de representación del conocimiento
 -------------------------------------------
+Las máquinas no pueden trabajar con un lenguaje plagado de ambigüedades y de contextos
+culturales subyacentes, necesitan de una representación formal explícita del 
+discurso para poder entenderlo y trabajar con él, así pues debemos ser capaces de
+codificar nuestras ideas en una estructura rígida, estructurar la actividad
+cognitiva humana en un sistema de representación inteligible por los algoritmos y
+modelos programados. 
+
 Pensamiento y Lenguaje están indisolublemente unidos, las estructuras conceptuales,
 si bien son diferentes de las estructuras lingüísticas, mantienen con estas una
 estrecha relación: para conocerlas, identificarlas y distinguirlas precisamos del
@@ -25,22 +32,26 @@ Teoría de la Dependencia Conceptual
 La principal dificultad para desarrollar los sistemas de comprensión del discurso por
 ordenador radica en proporcionarles esquemas conceptuales y conocimientos sobre el 
 mundo que les permita realizar inferencias. Uno de los primeros esfuerzos en este sentido
-lo encontramos en la obra de Roger C. Schank y Robert P. Abelson :cite:`Schank1977` donde
-se proponen dar con un "aparato general para un intento de representar todo o cualquier
+lo encontramos en 1979 en la obra de Roger C. Schank y Robert P. Abelson :cite:`Schank1977`
+donde se proponen dar con un "aparato general para un intento de representar todo o cualquier
 conocimiento", estudiando "cómo funciona la comprensión humana" puesto que "si entendemos
 cómo comprende el ser humano, podremos saber cómo conseguir que un ordenador entienda,
 y viceversa". Esta doctrina se apoya en la Teoría de la Dependencia Conceptual
 :cite:`Schank1969` que es "una teoría de la representación del significado de las frases",
-cuyo axioma básico consiste en que "para cualesquiera dos frases que son idénticas en
+cuyo axioma principal consiste en que "para cualesquiera dos frases que son idénticas en
 significado, sin tener en cuenta las diferencias en el lenguaje, existe una única
-representación" [#]_.
+representación" [#]_, en esta unicidad que supone una correspondencia biunívoca entre
+significado y representación nos fundamentamos para afirmar que es posible hablar de
+distancia semántica como herramienta para caracterizar los sistemas de traducción
+automática.
 
-.. [#] Las citas textuales han sido tomadas de :cite:`IzquierdoArroyo1995`.
+.. [#] Las citas textuales, traducciones del original, han sido tomadas
+   de :cite:`IzquierdoArroyo1995`.
 
 Schank y Abelson estructuran el conocimiento en una secuencia de eventos,
-guiones o *scripts* que representan a través de lo que llaman *primitivos léxicos*, que
-pueden hacer referencia tanto a una acción (con la forma Actor-Acción-Objeto-Dirección-
-(Instrumento)) como a un estado (Objeto-(está en)-Estado-(con Valor)). Los autores
+guiones o *scripts* que representan a través de lo que llaman *primitivos léxicos*, los cuales
+pueden hacer referencia tanto a una acción (con la forma Actor-Acción-Objeto-Dirección
+[-Instrumento]) como a un estado (Objeto-(está en)-Estado[-con Valor]). Los autores
 identifican 11 actos primitivos que son los constituyentes esenciales de cualquier acción
 más compleja, con lo que las reglas de inferencia y razonamiento deben definirse sobre
 un conjunto finito y reducido de elementos. A partir de los guiones almacenados en la
@@ -107,7 +118,7 @@ pueden aparecer en el grafo.
 .. figure:: ../img/sowagraph.png
    :name: fig-sowa
 
-   Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003) :cite:`Sowa2003`.
+   Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003).
    
 
 Semántica estructural
@@ -255,13 +266,11 @@ WordNet se creó en el Laboratorio de Ciencia Cognitiva de la Universidad de Pri
 1985 bajo la dirección del profesor de psicología George Armitage Miller (1920-2012).
 
 Un *synset* es un conjunto de palabras de la misma categoría gramatical que hacen
-referencia al mismo concepto, por lo tanto pueden ser intercambiadas en un texto sin
-afectar al significado. Son elementos semánticamente equivalentes. Las palabras
-polisémicas aparecerán múltiples veces en *synset* diferentes.
+referencia a la misma realidad extralingüística y por lo tanto pueden ser intercambiadas
+en un texto sin afectar al significado. Son elementos semánticamente equivalentes.
+Las palabras polisémicas aparecerán múltiples veces en *synset* diferentes.
 WordNet se encuentra actualmente en su versión 3.1 y se puede acceder online en 
 ``https://wordnet.princeton.edu``, cuenta con más de 117.000 synsets.
-
-.. TODO: Hablar de que los sinónimos tienen matices, 
 
 Las principales relaciones codificadas en WordNet son las de hiperonimia/hiponimia, seguidas
 por las de holonimia/meronimia, ambas estructuran los conceptos en jerarquías como la que
