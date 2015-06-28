@@ -421,7 +421,7 @@ análisis que realizan en el artículo concluyen que los parámetros óptimos en
 anterior son :math:`\alpha = 0.2` y :math:`\beta = 0.6`.
 
 
-.. redes-conceptos-contenido-informacion_
+.. _redes-conceptos-contenido-informacion:
 Basadas en el contenido de información
 ++++++++++++++++++++++++++++++++++++++
 Una de las formas de evaluar la densidad de la red de conceptos es considerar el contenido de

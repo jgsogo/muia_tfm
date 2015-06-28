@@ -22,31 +22,35 @@ conceptos con relaciones de hiponimia/hiperonimia.
 
 El modelo propuesto satisface los siguientes objetivos:
 
- * Ofrecer una medida de similaridad entre grafos conceptuales cuyo valor sea absoluto
-   en una escala en el intervalo :math:`[0,1]`, donde :math:`0` indica mínima similaridad
+ * Ofrecer una medida de similaridad entre grafos conceptuales cuyo valor esté contenido
+   en el intervalo :math:`[0,1]`, donde :math:`0` indica mínima similaridad
    y el valor :math:`1` que se trata de grafos idénticos. No se plantea el estudio sobre
    si esta medida cumple las propiedades de una distancia y por lo tanto podría ser
-   tratada como tal, así que preferimos hablar de similaridad.
+   tratada como tal, así que en general hablaremos de similaridad.
    
  * Maximizar la similaridad calculada entre grafos: el algoritmo debe buscar la combinación que
    ofrezca la mínima distancia (máxima similaridad) entre los grafos a comparar, el cálculo
    propuesto realiza una búsqueda exhaustiva por lo que está garantizado que
    encuentra el máximo global [#]_.
     
- * Permitir la utilización de diferentes métricas de distancias entre conceptos, incluyendo
-   las que hemos expuesto en el estado del arte.
+ * Permitir la utilización de diferentes métricas de distancias entre conceptos, se
+   utilizarán las que hemos expuesto en el estado del arte.
    
  * Permitir la utilización de diferentes métricas de distancias entre relaciones UNL.
  
- * Realizar la comparación con un parámetro configurable que permita modificar el umbral para
-   considerar dos conceptos o relaciones como iguales en la construcción del máximo grafo común.
+ * Utilizar un par de parámetros configurables que permitan definir el umbral de
+   tolerancia en la comparación de conceptos y relaciones de tal forma que dos *synsets*
+   puedan ser considerados iguales y, por lo tanto, formen parte del máximo grafo
+   común a pesar de existir cierta distancia entre ellos.
  
 .. [#] Como se expondrá más adelante esta búsqueda exhaustiva resulta en muchos
    casos ineficiente en términos de tiempo de computación y se recomendará la utilización
-   de heurísticas, pero no se ha utilizado ninguna en este trabajo.
+   de heurísticas. En este trabajo se han optimizado algunos algoritmos para reducir
+   los tiempos de computación, pero no se ha utilizado ninguna heurística, el espacio
+   de búsqueda se explora en su totalidad.
    
 Para poder alcanzar estos objetivos nos hemos apoyado en los recursos que se exponen en el
-apartado siguiente. Una vez expuestos estos recursos se describe el modelo propuesto.
+apartado siguiente. Una vez expuestos se describirá el modelo que se ha propuesto.
 
 
 .. toctree::
