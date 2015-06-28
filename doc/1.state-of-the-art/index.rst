@@ -38,7 +38,7 @@ la :num:`figura #fig-interlingua-esquema`.
    }
 
 Si convirtiéramos cualquiera de los textos traducidos de nuevo en la representación
-en interlingua, deberíamos obtener una representación idéntica a la que hemos
+en interlingua, deberíamos obtener una codificación idéntica a la que hemos
 utilizado para generarlos [#]_. La calidad de la traducción en cuanto a su fiabilidad, 
 entendida como contenido semántico transmitido, estará por lo tanto directamente
 relacionada con la proximidad entre las dos representaciones en interlingua; así
@@ -59,7 +59,7 @@ medidas que se han propuesto en la bibliografía para estudiar la similaridad en
 grafos, veremos cómo evaluar la distancia semántica entre conceptos y textos, y
 finalmente repasaremos los modelos propuestos que integran lo anterior para evaluar
 la distancia entre grafos conceptuales (manifiestan una distancia debida a la estructura
-del grafo y también al contenido de los nodos), analizando en profundidad cuáles son sus
+del grafo y también al contenido de los nodos) analizando en profundidad cuáles son sus
 principales aportaciones y las dificultades que aún están presentes.
 
 .. TODO: Quizá estos párrafos anteriores son más introducción que estado del arte

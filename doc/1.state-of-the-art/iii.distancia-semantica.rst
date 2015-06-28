@@ -36,11 +36,18 @@ lenguajes naturales, a saber:
  * **Sinonimia**: la RAE define el término sinónimo como "Dicho de un vocablo o de una
    expresión: Que tiene una misma o muy parecida significación que otro." [#]_, por lo
    tanto a la hora de asignar términos a un concepto o UW en el lenguaje UNL, según
-   el grado de semejanza, dos términos sinónimos se identificarán con la misma UW o
-   diferentes. El problema es que no hay una unidad de medida objetiva para la semejanza
-   semántica entre palabras.
+   el grado de semejanza, se identificarán con la misma UW o diferentes.
+   
+   El problema es que no hay una unidad de medida objetiva para la semejanza
+   semántica entre palabras; dos sinónimos *totales* son intercambiables en cualquier
+   contexto y deberán ser asignados a la misma UW, pero en el caso de sinonimia *parcial*
+   donde cada voz conserva rasgos connotativos propios, la asignación o no a una misma UW 
+   resulta subjetiva, dependiente del sustrato socio-cultural o incluso del
+   contexto en que aparece (melioración y peyoración) :cite:`MartinellGifre1994`
+   :cite:`Gelabert1994`.
 
-   Los matices que portan los sinónimos se pierden cuando son asignados a la misma UW. 
+   Muchos de estos matices se pierden cuando en el grafo son representados por una misma UW,
+   aunque los atributos de UNL permiten codificar algunos de estos rasgos.
 
  * **Polisemia**: un mismo término puede hacer referencia a dos conceptos distintos; este
    fenómeno queda perfectamente cubierto en la codificación a través de UWs. Teniendo el
