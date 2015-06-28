@@ -123,8 +123,52 @@ Uno de los problemas que mayor interés atrae en la literatura asociado a la com
 exacta de grafos es la búsqueda del **máximo grafo común** (MCS, *maximum common subgraph*),
 es decir, la búsqueda de un subgrafo del primer grafo que sea isomorfo con algún subgrafo
 que pueda extraerse del segundo, básicamente la idea de Jolion :cite:`Jolion2001` que
-exponíamos anteriormente.
+exponíamos anteriormente (ver :num:`figura #fig-mcs-example`).
 
+.. _fig-mcs-example:
+.. graphviz::
+   :caption: Dados dos grafos :math:`A` y :math:`B`, el máximo grafo común, :math:`mcs(A,B)` estará formado por el conjunto de nodos presentes en ambos y las conexiones entre ellos. En la figura se han indicado las correspondencias utilizando el símbolo :math:`\equiv` y los colores rojo para el grafo :math:`A` y azul para el :math:`B`.
+
+   digraph foo {
+     subgraph cluster_1 {
+         a1 [color=red]
+         a3 [color=red]
+         a4 [color=red]
+         a5 [color=red]
+         a0 -> a3
+         a1 -> a3 -> a4 -> a5 [color=red]
+         a1 -> a2 -> a3 
+         a3 -> a5
+         a1 -> a5 [color=red]
+         label = "Grafo A";
+         color = gray;
+     }
+
+     subgraph cluster_2 {
+         b1 [color=blue]
+         b3 [color=blue]
+         b4 [color=blue]
+         b5 [color=blue]
+         b1 -> b3-> b4 -> b5 [color=blue]
+         b1 -> b5 [color=blue]
+         b0 -> b4
+         b0 -> b5
+         label = "Grafo B";
+         color = gray;
+     }
+     
+     subgraph cluster_mcs {
+         1 [label="a1 ≡ b1"]
+         3 [label="a3 ≡ b3"]
+         4 [label="a4 ≡ b4"]
+         5 [label="a5 ≡ b5"]
+         1 -> 3 -> 4 -> 5
+         1 -> 5;
+         label = "mcs(A, B)";
+         color = gray;         
+     }
+   }
+   
 De esta forma la distancia entre dos grafos puede calcularse en función del tamaño
 relativo del MCS frente al de los grafos originales.
 

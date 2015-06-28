@@ -117,6 +117,7 @@ pueden aparecer en el grafo.
 
 .. figure:: ../img/sowagraph.png
    :name: fig-sowa
+   :scale: 80 %
 
    Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003).
    
