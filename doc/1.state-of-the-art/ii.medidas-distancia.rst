@@ -323,8 +323,8 @@ En ambos casos los resultados son bastante buenos debido a que sólo utilizan la
 
 
 .. [#] De ahora en adelante utilizaremos la nomenclatura :math:`d_{T}(c_1, c_2)` para indicar
-   la distancia ''d'' entre dos conceptos :math:`c_1` y :math:`c_2` utilizando el 
-   algoritmo ''T'' (''T'' deberá ser sustituído en cada caso por el identificador del
+   la distancia :math:`d` entre dos conceptos :math:`c_1` y :math:`c_2` utilizando el 
+   algoritmo :math:`T` (:math:`T` deberá ser sustituído en cada caso por el identificador del
    algoritmo concreto).
 
 No obstante, parece lógico pensar que la distancia entre dos nodos adyacentes cualesquiera
