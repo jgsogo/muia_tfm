@@ -8,23 +8,45 @@ subgrafo :math:`H_1` de :math:`G_1` y un subgrafo :math:`H_2` de :math:`G_2` tal
 de partida. Los subgrafos :math:`H_1` y :math:`H_2` no es necesario que sean conexos.
 
 La correspondencia entre los subgrafos :math:`H_1` y :math:`H_2` se realiza a través de una
-función de similaridad semántica entre conceptos :math:`s_c(c_i, c_j)` y de similaridad entre
+función de similaridad semántica entre conceptos :math:`s_C(c_i, c_j)` y de similaridad entre
 relaciones :math:`s_R(r_i, r_j)` que se pueden configurar con un umbral de tolerancia entre
 cada pareja de conceptos o relaciones, :math:`t_c` y :math:`t_r` respectivamente, en el
-intervalo :math:`[0, 1)` donde ``0`` exige una correspondencia exacta y ``1`` aceptaría
-como iguales cualquier pareja.
+intervalo :math:`[0, 1)` donde :math:`0` exige una correspondencia exacta y :math:`1`
+aceptaría como iguales cualquier pareja.
 
 La búsqueda de los subgrafos :math:`H_1` y :math:`H_2` se realiza utilizando el algoritmo
 McGregor y guardando todos los subgrafos comunes candidatos a ser máximo subgrafo común;
 en un paso posterior se escoge de entre los candidatos el subconjunto que maximice la
-similaridad entre los grafos de partida. Así:
+similaridad entre los grafos de partida (no se consideran componentes formados por
+un único nodo). Así:
 
 .. math::
 
-   sim(G_1, G_2) = argmax \sum_{i \in G_1, j \in G_2} sim(n_i, n_j) + sim(r_i, r_j)
+   sim(G_1, G_2) = argmax \sum_{i \in G_1, j \in G_2} sim(c_i, c_j) + sim(r_i, r_j)
+
+Este valor se normaliza teniendo en cuenta el valor máximo que podría alcanzar, el cual
+se calcula considerando todos los ejes y conexiones de ambos grafos:
+
+.. math::
+
+   sim_{MAX}(G_1, G_2) = max(|G_1|, |G_2|) + max(e_{G_1}, e_{G_2})
+   
+donde :math:`|G_i|` representa la cardinalidad del grafo :math:`G_i`, es decir, el
+número de nodos y :math:`e_{G_i}` es el número de conexiones existentes en el 
+grafo :math:`G_i`.
+
+Por lo tanto, el valor de similaridad se calcularía como 
+
+.. math::   
+
+   s(G_1, G_2) = \frac{sim(G_1, G_2)}{sim_{MAX}(G_1, G_2)}
+   
+y tomará siempre valores en el intervalo :math:`[0, 1]`.
 
 
-.. warning:: Meter un poco de formulación
+En la :num:`figura #fig-model-example-graph` se muestran dos grafos que servirán de
+ejemplo para ilustrar el modelo. En este caso no se han introducido etiquetas en las
+relaciones para simplificar la representación.
 
 
 .. _fig-model-example-graph:
@@ -32,58 +54,119 @@ similaridad entre los grafos de partida. Así:
    :caption: Grafos de ejemplo :math:`g_1` (izda) y :math:`g_2` (dcha).
 
    digraph foo {
-    # Grafo 1
-    A[label="A"]
-    B[label="B"]
-    C[label="C"]
-    D[label="D"]
-    E[label="E"]
-    
-    A -> B
-    A -> C
-    D -> C
-    D -> E
-    
-    # Grafo 2
-    A2[label="A"]
-    B2[label="B"]
-    C2[label="F"]
-    D2[label="d"]
-    E2[label="E"]
-    
-    A2 -> B2
-    A2 -> C2
-    D2 -> C2
-    D2 -> E2
+     subgraph cluster_A {
+         a0 [label="A"]
+         a1 [label="B"]
+         a2 [label="C"]
+         a3 [label="D"]
+         a4 [label="E"]
+         a5 [label="F"]
+         a6 [label="G"]
+         a7 [label="H"]
+         a8 [label="I"]
+         a0 -> a3
+         a1 -> a3 -> a4 -> a5
+         a1 -> a2 -> a3 
+         a3 -> a5
+         a1 -> a5
+         a6 -> a7 -> a8
+         a4 -> a8
+         label = "Grafo g1";
+         color = gray;
+     }
+
+     subgraph cluster_B {
+         b0 [label="A"]
+         b1 [label="B"]
+         #b2 [label="C"]
+         b3 [label="D"]
+         b4 [label="E"]
+         b5 [label="F"]
+         b6 [label="G"]
+         b7 [label="H"]
+         b8 [label="i"]
+         b1 -> b3-> b4 -> b5
+         b1 -> b5
+         b0 -> b4
+         b0 -> b5
+         b6 -> b7 -> b8
+         b4 -> b7
+         label = "Grafo g2";
+         color = gray;
+     }
    }
 
 
-Así, por ejemplo, dada la pareja de grafos :math:`g_1` y :math:`g_2` de la
-:num:`figura #fig-model-example-graph`, el modelo deberá ser capaz de encontrar
-el máximo grafo común que comparten ambos, :math:`mcs(g_1, g_2)` para un nivel de
-tolerancia dado. 
+El algoritmo de McGregor nos permitirá realizar la búsqueda del máximo grafo común
+de una forma ordenada. Utilizando un nivel de tolerancia entre conceptos :math:`t_c=0`
+exigimos una correspondencia exacta entre ellos y obtenemos el resultado de la
+:num:`figura #fig-model-example-mcs1`.
+
+En dicha figura se ha marcado en color los nodos y las relaciones que pertenecen a
+la solución de nuestro algoritmo: en este caso estaría formada por dos subgrafos
+(el rojo se correspondenría con el máximo grafo común) y ambos contribuyen.
+
  
 .. _fig-model-example-mcs1:
 .. graphviz::
-   :caption: Máximo grafo común de :math:`g_1` y :math:`g_2` con nivel de tolerancia, :math:`t_c=0`. NOTA.- En el modelo final se eliminarán los componentes del grafos que consten de un único nodo.
+   :caption: Máximo grafo común de :math:`g_1` y :math:`g_2` con nivel de tolerancia, :math:`t_c=0`.
 
    digraph foo {
-    # MCS
-    A[label="A"]
-    B[label="B"]
-    E[label="E"]
-    
-    A -> B
+     subgraph cluster_A {
+         a0 [label="A"]
+         a1 [label="B", color=red]
+         a2 [label="C"]
+         a3 [label="D", color=red]
+         a4 [label="E", color=red]
+         a5 [label="F", color=red]
+         a6 [label="G", color=blue]
+         a7 [label="H", color=blue]
+         a8 [label="I"]
+         a0 -> a3
+         a1 -> a3 -> a4 -> a5 [color=red]
+         a1 -> a2 -> a3 
+         a3 -> a5
+         a1 -> a5 [color=red]
+         a6 -> a7 [color=blue]
+         a7 -> a8
+         a4 -> a8
+         label = "Grafo g1";
+         color = gray;
+     }
+
+     subgraph cluster_B {
+         b0 [label="A"]
+         b1 [label="B", color=red]
+         #b2 [label="C"]
+         b3 [label="D", color=red]
+         b4 [label="E", color=red]
+         b5 [label="F", color=red]
+         b6 [label="G", color=blue]
+         b7 [label="H", color=blue]
+         b8 [label="i"]
+         b1 -> b3-> b4 -> b5 [color=red]
+         b1 -> b5 [color=red]
+         b0 -> b4
+         b0 -> b5
+         b6 -> b7  [color=blue]
+         b7 -> b8
+         b4 -> b7
+         label = "Grafo g2";
+         color = gray;
+     }
    }
 
-En la :num:`figura #fig-model-example-mcs1` se muestra el resultado con un nivel de
-tolerancia, :math:`t_c=0`, que exige que los nodos sean idénticos. Como se puede
-comprobar sólo existen tres nodos que cumplan esta condición, y sólo hay una conexión
-entre ellos. Por lo tanto, la similaridad entre los grafos será:
+El valor de similaridad calculado por el modelo sería:
 
 .. math::
 
-   sim(g_1, g_2)_{t_c=0}=s(A,A) + s(B,B) + s(E,E) + s(A \to B, A \to B)
+   sim(g_1, g_2)_{t_c=0}=s_{ROJO} + s_{AZUL}
+   
+y como hemos exigido una correspondencia exacta (:math:`t_c=0`) entonces la similaridad
+entre cada pareja de nodos será la máxima (la unidad) y podemos calcular el valor
+resultante de forma sencilla:
+
+
    
 Este valor se puede normalizar para poder comparar los resultados de diferentes
 experimentos, así lo podemos referir a un máximo de similaridad teórica que será:
@@ -102,7 +185,7 @@ similaridad:
 
 Si aumentamos la tolerancia entre conceptos, :math:`t_c`, ocurrirá que nodos que
 antes no aparecían en el MCS comiencen a hacerlo puesto que su distancia semántica
-según la medida elegida, será menor que el umbral de tolerancia utilizado como
+según la medida elegida será menor que el umbral de tolerancia utilizado como
 parámetro. 
 
 .. _fig-model-example-mcs2:
