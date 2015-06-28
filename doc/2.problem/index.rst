@@ -22,24 +22,27 @@ proponen en la bibliografía y los algoritmos de comparación de grafos que son 
 para la comparación de grafos conceptuales, presentados en la última sección del
 estado del arte.
 
-Sin embargo, ninguno de los artículos presentados es concluyente, debido, en primer lugar
+Sin embargo, ninguno de los artículos revisados es concluyente, debido, en primer lugar
 a que **no existe una definición objetiva de distancia semántica** a nivel de conceptos y,
-por lo tanto, este problema se arrastra hasta la comparación de grafos conceptuales.
+por lo tanto, este problema se arrastra hasta la comparación de grafos conceptuales y de
+textos completos. No hay una unidad de medida que permita saber cómo de lejos está
+un significado de otro y, probablemente, dadas las características del lenguaje natural,
+su ambigüedad, diversidad y subjetividad, sea imposible establecer una medida absoluta.
 
-La problemática se presenta en dos niveles, el primero de ellos en los conceptos
-individualizados y el segundo en el conjunto de la oración.
+Como hemos dicho, la problemática se presenta en dos niveles: el primero de ellos en
+los conceptos individualizados y el segundo en el conjunto de la oración.
 
 
 Distancia entre conceptos
 `````````````````````````
 Cada autor considera unas características diferentes a la hora de desarrollar su métrica
-de distancia entre conceptos o bien la restringe a un contexto concreto o utiliza el
-corpus que mejor se adecua al experimento que quiere realizar.
+de distancia entre conceptos: unos la restringen a un contexto concreto, otros utilizan el
+*corpus* que mejor se adecua al experimento que van a realizar.
 
 Existen esfuerzos como el de Budanitsky y Hirst :cite:`Budanitsky1998` :cite:`Budanitsky2006`
 o el dirigido por Slimani :cite:`Slimani2013` que muestran la correlación entre diferentes
 medidas de similaridad semántica o con datos obtenidos de estudios de campo.
-Las comparación con datos de distancia percibidos por
+Aún así, estas comparaciones con datos de distancia percibidos por
 personas se basan en pequeños experimentos (pocos sujetos y pocos pares de palabras) que
 parten del realizado por Rubenstein y Goodenough :cite:`Rubenstein1965` en 1965 con 51 nativos
 ingleses sobre 65 pares de palabras.
@@ -54,6 +57,12 @@ puede aceptar esta premisa como válida en términos generales (e.g. la palabra 
 la RAE define como "valiente", pero que en su uso está más próxima al concepto
 "raro, extravagante" importado del inglés *bizarre*).
 
+Resulta imprescindible disponer de un conjunto mayor de palabras y mejor etiquetado, que
+identifique, además de la distancia semántica, a las personas que han
+realizado el trabajo de clasificación: procedencia, edad, educación, contexto
+socio-cultural, etc. que pueden afectar a la identificación de la realidad
+extralingüística con un término concreto.
+
 
 Distancia entre oraciones
 `````````````````````````
@@ -63,22 +72,34 @@ muy importante del mensaje es implícito y su comprensión depende del sustrato 
 común de los interlocutores, es un problema que mencionábamos al hablar de los 
 fenómenos lingüísticos (:ref:`sección 2.3.1 <fenomenos-linguisticos>`).
 
-Este hecho provoca que el mismo mensaje pueda ser codificado de diferentes
-formas (paráfrasis), en cuyo caso una buena medida de distancia debería obtener un valor
-bajo que indicara que son muy similares, o bien, el mismo mensaje puede ser
-interpretado de manera diferente por distintos sujetos y entonces sí que existirá
-distancia real entre los grafos producidos.
+De acuerdo con la teoría de la dependencia conceptual dos oraciones con el mismo contenido
+semántico deberán representarse de la misma forma, pero pueden tener realizaciones
+distintas en el lenguaje natural en función de parámetros subjetivos que ya hemos enunciado.
+Este hecho puede provocar que un mismo mensaje sea codificado de formas diferentes
+y, por lo tanto, detectar una distancia semántica en teoría inexistente; una buena medida
+de distancia deberá ofrecer un valor muy bajo indicando que son muy similares.
 
-A pesar de que existen numerosos artículos en torno a la comparación de grafos, la literatura
-no es tan prolífica a la hora de comparar grafos conceptuales y, mucho menos, en la
-comparación flexible de grafos UNL. No se ha encontrado ningún artículo en el que
-se ofrezca una comparativa entre los resultados obtenidos por diferentes algoritmos.
+Pero también puede ocurrir que un mismo mensaje sea interpretado de manera diferente por
+distintos sujetos sin que ninguno esté equivocado, entonces la representación mental del
+significado deberá ser diferente en cada caso y existirá una distancia semántica entre
+ellas. El analizador de lenguaje natural debería tener en cuenta estas subjetividades a
+la hora de codificar el grafo, un problema para nada trivial que escapa del objeto de esta
+tesis.
+
+En la literatura que hemos consultado hay numerosos artículos en torno a la comparación
+de grafos, pero pocos de ellos se centran en grafos conceptuales y, mucho menos, en la
+comparación flexible de grafos UNL que es el problema que nosotros abordamos. Tampoco
+se ha encontrado ningún artículo en el que se ofrezca una comparativa entre los resultados
+obtenidos por diferentes algoritmos ni recursos etiquetados. 
+
+El problema de la distancia semántica entre oraciones parece que apenas ha sido 
+objeto de estudio.
 
 
 Recursos disponibles
 --------------------
-El problema que planteamos desde el principio también se ve condicionado por la
-disponibilidad (o carencia) de recursos adecuados disponibles:
+Como hemos hecho mención más arriba, el problema que planteamos desde el principio
+también se ve condicionado por la disponibilidad (o carencia) de recursos adecuados:
 
  * Los ejemplos de pares de palabras etiquetados por personas con la distancia
    semántica entre ellos son muy pocos y bastante pequeños. Cualquier medida de
@@ -93,8 +114,8 @@ disponibilidad (o carencia) de recursos adecuados disponibles:
 Respecto al enfoque desde el lenguaje UNL que quiere abordarse en esta tesis hay que
 señalar que tampoco se ha encontrado la Ontología UNL o *UNL Knowledge Base* a la que
 se hacía referencia en el capítulo anterior. Esta carencia puede ser subsanada
-utilizando WordNet, cuya base de datos puede ser descargada para ser accedida de
-una forma más conveniente.
+utilizando WordNet cuya base de datos es accesible; sin embargo será necesario establecer
+una correspondencia entre las UWs y los *synsets*.
 
 En cuanto a oraciones codificadas en forma de grafos UNL o grafos conceptuales pueden
 extraerse ejemplos de algunos artículos, aunque en este caso tenemos disponible en la
@@ -107,21 +128,19 @@ nuestra medida.
    http://www.unl.fi.upm.es/CLE/spanish/fr_examples.htm (accedido en junio de 2015).
 
    
-.. planteamiento-problema_
+.. _planteamiento-problema:
 Plantemaiento del problema
 --------------------------
 A la vista del estado del arte, las dificultades encontradas en la bibliografía y las
 carencias detectadas, el problema que se plantea en esta tesis es un problema no
 resuelto: **una medida de distancia entre grafos UNL**.
 
-Realmente no creemos que el problema esté resuelto en ninguna de sus partes, si acaso
-en la referida a propuestas de modelos para el cálculo de distancias entre conceptos
-dentro de una estructura jerárquica, pero al no haber un conjunto de datos de validación
-suficientemente amplio no puede evaluarse con propiedad qué modelo es mejor que otro.
+Realmente no creemos que el problema esté completamente resuelto en ninguna de sus partes,
+si acaso más avanzado en lo referente a propuestas de modelos para el cálculo de distancias
+entre conceptos dentro de una estructura jerárquica, pero al no haber un conjunto de datos
+de validación suficientemente amplio no puede fundamentarse qué modelo es mejor que otro.
 
-.. warning:: El problema claramente excede el ámbito de este trabajo.
-
-En este contexto creemos que prácticamente hay un trabajo pendiente en todas las fases
+En esta situación creemos que hay un trabajo pendiente en todas las fases
 involucradas en esta tesis:
 
  #. Creación de la **Ontología UNL**: es el recurso principal para poder automatizar el
@@ -145,8 +164,8 @@ involucradas en esta tesis:
     desarrollarse un proceso de obtención de datos que sea fácilmente reproducible y
     replicable para mantener actualizado el *dataset*.
 
- #. **Corpus etiquetado con UWs**: algunas medidas de distancia, las basadas en el contenido
-    de información, requieren de un corpus para poder calcular la frecuencia de aparición
+ #. **Corpus etiquetado con UWs**: las medidas de distancia basadas en el contenido
+    de información requieren de un *corpus* para poder calcular la frecuencia de aparición
     de los diferentes conceptos. Etiquetado para WordNet sólo se ha encontrado el
     corpus SemCor [#]_ que es un subconjunto del Brown Corpus [#]_ anotado con los conceptos de
     WordNet 1.6 y mapeado automáticamente a las versiones posteriores de WordNet.
@@ -201,6 +220,7 @@ involucradas en esta tesis:
 
 Los trabajos reseñados anteriormente exceden con mucho el alcance de esta tesis, pero hemos
 creído conveniente exponerlos como fruto de la investigación que se ha realizado sobre la
-materia y servirán para orientar el trabajo futuro.
+materia y servirán para orientar el trabajo futuro. Nosotros nos centraremos en proponer 
+un nuevo modelo para el último de los puntos a los que se ha hecho referencia.
 
 
