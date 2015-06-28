@@ -89,7 +89,7 @@ interpretada por un programa:
  * Los **conceptos** están representados por cajas que contienen un etiqueta identificativa
    del elemento cognitivo que representan, que puede tratarse de cualquier entidad real o 
    abstracción. Sowa, además, introduce una propiedad de ordenamiento entre los conceptos
-   que le permite crear una estructura jerárquica; esta propiedad, representada por ''<'',
+   que le permite crear una estructura jerárquica; esta propiedad, representada por :math:`<`,
    puede aplicarse a dos conceptos cualesquiera :math:`a` y :math:`b`, de tal forma que
    si se cumple :math:`a < b` entonces :math:`a` es un *subtipo* de :math:`b`, es decir,
    representa un concepto más específico. No hay ninguna restricción que impida que un
@@ -131,7 +131,7 @@ por conveniencia son representados con una breve etiqueta en inglés, pero podr�
 de un número o una dirección de memoria en un ordenador.
 
 Más importante es la jerarquización entre conceptos que introduce a través de la propiedad
-''<'' a la que hemos hecho mención, en artículos posteriores Sowa empezará a hablar de
+:math:`<` a la que hemos hecho mención, en artículos posteriores Sowa empezará a hablar de
 ontología y de categorías al hace referencia a la jerarquía de conceptos.
 
 El término *ontología* hace referencia a una parte de la metafísica que trata del ser en
@@ -401,7 +401,7 @@ de relaciones binarias que enlazan los conceptos presentes en la oración.
 
 Los conceptos se representan con etiquetas literales que reciben el nombre de
 *palabras universales* (UW, *Universal Words*) que además pueden ir acompañadas de
-varios attributos (se utiliza el símbolo ''@'' para indicarlos) que
+varios attributos (se utiliza el símbolo ``@`` para indicarlos) que
 permiten mostrar más informacón sobre el uso específico del concepto en la oración
 original :cite:`Uchida1999`. Estas UWs son el equivalente a los nodos-concepto de Sowa
 y a los *synsets* de WordNet.
@@ -414,7 +414,7 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
 
 .. _fig-example-unl:
 .. graphviz::
-   :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.". El atributo ''@entry'' indica el concepto principal de la oración.
+   :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.". El atributo ``@entry`` indica el concepto principal de la oración.
 
    digraph foo {
         rankdir=TB

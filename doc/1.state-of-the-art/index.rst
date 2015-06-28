@@ -49,9 +49,6 @@ ser una herramienta de extremada utilidad para evaluar un sistema de traducción
    también pérdidas de significado debidas a limitaciones de la lengua de destino si ésta
    no es capaz de representar toda la riqueza semántica del texto original.
 
-.. TODO: En el comentario anterior hay que enlazar al apartado donde se hable de paráfrasis
-   y de limitaciones del lenguaje.
-
 En este capítulo estudiamos el estado del arte de los sistemas de representación del
 conocimiento que son utilizados como interlinguas, y en concreto nos centraremos en
 aquéllos cuya representación formal es un grafo; posteriormente expondremos las 
