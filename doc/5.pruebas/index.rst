@@ -90,12 +90,14 @@ en los siguientes apartados.
 Datos de partida: oración y grafo UNL
 `````````````````````````````````````
 En el documento al que hemos hecho referencia anteriormente tenemos disponibles las
-oraciones en inglés y su transcripción como grafo UNL (:num:`listado #code-example-unl-3`).
+oraciones en inglés y su transcripción como grafo UNL. La oración sobre la que
+trabajaremos es la siguiente,
 
 Ejemplo 3
   : *These concepts are essential for advancing towards a sustainable, more human world agenda, and they will undoubtedly continue to be relevant for many years to come.*
   
-  
+cuyo grafo UNL se muestra en el :num:`listado #code-example-unl-3`.
+
 .. code-block:: unl
    :caption: Codificación UNL original de la oración ejemplo 3.
    :name: code-example-unl-3
@@ -128,7 +130,7 @@ servirá de punto de partida para las traducciones generadas por los sistemas qu
 a comparar.
 
 En nuestro caso el idioma intermedio será el español, y la traducción la generaremos
-utilizando Systrans [#]_.
+utilizando el sistema Systrans [#]_:
 
 .. [#] SYSTRANet – Online translation software and tools – Dictionary
    http://www.systranet.com/dictionary/english-spanish (accedido en junio
@@ -136,6 +138,9 @@ utilizando Systrans [#]_.
      
   **Systrans**: Estos conceptos son esenciales para avanzar hacia un orden del día sostenible, más humano del mundo, y continuarán indudablemente siendo relevantes durante muchos años de venir.
   
+Como podemos ver, el sistema ya ha introducido alguna variación respecto al contenido
+original, incluso la corrección gramatical de la oración parece estar comprometida.
+
 
 Traducción al idioma original
 `````````````````````````````
@@ -152,7 +157,7 @@ los siguientes resultados:
 .. [#] Yandex.Translate. https://translate.yandex.com/ (accedido en junio de 2015)
 
 Leyendo las oraciones resultantes podemos observar cómo las traducciones no son idénticas
-entre ellas y se han alejado del contenido semántico original. Nuestro modelo trabaja con
+entre ellas y se han alejado del contenido semántico original. Nuestro modelo trabajará con
 estos datos para obtener una medida de distancia entre las traducciones y la oración
 original.
 
@@ -163,10 +168,11 @@ de utilizar las medidas de distancia que hemos expuesto en el estado del arte de
 ser a través de la jerarquía de conceptos de WordNet. Para ello hemos tenido que
 identificar cada concepto expresado por las UWs con un *synset* concreto en WordNet.
 
-Este proceso se ha realizado manualmente y, con total seguridad, introduce una primera
+Este proceso se ha realizado manualmente y, con total seguridad, el autor está
+introduciendo una primera
 desviación semántica entre la oración original y el grafo base para la comparación; no
-obstante, siempre que aparecen los mismos conceptos se tiene la precaución de
-sustituirlos por el mismo *synset*.
+obstante, se ha tenido la precaución de que siempre que aparecen los mismos conceptos
+se sustituye por el mismo *synset*.
 
 De este modo, el grafo UNL original, se convierte en el grafo mostrado en el 
 :num:`listado #code-example-original-3` que también se muestra en la
@@ -205,7 +211,7 @@ De este modo, el grafo UNL original, se convierte en el grafo mostrado en el
    únicamente las *headwords* correspondientes a cada concepto).
 
 La conversión de los conceptos UNL expresados en las UWs en los *synsets* de WordNet
-se ha realizado utilizando el buscador accesible en la página web de la Universidad
+se ha realizado utilizando el buscador de WordNet accesible en la página web de la Universidad
 de Princeton [#]_, de entre todas las opciones proporcionadas para cada palabra se
 ha seleccionado el concepto más próximo dentro de la categoría gramatical adecuada.
 
@@ -285,7 +291,7 @@ Ejecución del modelo
 Una vez que se tienen disponibles los grafos generados por los traductores, se 
 realiza la comparación de cada uno de ellos con el grafo de referencia para calcular
 la distancia semántica introducida por cada uno de los sistemas de traducción y
-poder evaluar su rendimiento de una forma automática.
+poder evaluar su rendimiento de forma automática.
 
 A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros:
 
@@ -315,7 +321,7 @@ se muestra el valor calculado de similaridad para estos grafos utilizando todas
 las medidas de similaridad/distancia entre conceptos disponibles y para
 diferentes valores de tolerancia entre conceptos, :math:`t_c \in [0.0, 0.9]`.
 
-Una gráfica similar podría realizarse fijando un valor de tolerancia para la
+Una gráfica similar se ha realizado fijando un valor de tolerancia para la
 distancia entre conceptos y variando la tolerancia entre relaciones, no se ha
 reproducido aquí porque no se produce ninguna variación en el valor de 
 similaridad.
@@ -347,8 +353,8 @@ máximo grafo común es ``agenda`` y ``populace``, con los siguientes valores:
  * Leacock-Chodorow :math:`s_c(agenda, populace) = 0.395966`
  * Wu-Palmer :math:`s_c(agenda, populace) = 0.181818`
  * Resnik :math:`s_c(agenda, populace) = 0.122799`
- * Jiang-Conrath :math:`s_c(agenda, day) < 0.1`
- * Lin :math:`s_c(agenda, day) < 0.1`
+ * Jiang-Conrath :math:`s_c(agenda, populace) < 0.1`
+ * Lin :math:`s_c(agenda, populace) < 0.1`
 
 Como consecuencia de la incorporación de un nuevo nodo al grafo resultante, 
 se añaden nuevas conexiones con sus valores de similaridad que incrementan
@@ -373,10 +379,12 @@ el valor calculado para la pareja de grafos.
 
 Valor de similaridad
 ````````````````````
-Puesto que se dispone de varios algoritmos de medida de similaridad entre conceptos, para calcular el valor final
-de similaridad entre todos ellos se realizará la media de todos, de este modo se obtiene un resultado como el que
-se muestra en la :num:`figura #sample03-relation-tol-0`: el valor de similaridad muestra una incremento monótono
-conforme la tolerancia entre los conceptos aumenta.
+Puesto que se dispone de varios algoritmos de medida de similaridad entre conceptos,
+para calcular el valor final de similaridad entre los grafos podemos utilizar la media
+de todos ellos, de este modo se obtiene un resultado como el que se muestra en la
+:num:`figura #sample03-relation-tol-0`: el valor de similaridad muestra una incremento
+monótono conforme la tolerancia entre los conceptos aumenta, que es lo que cabría
+esperar y que hemos comentado al exponer el modelo.
 
 .. figure:: ../../data/samples/sample03-brief/synset_tol-relation_tol-0.png
    :name: sample03-relation-tol-0
@@ -385,17 +393,19 @@ conforme la tolerancia entre los conceptos aumenta.
 
    Similaridad semántica entre el grafo original y los grafos correspondientes a las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia :math:`t_c` entre conceptos (intervalo de confianza 95%).
 
-En este caso concreto, el algoritmo indica que la distancia semántica es menor en el caso de la traducción de Yandex
-que en la de Google; un conjunto de oraciones etiquetado adecuadamente (probablemente fuera necesario realizarlo
-manualmente) nos podría servir para valorar el resultado del algoritmo.
+En este caso concreto, el algoritmo indica que la distancia semántica es menor en el
+caso de la traducción de Yandex que en la de Google; un conjunto de oraciones
+etiquetado adecuadamente (probablemente fuera necesario realizarlo manualmente)
+nos podría servir para valorar el desempeño de los traductores.
 
 
 Resultados
 ----------
-Para la experimentacion se ha preparado un *dataset* con 10 oraciones extraídas del documento del Forum
-Universal de las Culturas de Barcelona 2004 y traducidas utilizando los servicios indicados anteriormente.
-El conjunto completo de oraciones se incluye a continuación, la codificacion original, asi como las
-correspondencias con WordNet y la representacion grafica tanto del original como de las traducciones puede
+Para la experimentacion se ha preparado un *dataset* con 10 oraciones extraídas del
+documento del Forum Universal de las Culturas de Barcelona 2004 y traducidas utilizando
+los servicios indicados anteriormente. El conjunto completo de oraciones se incluye a
+continuación; la codificacion original, así como las correspondencias con WordNet y
+la representación gráfica tanto del original como de las traducciones puede
 consultarse en el *dataset* completo que se adjunta en el :ref:`Apéndice A <appendix-data>`.
 
 
@@ -619,7 +629,8 @@ Sin embargo, existen algunos resultados que no parecen correctos:
    Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
 
 
-El objetivo de esta experimentación no es valorar los traductores, no creemos que la muestra
-de oraciones sobre la que hemos trabajado sea suficientemente significativa para ello.
+NOTA.- El objetivo de esta experimentación no es valorar los traductores, no creemos
+que la muestra de oraciones sobre la que hemos trabajado sea suficientemente
+significativa para ello.
    
 
