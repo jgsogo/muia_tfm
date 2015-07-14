@@ -9,7 +9,7 @@ Conclusión y trabajo futuro
 A lo largo de este trabajo hemos tenido la ocasión de aproximarnos a la problemática que
 ofrecen los sistemas de traducción automáticos en cuanto a la fiabilidad de los textos 
 que producen. El objetivo de estos sistemas es generar un texto en un idioma desconocido
-por el cliente de un contenido que éste le proporciona, por lo tanto la principal
+por el cliente de un contenido que este le proporciona, por lo tanto la principal
 característica que deben cumplir es que el mensaje sea el mismo en ambas lenguas.
 
 El usuario que solicita la traducción lo hace precisamente porque desconoce el idioma de
@@ -72,7 +72,7 @@ dejado a un lado, pero que sin duda son importantes:
    métrico.
    
  * También es imprescindible incorporar los atributos de las UWs en el cálculo de la
-   distancia entre grafos, sin duda ésta será una de las primeras incorporaciones
+   distancia entre grafos, sin duda esta será una de las primeras incorporaciones
    que se realicen al modelo en una futura versión.
 
 Por último, es necesario revisar los casos en los que el resultado del modelo ofrece

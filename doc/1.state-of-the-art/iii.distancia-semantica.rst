@@ -77,7 +77,7 @@ tendrán los grafos generados a partir de los textos traducidos no podrá ser ma
 información que es posible expresar en los lenguajes de destino. Es decir, ningún grafo
 obtenido a partir de un texto puede contener más información que el propio texto.
 
-Así, si el texto original es en japonés y aparece el término *ikebana*, éste será codificado
+Así, si el texto original es en japonés y aparece el término *ikebana*, este será codificado
 en UNL mediante la UW ``ikebana(icl>flower arrangement)``, al traducir este texto al español,
 idioma en el que no existe una traducción exacta para este concepto, el generador tendrá que optar
 por un término aproximado como *arreglo floral* donde ya se han perdido las connotaciones
@@ -194,7 +194,7 @@ nodo de entrada o raíz (este nodo está presente en los grafos conceptuales y t
 los grafos UNL), que será por el que comience su algoritmo.
 
 De este modo crean un algoritmo recursivo que comienza por el nodo raíz de cada grafo y
-continúa comparando todas las posibles combinaciones de los subgrafos que cuelgan de éste, el
+continúa comparando todas las posibles combinaciones de los subgrafos que cuelgan de este, el
 algoritmo devolverá el valor máximo de similaridad entre todas las posibles combinaciones.
 
 .. TODO: Artículos pendientes de revisión:
