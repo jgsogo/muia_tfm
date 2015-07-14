@@ -8,7 +8,7 @@ Estado del Arte
 ===============
 
 La base de los sistemas de traducción automáticos basados en una interlingua es
-que ésta debe representar todas las oraciones que tienen el mismo
+que esta debe representar todas las oraciones que tienen el mismo
 significado de la misma manera, con el mismo conjunto de símbolos, independientemente
 del idioma original del texto. Partiendo de esta representación única no ambigua
 se generan las traducciones a todos los idiomas de destino como se muestra en
@@ -46,12 +46,12 @@ una medida adecuada de distancia o de similaridad entre ambas representaciones r
 ser una herramienta de extremada utilidad para evaluar un sistema de traducción automática.
 
 .. [#] Podrán existir diferencias debidas a fenómenos lingüísticos como la paráfrasis y
-   también pérdidas de significado debidas a limitaciones de la lengua de destino si ésta
+   también pérdidas de significado debidas a limitaciones de la lengua de destino si esta
    no es capaz de representar toda la riqueza semántica del texto original.
 
 En este capítulo estudiamos el estado del arte de los sistemas de representación del
 conocimiento que son utilizados como interlinguas, y en concreto nos centraremos en
-aquéllos cuya representación formal es un grafo; posteriormente expondremos las 
+aquellos cuya representación formal es un grafo; posteriormente expondremos las
 medidas que se han propuesto en la bibliografía para estudiar la similaridad entre dos
 grafos, veremos cómo evaluar la distancia semántica entre conceptos y textos, y
 finalmente repasaremos los modelos propuestos que integran lo anterior para evaluar

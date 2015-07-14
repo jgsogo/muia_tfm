@@ -12,7 +12,7 @@ La distancia semántica
 En la revisión del estado del arte del capítulo anterior hemos mostrado los diferentes
 elementos que se han de tener en cuenta para la comparación de dos oraciones en lenguaje
 natural. Hemos comentado muy sucintamente los problemas relacionados con la conversión de
-éste en una representación del conocimiento independiente de la lengua y que
+este en una representación del conocimiento independiente de la lengua y que
 no presente ambigüedades, que es la base de los sistemas de traducción basados en
 interlingua. Hemos repasado los grafos conceptuales y la evolución de estos hasta el
 *Universal Networking Language* (UNL).

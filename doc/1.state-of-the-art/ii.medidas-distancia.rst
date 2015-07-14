@@ -196,7 +196,7 @@ algoritmos de procesamiento en paralelo, como Shinano *et al.* :cite:`Shinano199
 Pardalo *et al.* :cite:`Pardalos1998` o San Segundo *et al.* :cite:`SanSegundo2011`.
 
 Otro algoritmo que aplica marcha atrás en la búsqueda del MCS se debe a McGregor en
-1979 :cite:`McGregor1982`, éste no convierte el problema en la búsqueda del máximo *clique*
+1979 :cite:`McGregor1982`, este no convierte el problema en la búsqueda del máximo *clique*
 y, según Bunke *et al.* :cite:`Bunke2002` ofrece resultados más rápido que los otros
 algoritmos que sí lo hacen cuando los grafos son dispersos. McGregor implementa
 el algoritmo dentro de un programa para analizar las modificaciones en los enlaces de

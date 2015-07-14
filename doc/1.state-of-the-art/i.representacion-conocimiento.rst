@@ -125,7 +125,7 @@ pueden aparecer en el grafo.
 Semántica estructural
 `````````````````````
 En los nodos de tipo *concepto* de los CGs tiene que tener cabida cualquier entidad real
-o abstracta y ésta tiene que poder expresarse de una manera no ambigua. En su artículo de
+o abstracta y esta tiene que poder expresarse de una manera no ambigua. En su artículo de
 1976 :cite:`Sowa1976` Sowa ya indica que estos conceptos son meros identificadores y que
 por conveniencia son representados con una breve etiqueta en inglés, pero podría tratarse
 de un número o una dirección de memoria en un ordenador.
@@ -369,7 +369,7 @@ PIVOT
 .. La información está sacada de aquí: http://www.tendencias21.net/iartificial/m/Haciendo-memoria_a17.html
 
 A finales de los 1980s también se iniciaba el proyecto de traducción automática multilingüe
-conocido como PIVOT; a diferencia del programa EUROTRA, éste sí planteaba la creación de una
+conocido como PIVOT; a diferencia del programa EUROTRA, este sí planteaba la creación de una
 interlingua que sirviera como eje de las traducciones.
 No era el único proyecto en este sentido, Fujitsu lo estaba haciendo en su proyecto ATLAS
 (Dr. Uchida) y la universidad Carnegie Mellon de Pittsburg (USA) con KANT (Jaime Carbonell).
@@ -595,7 +595,7 @@ también ejemplos de UWs extra.
 
 Todas las UWs aceptadas deberían estar recogidas en un único repositorio centralizado conocido
 como *UNL Ontology* (anteriormente *UNL Knowledge Base*). Esta base de datos constituiría una red
-semántica con todas las relaciones binarias dirigidas que existen entre las palabras universales,  asignando a éstas relaciones un grado de certeza absoluto (imposible o verdadero) [#]_.
+semántica con todas las relaciones binarias dirigidas que existen entre las palabras universales,  asignando a estas relaciones un grado de certeza absoluto (imposible o verdadero) [#]_.
 De esta forma cualquier UW aceptada aparecería en la ontología relacionada con otras palabras.
 
 .. [#] La posibilidad de asignar a una relación un grado de certeza *imposible* sirve para

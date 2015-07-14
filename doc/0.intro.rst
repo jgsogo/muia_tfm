@@ -16,7 +16,7 @@ conocimiento científico, los negocios y la educación; quienes no son nativos
 angloparlantes deben dedicar dinero y tiempo para acceder a estos conocimientos,
 pero muchas otras personas no tendrán los recursos necesarios. Pero la barrera del
 idioma también existe en el sentido contrario, el conocimiento expresado en otros
-lenguajes como el español, chino, árabe, etc. resulta inaccesible para aquéllos
+lenguajes como el español, chino, árabe, etc. resulta inaccesible para aquellos
 que no conocen estos idiomas.
 
 El lenguaje universal (UNL, *Universal Networking Language*) es un lenguaje
@@ -187,12 +187,12 @@ de un idioma a otro, o la existencia de lenguas criollas aporta evidencias a est
 hipótesis :cite:`Kottak2002`. Un sistema de traducción que utiliza una interlingua
 solo es posible si se acepta esta hipótesis como válida, los conceptos son independientes
 y anteriores al lenguaje en el que se articulan y, por lo tanto, pueden ser representados
-independientemente de éste [#]_.
+independientemente de este [#]_.
 
 .. [#] La hipótesis contraria, conocida como Hipótesis de Sapir-Whorf, sostiene que
    las características del lenguaje condicionan la manera de pensar del hablante. Esta
    hipótesis toma el nombre de Edward Sapir, quien la formula originalmente, y de 
-   Benajmin Lee Whorf, discípulo de aquél, que la desarrolla en la década de 1940.
+   Benajmin Lee Whorf, discípulo de aquel, que la desarrolla en la década de 1940.
 
 Una de las principales ventajas de los sistemas que utilizan una lengua pivote frente a
 los que se enfocan en la traducción entre pares de lenguas es el número de *traductores*
