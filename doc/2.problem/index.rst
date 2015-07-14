@@ -104,7 +104,7 @@ también se ve condicionado por la disponibilidad (o carencia) de recursos adecu
  * Los ejemplos de pares de palabras etiquetados por personas con la distancia
    semántica entre ellos son muy pocos y bastante pequeños. Cualquier medida de
    distancia que propongamos apenas podrá ser contrastada contra un conjunto de
-   datos de test, sólo podrá ser evaluada contra otras medidas presentes en la
+   datos de test, solo podrá ser evaluada contra otras medidas presentes en la
    bibliografía.
 
  * Mucho menos existe un repositorio con oraciones y las distancias entre ellas, en
@@ -166,7 +166,7 @@ involucradas en esta tesis:
 
  #. **Corpus etiquetado con UWs**: las medidas de distancia basadas en el contenido
     de información requieren de un *corpus* para poder calcular la frecuencia de aparición
-    de los diferentes conceptos. Etiquetado para WordNet sólo se ha encontrado el
+    de los diferentes conceptos. Etiquetado para WordNet solo se ha encontrado el
     corpus SemCor [#]_ que es un subconjunto del Brown Corpus [#]_ anotado con los conceptos de
     WordNet 1.6 y mapeado automáticamente a las versiones posteriores de WordNet.
     

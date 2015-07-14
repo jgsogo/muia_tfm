@@ -38,7 +38,7 @@ traducciones, tanto en lo referente al dominio tratado como en su contemporaneid
 Además, para poder evaluar el modelo propuesto y compararlo con los pocos que están
 disponibles en la bibliografía resulta también imprescindible contar con un conjunto de
 datos de validación etiquetados manualmente que contengan una apreciación lo más objetiva
-y profesional posible de la distancia entre varias oraciones. Sólo así es posible
+y profesional posible de la distancia entre varias oraciones. Solamente así es posible
 evaluar el rendimiento del modelo y trabajar sobre él para mejorar sus resultados.
 
 

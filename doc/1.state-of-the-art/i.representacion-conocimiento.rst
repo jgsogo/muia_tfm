@@ -336,7 +336,7 @@ su utilización.
 
 El argumento más relevante en contra del uso de las interlinguas está relacionado con el nivel
 de abstracción y universalidad que debe tener esta lengua, lo que la convertiría en inviable
-económicamente :cite:`Martins2002`: no sólo debería ser capaz de expresar cualquier significado
+económicamente :cite:`Martins2002`: no solo debería ser capaz de expresar cualquier significado
 de cualquier lengua sino que también tendría que poder trabajar con las particularidades
 cognitivas de todas las culturas, un problema sin acotar. Por ejemplo, una interlingua de
 carácter universal debería ser capaz de representar la lógica trivalente del
@@ -381,7 +381,7 @@ a español.
 
 Este proyecto también finaliza en 1992, al igual que EUROTRA. El proyecto ATLAS, por su
 parte, aún puede ser encontrado en la página web de Fujitsu como un producto comercial
-relacionado con la traducción, aunque sólo entre el par de lenguas inglés-japonés [#]_.
+relacionado con la traducción, aunque solo entre el par de lenguas inglés-japonés [#]_.
 
 .. [#] Fujitsu. ATLAS V14. Información disponible en https://www.fujitsu.com/global/products/software/packaged-software/translation/atlas/ (accedido en junio de 2015)
 
@@ -614,7 +614,7 @@ Las relaciones principales entre UWs para construir la ontología son las siguie
  * ``pof`` (parte de): codifica la relación de meronimia.
 
 La Ontología UNL también contendría el resto de relaciones posibles entre cualquier par de
-UWs, no obstante, estas relaciones sólo aparecerían entre los conceptos más generales posibles,
+UWs, no obstante, estas relaciones solo aparecerían entre los conceptos más generales posibles,
 de tal forma que se explota la propiedad de herencia de las UWs: cualquier UWs hereda las
 relaciones más restrictivas de sus hiperónimos.
 

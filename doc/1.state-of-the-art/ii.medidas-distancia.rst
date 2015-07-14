@@ -57,7 +57,7 @@ Comparación de grafos
 La comparación de grafos es un problema muy prolífico en la literatura; desde hace tiempo,
 multitud de problemas en el ámbito del reconocimiento de patrones se han codificado en forma
 de grafos, una herramienta muy potente para representar la información de forma clara y
-concisa. Pero los grafos no sólo se utilizan para almacenar la información, en muchos casos
+concisa. Pero los grafos no solo se utilizan para almacenar la información, en muchos casos
 es precisa la búsqueda de patrones dentro de un conjunto de grafos, o la clasificación de
 un nuevo grafo. 
 
@@ -212,7 +212,7 @@ introducen penalizaciones cuando la correspondencia entre los nodos o los arcos 
 exacta. Por lo tanto, el algoritmo deberá encontrar la solución que minimice este coste.
 
 Hay algoritmos que garantizan la solución óptima (exacta en caso de que exista) y otros
-que sólo la aproximan ofreciendo un resultado que es mínimo local, generalmente los
+que solo la aproximan ofreciendo un resultado que es mínimo local, generalmente los
 segundos ofrecerán tiempos de respuesta mucho más breves.
 
 En función de la estrategia utilizada por los algoritmos podemos clasificarlos en:
@@ -248,7 +248,7 @@ son (el lector podrá encontrar una exposición más exhaustiva en el trabajo de
    seguir un camino determinado. De este modo podrá definirse el orden de búsqueda en el
    árbol o podarse aquellas ramas que no vayan a visitarse.
 
-   Los primeros algoritmos sólo permitían la sustitución de nodos y arcos por lo que las
+   Los primeros algoritmos solo permitían la sustitución de nodos y arcos por lo que las
    estructuras de ambos grafos debían ser isomorfas :cite:`Tsai1979`, posteriormente se
    incorpora la adición y sustracción de elementos (o su división y unión).
 
@@ -265,12 +265,12 @@ son (el lector podrá encontrar una exposición más exhaustiva en el trabajo de
    el dominio continuo que debe ser transformada posteriormente al discreto original.
 
    La mayoría de este tipo de algoritmos que aparecen en :cite:`Conte2004` no consideran
-   los atributos en nodos y arcos, tan sólo el propuesto por Christmas *et al.*
+   los atributos en nodos y arcos, tan solo el propuesto por Christmas *et al.*
    :cite:`Christmas1995` que utilizan para el reconocimiento de carreteras en imágenes
    aéreas.
 
  * **Métodos espectrales**: basadas en los autovalores y autovectores calculados a partir de la
-   matriz de adyacencia. El inconveniente de estos métodos es que sólo tienen en cuenta la
+   matriz de adyacencia. El inconveniente de estos métodos es que solo tienen en cuenta la
    estructura del grafo y no los atributos de los nodos y arcos. Una revisión actualizada de
    algoritmos de este tipo que utilizan la matriz de distancias puede ser consultada en
    el articulo de Aouchiche y Hansen de 2014 :cite:`Aouchiche2014`.
@@ -324,7 +324,7 @@ considerar su distancia semántica proporcional a la longitud de este camino.
 **Rada et al.** :cite:`Rada1989` aplican este principio para calcular la distancia entre
 conceptos en la red MeSH (*Medical Subject Headers*), Jarmasz y Szpakowicz
 :cite:`Jarmasz2003` utilizan la misma técnica con el *Roget's Thesaurus*.
-En ambos casos los resultados son bastante buenos debido a que sólo utilizan las relaciones
+En ambos casos los resultados son bastante buenos debido a que solo utilizan las relaciones
 ``is-a`` :cite:`Lee1993`. Esta distancia se formularía como [#]_:
 
 .. math::
@@ -441,7 +441,7 @@ el contenido de información dado por este concepto, según la teoría de la inf
     IC(c) = -log(p(c))
 
 La primera vez en la que se utiliza el contenido de información para calcular la distancia
-semántica entre conceptos pudo ser en 1995 por Resnik quien sólo tenía
+semántica entre conceptos pudo ser en 1995 por Resnik quien solo tenía
 en cuenta la frecuencia de aparición de un término para evaluarlo.
 
 **Resnik** :cite:`Resnik1995` propone la siguiente medida de similaridad semántica:
@@ -511,7 +511,7 @@ y :math:`\beta (0 \leq \beta \leq 1)` controlan el grado de influencia de los di
 en el peso final del enlace.
 
 Utilizando esta formulación puede calcularse la distancia entre dos conceptos como la suma de los
-pesos de las conexiones del camino más corto que los une. En el caso especial en el que sólo se 
+pesos de las conexiones del camino más corto que los une. En el caso especial en el que solo se
 considera el peso de los enlaces de tipo hiperónimo/hipónimo con un peso 1,
 :math:`\alpha = 0, \beta = 1, T(c,f)=1`, entonces la distancia puede calcularse como:
 

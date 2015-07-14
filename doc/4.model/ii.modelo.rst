@@ -104,7 +104,7 @@ la solución de nuestro algoritmo: en este caso estaría formada por dos subgraf
 (el rojo se correspondenría con el máximo grafo común) y ambos contribuyen al
 valor de similaridad. A pesar de que hay otros nodos que también están presentes
 en ambos grafos (como el nodo :math:`A`) éste no forma parte de la solución puesto
-que está aislado y ya hemos comentado que sólo se consideran aquellos componentes que
+que está aislado y ya hemos comentado que solo se consideran aquellos componentes que
 estén formados por un mínimo de dos nodos (como es el caso de la pareja :math:`G, H`).
 
  
