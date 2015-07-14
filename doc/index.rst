@@ -17,9 +17,13 @@ Medida de distancia en grafos UNL
     
 .. raw:: latex
 
+   \cleardoublepage
+   \phantomsection
    \addcontentsline{toc}{chapter}{Índice de figuras}
    \listoffigures
    
+   \cleardoublepage
+   \phantomsection
    \addcontentsline{toc}{chapter}{Tablas}
    \listoftables
   
