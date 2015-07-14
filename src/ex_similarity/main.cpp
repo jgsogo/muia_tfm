@@ -148,6 +148,9 @@ int main(int argc, char** argv) {
     vector<synset> synsets2 = wnet.get_synsets("dog", pos_t::N);
     auto synset1 = synsets1[0];
     auto synset2 = synsets2[0];
+    cout << synset1.id << endl << endl;
+    cout << synset1.sense_number << endl << endl;
+    
     cout << "cat[0] = " << synset1 << endl;
     cout << "dog[0] = " << synset2 << endl;
     auto distance_synset = [&synset1, &synset2](distance::base_synset& dist, const std::string& id_dist){
@@ -174,7 +177,7 @@ int main(int argc, char** argv) {
         auto data = dist.min_distance(s1, synsets2, distances, penalize_each);
         auto min_d = dist.lower_bound(s1, synsets2, penalize_each);
         auto max_d = dist.upper_bound(s1, synsets2, penalize_each);
-        cout << " - Distance € [" << min_d << ", " << max_d  << "]" << endl;
+        cout << " - Distance [" << min_d << ", " << max_d  << "]" << endl;
         cout << " - Min distance is " << data << endl;
         cout << " - Ratio " << (data - min_d) / (max_d - min_d) << endl;
         cout << " - Sim_ration " << (max_d - data) / (max_d) << endl;

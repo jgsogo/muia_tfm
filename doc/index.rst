@@ -1,8 +1,5 @@
-.. Medida de distancia en grafos UNL documentation master file, created by
-   sphinx-quickstart on Tue Feb 17 20:45:25 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
+:orphan:
 
 Medida de distancia en grafos UNL
 =================================
@@ -10,8 +7,15 @@ Medida de distancia en grafos UNL
 .. only:: html
    Contents:
 
+
 .. toctree::
-   :maxdepth: 4
+
+   abstract
+   acknowledgements
+   dedication
+    
+    
+.. toctree::
    :numbered:
 
    0.intro
