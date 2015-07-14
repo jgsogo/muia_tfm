@@ -137,7 +137,7 @@ exponíamos anteriormente (ver :num:`figura #fig-mcs-example`).
 
 .. _fig-mcs-example:
 .. graphviz::
-   :caption: Dados dos grafos :math:`A` y :math:`B`, el máximo grafo común, :math:`mcs(A,B)` estará formado por el conjunto de nodos presentes en ambos y las conexiones entre ellos. En la figura se han indicado las correspondencias utilizando el símbolo :math:`\equiv` y los colores rojo para el grafo :math:`A` y azul para el :math:`B`.
+   :caption: Dados dos grafos ``A`` y ``B``, el máximo grafo común, ``mcs(A,B)`` estará formado por el conjunto de nodos presentes en ambos y las conexiones entre ellos. En la figura se han indicado las correspondencias utilizando el símbolo ``\equiv`` y los colores rojo para el grafo ``A`` y azul para el ``B``.
 
    digraph foo {
      subgraph cluster_1 {
