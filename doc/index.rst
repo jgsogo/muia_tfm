@@ -10,9 +10,8 @@ Medida de distancia en grafos UNL
 
 .. toctree::
 
+   resumen
    abstract
-   acknowledgements
-   dedication
     
     
 .. raw:: latex
