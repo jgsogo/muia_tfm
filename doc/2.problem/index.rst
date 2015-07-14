@@ -129,7 +129,7 @@ nuestra medida.
 
    
 .. _planteamiento-problema:
-Plantemaiento del problema
+Planteamiento del problema
 --------------------------
 A la vista del estado del arte, las dificultades encontradas en la bibliografía y las
 carencias detectadas, el problema que se plantea en esta tesis es un problema no

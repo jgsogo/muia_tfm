@@ -132,13 +132,15 @@ a comparar.
 En nuestro caso el idioma intermedio será el español, y la traducción la generaremos
 utilizando el sistema Systrans [#]_:
 
-.. [#] SYSTRANet – Online translation software and tools – Dictionary
+  **Systrans**: Estos conceptos son esenciales para avanzar hacia un orden del día sostenible, más humano del mundo, y continuarán indudablemente siendo relevantes durante muchos años de venir.
+
+
+.. [#] SYSTRANet – Online translation software and tools – Dictionary.
    http://www.systranet.com/dictionary/english-spanish (accedido en junio
    de 2015)
-     
-  **Systrans**: Estos conceptos son esenciales para avanzar hacia un orden del día sostenible, más humano del mundo, y continuarán indudablemente siendo relevantes durante muchos años de venir.
-  
-Como podemos ver, el sistema ya ha introducido alguna variación respecto al contenido
+
+
+Como podemos ver, este sistema ya ha introducido alguna variación respecto al contenido
 original, incluso la corrección gramatical de la oración parece estar comprometida.
 
 
@@ -424,7 +426,7 @@ Ejemplo 1
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
    
 Ejemplo 2
@@ -442,7 +444,7 @@ Ejemplo 2
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
  
       
@@ -471,7 +473,7 @@ Ejemplo 4
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
 
 Ejemplo 5
@@ -489,7 +491,7 @@ Ejemplo 5
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
 
 Ejemplo 6
@@ -507,7 +509,7 @@ Ejemplo 6
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
    
 Ejemplo 7
@@ -525,7 +527,7 @@ Ejemplo 7
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
    
 Ejemplo 8
@@ -543,7 +545,7 @@ Ejemplo 8
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
    
    
 Ejemplo 9
@@ -561,7 +563,7 @@ Ejemplo 9
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
  
    
 Ejemplo 10
@@ -579,7 +581,7 @@ Ejemplo 10
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo origianl y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
 
 
 Valoración

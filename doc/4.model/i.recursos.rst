@@ -45,7 +45,7 @@ subsanar algún error y prepararlo para su utilización desde nuestro modelo [#]
    principal, otras están disponibles en la rama perteneciente al autor de esta
    tesis: https://github.com/jgsogo/wordnet-blast
 
-
+.. medidas-distancia-conceptos_
 Medidas de distancia entre conceptos
 ------------------------------------
 En el estado del arte hemos visto varios intentos por diferentes autores para lograr una

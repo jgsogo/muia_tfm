@@ -19,7 +19,7 @@ mediador (Izquierdo Arroyo, 1995 :cite:`IzquierdoArroyo1995`).
 La bibliografía contemporánea recoge la problemática de las estructuras conceptuales
 desde que en 1966 apareciera el libro de Shera sobre la "Documentación y la Organización
 del Conocimiento" :cite:`Shera1966`; se trata de un problema que compete a las llamadas
-Ciencias Cognitivas, que engloban disciplinas muy diferentes: la dimensión individual es
+Ciencias Cognitivas las cuales engloban disciplinas muy diferentes: la dimensión individual es
 objeto de la Psicología, pero también hay una dimensión social que será objeto de la Sociología
 y que se basa en el "principio de cooperación" :cite:`Grice1975` que establece que el discurso
 es una actividad colaborativa que se rige por unas máximas aceptadas tácitamente por todos
@@ -132,11 +132,11 @@ de un número o una dirección de memoria en un ordenador.
 
 Más importante es la jerarquización entre conceptos que introduce a través de la propiedad
 :math:`<` a la que hemos hecho mención, en artículos posteriores Sowa empezará a hablar de
-ontología y de categorías al hace referencia a la jerarquía de conceptos.
+ontología y de categorías al hacer referencia a la jerarquía de conceptos.
 
 El término *ontología* hace referencia a una parte de la metafísica que trata del ser en
-general y sus propiedades trascendentales; es un concepto que se ha estudiado desde época
-clásica, con la intención de realizar una clasificación de todo lo que *es*.
+general y sus propiedades trascendentales; es un concepto que se ha estudiado desde la época
+clásica con la intención de realizar una clasificación de todo lo que *es*.
 Sin embargo, nos interesa más abordar las ontologías desde el punto de vista de la
 Ingeniería del Conocimiento, en este ámbito
 una de las definiciones más extendidas y aceptadas es la que se ofrece en :cite:`Studer1998`:
@@ -401,7 +401,7 @@ de relaciones binarias que enlazan los conceptos presentes en la oración.
 
 Los conceptos se representan con etiquetas literales que reciben el nombre de
 *palabras universales* (UW, *Universal Words*) que además pueden ir acompañadas de
-varios attributos (se utiliza el símbolo ``@`` para indicarlos) que
+varios atributos (se utiliza el símbolo ``@`` para indicarlos) que
 permiten mostrar más informacón sobre el uso específico del concepto en la oración
 original :cite:`Uchida1999`. Estas UWs son el equivalente a los nodos-concepto de Sowa
 y a los *synsets* de WordNet.
@@ -492,7 +492,7 @@ no ser representables en todas las lenguas.
 La principal diferencia entre el UNL y otros sistemas de representación del conocimiento como
 los grafos conceptuales (ver :num:`sección #grafos-conceptuales`) o el *Resource Description
 Framework* (RDF) :cite:`Brickley2014` es que el número y el significado de las relaciones y
-attributos deben formar parte del estándar :cite:`TeixeiraMartins2005`.
+atributos deben formar parte del estándar :cite:`TeixeiraMartins2005`.
 
 
 

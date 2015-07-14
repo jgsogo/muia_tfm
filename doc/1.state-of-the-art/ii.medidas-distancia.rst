@@ -35,10 +35,20 @@ es su valor, más parecidos son los objetos.
 
 La conversión entre valores de distancia y similaridad resulta intuitiva, pero dependerá
 del rango de valores que pueda alcanzar la medida que se tome como referencia. Para medidas
-de distancia en el rango :math:`d(i,j) \in [0, 1]` la similaridad asociada podrá calcularse como 
-:math:`s(i,j) = 1-d(i,j)`, en el caso de medidas no acotadas donde :math:`d(i,j) \in [0, \infty)`
-tendrá que utilizarse algo como :math:`s(i,j) \propto \frac{1}{1 + d(i,j)}`. No obstante,
-la relación adecuada entre distancia y similaridad podría ser diferente según el
+de distancia en el rango :math:`d(i,j) \in [0, 1]` la similaridad asociada podrá calcularse como
+
+.. math::
+
+    s(i,j) = 1-d(i,j)
+
+en el caso de medidas no acotadas donde :math:`d(i,j) \in [0, \infty)`
+tendrá que utilizarse algo como
+
+.. math::
+
+    s(i,j) \propto \frac{1}{1 + d(i,j)}
+
+No obstante, la relación adecuada entre distancia y similaridad podría ser diferente según el
 problema concreto con el que se trabaje.
 
 
@@ -240,7 +250,7 @@ son (el lector podrá encontrar una exposición más exhaustiva en el trabajo de
 
    Los primeros algoritmos sólo permitían la sustitución de nodos y arcos por lo que las
    estructuras de ambos grafos debían ser isomorfas :cite:`Tsai1979`, posteriormente se
-   incorpora la adición y sustración de elementos (o su división y unión).
+   incorpora la adición y sustracción de elementos (o su división y unión).
 
    Resulta interesante el trabajo de Cordella *et al.* :cite:`Cordella1996`
    :cite:`Cordella1998a` cuyo algoritmo incorpora un modelo de transformación que en
@@ -366,16 +376,12 @@ de los pesos de la relación en ambas direcciones ponderada por la profundidad d
     d_{S}(c_i, c_j) = \frac{wt(c_i \rightarrow_r) + wt(c_j \rightarrow_{r'}) }{2 \cdot max\{depth(c_i), depth(c_j)\}}
     
 donde :math:`r'` es la relación inversa de :math:`r`, es decir, aquella que va en sentido
-contrario, y :math:`depth(c_i)` es la profundidad del concepto :math:`c_i` en la jerarquía.
+contrario, y :math:`depth(c_i)` es la profundidad del concepto :math:`c_i` en la jerarquía [#]_.
 
+.. [#] La formulación mostrada aquí se corresponde con la que aparece en el artículo de Sussna y la
+   bibliografía posterior. No obstante, el autor considera que existe un error en esta formulación y
+   propone una corrección en la :ref:`sección 5.1.4 <medidas-distancia-conceptos>`).
 
-    
-.. warning:: En el artículo de Sussna se dice que en esta última ecuació los pesos
-   deben ser invertidos, pero tanto en la formulación del artículo como en la literatura
-   posterior, no se tiene en cuenta y el resultado NO ES EL ESPERADO.
-   
-   Hablo de esto más adelante, ¿debería tratarlo aquí?
-   
 
 La distancia semántica entre dos nodos cualesquiera de la red, :math:`c_1` y :math:`c_2`
 se calcularía como la suma de distancias entre cada par de nodos adyacentes a lo largo
