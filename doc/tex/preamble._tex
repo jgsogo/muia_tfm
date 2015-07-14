@@ -1,6 +1,10 @@
 
 \usepackage[sort,numbers]{natbib}
 \usepackage{fixltx2e}
+\usepackage{listings}
+
+\renewcommand{\listfigurename}{Índice de figuras} 
+\renewcommand{\listtablename}{Tablas}
 
 %%% For tables
 \usepackage{multirow}

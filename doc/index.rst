@@ -17,8 +17,9 @@ Medida de distancia en grafos UNL
     
 .. raw:: latex
 
-  \listoffigures
-  \listoftables
+   \listoffigures
+   \listoftables
+   \lstlistoflistings
   
   
 .. toctree::

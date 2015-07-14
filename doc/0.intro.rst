@@ -204,6 +204,7 @@ considerar el esfuerzo necesario para crear la lengua intermedia).
 
 .. figure:: img/interlingua.png
    :name: fig-interlingua
+   :alt: Whatever texto en alt de un figure
 
    a) Grafo de traducciones necesarias en el caso de traducción directa
    (se necesitan 12 diccionarios de traducción); b) Grafo de traducciones necesarias
