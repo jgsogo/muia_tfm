@@ -1,0 +1,19 @@
+
+\usepackage[sort,numbers]{natbib}
+\usepackage{fixltx2e}
+
+%%% For tables
+\usepackage{multirow}
+% Longtable lets you have tables that span multiple pages.
+\usepackage{longtable}
+
+% Booktabs produces far nicer tables than the standard LaTeX tables.
+%   see: http://en.wikibooks.org/wiki/LaTeX/Tables
+\usepackage{booktabs}
+
+% adds more formatting options to tables
+\usepackage{array}
+
+%set parameters for longtable:
+% default caption width is 4in for longtable, but wider for normal tables
+\setlength{\LTcapwidth}{\textwidth}

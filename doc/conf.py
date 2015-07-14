@@ -189,6 +189,9 @@ htmlhelp_basename = 'MedidadedistanciaengrafosUNLdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
+ADDITIONAL_PREAMBLE = """
+\input{preamble._tex}
+"""
 
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
@@ -204,6 +207,7 @@ latex_elements = {
 
 'babel': u'\\usepackage[spanish]{babel}',
 'fncychap': u'',
+'preamble': ADDITIONAL_PREAMBLE,
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -212,6 +216,10 @@ latex_elements = {
 latex_documents = [
   ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia en grafos UNL',
    u'Javier García Sogo', 'book'),
+]
+
+latex_additional_files = [
+'tex/preamble._tex',
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

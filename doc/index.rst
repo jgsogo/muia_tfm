@@ -15,6 +15,12 @@ Medida de distancia en grafos UNL
    dedication
     
     
+.. raw:: latex
+
+  \listoffigures
+  \listoftables
+  
+  
 .. toctree::
    :numbered:
 
@@ -28,6 +34,8 @@ Medida de distancia en grafos UNL
    zreferences
 
 
+
+  
 
 .. only:: html
 
