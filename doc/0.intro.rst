@@ -20,7 +20,7 @@ lenguajes como el español, chino, árabe, etc. resulta inaccesible para aquéll
 que no conocen estos idiomas.
 
 El lenguaje universal (UNL, *Universal Networking Language*) es un lenguaje
-eléctronico para las máquinas que permite representar oraciones como expresiones
+electrónico para las máquinas que permite representar oraciones como expresiones
 lógicas sin ambigüedad; estas expresiones se generan para ser entendidas por
 los ordenadores, no por las personas :cite:`Uchida1999`.
 
@@ -57,7 +57,7 @@ La barrera del lenguaje
    * Primeras herramientas informáticas de traducción automática.
 
 A lo largo de los años se han tratado de adoptar diferentes soluciones para hacer
-frente a este problema: en la época del colonialismo la metropolis imponía su idioma
+frente a este problema. En la época del colonialismo la metropolis imponía su idioma
 en el gobierno de las colonias de tal forma que el acceso a los negocios, la
 justicia, el poder o a las clases altas quedaba supeditado a su conocimiento;
 así se extendieron algunos idiomas europeos como el inglés, francés o español,
@@ -80,7 +80,7 @@ cuentan con algunos hablantes, la experiencia demuestra que no son la solución.
 El último intento de lenguaje artificial, y quizá el que aún mantiene más interés [#]_ es
 la interlingua de la *International Auxiliary Language Association* (IALA) que comenzó
 su andadura después de la Primera Guerra Mundial y fue publicada por Alexander Gode
-en 1951 :cite:`Gode1955`, esta lengua de aspecto naturalista está basada en vocablos
+en 1951 :cite:`Gode1955`. Esta lengua de aspecto naturalista está basada en vocablos
 comunes a la mayoría de los idiomas del oeste de Europa y en una gramática anglorrománica
 simplificada :cite:`WP-Interlingua`; de este modo pretende ser accesible a toda la comunidad
 de hablantes de lenguas romances y derivadas.
@@ -255,7 +255,7 @@ con el tiempo evolucionará apartándose de la ortodoxia de estos principios.
 
 .. TODO: Algo de Wittgenstein aquí lo petaba todo
 
-En consecuencia, una lengua pivot para un sistema de traducción automática sólo podrá ser
+En consecuencia, una lengua pívot para un sistema de traducción automática sólo podrá ser
 un lenguaje artificial. Este constructo, además de servir para realizar traducciones,
 constituiría una herramienta de representación del conocimiento que podría ser utilizada
 en cualquier aplicación de recuperación de información. Como tendremos ocasión de
@@ -287,7 +287,7 @@ originales. En las conclusiones se muestra claramente cómo los textos producido
 los sistemas automáticos obtienen valores muy por debajo de los realizados por
 traductores.
 
-.. warning:: Aquí necesito meter un poco más de chicha... a lo mejor una gráfica
+.. TODO: Aquí necesito meter un poco más de chicha... a lo mejor una gráfica
    con los resultados del experimento.
 
 En este documento abordamos precisamente este problema: la definición de una medida

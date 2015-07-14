@@ -26,7 +26,7 @@ hay mucha investigación pendiente.
 Nosotros hemos propuesto un algoritmo que permite captar la distancia semántica entre dos
 oraciones representadas por sus grafos conceptuales, con lo que en teoría podríamos 
 automatizar el proceso de evaluación de un traductor y establecer un criterio para
-determinar cuál es mejor y cual peor en términos objetivos.
+determinar cuál es mejor y cuál peor en términos objetivos.
 
 No obstante, hemos dejado también de manifiesto que para realizar esta tarea con el 
 rigor científico necesario es imprescindible contar con recursos que ahora mismo no están
