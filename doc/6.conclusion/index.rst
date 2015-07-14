@@ -29,8 +29,8 @@ automatizar el proceso de evaluación de un traductor y establecer un criterio p
 determinar cuál es mejor y cuál peor en términos objetivos.
 
 No obstante, hemos dejado también de manifiesto que para realizar esta tarea con el 
-rigor científico necesario es imprescindible contar con recursos que ahora mismo no están
-disponibles. En primer lugar es fundamental contar con bases de datos con jerarquías de
+rigor científico necesario es imprescindible contar con recursos que ahora mismo no son
+accesibles. En primer lugar es fundamental disponer de bases de datos con jerarquías de
 conceptos (inexistentes en el caso del UNL) y corpus de textos etiquetados con esos 
 conceptos que sean suficientemente representativos del lenguaje utilizado en las 
 traducciones, tanto en lo referente al dominio tratado como en su contemporaneidad.
