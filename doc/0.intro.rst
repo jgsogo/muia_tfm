@@ -185,7 +185,7 @@ los lenguajes tienen una base estructural común (Chomsky se refiere a ella como
 la *gramática universal*). El hecho de que palabras e ideas puedan ser traducidas
 de un idioma a otro, o la existencia de lenguas criollas aporta evidencias a esta
 hipótesis :cite:`Kottak2002`. Un sistema de traducción que utiliza una interlingua
-sólo es posible si se acepta esta hipótesis como válida, los conceptos son independientes
+solo es posible si se acepta esta hipótesis como válida, los conceptos son independientes
 y anteriores al lenguaje en el que se articulan y, por lo tanto, pueden ser representados
 independientemente de éste [#]_.
 
@@ -214,7 +214,7 @@ considerar el esfuerzo necesario para crear la lengua intermedia).
    actual para el entorno comercial
 
 El mundo actual globalizado es un claro ejemplo de entorno multilingüe donde una
-verdadera superación de la barrera del lenguaje sólo puede acometerse utilizando una
+verdadera superación de la barrera del lenguaje solo puede acometerse utilizando una
 interlingua. Un escenario de este tipo permitiría un acceso universal a la cultura y
 una expansión comercial hacia nuevos mercados sin precedentes, los productos podrían
 localizarse en la lengua nativa de cada cliente potencial sin incurrir en costes elevados.
@@ -222,7 +222,7 @@ localizarse en la lengua nativa de cada cliente potencial sin incurrir en costes
 .. TODO: Estimaciones de comercio sin barreras lingüísticas.
 
 Sin embargo, a pesar de estos beneficios, este tipo de traducción es una de las menos
-utilizadas en la práctica, la mayoría son prototipos de investigación y sólo el
+utilizadas en la práctica, la mayoría son prototipos de investigación y solo el
 proyecto KANT [#]_ ha sido utilizado en un sistema comercial :cite:`Brown2006`, sin
 embargo su aplicación se limita a la traducción de textos técnicos en inglés
 controlado [#]_ hacia francés, español y alemán :cite:`Lonsdale1994`.
@@ -255,7 +255,7 @@ con el tiempo evolucionará apartándose de la ortodoxia de estos principios.
 
 .. TODO: Algo de Wittgenstein aquí lo petaba todo
 
-En consecuencia, una lengua pívot para un sistema de traducción automática sólo podrá ser
+En consecuencia, una lengua pívot para un sistema de traducción automática solo podrá ser
 un lenguaje artificial. Este constructo, además de servir para realizar traducciones,
 constituiría una herramienta de representación del conocimiento que podría ser utilizada
 en cualquier aplicación de recuperación de información. Como tendremos ocasión de

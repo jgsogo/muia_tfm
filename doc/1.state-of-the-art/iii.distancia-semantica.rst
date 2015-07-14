@@ -21,7 +21,7 @@ dificultades a las que se enfrentan.
 
 Fenómenos lingüísticos
 ``````````````````````
-El lenguaje natural está repleto de ambigüedades que sólo se resuelven en la interacción
+El lenguaje natural está repleto de ambigüedades que solo se resuelven en la interacción
 entre los interlocutores (o entre el escritor y el lector de un texto), lo presentábamos
 anteriormente como "principio de cooperación" :cite:`Grice1975`. Además, una gran cantidad
 de matices (o incluso elementos relevantes de una lengua) no pueden ser representados
@@ -185,7 +185,7 @@ grafo de búsqueda y otra :math:`r_R` del grafo en el que se busca es:
     0, & otherwise.
     \end{cases}
 
-es decir, que la similaridad sólo valdrá :math:`1` en el caso de que la relación presente en el
+es decir, que la similaridad solo valdrá :math:`1` en el caso de que la relación presente en el
 grafo de búsqueda sea más general que la presente en el grafo con el que se compara. Esta
 circunstancia provoca que la medida resultante del algoritmo no sea simétrica.
 
