@@ -7,7 +7,6 @@ BaseTranslator = sphinx.writers.latex.LaTeXTranslator
 class DocTranslator(BaseTranslator):
     
     def visit_caption(self, node):
-        print("!"*50)
         caption_idx = node.parent.index(node)
         if caption_idx > 0:
             look_node = node.parent.children[caption_idx - 1]

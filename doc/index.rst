@@ -17,9 +17,11 @@ Medida de distancia en grafos UNL
     
 .. raw:: latex
 
+   \addcontentsline{toc}{chapter}{Índice de figuras}
    \listoffigures
+   
+   \addcontentsline{toc}{chapter}{Tablas}
    \listoftables
-   \lstlistoflistings
   
   
 .. toctree::

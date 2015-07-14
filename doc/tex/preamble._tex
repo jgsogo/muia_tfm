@@ -1,11 +1,10 @@
 
 \usepackage[sort,numbers]{natbib}
 \usepackage{fixltx2e}
-\usepackage{listings}
 
-\renewcommand{\listfigurename}{Índice de figuras} 
-\renewcommand{\listtablename}{Tablas}
-
+\addto\captionsspanish{\renewcommand\listfigurename{Índice de figuras}}
+\addto\captionsspanish{\renewcommand\listtablename{Tablas}}
+      
 %%% For tables
 \usepackage{multirow}
 % Longtable lets you have tables that span multiple pages.
