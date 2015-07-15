@@ -7,9 +7,9 @@
 Hipótesis de trabajo
 ====================
 
-.. warning:: la verdad es que no tengo nada claro cómo enfocar este capítulo.
+.. TODO: la verdad es que no tengo nada claro cómo enfocar este capítulo.
 
-La cantidad de trabajo requerido para realizar todo el estudio con el rigor científico 
+La cantidad de esfuerzo requerido para realizar todo el estudio con el rigor científico 
 necesario excede el alcance de este trabajo por lo que, como el título de la tesis indica,
 nos hemos centrado en la construcción de un modelo que sirva para medir la distancia
 entre grafos UNL. Además, como hemos visto en el capítulo anterior, dada la carencia de
@@ -49,8 +49,8 @@ Por todo lo anterior el alcance del presente trabajo se limitará a lo siguiente
    
  * En este desarrollo no se considerarán los atributos de las UWs en la
    comparación de los grafos, se descarta así una cantidad importante de contenido
-   semántico, pero se simplifica la interpretación de los resultados y la primera
-   evaluación del modelo.
+   semántico, pero se simplifica la implementacióin del modelo, la interpretación
+   de los resultados y la primera evaluación de los resultados.
    
  * El modelo será probado con un conjunto de oraciones que permita obtener una
    valoración cualitativa de su funcionamiento. Estas oraciones serán traducidas
