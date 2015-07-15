@@ -199,20 +199,19 @@ ADDITIONAL_PREAMBLE = """
 """
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-'papersize': 'a4paper',
+    # The paper size ('letterpaper' or 'a4paper').
+    'papersize': 'a4paper',
 
-# The font size ('10pt', '11pt' or '12pt').
-'pointsize': '12pt',
+    # The font size ('10pt', '11pt' or '12pt').
+    'pointsize': '12pt',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
-'releasename': u'Máster Universitario en Inteligencia Artificial',
-'printindex': '',
+    # Additional stuff for the LaTeX preamble.
+    'releasename': u'Máster Universitario en Inteligencia Artificial',
+    'printindex': '',
 
-'babel': u'\\usepackage[spanish]{babel}',
-'fncychap': u'',
-'preamble': ADDITIONAL_PREAMBLE,
+    'babel': u'\\usepackage[spanish]{babel}',
+    'fncychap': u'',
+    'preamble': ADDITIONAL_PREAMBLE,
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
