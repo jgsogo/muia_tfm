@@ -10,6 +10,7 @@ Medida de distancia en grafos UNL
 
 .. toctree::
 
+   dedication
    resumen
    abstract
     

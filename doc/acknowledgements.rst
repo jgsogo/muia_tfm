@@ -3,5 +3,4 @@
 Agradecimientos
 ===============
 
-This project is a collection of extensions and monkey patches to Sphinx to
-better format a PhD thesis.
+Este trabajo es fruto del interés acumulado durante muchos años en temas lingüísticos.

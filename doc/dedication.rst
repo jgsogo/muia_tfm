@@ -4,7 +4,13 @@
 .. raw:: latex
 
    \cleardoublepage
-   
-   
-This project is a collection of extensions and monkey patches to Sphinx to
-better format a PhD thesis.
+   \thispagestyle{empty}
+   \chapter*{}
+   \begin{flushright}
+   \textit{Cuando consigas encorsetar el aymara, aparecerá el pirahã}
+   \end{flushright}
+
+
+.. only:: html
+
+    *Cuando consigas encorsetar el aymara, aparecerá el pirahã.*
