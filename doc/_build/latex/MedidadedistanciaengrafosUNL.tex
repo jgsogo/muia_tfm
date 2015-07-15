@@ -125,10 +125,10 @@
 \renewcommand\PYGZsq{\textquotesingle}
 
 \begin{document}
+\pagenumbering{roman}
 \shorthandoff{"}
 \maketitle
-\tableofcontents
-\phantomsection\label{index::doc}
+
 
 \cleardoublepage
 \chapter*{}
@@ -194,6 +194,12 @@ lead to the achievement of a measure of distance between UNL graphs with applica
 in machine translation systems, however, lack of resources and of labeled data
 to validate the algorithm requires an important effort to be done first in order
 to be able to provide conclusive results.
+
+\cleardoublepage
+\tableofcontents
+\phantomsection\label{index::doc}
+
+
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Índice de figuras}
@@ -203,6 +209,7 @@ to be able to provide conclusive results.
 \phantomsection
 \addcontentsline{toc}{chapter}{Tablas}
 \listoftables\newpage\mainmatter
+\pagenumbering{arabic}
 
 \chapter{Introducción}
 \label{0.intro:introduccion}\label{0.intro::doc}\label{0.intro:medida-de-distancia-en-grafos-unl}
