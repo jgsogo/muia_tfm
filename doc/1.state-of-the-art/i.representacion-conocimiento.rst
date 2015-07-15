@@ -118,8 +118,9 @@ pueden aparecer en el grafo.
 .. figure:: ../img/sowagraph.png
    :name: fig-sowa
    :scale: 80 %
+   :alt: Ejemplo de grafo conceptual con contextos.
 
-   Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003).
+   Un grafo conceptual con dos contextos anidados. El grafo representa la oración *Tom believes that Mary wants to marry a sailor*. Imagen extraída de Sowa (2003) :cite:`Sowa2003`.
    
 
 Semántica estructural
@@ -207,6 +208,7 @@ ovoscopia.
 .. _fig-wordnet-lightning:
 .. graphviz::
    :caption: Esquema de relaciones semánticas en torno a la palabra *candle*, que en inglés hace referencia a los conceptos *vela* y *candela*, y también al verbo utilizado para la realización de una *ovoscopia*. Cada nodo representa un concepto (representado por varias palabras sinónimas). Las relaciones han sido extraídas de Wordnet v3.1.
+   :alt: Estructura de relaciones semánticas de WordNet en torno a la palabra *candle*.
 
    digraph foo {
         
@@ -415,6 +417,7 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
 .. _fig-example-unl:
 .. graphviz::
    :caption: Representación gráfica en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.". El atributo ``@entry`` indica el concepto principal de la oración.
+   :alt: Ejemplo de representación gráfica de una oración codificada en UNL.
 
    digraph foo {
         rankdir=TB
@@ -451,6 +454,7 @@ gráfica (:num:`figura #fig-example-unl`) como codificada (:num:`listado #code-e
 .. code-block:: unl
    :caption: Codificación en UNL de la oración "Hace tiempo, en la ciudad de Babilonia, la gente comenzó a construir una torre enorme, que parecía alcanzar los cielos.".
    :name: code-example-unl
+   :alt: Codificación UNL de una oración.
    
     [S:2]
     {org:es}
@@ -556,7 +560,7 @@ correspondientes; aparecen algunas UWs básicas como *go* o *house*, UWs restrin
 también ejemplos de UWs extra.
 
 .. tabularcolumns:: |p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.25\linewidth}|
-.. list-table:: Ejemplos de UWs.
+.. list-table:: Ejemplos de palabras universales (UWs).
    :name: table-uws-example
    :header-rows: 1
 

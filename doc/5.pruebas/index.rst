@@ -25,6 +25,7 @@ disponible en internet.
 .. _fig-experiment-layout:
 .. graphviz::
    :caption: Metodología elaborada para obtener el conjunto de datos utilizado en la experimentación del modelo. Se muestra la obtención de la distancia entre el grafo original y el obtenido a partir de la traducción de Yandex.
+   :alt: Metodología elaborada para obtener el conjunto de datos utilizado en la experimentación del modelo.
 
    digraph foo {
    
@@ -208,6 +209,7 @@ De este modo, el grafo UNL original, se convierte en el grafo mostrado en el
    :name: sample03-original
    :scale: 100 %
    :width: 100 %
+   :alt: Grafo correspondiente al ejemplo #3 utilizado en el experimento.
    
    Grafo correspondiente al ejemplo #3 utilizado en el experimento (se muestran
    únicamente las *headwords* correspondientes a cada concepto).
@@ -306,6 +308,7 @@ A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros
    :name: sample03-measures-yandex-synset
    :scale: 100 %
    :width: 100 %
+   :alt: Similaridad entre el grafo original y el grafo generado por el traductor de Yandex.
    
    Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
 
@@ -314,9 +317,11 @@ A la hora de ejecutar el modelo, el usuario debe seleccionar algunos parámetros
    :name: sample03-measures-google-synset
    :scale: 100 %
    :width: 100 %
+   :alt: Similaridad entre el grafo original y el grafo generado por el traductor de Google.
    
    Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
-   
+
+
 En la :num:`figura #sample03-measures-yandex-synset` y en la
 :num:`figura #sample03-measures-google-synset`
 se muestra el valor calculado de similaridad para estos grafos utilizando todas
@@ -426,7 +431,7 @@ Ejemplo 1
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 1.
    
    
 Ejemplo 2
@@ -444,7 +449,7 @@ Ejemplo 2
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 2.
    
  
       
@@ -473,7 +478,7 @@ Ejemplo 4
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 4.
    
 
 Ejemplo 5
@@ -491,7 +496,7 @@ Ejemplo 5
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 5.
    
 
 Ejemplo 6
@@ -509,7 +514,7 @@ Ejemplo 6
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 6.
    
    
 Ejemplo 7
@@ -527,7 +532,7 @@ Ejemplo 7
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 7.
    
    
 Ejemplo 8
@@ -545,7 +550,7 @@ Ejemplo 8
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 8.
    
    
 Ejemplo 9
@@ -563,7 +568,7 @@ Ejemplo 9
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 9.
  
    
 Ejemplo 10
@@ -581,7 +586,7 @@ Ejemplo 10
    :scale: 100 %
    :width: 100 %
    
-   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%).
+   Similaridad semántica entre el grafo original y las traducciones realizadas con Google (rojo) y Yandex (azul) en función de la tolerancia entre conceptos (intervalo de confianza 95%) en el ejemplo 10.
 
 
 Valoración
@@ -620,7 +625,7 @@ Sin embargo, existen algunos resultados que no parecen correctos:
    :scale: 100 %
    :width: 100 %
    
-   Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+   Similaridad entre el grafo original y el grafo generado por el traductor de Yandex en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo (ejemplo 7).
 
 
 .. figure:: ../../data/samples/sample02-brief/measures-yandex-synset.png
@@ -628,7 +633,7 @@ Sin embargo, existen algunos resultados que no parecen correctos:
    :scale: 100 %
    :width: 100 %
    
-   Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo.
+   Similaridad entre el grafo original y el grafo generado por el traductor de Google en función de la tolerancia entre conceptos. Se muestra la evolución de este valor para todas las métricas de distancia incorporadas en el algoritmo (ejemplo 2).
 
 
 NOTA.- El objetivo de esta experimentación no es valorar los traductores, no creemos

@@ -204,7 +204,7 @@ considerar el esfuerzo necesario para crear la lengua intermedia).
 
 .. figure:: img/interlingua.png
    :name: fig-interlingua
-   :alt: Whatever texto en alt de un figure
+   :alt: Traducción directa y traducción con lengua intermedia.
 
    a) Grafo de traducciones necesarias en el caso de traducción directa
    (se necesitan 12 diccionarios de traducción); b) Grafo de traducciones necesarias
@@ -301,7 +301,7 @@ interlingua (ver :num:`figura #fig-problema-interlingua`).
 
 .. _fig-problema-interlingua:
 .. graphviz::
-   :caption: Evaluación de una traducción apoyándose en la interlingua.
+   :caption: Procedimiento de evaluación de una traducción con lengua intermedia.
 
    digraph foo {
         rankdir=LR
