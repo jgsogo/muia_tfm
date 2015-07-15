@@ -1,7 +1,14 @@
 :orphan:
 
-Abstract
-========
+.. raw:: latex
+
+   \cleardoublepage
+   \chapter*{Abstract}
+   
+.. only:: html
+
+    Abstract
+    ========
 
 The work presented here develops a model to calculate the semantic distance
 between two sentences represented by their UNL graphs. This problem arises

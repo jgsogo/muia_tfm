@@ -1,8 +1,16 @@
 :orphan:
 
-Resumen
-=======
+.. raw:: latex
 
+   \cleardoublepage
+   \chapter*{Resumen}
+   
+.. only:: html
+
+    Resumen
+    =======
+
+    
 El trabajo que se presenta a continuación desarrolla un modelo para calcular la distancia
 semántica entre dos oraciones representadas por grafos UNL. Este problema se plantea
 en el contexto de la traducción automática donde diferentes traductores pueden generar
