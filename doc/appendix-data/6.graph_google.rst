@@ -13,6 +13,7 @@ el *software* de Google.
 
 .. figure:: ../data/samples/sample01_google.png
    :name: sample01-google
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #1.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #1**:
    *The Universal Forum of Cultures will be held from April 23 to September
@@ -24,6 +25,7 @@ el *software* de Google.
    :name: sample02-google
    :scale: 100 %
    :width: 100 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #2.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #2**:
    *In its 29th general conference, the 186 Member States of UNESCO unanimously
@@ -35,6 +37,7 @@ el *software* de Google.
    :name: sample03-google
    :scale: 100 %
    :width: 100 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #3.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #3**:
    *These concepts are essential in order to move towards a more sustainable
@@ -45,6 +48,7 @@ el *software* de Google.
 .. figure:: ../data/samples/sample04_google.png
    :name: sample04-google
    :scale: 80 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #4.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #4**:
    *Knowledge of other cultures is essential to establish a constructive
@@ -54,6 +58,7 @@ el *software* de Google.
 .. figure:: ../data/samples/sample05_google.png
    :name: sample05-google
    :scale: 60 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #5.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #5**:
    *This knowledge involves reflection on the common ground between all
@@ -63,6 +68,7 @@ el *software* de Google.
 .. figure:: ../data/samples/sample06_google.png
    :name: sample06-google
    :scale: 50 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #6.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #6**:
    *The forum strives to promote the kind of understanding and respect able
@@ -74,6 +80,7 @@ el *software* de Google.
    :name: sample07-google
    :scale: 100 %
    :width: 100 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #7.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #7**:
    *Sustainable development meets the needs of the present without the ability
@@ -85,6 +92,7 @@ el *software* de Google.
    :name: sample08-google
    :scale: 100 %
    :width: 100 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #8.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #8**:
    *People of all cultures must join forces to achieve this goal by bringing
@@ -95,6 +103,7 @@ el *software* de Google.
 .. figure:: ../data/samples/sample09_google.png
    :name: sample09-google
    :scale: 80 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #9.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #9**:
    *the elements of culture that have a decisive impact on the development
@@ -105,6 +114,7 @@ el *software* de Google.
 .. figure:: ../data/samples/sample10_google.png
    :name: sample10-google
    :scale: 70 %
+   :alt: Grafo correspondiente a la traducción de Google del ejemplo #10.
    
    Grafo correspondiente a la traducción de **Google** del **ejemplo #10**:
    *Stable and lasting peace requires more than stopping war and conflict

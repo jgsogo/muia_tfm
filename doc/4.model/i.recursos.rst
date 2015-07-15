@@ -84,6 +84,7 @@ WordNet. Nosotros hemos implementado las siguientes utilizando el lenguaje C++:
 
 .. figure:: ../img/sussnafail.png
    :name: fig-sussna-fail
+   :alt: Evolución de la distancia entre conceptos según la formulación de Sussna (y corrección propuesta).
 
    Variación de la distancia asociada a una conexión en función del número relaciones
    entre los elementos. A la izquierda los resultados según la formulación de

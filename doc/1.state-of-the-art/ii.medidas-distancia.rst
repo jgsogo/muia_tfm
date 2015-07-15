@@ -80,6 +80,7 @@ bibliográficas (:num:`tabla #table-graph-articles`).
    :class: longtable
    :header-rows: 1
    :stub-columns: 1
+   :alt: Evolución del número de artículos relacionados con técnicas de comparación de grafos.
 
    *  -  **Período**
       -  **Artículos**
@@ -138,6 +139,7 @@ exponíamos anteriormente (ver :num:`figura #fig-mcs-example`).
 .. _fig-mcs-example:
 .. graphviz::
    :caption: Dados dos grafos ``A`` y ``B``, el máximo grafo común, ``mcs(A,B)`` estará formado por el conjunto de nodos presentes en ambos y las conexiones entre ellos. En la figura se han indicado las correspondencias utilizando el símbolo ``\equiv`` y los colores rojo para el grafo ``A`` y azul para el ``B``.
+   :alt: Cálculo del máximo grafo común.
 
    digraph foo {
      subgraph cluster_1 {
