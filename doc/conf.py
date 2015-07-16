@@ -57,7 +57,7 @@ master_doc = 'index'
 latex_appendices = ['appendix-data']
 
 # General information about the project.
-project = u'Medida de distancia en grafos UNL'
+project = u'Medida de distancia semántica en grafos UNL'
 copyright = u'2015, Javier García Sogo'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -218,7 +218,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia en grafos UNL',
+  ('index', 'MedidadedistanciaengrafosUNL.tex', u'Medida de distancia semántica en grafos UNL',
    u'Javier García Sogo', 'book'),
 ]
 
@@ -252,7 +252,7 @@ latex_additional_files = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'medidadedistanciaengrafosunl', u'Medida de distancia en grafos UNL Documentation',
+    ('index', 'medidadedistanciaengrafosunl', u'Medida de distancia semántica en grafos UNL',
      [u'Javier García Sogo'], 1)
 ]
 
@@ -266,7 +266,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'MedidadedistanciaengrafosUNL', u'Medida de distancia en grafos UNL Documentation',
+  ('index', 'MedidadedistanciaengrafosUNL', u'Medida de distancia semántica en grafos UNL',
    u'Javier García Sogo', 'MedidadedistanciaengrafosUNL', 'One line description of project.',
    'Miscellaneous'),
 ]
@@ -287,7 +287,7 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Medida de distancia en grafos UNL'
+epub_title = u'Medida de distancia semántica en grafos UNL'
 epub_author = u'Javier García Sogo'
 epub_publisher = u'Javier García Sogo'
 epub_copyright = u'2015, Javier García Sogo'
