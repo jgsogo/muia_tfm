@@ -1,0 +1,1 @@
+La licencia debe ser compatible con la establecida para este trabajo por la Universidad Politécnica de Madrid [link](http://oa.upm.es/).
